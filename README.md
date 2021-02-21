@@ -5,6 +5,8 @@ rendering Kubernetes manifests using python type-hints.
 
 ## Reqiurements
 
+Python 3.7+
+
 Gybe uses [pydantic](https://github.com/samuelcolvin/pydantic) for type-hint
 validation and [Click](https://github.com/pallets/click) for the CLI.
 
