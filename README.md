@@ -1,7 +1,6 @@
 # ⛵ Gybe
 
-[![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)]
-(https://codecov.io/github/petermorrow/gybe?branch=main)
+![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
 
 A very simple YAML source-to-source compiler (transpiler) framework for
 rendering Kubernetes manifests using python type-hints.
