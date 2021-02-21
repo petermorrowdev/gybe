@@ -1,9 +1,10 @@
 # ⛵ Gybe
 
 ![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
+![PyPI Package](https://img.shields.io/pypi/v/gybe?color=%2334D058&label=PyPI%20Package)
 
-A very simple YAML source-to-source compiler (transpiler) framework for
-rendering Kubernetes manifests using python type-hints.
+A simple YAML source-to-source compiler (transpiler) for rendering Kubernetes
+manifests using python type-hints.
 
 ## Reqiurements
 
