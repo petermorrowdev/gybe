@@ -1,7 +1,7 @@
 # ⛵ Gybe
 
-![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
 ![PyPI Package](https://img.shields.io/pypi/v/gybe?color=%2334D058&label=PyPI%20Package)
+![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
 
 A simple YAML source-to-source compiler (transpiler) for rendering Kubernetes
 manifests using python type-hints.
@@ -12,6 +12,12 @@ Python 3.7+
 
 Gybe uses [pydantic](https://github.com/samuelcolvin/pydantic) for type-hint
 validation and [Click](https://github.com/pallets/click) for the CLI.
+
+## Install
+
+```
+pip install gybe
+```
 
 ## Example
 
