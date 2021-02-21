@@ -9,4 +9,14 @@ author-email = "peterthehacker3@gmail.com"
 home-page = "https://github.com/petermorrow/gybe"
 classifiers = ["License :: OSI Approved :: MIT License"]
 description-file = "README.md"
+requires = [
+    "click >=7.0.0",
+    "pydantic >=1.0.0,<2.0.0",
+    "PyYAML >=5.0.0",
+]
 
+[tool.flit.metadata.requires-extra]
+test = [
+    "pytest",
+    "pytest-cov",
+]
