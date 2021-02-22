@@ -84,7 +84,8 @@ spec:
   containers:
   - command:
     - python
-    - -m=http.server
+    - -m
+    - http.server
     image: python:3.9
     name: standard-server
 ---
@@ -96,7 +97,8 @@ spec:
   containers:
   - command:
     - python
-    - -m=http.server
+    - -m
+    - http.server
     image: python:3.9
     name: standard-server
 ```
