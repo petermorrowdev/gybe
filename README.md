@@ -1,10 +1,11 @@
-# ⛵ Gybe
+# Gybe
 
 ![PyPI Package](https://img.shields.io/pypi/v/gybe?color=%2334D058&label=PyPI%20Package)
 ![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
 
-A simple YAML transpiler for rendering Kubernetes manifests using python
-type-hints.
+Transpile Kubernetes manifests with your simple values.yaml files using python type-hints.
+Gybe is a simple, declarative, and more pythonic alternative to [helm](https://helm.sh/)
+that makes it easier to develop modest kubernetes deployments.
 
 ## Reqiurements
 
@@ -74,8 +75,11 @@ if __name__ == '__main__':
 
 Now run your transpiler with your values file:
 
+```bash
+python chart.py values.yaml
 ```
-$ python chart.py values.yaml
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -105,15 +109,28 @@ spec:
 
 If you're feeling lucky, you can pipe that into `kubectl`:
 
+```bash
+python chart.py values.yaml | kubectl apply -f -
 ```
-$ python chart.py values.yaml | kubectl apply -f -
+
+```
 pod/pod-1 created
 pod/pod-2 created
+```bash
 $ kubectl get pods
+```
+
+```
 NAME    READY   STATUS    RESTARTS   AGE
 pod-1   1/1     Running   0          5s
 pod-2   1/1     Running   0          5s
-$ python chart.py values.yaml | kubectl delete -f -
+```
+
+```bash
+python chart.py values.yaml | kubectl delete -f -
+```
+
+```
 pod "pod-1" deleted
 pod "pod-2" deleted
 ```
