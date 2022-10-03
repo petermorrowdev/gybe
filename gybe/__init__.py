@@ -1,6 +1,6 @@
 """A simple YAML transpilation tool for rendering kubernetes manifests"""
 
-__version__ = '0.1.0'
+__version__ = '0.2.0'
 
 
 from typing import List

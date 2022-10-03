@@ -1,7 +1,7 @@
 from typing import List
 from pathlib import Path
 
-from gybe.kubernetes.favorites import Pod, PodSpec, Container
+from gybe.favorites.kubernetes import Pod, PodSpec, Container
 import gybe
 
 

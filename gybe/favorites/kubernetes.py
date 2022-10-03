@@ -1,4 +1,4 @@
-from .io.k8s.api.apps.v1 import (
+from gybe.kubernetes.io.k8s.api.apps.v1 import (
     Deployment,
     DeploymentSpec,
     StatefulSet,
@@ -6,11 +6,11 @@ from .io.k8s.api.apps.v1 import (
     DaemonSet,
     DaemonSetSpec,
 )
-from .io.k8s.api.batch.v1 import (
+from gybe.kubernetes.io.k8s.api.batch.v1 import (
     Job,
     JobSpec,
 )
-from .io.k8s.api.core.v1 import (
+from gybe.kubernetes.io.k8s.api.core.v1 import (
     Pod,
     PodSpec,
     Container,
