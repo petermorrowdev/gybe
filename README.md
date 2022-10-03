@@ -116,8 +116,11 @@ python chart.py values.yaml | kubectl apply -f -
 ```
 pod/pod-1 created
 pod/pod-2 created
+```
+
+
 ```bash
-$ kubectl get pods
+kubectl get pods
 ```
 
 ```
