@@ -2,7 +2,6 @@
 dist
 build
 *__pycache__
-swagger.json
 schemas
 .coverage
 scratch*
