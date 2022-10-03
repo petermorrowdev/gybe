@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [tool.flit.metadata]
 module = "gybe"
 author = "Peter Morrow"
-author-email = "peterthehacker3@gmail.com"
+author-email = "petermorrowtech@gmail.com"
 home-page = "https://github.com/petermorrow/gybe"
 classifiers = ["License :: OSI Approved :: MIT License"]
 description-file = "README.md"
