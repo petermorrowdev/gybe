@@ -63,7 +63,7 @@ class Endpoint(BaseModel):
         description='addresses of this endpoint. The contents of this field are interpreted according to the corresponding EndpointSlice addressType field. Consumers must handle different types of addresses in the context of their own capabilities. This must contain at least one address but no more than 100. These are all assumed to be fungible and clients may choose to only use the first element. Refer to: https://issue.k8s.io/106267',
     )
     conditions: Optional[EndpointConditions] = Field(
-        {},
+        None,
         description='conditions contains information about the current status of the endpoint.',
     )
     deprecatedTopology: Optional[Dict[str, str]] = Field(
@@ -109,7 +109,7 @@ class EndpointSlice(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel20] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
     ports: Optional[List[EndpointPort]] = Field(
         None,
@@ -128,5 +128,5 @@ class EndpointSliceList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel17] = Field(
-        {}, description='Standard list metadata.'
+        None, description='Standard list metadata.'
     )

@@ -79,7 +79,7 @@ class ClusterRole(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
     rules: Optional[List[PolicyRule]] = Field(
         None, description='Rules holds all the PolicyRules for this ClusterRole'
@@ -96,7 +96,7 @@ class ClusterRoleBinding(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
     roleRef: RoleRef = Field(
         ...,
@@ -121,7 +121,7 @@ class ClusterRoleBindingList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
 
 
@@ -136,7 +136,7 @@ class ClusterRoleList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
 
 
@@ -150,7 +150,7 @@ class Role(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
     rules: Optional[List[PolicyRule]] = Field(
         None, description='Rules holds all the PolicyRules for this Role'
@@ -167,7 +167,7 @@ class RoleBinding(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
     roleRef: RoleRef = Field(
         ...,
@@ -190,7 +190,7 @@ class RoleBindingList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )
 
 
@@ -205,5 +205,5 @@ class RoleList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel4] = Field(
-        {}, description="Standard object's metadata."
+        None, description="Standard object's metadata."
     )

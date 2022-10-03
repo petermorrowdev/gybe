@@ -81,14 +81,14 @@ class IngressServiceBackend(BaseModel):
         description='Name is the referenced service. The service must exist in the same namespace as the Ingress object.',
     )
     port: Optional[ServiceBackendPort] = Field(
-        {},
+        None,
         description='Port of the referenced service. A port name or port number is required for a IngressServiceBackend.',
     )
 
 
 class IngressStatus(BaseModel):
     loadBalancer: Optional[v1.LoadBalancerStatusModel] = Field(
-        {}, description='LoadBalancer contains the current status of the load-balancer.'
+        None, description='LoadBalancer contains the current status of the load-balancer.'
     )
 
 
@@ -128,11 +128,11 @@ class IngressClass(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel14] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[IngressClassSpec] = Field(
-        {},
+        None,
         description='Spec is the desired state of the IngressClass. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -150,7 +150,7 @@ class IngressClassList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel12] = Field(
-        {}, description='Standard list metadata.'
+        None, description='Standard list metadata.'
     )
 
 
@@ -276,15 +276,15 @@ class Ingress(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel14] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[IngressSpec] = Field(
-        {},
+        None,
         description='Spec is the desired state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[IngressStatus] = Field(
-        {},
+        None,
         description='Status is the current state of the Ingress. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -300,7 +300,7 @@ class IngressList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel12] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
 
@@ -315,14 +315,14 @@ class NetworkPolicy(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel14] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[NetworkPolicySpec] = Field(
-        {}, description='Specification of the desired behavior for this NetworkPolicy.'
+        None, description='Specification of the desired behavior for this NetworkPolicy.'
     )
     status: Optional[NetworkPolicyStatus] = Field(
-        {},
+        None,
         description='Status is the current state of the NetworkPolicy. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -340,6 +340,6 @@ class NetworkPolicyList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel12] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )

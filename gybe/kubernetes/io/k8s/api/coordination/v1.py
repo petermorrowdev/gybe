@@ -43,11 +43,11 @@ class Lease(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel5] = Field(
-        {},
+        None,
         description='More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: Optional[LeaseSpec] = Field(
-        {},
+        None,
         description='Specification of the Lease. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -63,6 +63,6 @@ class LeaseList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel5] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )

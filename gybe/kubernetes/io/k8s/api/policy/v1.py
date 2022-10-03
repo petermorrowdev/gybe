@@ -25,7 +25,7 @@ class Eviction(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel10] = Field(
-        {}, description='ObjectMeta describes the pod that is being evicted.'
+        None, description='ObjectMeta describes the pod that is being evicted.'
     )
 
 
@@ -79,15 +79,15 @@ class PodDisruptionBudget(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel11] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[PodDisruptionBudgetSpec] = Field(
-        {},
+        None,
         description='Specification of the desired behavior of the PodDisruptionBudget.',
     )
     status: Optional[PodDisruptionBudgetStatus] = Field(
-        {}, description='Most recently observed status of the PodDisruptionBudget.'
+        None, description='Most recently observed status of the PodDisruptionBudget.'
     )
 
 
@@ -104,6 +104,6 @@ class PodDisruptionBudgetList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel10] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )

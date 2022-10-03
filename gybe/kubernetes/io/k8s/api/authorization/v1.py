@@ -165,7 +165,7 @@ class LocalSubjectAccessReview(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel13] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: SubjectAccessReviewSpec = Field(
@@ -173,7 +173,7 @@ class LocalSubjectAccessReview(BaseModel):
         description='Spec holds information about the request being evaluated.  spec.namespace must be equal to the namespace you made the request against.  If empty, it is defaulted.',
     )
     status: Optional[SubjectAccessReviewStatus] = Field(
-        {},
+        None,
         description='Status is filled in by the server and indicates whether the request is allowed or not',
     )
 
@@ -188,7 +188,7 @@ class SelfSubjectAccessReview(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel13] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: SelfSubjectAccessReviewSpec = Field(
@@ -196,7 +196,7 @@ class SelfSubjectAccessReview(BaseModel):
         description='Spec holds information about the request being evaluated.  user and groups must be empty',
     )
     status: Optional[SubjectAccessReviewStatus] = Field(
-        {},
+        None,
         description='Status is filled in by the server and indicates whether the request is allowed or not',
     )
 
@@ -211,14 +211,14 @@ class SelfSubjectRulesReview(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel13] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: SelfSubjectRulesReviewSpec = Field(
         ..., description='Spec holds information about the request being evaluated.'
     )
     status: Optional[SubjectRulesReviewStatus] = Field(
-        {},
+        None,
         description='Status is filled in by the server and indicates the set of actions a user can perform.',
     )
 
@@ -233,13 +233,13 @@ class SubjectAccessReview(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel13] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: SubjectAccessReviewSpec = Field(
         ..., description='Spec holds information about the request being evaluated'
     )
     status: Optional[SubjectAccessReviewStatus] = Field(
-        {},
+        None,
         description='Status is filled in by the server and indicates whether the request is allowed or not',
     )

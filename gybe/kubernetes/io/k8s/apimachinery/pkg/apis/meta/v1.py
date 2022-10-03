@@ -4376,7 +4376,7 @@ class APIGroup(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscovery] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDR]] = Field(
@@ -4456,7 +4456,7 @@ class ObjectMeta(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[Time] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -4534,7 +4534,7 @@ class Status(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMeta] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -4566,7 +4566,7 @@ class APIGroupModel(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel]] = Field(
@@ -4657,7 +4657,7 @@ class ObjectMetaModel(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -4735,7 +4735,7 @@ class StatusModel(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -4767,7 +4767,7 @@ class APIGroupModel1(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel1] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel1]] = Field(
@@ -4804,7 +4804,7 @@ class APIGroupModel2(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel2] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel2]] = Field(
@@ -4827,7 +4827,7 @@ class APIGroupModel3(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel3] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel3]] = Field(
@@ -4907,7 +4907,7 @@ class ObjectMetaModel1(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel1] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -4985,7 +4985,7 @@ class StatusModel1(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel1] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5017,7 +5017,7 @@ class APIGroupModel4(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel4] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel4]] = Field(
@@ -5097,7 +5097,7 @@ class ObjectMetaModel2(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel2] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -5175,7 +5175,7 @@ class StatusModel2(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel2] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5207,7 +5207,7 @@ class APIGroupModel5(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel5] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel5]] = Field(
@@ -5230,7 +5230,7 @@ class APIGroupModel6(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel6] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel6]] = Field(
@@ -5310,7 +5310,7 @@ class ObjectMetaModel3(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel3] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -5388,7 +5388,7 @@ class StatusModel3(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel3] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5488,7 +5488,7 @@ class ObjectMetaModel4(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel4] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -5566,7 +5566,7 @@ class StatusModel4(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel4] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5655,7 +5655,7 @@ class ObjectMetaModel5(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel5] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -5733,7 +5733,7 @@ class StatusModel5(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel5] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5765,7 +5765,7 @@ class APIGroupModel7(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel7] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel7]] = Field(
@@ -5845,7 +5845,7 @@ class ObjectMetaModel6(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel6] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -5923,7 +5923,7 @@ class StatusModel6(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel6] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -5981,7 +5981,7 @@ class ObjectMetaModel7(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel7] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6049,7 +6049,7 @@ class APIGroupModel8(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel8] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel8]] = Field(
@@ -6140,7 +6140,7 @@ class ObjectMetaModel8(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel8] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6218,7 +6218,7 @@ class StatusModel7(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel7] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -6307,7 +6307,7 @@ class ObjectMetaModel9(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel9] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6385,7 +6385,7 @@ class StatusModel8(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel8] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -6417,7 +6417,7 @@ class APIGroupModel9(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel9] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDRModel9]] = Field(
@@ -6534,7 +6534,7 @@ class ObjectMetaModel10(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel10] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6612,7 +6612,7 @@ class StatusModel9(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel9] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -6738,7 +6738,7 @@ class ObjectMetaModel11(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel11] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6816,7 +6816,7 @@ class StatusModel10(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel10] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -6905,7 +6905,7 @@ class ObjectMetaModel12(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel12] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -6983,7 +6983,7 @@ class StatusModel11(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel11] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -7015,7 +7015,7 @@ class APIGroupModel10(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel10] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7040,7 +7040,7 @@ class APIGroupModel11(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel11] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7091,7 +7091,7 @@ class ObjectMetaModel13(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel13] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -7159,7 +7159,7 @@ class APIGroupModel12(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel12] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7184,7 +7184,7 @@ class APIGroupModel13(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel13] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7303,7 +7303,7 @@ class ObjectMetaModel14(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel14] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -7381,7 +7381,7 @@ class StatusModel12(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel12] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -7470,7 +7470,7 @@ class ObjectMetaModel15(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel15] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -7548,7 +7548,7 @@ class StatusModel13(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel13] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -7648,7 +7648,7 @@ class ObjectMetaModel16(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel16] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -7726,7 +7726,7 @@ class StatusModel14(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel14] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -7758,7 +7758,7 @@ class APIGroupModel14(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel14] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7809,7 +7809,7 @@ class ObjectMetaModel17(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel17] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -7877,7 +7877,7 @@ class APIGroupModel15(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel15] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -7959,7 +7959,7 @@ class ObjectMetaModel18(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel18] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -8037,7 +8037,7 @@ class StatusModel15(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel15] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -8069,7 +8069,7 @@ class APIGroupModel16(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel16] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -8180,7 +8180,7 @@ class ObjectMetaModel19(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel19] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -8258,7 +8258,7 @@ class StatusModel16(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel16] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -8290,7 +8290,7 @@ class APIGroupModel17(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel17] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -8315,7 +8315,7 @@ class APIGroupModel18(BaseModel):
     )
     name: str = Field(..., description='name is the name of the group.')
     preferredVersion: Optional[GroupVersionForDiscoveryModel18] = Field(
-        {},
+        None,
         description='preferredVersion is the version preferred by the API server, which probably is the storage version.',
     )
     serverAddressByClientCIDRs: Optional[
@@ -8397,7 +8397,7 @@ class ObjectMetaModel20(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel20] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -8475,7 +8475,7 @@ class StatusModel17(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel17] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -8575,7 +8575,7 @@ class ObjectMetaModel21(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel21] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -8653,7 +8653,7 @@ class StatusModel18(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel18] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(
@@ -8753,7 +8753,7 @@ class ObjectMetaModel22(BaseModel):
         description='Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations',
     )
     creationTimestamp: Optional[TimeModel22] = Field(
-        {},
+        None,
         description='CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     deletionGracePeriodSeconds: Optional[int] = Field(
@@ -8831,7 +8831,7 @@ class StatusModel19(BaseModel):
         description='A human-readable description of the status of this operation.',
     )
     metadata: Optional[ListMetaModel19] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     reason: Optional[str] = Field(

@@ -77,10 +77,10 @@ class CronJobStatus(BaseModel):
 
 class JobCondition(BaseModel):
     lastProbeTime: Optional[v1_1.TimeModel21] = Field(
-        {}, description='Last time the condition was checked.'
+        None, description='Last time the condition was checked.'
     )
     lastTransitionTime: Optional[v1_1.TimeModel21] = Field(
-        {}, description='Last time the condition transit from one status to another.'
+        None, description='Last time the condition transit from one status to another.'
     )
     message: Optional[str] = Field(
         None,
@@ -187,11 +187,11 @@ class JobSpec(BaseModel):
 
 class JobTemplateSpec(BaseModel):
     metadata: Optional[v1_1.ObjectMetaModel21] = Field(
-        {},
+        None,
         description="Standard object's metadata of the jobs created from this template. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[JobSpec] = Field(
-        {},
+        None,
         description='Specification of the desired behavior of the job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -241,15 +241,15 @@ class Job(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel21] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[JobSpec] = Field(
-        {},
+        None,
         description='Specification of the desired behavior of a job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[JobStatus] = Field(
-        {},
+        None,
         description='Current status of a job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -265,7 +265,7 @@ class JobList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel18] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -280,15 +280,15 @@ class CronJob(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel21] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[CronJobSpec] = Field(
-        {},
+        None,
         description='Specification of the desired behavior of a cron job, including the schedule. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[CronJobStatus] = Field(
-        {},
+        None,
         description='Current status of a cron job. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -304,6 +304,6 @@ class CronJobList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ListMetaModel18] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )

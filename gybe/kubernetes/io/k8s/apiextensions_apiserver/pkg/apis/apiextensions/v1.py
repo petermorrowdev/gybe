@@ -99,7 +99,7 @@ class ExternalDocumentation(BaseModel):
 class JSON(BaseModel):
     __root__: Any = Field(
         ...,
-        description='JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interface{}, map[string]interface{} and nil.',
+        description='JSON represents any valid JSON value. These types are supported: bool, int64, float64, string, []interfaceNone, map[string]interface{} and nil.',
     )
 
 
@@ -189,7 +189,7 @@ class CustomResourceConversion(BaseModel):
 
 class CustomResourceDefinitionCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel1] = Field(
-        {},
+        None,
         description='lastTransitionTime last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -212,7 +212,7 @@ class CustomResourceDefinitionCondition(BaseModel):
 
 class CustomResourceDefinitionStatus(BaseModel):
     acceptedNames: Optional[CustomResourceDefinitionNames] = Field(
-        {},
+        None,
         description='acceptedNames are the names that are actually being used to serve discovery. They may be different than the names in spec.',
     )
     conditions: Optional[List[CustomResourceDefinitionCondition]] = Field(
@@ -385,14 +385,14 @@ class CustomResourceDefinition(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel1] = Field(
-        {},
+        None,
         description="Standard object's metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: CustomResourceDefinitionSpec = Field(
         ..., description='spec describes how the user wants the resources to appear'
     )
     status: Optional[CustomResourceDefinitionStatus] = Field(
-        {},
+        None,
         description='status indicates the actual state of the CustomResourceDefinition',
     )
 
@@ -410,7 +410,7 @@ class CustomResourceDefinitionList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel1] = Field(
-        {},
+        None,
         description="Standard object's metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
 

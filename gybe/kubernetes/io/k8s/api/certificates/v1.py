@@ -48,11 +48,11 @@ class CertificateSigningRequestSpec(BaseModel):
 
 class CertificateSigningRequestCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel15] = Field(
-        {},
+        None,
         description="lastTransitionTime is the time the condition last transitioned from one status to another. If unset, when a new condition type is added or an existing condition's status is changed, the server defaults this to the current time.",
     )
     lastUpdateTime: Optional[v1.TimeModel15] = Field(
-        {},
+        None,
         description='lastUpdateTime is the time of the last update to this condition',
     )
     message: Optional[str] = Field(
@@ -98,7 +98,7 @@ class CertificateSigningRequest(BaseModel):
         description='spec contains the certificate request, and is immutable after creation. Only the request, signerName, expirationSeconds, and usages fields can be set on creation. Other fields are derived by Kubernetes and cannot be modified by users.',
     )
     status: Optional[CertificateSigningRequestStatus] = Field(
-        {},
+        None,
         description='status contains information about whether the request is approved or denied, and the certificate issued by the signer, or the failure condition indicating signer failure.',
     )
 

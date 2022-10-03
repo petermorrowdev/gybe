@@ -37,15 +37,15 @@ class Event(BaseModel):
         description='deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.',
     )
     deprecatedFirstTimestamp: Optional[v1.Time] = Field(
-        {},
+        None,
         description='deprecatedFirstTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.',
     )
     deprecatedLastTimestamp: Optional[v1.Time] = Field(
-        {},
+        None,
         description='deprecatedLastTimestamp is the deprecated field assuring backward compatibility with core.v1 Event type.',
     )
     deprecatedSource: Optional[v1_1.EventSource] = Field(
-        {},
+        None,
         description='deprecatedSource is the deprecated field assuring backward compatibility with core.v1 Event type.',
     )
     eventTime: v1.MicroTime = Field(
@@ -57,7 +57,7 @@ class Event(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMeta] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     note: Optional[str] = Field(
@@ -69,7 +69,7 @@ class Event(BaseModel):
         description='reason is why the action was taken. It is human-readable. This field cannot be empty for new Events and it can have at most 128 characters.',
     )
     regarding: Optional[v1_1.ObjectReference] = Field(
-        {},
+        None,
         description="regarding contains the object this Event is about. In most cases it's an Object reporting controller implements, e.g. ReplicaSetController implements ReplicaSets and this event is emitted because it acts on some changes in a ReplicaSet object.",
     )
     related: Optional[v1_1.ObjectReference] = Field(
@@ -105,6 +105,6 @@ class EventList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMeta] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
