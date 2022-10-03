@@ -37,7 +37,7 @@ Create a `chart.py` file:
 ```python
 from typing import List
 
-from gybe.kubernetes.favorites import Pod, PodSpec, Container
+from gybe.favorites.kubernetes import Pod, PodSpec, Container
 import gybe
 
 
