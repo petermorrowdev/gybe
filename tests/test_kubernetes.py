@@ -3,4 +3,4 @@ def test_import_kuberentes():
 
 
 def test_import_favorites():
-    from gybe.kubernetes import favorites
+    from gybe.favorites import kubernetes
