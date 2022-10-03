@@ -27,7 +27,7 @@ class StatefulSetPersistentVolumeClaimRetentionPolicy(BaseModel):
 
 class DaemonSetCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel8] = Field(
-        {},
+        None,
         description='Last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -88,11 +88,11 @@ class DaemonSetStatus(BaseModel):
 
 class DeploymentCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel8] = Field(
-        {},
+        None,
         description='Last time the condition transitioned from one status to another.',
     )
     lastUpdateTime: Optional[v1.TimeModel8] = Field(
-        {}, description='The last time this condition was updated.'
+        None, description='The last time this condition was updated.'
     )
     message: Optional[str] = Field(
         None,
@@ -143,7 +143,7 @@ class DeploymentStatus(BaseModel):
 
 class ReplicaSetCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel8] = Field(
-        {},
+        None,
         description='The last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -221,7 +221,7 @@ class RollingUpdateStatefulSetStrategy(BaseModel):
 
 class StatefulSetCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel8] = Field(
-        {},
+        None,
         description='Last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -297,14 +297,14 @@ class ControllerRevision(BaseModel):
         description='APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources',
     )
     data: Optional[runtime.RawExtensionModel7] = Field(
-        {}, description='Data is the serialized representation of the state.'
+        None, description='Data is the serialized representation of the state.'
     )
     kind: Optional[str] = Field(
         None,
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     revision: int = Field(
@@ -326,7 +326,7 @@ class ControllerRevisionList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel7] = Field(
-        {},
+        None,
         description='More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -371,7 +371,7 @@ class DaemonSetSpec(BaseModel):
         description="An object that describes the pod that will be created. The DaemonSet will create exactly one copy of this pod on every node that matches the template's node selector (or on every node if no node selector is specified). More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template",
     )
     updateStrategy: Optional[DaemonSetUpdateStrategy] = Field(
-        {},
+        None,
         description='An update strategy to replace existing DaemonSet pods with new pods.',
     )
 
@@ -401,7 +401,7 @@ class DeploymentSpec(BaseModel):
         description="Label selector for pods. Existing ReplicaSets whose pods are selected by this will be the ones affected by this deployment. It must match the pod template's labels.",
     )
     strategy: Optional[DeploymentStrategy] = Field(
-        {},
+        None,
         description='The deployment strategy to use to replace existing pods with new ones.',
     )
     template: v1_1.PodTemplateSpec = Field(
@@ -423,7 +423,7 @@ class ReplicaSetSpec(BaseModel):
         description="Selector is a label query over pods that should match the replica count. Label keys and values that must match in order to be controlled by this replica set. It must match the pod template's labels. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors",
     )
     template: Optional[v1_1.PodTemplateSpec] = Field(
-        {},
+        None,
         description='Template is the object that describes the pod that will be created if insufficient replicas are detected. More info: https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template',
     )
 
@@ -464,7 +464,7 @@ class StatefulSetSpec(BaseModel):
         description='template is the object that describes the pod that will be created if insufficient replicas are detected. Each pod stamped out by the StatefulSet will fulfill this Template, but have a unique identity from the rest of the StatefulSet.',
     )
     updateStrategy: Optional[StatefulSetUpdateStrategy] = Field(
-        {},
+        None,
         description='updateStrategy indicates the StatefulSetUpdateStrategy that will be employed to update Pods in the StatefulSet when a revision is made to Template.',
     )
     volumeClaimTemplates: Optional[List[v1_1.PersistentVolumeClaim]] = Field(
@@ -483,15 +483,15 @@ class DaemonSet(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[DaemonSetSpec] = Field(
-        {},
+        None,
         description='The desired behavior of this daemon set. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[DaemonSetStatus] = Field(
-        {},
+        None,
         description='The current status of this daemon set. This data may be out of date by some window of time. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -507,7 +507,7 @@ class DaemonSetList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel7] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -522,14 +522,14 @@ class Deployment(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[DeploymentSpec] = Field(
-        {}, description='Specification of the desired behavior of the Deployment.'
+        None, description='Specification of the desired behavior of the Deployment.'
     )
     status: Optional[DeploymentStatus] = Field(
-        {}, description='Most recently observed status of the Deployment.'
+        None, description='Most recently observed status of the Deployment.'
     )
 
 
@@ -546,7 +546,7 @@ class DeploymentList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel7] = Field(
-        {}, description='Standard list metadata.'
+        None, description='Standard list metadata.'
     )
 
 
@@ -560,15 +560,15 @@ class ReplicaSet(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description="If the Labels of a ReplicaSet are empty, they are defaulted to be the same as the Pod(s) that the ReplicaSet manages. Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[ReplicaSetSpec] = Field(
-        {},
+        None,
         description='Spec defines the specification of the desired behavior of the ReplicaSet. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[ReplicaSetStatus] = Field(
-        {},
+        None,
         description='Status is the most recently observed status of the ReplicaSet. This data may be out of date by some window of time. Populated by the system. Read-only. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -587,7 +587,7 @@ class ReplicaSetList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel7] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
 
@@ -602,14 +602,14 @@ class StatefulSet(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[StatefulSetSpec] = Field(
-        {}, description='Spec defines the desired identities of pods in this set.'
+        None, description='Spec defines the desired identities of pods in this set.'
     )
     status: Optional[StatefulSetStatus] = Field(
-        {},
+        None,
         description='Status is the current status of Pods in this StatefulSet. This data may be out of date by some window of time.',
     )
 
@@ -627,6 +627,6 @@ class StatefulSetList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel7] = Field(
-        {},
+        None,
         description="Standard list's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )

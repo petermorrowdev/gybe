@@ -106,15 +106,15 @@ class Scale(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel8] = Field(
-        {},
+        None,
         description='Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.',
     )
     spec: Optional[ScaleSpec] = Field(
-        {},
+        None,
         description='defines the behavior of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.',
     )
     status: Optional[ScaleStatus] = Field(
-        {},
+        None,
         description='current status of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status. Read-only.',
     )
 
@@ -129,15 +129,15 @@ class HorizontalPodAutoscaler(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel9] = Field(
-        {},
+        None,
         description='Standard object metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: Optional[HorizontalPodAutoscalerSpec] = Field(
-        {},
+        None,
         description='behaviour of autoscaler. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.',
     )
     status: Optional[HorizontalPodAutoscalerStatus] = Field(
-        {}, description='current information about the autoscaler.'
+        None, description='current information about the autoscaler.'
     )
 
 
@@ -154,7 +154,7 @@ class HorizontalPodAutoscalerList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel8] = Field(
-        {}, description='Standard list metadata.'
+        None, description='Standard list metadata.'
     )
 
 
@@ -168,14 +168,14 @@ class ScaleModel(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel10] = Field(
-        {},
+        None,
         description='Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata.',
     )
     spec: Optional[ScaleSpecModel] = Field(
-        {},
+        None,
         description='defines the behavior of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.',
     )
     status: Optional[ScaleStatusModel] = Field(
-        {},
+        None,
         description='current status of the scale. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status. Read-only.',
     )

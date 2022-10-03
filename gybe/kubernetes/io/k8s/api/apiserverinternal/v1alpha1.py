@@ -31,7 +31,7 @@ class StorageVersionSpec(BaseModel):
 
 class StorageVersionCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel18] = Field(
-        {},
+        None,
         description='Last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -75,7 +75,7 @@ class StorageVersion(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel18] = Field(
-        {}, description='The name is <group>.<resource>.'
+        None, description='The name is <group>.<resource>.'
     )
     spec: StorageVersionSpec = Field(
         ...,
@@ -100,6 +100,6 @@ class StorageVersionList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel15] = Field(
-        {},
+        None,
         description='Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )

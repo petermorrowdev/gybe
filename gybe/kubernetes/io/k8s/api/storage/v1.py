@@ -98,7 +98,7 @@ class VolumeError(BaseModel):
         description='String detailing the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.',
     )
     time: Optional[v1.TimeModel] = Field(
-        {}, description='Time the error was encountered.'
+        None, description='Time the error was encountered.'
     )
 
 
@@ -112,7 +112,7 @@ class CSIDriver(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel] = Field(
-        {},
+        None,
         description='Standard object metadata. metadata.Name indicates the name of the CSI driver that this object refers to; it MUST be the same name returned by the CSI GetPluginName() call for that driver. The driver name must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), dots (.), and alphanumerics between. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: CSIDriverSpec = Field(..., description='Specification of the CSI Driver.')
@@ -129,7 +129,7 @@ class CSIDriverList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -144,7 +144,7 @@ class CSINode(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel] = Field(
-        {}, description='metadata.name must be the Kubernetes node name.'
+        None, description='metadata.name must be the Kubernetes node name.'
     )
     spec: CSINodeSpec = Field(..., description='spec is the specification of CSINode')
 
@@ -160,7 +160,7 @@ class CSINodeList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -183,7 +183,7 @@ class CSIStorageCapacity(BaseModel):
         description='MaximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse for a GetCapacityRequest with topology and parameters that match the previous fields.\n\nThis is defined since CSI spec 1.4.0 as the largest size that may be used in a CreateVolumeRequest.capacity_range.required_bytes field to create a volume with the same parameters as those in GetCapacityRequest. The corresponding value in the Kubernetes API is ResourceRequirements.Requests in a volume claim.',
     )
     metadata: Optional[v1.ObjectMetaModel] = Field(
-        {},
+        None,
         description="Standard object's metadata. The name has no particular meaning. It must be be a DNS subdomain (dots allowed, 253 characters). To ensure that there are no conflicts with other CSI drivers on the cluster, the recommendation is to use csisc-<uuid>, a generated name, or a reverse-domain name which ends with the unique CSI driver name.\n\nObjects are namespaced.\n\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     nodeTopology: Optional[v1.LabelSelector] = Field(
@@ -209,7 +209,7 @@ class CSIStorageCapacityList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -232,7 +232,7 @@ class StorageClass(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     mountOptions: Optional[List[str]] = Field(
@@ -269,7 +269,7 @@ class StorageClassList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
 
@@ -326,7 +326,7 @@ class VolumeAttachment(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel] = Field(
-        {},
+        None,
         description='Standard object metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: VolumeAttachmentSpec = Field(
@@ -334,7 +334,7 @@ class VolumeAttachment(BaseModel):
         description='Specification of the desired attach/detach volume behavior. Populated by the Kubernetes system.',
     )
     status: Optional[VolumeAttachmentStatus] = Field(
-        {},
+        None,
         description='Status of the VolumeAttachment request. Populated by the entity completing the attach or detach operation, i.e. the external-attacher.',
     )
 
@@ -352,6 +352,6 @@ class VolumeAttachmentList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel] = Field(
-        {},
+        None,
         description='Standard list metadata More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )

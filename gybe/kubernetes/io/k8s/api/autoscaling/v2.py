@@ -64,7 +64,7 @@ class HorizontalPodAutoscalerBehavior(BaseModel):
 
 class HorizontalPodAutoscalerCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel16] = Field(
-        {},
+        None,
         description='lastTransitionTime is the last time the condition transitioned from one status to another',
     )
     message: Optional[str] = Field(
@@ -332,15 +332,15 @@ class HorizontalPodAutoscaler(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel16] = Field(
-        {},
+        None,
         description='metadata is the standard object metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
     spec: Optional[HorizontalPodAutoscalerSpec] = Field(
-        {},
+        None,
         description='spec is the specification for the behaviour of the autoscaler. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status.',
     )
     status: Optional[HorizontalPodAutoscalerStatus] = Field(
-        {}, description='status is the current information about the autoscaler.'
+        None, description='status is the current information about the autoscaler.'
     )
 
 
@@ -357,5 +357,5 @@ class HorizontalPodAutoscalerList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel14] = Field(
-        {}, description='metadata is the standard list metadata.'
+        None, description='metadata is the standard list metadata.'
     )

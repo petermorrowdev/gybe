@@ -14,7 +14,7 @@ from . import v1
 
 class SelfSubjectReviewStatus(BaseModel):
     userInfo: Optional[v1.UserInfo] = Field(
-        {}, description='User attributes of the user making this request.'
+        None, description='User attributes of the user making this request.'
     )
 
 
@@ -28,9 +28,9 @@ class SelfSubjectReview(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1_1.ObjectMetaModel7] = Field(
-        {},
+        None,
         description="Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     status: Optional[SelfSubjectReviewStatus] = Field(
-        {}, description='Status is filled in by the server with the user attributes.'
+        None, description='Status is filled in by the server with the user attributes.'
     )

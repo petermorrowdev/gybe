@@ -101,7 +101,7 @@ class UserSubject(BaseModel):
 
 class FlowSchemaCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel6] = Field(
-        {},
+        None,
         description='`lastTransitionTime` is the last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -144,14 +144,14 @@ class LimitedPriorityLevelConfiguration(BaseModel):
         description="`assuredConcurrencyShares` (ACS) configures the execution limit, which is a limit on the number of requests of this priority level that may be exeucting at a given time.  ACS must be a positive number. The server's concurrency limit (SCL) is divided among the concurrency-controlled priority levels in proportion to their assured concurrency shares. This produces the assured concurrency value (ACV) --- the number of requests that may be executing at a time --- for each such priority level:\n\n            ACV(l) = ceil( SCL * ACS(l) / ( sum[priority levels k] ACS(k) ) )\n\nbigger numbers of ACS mean more reserved concurrent requests (at the expense of every other PL). This field has a default value of 30.",
     )
     limitResponse: Optional[LimitResponse] = Field(
-        {},
+        None,
         description='`limitResponse` indicates what to do with requests that can not be executed right now',
     )
 
 
 class PriorityLevelConfigurationCondition(BaseModel):
     lastTransitionTime: Optional[v1.TimeModel6] = Field(
-        {},
+        None,
         description='`lastTransitionTime` is the last time the condition transitioned from one status to another.',
     )
     message: Optional[str] = Field(
@@ -229,15 +229,15 @@ class PriorityLevelConfiguration(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel6] = Field(
-        {},
+        None,
         description="`metadata` is the standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[PriorityLevelConfigurationSpec] = Field(
-        {},
+        None,
         description='`spec` is the specification of the desired behavior of a "request-priority". More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[PriorityLevelConfigurationStatus] = Field(
-        {},
+        None,
         description='`status` is the current status of a "request-priority". More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -255,7 +255,7 @@ class PriorityLevelConfigurationList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel6] = Field(
-        {},
+        None,
         description="`metadata` is the standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
 
@@ -289,15 +289,15 @@ class FlowSchema(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ObjectMetaModel6] = Field(
-        {},
+        None,
         description="`metadata` is the standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata",
     )
     spec: Optional[FlowSchemaSpec] = Field(
-        {},
+        None,
         description='`spec` is the specification of the desired behavior of a FlowSchema. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
     status: Optional[FlowSchemaStatus] = Field(
-        {},
+        None,
         description='`status` is the current status of a FlowSchema. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status',
     )
 
@@ -315,6 +315,6 @@ class FlowSchemaList(BaseModel):
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
     metadata: Optional[v1.ListMetaModel6] = Field(
-        {},
+        None,
         description='`metadata` is the standard list metadata. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata',
     )
