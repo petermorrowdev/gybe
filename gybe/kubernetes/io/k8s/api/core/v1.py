@@ -3266,7 +3266,7 @@ class EmptyDirVolumeSource(BaseModel):
         None,
         description='medium represents what type of storage medium should back this directory. The default is "" which means to use the node\'s default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir',
     )
-    sizeLimit: Optional[resource.QuantityModel1] = Field(
+    sizeLimit: Optional[resource.Quantity] = Field(
         None,
         description='sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir',
     )
@@ -3399,11 +3399,11 @@ class PersistentVolumeClaimStatus(BaseModel):
         None,
         description='accessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1',
     )
-    allocatedResources: Optional[Dict[str, resource.QuantityModel1]] = Field(
+    allocatedResources: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='allocatedResources is the storage resource within AllocatedResources tracks the capacity allocated to a PVC. It may be larger than the actual capacity when a volume expansion operation is requested. For storage quota, the larger value from allocatedResources and PVC.spec.resources is used. If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation. If a volume expansion capacity request is lowered, allocatedResources is only lowered if there are no expansion operations in progress and if the actual volume capacity is equal or lower than the requested capacity. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.',
     )
-    capacity: Optional[Dict[str, resource.QuantityModel1]] = Field(
+    capacity: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='capacity represents the actual resources of the underlying volume.',
     )
@@ -3483,7 +3483,7 @@ class ResourceFieldSelector(BaseModel):
     containerName: Optional[str] = Field(
         None, description='Container name: required for volumes, optional for env vars'
     )
-    divisor: Optional[resource.QuantityModel1] = Field(
+    divisor: Optional[resource.Quantity] = Field(
         None,
         description='Specifies the output format of the exposed resources, defaults to "1"',
     )
@@ -3491,11 +3491,11 @@ class ResourceFieldSelector(BaseModel):
 
 
 class ResourceRequirements(BaseModel):
-    limits: Optional[Dict[str, resource.QuantityModel1]] = Field(
+    limits: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
-    requests: Optional[Dict[str, resource.QuantityModel1]] = Field(
+    requests: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
@@ -3784,7 +3784,7 @@ class EmptyDirVolumeSourceModel(BaseModel):
         None,
         description='medium represents what type of storage medium should back this directory. The default is "" which means to use the node\'s default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir',
     )
-    sizeLimit: Optional[resource.QuantityModel2] = Field(
+    sizeLimit: Optional[resource.Quantity] = Field(
         None,
         description='sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir',
     )
@@ -3989,22 +3989,22 @@ class ISCSIVolumeSourceModel(BaseModel):
 
 
 class LimitRangeItem(BaseModel):
-    default: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    default: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Default resource requirement limit value by resource name if resource limit is omitted.',
     )
-    defaultRequest: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    defaultRequest: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.',
     )
-    max: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    max: Optional[Dict[str, resource.Quantity]] = Field(
         None, description='Max usage constraints on this kind by resource name.'
     )
-    maxLimitRequestRatio: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    maxLimitRequestRatio: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.',
     )
-    min: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    min: Optional[Dict[str, resource.Quantity]] = Field(
         None, description='Min usage constraints on this kind by resource name.'
     )
     type: str = Field(..., description='Type of resource that this limit applies to.')
@@ -4091,11 +4091,11 @@ class NodeStatus(BaseModel):
         None,
         description='List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See https://pr.k8s.io/79391 for an example.',
     )
-    allocatable: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    allocatable: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.',
     )
-    capacity: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    capacity: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity',
     )
@@ -4154,11 +4154,11 @@ class PersistentVolumeClaimStatusModel(BaseModel):
         None,
         description='accessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1',
     )
-    allocatedResources: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    allocatedResources: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='allocatedResources is the storage resource within AllocatedResources tracks the capacity allocated to a PVC. It may be larger than the actual capacity when a volume expansion operation is requested. For storage quota, the larger value from allocatedResources and PVC.spec.resources is used. If allocatedResources is not set, PVC.spec.resources alone is used for quota calculation. If a volume expansion capacity request is lowered, allocatedResources is only lowered if there are no expansion operations in progress and if the actual volume capacity is equal or lower than the requested capacity. This is an alpha field and requires enabling RecoverVolumeExpansionFailure feature.',
     )
-    capacity: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    capacity: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='capacity represents the actual resources of the underlying volume.',
     )
@@ -4344,7 +4344,7 @@ class ResourceFieldSelectorModel(BaseModel):
     containerName: Optional[str] = Field(
         None, description='Container name: required for volumes, optional for env vars'
     )
-    divisor: Optional[resource.QuantityModel2] = Field(
+    divisor: Optional[resource.Quantity] = Field(
         None,
         description='Specifies the output format of the exposed resources, defaults to "1"',
     )
@@ -4352,22 +4352,22 @@ class ResourceFieldSelectorModel(BaseModel):
 
 
 class ResourceQuotaStatus(BaseModel):
-    hard: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    hard: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/',
     )
-    used: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    used: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Used is the current observed total usage of the resource in the namespace.',
     )
 
 
 class ResourceRequirementsModel(BaseModel):
-    limits: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    limits: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
-    requests: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    requests: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
@@ -4735,7 +4735,7 @@ class EmptyDirVolumeSourceModel1(BaseModel):
         None,
         description='medium represents what type of storage medium should back this directory. The default is "" which means to use the node\'s default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir',
     )
-    sizeLimit: Optional[resource.QuantityModel5] = Field(
+    sizeLimit: Optional[resource.Quantity] = Field(
         None,
         description='sizeLimit is the total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir',
     )
@@ -4905,7 +4905,7 @@ class ResourceFieldSelectorModel1(BaseModel):
     containerName: Optional[str] = Field(
         None, description='Container name: required for volumes, optional for env vars'
     )
-    divisor: Optional[resource.QuantityModel5] = Field(
+    divisor: Optional[resource.Quantity] = Field(
         None,
         description='Specifies the output format of the exposed resources, defaults to "1"',
     )
@@ -4913,11 +4913,11 @@ class ResourceFieldSelectorModel1(BaseModel):
 
 
 class ResourceRequirementsModel1(BaseModel):
-    limits: Optional[Dict[str, resource.QuantityModel5]] = Field(
+    limits: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
-    requests: Optional[Dict[str, resource.QuantityModel5]] = Field(
+    requests: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/',
     )
@@ -5832,7 +5832,7 @@ class PersistentVolumeSpecModel(BaseModel):
         None,
         description='azureFile represents an Azure File Service mount on the host and bind mount to the pod.',
     )
-    capacity: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    capacity: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description="capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity",
     )
@@ -6052,7 +6052,7 @@ class ProbeModel(BaseModel):
 
 
 class ResourceQuotaSpec(BaseModel):
-    hard: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    hard: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/',
     )
@@ -7982,7 +7982,7 @@ class PodSpec(BaseModel):
         None,
         description='Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.\n\nIf the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions\n\nIf the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup',
     )
-    overhead: Optional[Dict[str, resource.QuantityModel1]] = Field(
+    overhead: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md',
     )
@@ -8140,7 +8140,7 @@ class PodSpecModel(BaseModel):
         None,
         description='Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.\n\nIf the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions\n\nIf the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup',
     )
-    overhead: Optional[Dict[str, resource.QuantityModel2]] = Field(
+    overhead: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md',
     )
@@ -8317,7 +8317,7 @@ class PodSpecModel1(BaseModel):
         None,
         description='Specifies the OS of the containers in the pod. Some pod and container fields are restricted if this is set.\n\nIf the OS field is set to linux, the following fields must be unset: -securityContext.windowsOptions\n\nIf the OS field is set to windows, following fields must be unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile - spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions - spec.containers[*].securityContext.seccompProfile - spec.containers[*].securityContext.capabilities - spec.containers[*].securityContext.readOnlyRootFilesystem - spec.containers[*].securityContext.privileged - spec.containers[*].securityContext.allowPrivilegeEscalation - spec.containers[*].securityContext.procMount - spec.containers[*].securityContext.runAsUser - spec.containers[*].securityContext.runAsGroup',
     )
-    overhead: Optional[Dict[str, resource.QuantityModel5]] = Field(
+    overhead: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md',
     )

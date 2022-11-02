@@ -17,7 +17,7 @@ class CSIStorageCapacity(BaseModel):
         None,
         description='APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources',
     )
-    capacity: Optional[resource.QuantityModel4] = Field(
+    capacity: Optional[resource.Quantity] = Field(
         None,
         description='Capacity is the value reported by the CSI driver in its GetCapacityResponse for a GetCapacityRequest with topology and parameters that match the previous fields.\n\nThe semantic is currently (CSI spec 1.2) defined as: The available capacity, in bytes, of the storage that can be used to provision volumes. If not set, that information is currently unavailable.',
     )
@@ -25,7 +25,7 @@ class CSIStorageCapacity(BaseModel):
         None,
         description='Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds',
     )
-    maximumVolumeSize: Optional[resource.QuantityModel4] = Field(
+    maximumVolumeSize: Optional[resource.Quantity] = Field(
         None,
         description='MaximumVolumeSize is the value reported by the CSI driver in its GetCapacityResponse for a GetCapacityRequest with topology and parameters that match the previous fields.\n\nThis is defined since CSI spec 1.4.0 as the largest size that may be used in a CreateVolumeRequest.capacity_range.required_bytes field to create a volume with the same parameters as those in GetCapacityRequest. The corresponding value in the Kubernetes API is ResourceRequirements.Requests in a volume claim.',
     )

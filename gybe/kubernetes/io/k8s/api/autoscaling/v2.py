@@ -85,7 +85,7 @@ class MetricTarget(BaseModel):
         None,
         description='averageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods. Currently only valid for Resource metric source type',
     )
-    averageValue: Optional[resource.QuantityModel3] = Field(
+    averageValue: Optional[resource.Quantity] = Field(
         None,
         description='averageValue is the target value of the average of the metric across all relevant pods (as a quantity)',
     )
@@ -93,7 +93,7 @@ class MetricTarget(BaseModel):
         ...,
         description='type represents whether the metric type is Utilization, Value, or AverageValue',
     )
-    value: Optional[resource.QuantityModel3] = Field(
+    value: Optional[resource.Quantity] = Field(
         None, description='value is the target value of the metric (as a quantity).'
     )
 
@@ -103,11 +103,11 @@ class MetricValueStatus(BaseModel):
         None,
         description='currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.',
     )
-    averageValue: Optional[resource.QuantityModel3] = Field(
+    averageValue: Optional[resource.Quantity] = Field(
         None,
         description='averageValue is the current value of the average of the metric across all relevant pods (as a quantity)',
     )
-    value: Optional[resource.QuantityModel3] = Field(
+    value: Optional[resource.Quantity] = Field(
         None, description='value is the current value of the metric (as a quantity).'
     )
 

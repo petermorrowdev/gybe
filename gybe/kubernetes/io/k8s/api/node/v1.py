@@ -25,7 +25,7 @@ class Scheduling(BaseModel):
 
 
 class Overhead(BaseModel):
-    podFixed: Optional[Dict[str, resource.QuantityModel]] = Field(
+    podFixed: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description='PodFixed represents the fixed resource overhead associated with running a pod.',
     )
