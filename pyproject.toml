@@ -20,3 +20,6 @@ test = [
     "pytest",
     "pytest-cov",
 ]
+codegen = [
+    "datamodel-code-generator",
+]
