@@ -1,7 +1,6 @@
 from typing import Iterator, Union
 import ast
 import re
-import json
 
 from gybe.clean import PATTERN, iter_k8s_py
 
