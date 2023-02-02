@@ -1,12 +1,13 @@
-from pathlib import Path
 from typing import Iterator, Union
 import ast
 import re
+import json
 
 from gybe.clean import PATTERN, iter_k8s_py
 
 
 def test_no_duplicate_models():
+    duplicates = {}
     for path in iter_k8s_py():
         with open(path) as f:
             tree = ast.parse(f.read())
@@ -14,7 +15,15 @@ def test_no_duplicate_models():
         for node in tree.body:
             if isinstance(node, ast.ClassDef):
                 has_duplicate = re.search(PATTERN, node.name)
-                assert not has_duplicate, f'Duplicate Found: {node.name}'
+                if has_duplicate:
+                    clean_name = re.sub(PATTERN, '', node.name)
+                    duplicates[clean_name] = duplicates.get(clean_name, 0) + 1
+    
+    count = sum([v for v in duplicates.values()])
+    top_five = "\n\t".join([
+        f"{k}: {v}" for k, v in sorted(duplicates.items(), key=lambda i: -i[1])
+    ][:5])
+    assert not count, f"Found {count} duplicates: \n\t{top_five}\n\t...{count - 5} more"
 
 
 def get_classes_from_ast(node):
