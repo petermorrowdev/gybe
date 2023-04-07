@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+# Runs datamodel-codegen to test if any duplicate models are generated
+
+# Wipe existing kubernetes code
+rm -rf gybe/kubernetes
+
+# Generate pydantic models from Kubernetes OpenAPI 
+datamodel-codegen \
+  --input kubernetes/api/openapi-spec/v3/ \
+  --input-file-type=openapi \
+  --output=gybe/kubernetes
+
+# Test that datamodel-codegen has not generated duplicates
+pytest tests/test_no_duplicates.py

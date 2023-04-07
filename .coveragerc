@@ -1,0 +1,4 @@
+[report]
+  omit=
+    # testing gybe.clean messes up coverage
+    gybe/clean.py
