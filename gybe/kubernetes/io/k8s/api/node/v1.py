@@ -31,7 +31,7 @@ class Overhead(BaseModel):
     podFixed: Optional[Dict[str, resource.Quantity]] = Field(
         None,
         description=(
-            "PodFixed represents the fixed resource overhead associated with running a"
+            "podFixed represents the fixed resource overhead associated with running a"
             " pod."
         ),
     )
@@ -50,7 +50,7 @@ class RuntimeClass(BaseModel):
     handler: str = Field(
         ...,
         description=(
-            "Handler specifies the underlying runtime and configuration that the CRI"
+            "handler specifies the underlying runtime and configuration that the CRI"
             " implementation will use to handle pods of this class. The possible values"
             " are specific to the node & CRI configuration.  It is assumed that all"
             " handlers are available on every node, and handlers of the same name are"
@@ -79,7 +79,7 @@ class RuntimeClass(BaseModel):
     overhead: Optional[Overhead] = Field(
         None,
         description=(
-            "Overhead represents the resource overhead associated with running a pod"
+            "overhead represents the resource overhead associated with running a pod"
             " for a given RuntimeClass. For more details, see\n"
             " https://kubernetes.io/docs/concepts/scheduling-eviction/pod-overhead/"
         ),
@@ -87,7 +87,7 @@ class RuntimeClass(BaseModel):
     scheduling: Optional[Scheduling] = Field(
         None,
         description=(
-            "Scheduling holds the scheduling constraints to ensure that pods running"
+            "scheduling holds the scheduling constraints to ensure that pods running"
             " with this RuntimeClass are scheduled to nodes that support it. If"
             " scheduling is nil, this RuntimeClass is assumed to be supported by all"
             " nodes."
@@ -106,7 +106,7 @@ class RuntimeClassList(BaseModel):
         ),
     )
     items: List[RuntimeClass] = Field(
-        ..., description="Items is a list of schema objects."
+        ..., description="items is a list of schema objects."
     )
     kind: Optional[str] = Field(
         None,

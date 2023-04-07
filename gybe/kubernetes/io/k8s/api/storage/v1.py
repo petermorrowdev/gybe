@@ -10,14 +10,14 @@ class TokenRequest(BaseModel):
     audience: str = Field(
         ...,
         description=(
-            'Audience is the intended audience of the token in "TokenRequestSpec". It'
+            'audience is the intended audience of the token in "TokenRequestSpec". It'
             " will default to the audiences of kube apiserver."
         ),
     )
     expirationSeconds: Optional[int] = Field(
         None,
         description=(
-            "ExpirationSeconds is the duration of validity of the token in"
+            "expirationSeconds is the duration of validity of the token in"
             ' "TokenRequestSpec". It has the same default value of "ExpirationSeconds"'
             ' in "TokenRequestSpec".'
         ),
@@ -28,12 +28,12 @@ class VolumeNodeResources(BaseModel):
     count: Optional[int] = Field(
         None,
         description=(
-            "Maximum number of unique volumes managed by the CSI driver that can be"
-            " used on a node. A volume that is both attached and mounted on a node is"
-            " considered to be used once, not twice. The same rule applies for a unique"
-            " volume that is shared among multiple pods on the same node. If this field"
-            " is not specified, then the supported number of volumes on this node is"
-            " unbounded."
+            "count indicates the maximum number of unique volumes managed by the CSI"
+            " driver that can be used on a node. A volume that is both attached and"
+            " mounted on a node is considered to be used once, not twice. The same rule"
+            " applies for a unique volume that is shared among multiple pods on the"
+            " same node. If this field is not specified, then the supported number of"
+            " volumes on this node is unbounded."
         ),
     )
 
@@ -57,8 +57,8 @@ class CSIDriverSpec(BaseModel):
     fsGroupPolicy: Optional[str] = Field(
         None,
         description=(
-            "Defines if the underlying volume supports changing ownership and"
-            " permission of the volume before being mounted. Refer to the specific"
+            "fsGroupPolicy defines if the underlying volume supports changing ownership"
+            " and permission of the volume before being mounted. Refer to the specific"
             " FSGroupPolicy values for additional details.\n\nThis field is"
             " immutable.\n\nDefaults to ReadWriteOnceWithFSType, which will examine"
             " each volume to determine if Kubernetes should modify ownership and"
@@ -70,14 +70,14 @@ class CSIDriverSpec(BaseModel):
     podInfoOnMount: Optional[bool] = Field(
         None,
         description=(
-            "If set to true, podInfoOnMount indicates this CSI volume driver requires"
-            " additional pod information (like podName, podUID, etc.) during mount"
-            " operations. If set to false, pod information will not be passed on mount."
-            " Default is false. The CSI driver specifies podInfoOnMount as part of"
+            "podInfoOnMount indicates this CSI volume driver requires additional pod"
+            " information (like podName, podUID, etc.) during mount operations, if set"
+            " to true. If set to false, pod information will not be passed on mount."
+            " Default is false.\n\nThe CSI driver specifies podInfoOnMount as part of"
             " driver deployment. If true, Kubelet will pass pod information as"
             " VolumeContext in the CSI NodePublishVolume() calls. The CSI driver is"
             " responsible for parsing and validating the information passed in as"
-            " VolumeContext. The following VolumeConext will be passed if"
+            " VolumeContext.\n\nThe following VolumeConext will be passed if"
             " podInfoOnMount is set to true. This list might grow, but the prefix will"
             ' be used. "csi.storage.k8s.io/pod.name": pod.Name'
             ' "csi.storage.k8s.io/pod.namespace": pod.Namespace'
@@ -97,7 +97,7 @@ class CSIDriverSpec(BaseModel):
     requiresRepublish: Optional[bool] = Field(
         None,
         description=(
-            "RequiresRepublish indicates the CSI driver wants `NodePublishVolume` being"
+            "requiresRepublish indicates the CSI driver wants `NodePublishVolume` being"
             " periodically called to reflect any possible change in the mounted volume."
             " This field defaults to false.\n\nNote: After a successful initial"
             " NodePublishVolume call, subsequent calls to NodePublishVolume should only"
@@ -108,7 +108,7 @@ class CSIDriverSpec(BaseModel):
     seLinuxMount: Optional[bool] = Field(
         None,
         description=(
-            'SELinuxMount specifies if the CSI driver supports "-o context" mount'
+            'seLinuxMount specifies if the CSI driver supports "-o context" mount'
             ' option.\n\nWhen "true", the CSI driver must ensure that all volumes'
             " provided by this CSI driver can be mounted separately with different `-o"
             " context` options. This is typical for storage backends that provide"
@@ -126,22 +126,22 @@ class CSIDriverSpec(BaseModel):
     storageCapacity: Optional[bool] = Field(
         None,
         description=(
-            "If set to true, storageCapacity indicates that the CSI volume driver wants"
-            " pod scheduling to consider the storage capacity that the driver"
-            " deployment will report by creating CSIStorageCapacity objects with"
-            " capacity information.\n\nThe check can be enabled immediately when"
-            " deploying a driver. In that case, provisioning new volumes with late"
-            " binding will pause until the driver deployment has published some"
-            " suitable CSIStorageCapacity object.\n\nAlternatively, the driver can be"
-            " deployed with the field unset or false and it can be flipped later when"
-            " storage capacity information has been published.\n\nThis field was"
-            " immutable in Kubernetes <= 1.22 and now is mutable."
+            "storageCapacity indicates that the CSI volume driver wants pod scheduling"
+            " to consider the storage capacity that the driver deployment will report"
+            " by creating CSIStorageCapacity objects with capacity information, if set"
+            " to true.\n\nThe check can be enabled immediately when deploying a driver."
+            " In that case, provisioning new volumes with late binding will pause until"
+            " the driver deployment has published some suitable CSIStorageCapacity"
+            " object.\n\nAlternatively, the driver can be deployed with the field unset"
+            " or false and it can be flipped later when storage capacity information"
+            " has been published.\n\nThis field was immutable in Kubernetes <= 1.22 and"
+            " now is mutable."
         ),
     )
     tokenRequests: Optional[List[TokenRequest]] = Field(
         None,
         description=(
-            "TokenRequests indicates the CSI driver needs pods' service account tokens"
+            "tokenRequests indicates the CSI driver needs pods' service account tokens"
             " it is mounting volume for to do necessary authentication. Kubelet will"
             " pass the tokens in VolumeContext in the CSI NodePublishVolume calls. The"
             " CSI driver should parse and validate the following VolumeContext:"
@@ -159,14 +159,14 @@ class CSIDriverSpec(BaseModel):
             "volumeLifecycleModes defines what kind of volumes this CSI volume driver"
             ' supports. The default if the list is empty is "Persistent", which is the'
             " usage defined by the CSI specification and implemented in Kubernetes via"
-            ' the usual PV/PVC mechanism. The other mode is "Ephemeral". In this mode,'
-            " volumes are defined inline inside the pod spec with CSIVolumeSource and"
-            " their lifecycle is tied to the lifecycle of that pod. A driver has to be"
-            " aware of this because it is only going to get a NodePublishVolume call"
-            " for such a volume. For more information about implementing this mode, see"
-            " https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A"
+            ' the usual PV/PVC mechanism.\n\nThe other mode is "Ephemeral". In this'
+            " mode, volumes are defined inline inside the pod spec with CSIVolumeSource"
+            " and their lifecycle is tied to the lifecycle of that pod. A driver has to"
+            " be aware of this because it is only going to get a NodePublishVolume call"
+            " for such a volume.\n\nFor more information about implementing this mode,"
+            " see https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A"
             " driver can support one or more of these modes and more modes may be added"
-            " in the future. This field is beta.\n\nThis field is immutable."
+            " in the future.\n\nThis field is beta. This field is immutable."
         ),
     )
 
@@ -182,9 +182,9 @@ class CSINodeDriver(BaseModel):
     name: str = Field(
         ...,
         description=(
-            "This is the name of the CSI driver that this object refers to. This MUST"
-            " be the same name returned by the CSI GetPluginName() call for that"
-            " driver."
+            "name represents the name of the CSI driver that this object refers to."
+            " This MUST be the same name returned by the CSI GetPluginName() call for"
+            " that driver."
         ),
     )
     nodeID: str = Field(
@@ -231,12 +231,14 @@ class VolumeError(BaseModel):
     message: Optional[str] = Field(
         None,
         description=(
-            "String detailing the error encountered during Attach or Detach operation."
-            " This string may be logged, so it should not contain sensitive"
+            "message represents the error encountered during Attach or Detach"
+            " operation. This string may be logged, so it should not contain sensitive"
             " information."
         ),
     )
-    time: Optional[v1.Time] = Field(None, description="Time the error was encountered.")
+    time: Optional[v1.Time] = Field(
+        None, description="time represents the time the error was encountered."
+    )
 
 
 class CSIDriver(BaseModel):
@@ -270,7 +272,9 @@ class CSIDriver(BaseModel):
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
         ),
     )
-    spec: CSIDriverSpec = Field(..., description="Specification of the CSI Driver.")
+    spec: CSIDriverSpec = Field(
+        ..., description="spec represents the specification of the CSI Driver."
+    )
 
 
 class CSIDriverList(BaseModel):
@@ -322,7 +326,11 @@ class CSINode(BaseModel):
         ),
     )
     metadata: Optional[v1.ObjectMeta] = Field(
-        None, description="metadata.name must be the Kubernetes node name."
+        None,
+        description=(
+            "Standard object's metadata. metadata.name must be the Kubernetes node"
+            " name."
+        ),
     )
     spec: CSINodeSpec = Field(..., description="spec is the specification of CSINode")
 
@@ -369,7 +377,7 @@ class CSIStorageCapacity(BaseModel):
     capacity: Optional[resource.Quantity] = Field(
         None,
         description=(
-            "Capacity is the value reported by the CSI driver in its"
+            "capacity is the value reported by the CSI driver in its"
             " GetCapacityResponse for a GetCapacityRequest with topology and parameters"
             " that match the previous fields.\n\nThe semantic is currently (CSI spec"
             " 1.2) defined as: The available capacity, in bytes, of the storage that"
@@ -389,7 +397,7 @@ class CSIStorageCapacity(BaseModel):
     maximumVolumeSize: Optional[resource.Quantity] = Field(
         None,
         description=(
-            "MaximumVolumeSize is the value reported by the CSI driver in its"
+            "maximumVolumeSize is the value reported by the CSI driver in its"
             " GetCapacityResponse for a GetCapacityRequest with topology and parameters"
             " that match the previous fields.\n\nThis is defined since CSI spec 1.4.0"
             " as the largest size that may be used in a"
@@ -403,18 +411,18 @@ class CSIStorageCapacity(BaseModel):
         None,
         description=(
             "Standard object's metadata. The name has no particular meaning. It must be"
-            " be a DNS subdomain (dots allowed, 253 characters). To ensure that there"
-            " are no conflicts with other CSI drivers on the cluster, the"
-            " recommendation is to use csisc-<uuid>, a generated name, or a"
-            " reverse-domain name which ends with the unique CSI driver"
-            " name.\n\nObjects are namespaced.\n\nMore info:"
+            " a DNS subdomain (dots allowed, 253 characters). To ensure that there are"
+            " no conflicts with other CSI drivers on the cluster, the recommendation is"
+            " to use csisc-<uuid>, a generated name, or a reverse-domain name which"
+            " ends with the unique CSI driver name.\n\nObjects are namespaced.\n\nMore"
+            " info:"
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata"
         ),
     )
     nodeTopology: Optional[v1.LabelSelector] = Field(
         None,
         description=(
-            "NodeTopology defines which nodes have access to the storage for which"
+            "nodeTopology defines which nodes have access to the storage for which"
             " capacity was reported. If not set, the storage is not accessible from any"
             " node in the cluster. If empty, the storage is accessible from all nodes."
             " This field is immutable."
@@ -423,11 +431,11 @@ class CSIStorageCapacity(BaseModel):
     storageClassName: str = Field(
         ...,
         description=(
-            "The name of the StorageClass that the reported capacity applies to. It"
-            " must meet the same requirements as the name of a StorageClass object"
-            " (non-empty, DNS subdomain). If that object no longer exists, the"
-            " CSIStorageCapacity object is obsolete and should be removed by its"
-            " creator. This field is immutable."
+            "storageClassName represents the name of the StorageClass that the reported"
+            " capacity applies to. It must meet the same requirements as the name of a"
+            " StorageClass object (non-empty, DNS subdomain). If that object no longer"
+            " exists, the CSIStorageCapacity object is obsolete and should be removed"
+            " by its creator. This field is immutable."
         ),
     )
 
@@ -443,7 +451,7 @@ class CSIStorageCapacityList(BaseModel):
         ),
     )
     items: List[CSIStorageCapacity] = Field(
-        ..., description="Items is the list of CSIStorageCapacity objects."
+        ..., description="items is the list of CSIStorageCapacity objects."
     )
     kind: Optional[str] = Field(
         None,
@@ -467,17 +475,17 @@ class StorageClass(BaseModel):
     allowVolumeExpansion: Optional[bool] = Field(
         None,
         description=(
-            "AllowVolumeExpansion shows whether the storage class allow volume expand"
+            "allowVolumeExpansion shows whether the storage class allow volume expand."
         ),
     )
     allowedTopologies: Optional[List[v1_1.TopologySelectorTerm]] = Field(
         None,
         description=(
-            "Restrict the node topologies where volumes can be dynamically provisioned."
-            " Each volume plugin defines its own supported topology specifications. An"
-            " empty TopologySelectorTerm list means there is no topology restriction."
-            " This field is only honored by servers that enable the VolumeScheduling"
-            " feature."
+            "allowedTopologies restrict the node topologies where volumes can be"
+            " dynamically provisioned. Each volume plugin defines its own supported"
+            " topology specifications. An empty TopologySelectorTerm list means there"
+            " is no topology restriction. This field is only honored by servers that"
+            " enable the VolumeScheduling feature."
         ),
     )
     apiVersion: Optional[str] = Field(
@@ -508,32 +516,32 @@ class StorageClass(BaseModel):
     mountOptions: Optional[List[str]] = Field(
         None,
         description=(
-            "Dynamically provisioned PersistentVolumes of this storage class are"
-            ' created with these mountOptions, e.g. ["ro", "soft"]. Not validated -'
-            " mount of the PVs will simply fail if one is invalid."
+            "mountOptions controls the mountOptions for dynamically provisioned"
+            ' PersistentVolumes of this storage class. e.g. ["ro", "soft"]. Not'
+            " validated - mount of the PVs will simply fail if one is invalid."
         ),
     )
     parameters: Optional[Dict[str, str]] = Field(
         None,
         description=(
-            "Parameters holds the parameters for the provisioner that should create"
+            "parameters holds the parameters for the provisioner that should create"
             " volumes of this storage class."
         ),
     )
     provisioner: str = Field(
-        ..., description="Provisioner indicates the type of the provisioner."
+        ..., description="provisioner indicates the type of the provisioner."
     )
     reclaimPolicy: Optional[str] = Field(
         None,
         description=(
-            "Dynamically provisioned PersistentVolumes of this storage class are"
-            " created with this reclaimPolicy. Defaults to Delete."
+            "reclaimPolicy controls the reclaimPolicy for dynamically provisioned"
+            " PersistentVolumes of this storage class. Defaults to Delete."
         ),
     )
     volumeBindingMode: Optional[str] = Field(
         None,
         description=(
-            "VolumeBindingMode indicates how PersistentVolumeClaims should be"
+            "volumeBindingMode indicates how PersistentVolumeClaims should be"
             " provisioned and bound.  When unset, VolumeBindingImmediate is used. This"
             " field is only honored by servers that enable the VolumeScheduling"
             " feature."
@@ -552,7 +560,7 @@ class StorageClassList(BaseModel):
         ),
     )
     items: List[StorageClass] = Field(
-        ..., description="Items is the list of StorageClasses"
+        ..., description="items is the list of StorageClasses"
     )
     kind: Optional[str] = Field(
         None,
@@ -585,7 +593,11 @@ class VolumeAttachmentSource(BaseModel):
         ),
     )
     persistentVolumeName: Optional[str] = Field(
-        None, description="Name of the persistent volume to attach."
+        None,
+        description=(
+            "persistentVolumeName represents the name of the persistent volume to"
+            " attach."
+        ),
     )
 
 
@@ -593,15 +605,18 @@ class VolumeAttachmentSpec(BaseModel):
     attacher: str = Field(
         ...,
         description=(
-            "Attacher indicates the name of the volume driver that MUST handle this"
+            "attacher indicates the name of the volume driver that MUST handle this"
             " request. This is the name returned by GetPluginName()."
         ),
     )
     nodeName: str = Field(
-        ..., description="The node that the volume should be attached to."
+        ...,
+        description=(
+            "nodeName represents the node that the volume should be attached to."
+        ),
     )
     source: VolumeAttachmentSource = Field(
-        ..., description="Source represents the volume that should be attached."
+        ..., description="source represents the volume that should be attached."
     )
 
 
@@ -609,34 +624,34 @@ class VolumeAttachmentStatus(BaseModel):
     attachError: Optional[VolumeError] = Field(
         None,
         description=(
-            "The last error encountered during attach operation, if any. This field"
-            " must only be set by the entity completing the attach operation, i.e. the"
-            " external-attacher."
+            "attachError represents the last error encountered during attach operation,"
+            " if any. This field must only be set by the entity completing the attach"
+            " operation, i.e. the external-attacher."
         ),
     )
     attached: bool = Field(
         ...,
         description=(
-            "Indicates the volume is successfully attached. This field must only be set"
-            " by the entity completing the attach operation, i.e. the"
+            "attached indicates the volume is successfully attached. This field must"
+            " only be set by the entity completing the attach operation, i.e. the"
             " external-attacher."
         ),
     )
     attachmentMetadata: Optional[Dict[str, str]] = Field(
         None,
         description=(
-            "Upon successful attach, this field is populated with any information"
-            " returned by the attach operation that must be passed into subsequent"
-            " WaitForAttach or Mount calls. This field must only be set by the entity"
-            " completing the attach operation, i.e. the external-attacher."
+            "attachmentMetadata is populated with any information returned by the"
+            " attach operation, upon successful attach, that must be passed into"
+            " subsequent WaitForAttach or Mount calls. This field must only be set by"
+            " the entity completing the attach operation, i.e. the external-attacher."
         ),
     )
     detachError: Optional[VolumeError] = Field(
         None,
         description=(
-            "The last error encountered during detach operation, if any. This field"
-            " must only be set by the entity completing the detach operation, i.e. the"
-            " external-attacher."
+            "detachError represents the last error encountered during detach operation,"
+            " if any. This field must only be set by the entity completing the detach"
+            " operation, i.e. the external-attacher."
         ),
     )
 
@@ -670,15 +685,16 @@ class VolumeAttachment(BaseModel):
     spec: VolumeAttachmentSpec = Field(
         ...,
         description=(
-            "Specification of the desired attach/detach volume behavior. Populated by"
-            " the Kubernetes system."
+            "spec represents specification of the desired attach/detach volume"
+            " behavior. Populated by the Kubernetes system."
         ),
     )
     status: Optional[VolumeAttachmentStatus] = Field(
         None,
         description=(
-            "Status of the VolumeAttachment request. Populated by the entity completing"
-            " the attach or detach operation, i.e. the external-attacher."
+            "status represents status of the VolumeAttachment request. Populated by the"
+            " entity completing the attach or detach operation, i.e. the"
+            " external-attacher."
         ),
     )
 
@@ -694,7 +710,7 @@ class VolumeAttachmentList(BaseModel):
         ),
     )
     items: List[VolumeAttachment] = Field(
-        ..., description="Items is the list of VolumeAttachments"
+        ..., description="items is the list of VolumeAttachments"
     )
     kind: Optional[str] = Field(
         None,

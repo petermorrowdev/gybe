@@ -224,21 +224,6 @@ class LimitResponse(BaseModel):
 
 
 class LimitedPriorityLevelConfiguration(BaseModel):
-    assuredConcurrencyShares: Optional[int] = Field(
-        0,
-        description=(
-            "`assuredConcurrencyShares` (ACS) configures the execution limit, which is"
-            " a limit on the number of requests of this priority level that may be"
-            " exeucting at a given time.  ACS must be a positive number. The server's"
-            " concurrency limit (SCL) is divided among the concurrency-controlled"
-            " priority levels in proportion to their assured concurrency shares. This"
-            " produces the assured concurrency value (ACV) --- the number of requests"
-            " that may be executing at a time --- for each such priority level:\n\n    "
-            "        ACV(l) = ceil( SCL * ACS(l) / ( sum[priority levels k] ACS(k) )"
-            " )\n\nbigger numbers of ACS mean more reserved concurrent requests (at the"
-            " expense of every other PL). This field has a default value of 30."
-        ),
-    )
     borrowingLimitPercent: Optional[int] = Field(
         None,
         description=(
@@ -273,6 +258,22 @@ class LimitedPriorityLevelConfiguration(BaseModel):
         description=(
             "`limitResponse` indicates what to do with requests that can not be"
             " executed right now"
+        ),
+    )
+    nominalConcurrencyShares: Optional[int] = Field(
+        0,
+        description=(
+            "`nominalConcurrencyShares` (NCS) contributes to the computation of the"
+            " NominalConcurrencyLimit (NominalCL) of this level. This is the number of"
+            " execution seats available at this priority level. This is used both for"
+            " requests dispatched from this priority level as well as requests"
+            " dispatched from other priority levels borrowing seats from this level."
+            " The server's concurrency limit (ServerCL) is divided among the Limited"
+            " priority levels in proportion to their NCS values:\n\nNominalCL(i)  ="
+            " ceil( ServerCL * NCS(i) / sum_ncs ) sum_ncs = sum[limited priority level"
+            " k] NCS(k)\n\nBigger numbers mean a larger nominal concurrency limit, at"
+            " the expense of every other Limited priority level. This field has a"
+            " default value of 30."
         ),
     )
 
