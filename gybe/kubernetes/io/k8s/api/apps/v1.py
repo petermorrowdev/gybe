@@ -7,6 +7,21 @@ from ...apimachinery.pkg.util import intstr
 from ..core import v1 as v1_1
 
 
+class StatefulSetOrdinals(BaseModel):
+    start: Optional[int] = Field(
+        0,
+        description=(
+            "start is the number representing the first replica's index. It may be used"
+            " to number replicas from an alternate index (eg: 1-indexed) over the"
+            " default 0-indexed names, or to orchestrate progressive movement of"
+            " replicas from one StatefulSet to another. If set, replica indices will be"
+            " in the range:\n  [.spec.ordinals.start, .spec.ordinals.start +"
+            " .spec.replicas).\nIf unset, defaults to 0. Replica indices will be in the"
+            " range:\n  [0, .spec.replicas)."
+        ),
+    )
+
+
 class StatefulSetPersistentVolumeClaimRetentionPolicy(BaseModel):
     whenDeleted: Optional[str] = Field(
         None,
@@ -469,7 +484,7 @@ class StatefulSetUpdateStrategy(BaseModel):
         None,
         description=(
             "Type indicates the type of the StatefulSetUpdateStrategy. Default is"
-            " RollingUpdate.\n\n"
+            " RollingUpdate."
         ),
     )
 
@@ -551,7 +566,7 @@ class DaemonSetUpdateStrategy(BaseModel):
         None,
         description=(
             'Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default'
-            " is RollingUpdate.\n\n"
+            " is RollingUpdate."
         ),
     )
 
@@ -568,7 +583,7 @@ class DeploymentStrategy(BaseModel):
         None,
         description=(
             'Type of deployment. Can be "Recreate" or "RollingUpdate". Default is'
-            " RollingUpdate.\n\n"
+            " RollingUpdate."
         ),
     )
 
@@ -605,7 +620,8 @@ class DaemonSetSpec(BaseModel):
             "An object that describes the pod that will be created. The DaemonSet will"
             " create exactly one copy of this pod on every node that matches the"
             " template's node selector (or on every node if no node selector is"
-            " specified). More info:"
+            " specified). The only allowed template.spec.restartPolicy value is"
+            ' "Always". More info:'
             " https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template"
         ),
     )
@@ -670,7 +686,11 @@ class DeploymentSpec(BaseModel):
         ),
     )
     template: v1_1.PodTemplateSpec = Field(
-        ..., description="Template describes the pods that will be created."
+        ...,
+        description=(
+            "Template describes the pods that will be created. The only allowed"
+            ' template.spec.restartPolicy value is "Always".'
+        ),
     )
 
 
@@ -720,6 +740,16 @@ class StatefulSetSpec(BaseModel):
             " Defaults to 0 (pod will be considered available as soon as it is ready)"
         ),
     )
+    ordinals: Optional[StatefulSetOrdinals] = Field(
+        None,
+        description=(
+            "ordinals controls the numbering of replica indices in a StatefulSet. The"
+            ' default ordinals behavior assigns a "0" index to the first replica and'
+            " increments the index by one for each additional replica requested. Using"
+            " the ordinals field requires the StatefulSetStartOrdinal feature gate to"
+            " be enabled, which is beta."
+        ),
+    )
     persistentVolumeClaimRetentionPolicy: Optional[
         StatefulSetPersistentVolumeClaimRetentionPolicy
     ] = Field(
@@ -745,7 +775,7 @@ class StatefulSetSpec(BaseModel):
             " continuing. When scaling down, the pods are removed in the opposite"
             " order. The alternative policy is `Parallel` which will create pods in"
             " parallel to match the desired scale without waiting, and on scale down"
-            " will delete all pods at once.\n\n"
+            " will delete all pods at once."
         ),
     )
     replicas: Optional[int] = Field(
@@ -790,7 +820,10 @@ class StatefulSetSpec(BaseModel):
             "template is the object that describes the pod that will be created if"
             " insufficient replicas are detected. Each pod stamped out by the"
             " StatefulSet will fulfill this Template, but have a unique identity from"
-            " the rest of the StatefulSet."
+            " the rest of the StatefulSet. Each pod will be named with the format"
+            " <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named"
+            ' "web" with index number "3" would be named "web-3". The only allowed'
+            ' template.spec.restartPolicy value is "Always".'
         ),
     )
     updateStrategy: Optional[StatefulSetUpdateStrategy] = Field(

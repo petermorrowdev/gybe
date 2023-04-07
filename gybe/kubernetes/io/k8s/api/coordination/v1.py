@@ -19,7 +19,7 @@ class LeaseSpec(BaseModel):
         description=(
             "leaseDurationSeconds is a duration that candidates for a lease need to"
             " wait to force acquire it. This is measure against time of last observed"
-            " RenewTime."
+            " renewTime."
         ),
     )
     leaseTransitions: Optional[int] = Field(
@@ -66,7 +66,7 @@ class Lease(BaseModel):
     spec: Optional[LeaseSpec] = Field(
         None,
         description=(
-            "Specification of the Lease. More info:"
+            "spec contains the specification of the Lease. More info:"
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#spec-and-status"
         ),
     )
@@ -82,7 +82,7 @@ class LeaseList(BaseModel):
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
         ),
     )
-    items: List[Lease] = Field(..., description="Items is a list of schema objects.")
+    items: List[Lease] = Field(..., description="items is a list of schema objects.")
     kind: Optional[str] = Field(
         None,
         description=(
