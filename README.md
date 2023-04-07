@@ -41,7 +41,7 @@ from gybe.favorites.kubernetes import Pod, PodSpec, Container
 import gybe
 
 
-def create_standard_container(image: str, command: List[str]):
+def create_standard_container(image: str, command: List[str]) -> Container:
     return Container(image=image, command=command, name='standard-server')
 
 
