@@ -1,11 +1,10 @@
 from typing import List
-from pathlib import Path
 
-from gybe.favorites.kubernetes import Pod, PodSpec, Container
+from gybe.kubernetes import Pod, PodSpec, Container
 import gybe
 
 
-def create_standard_container(image: str, command: str):
+def create_standard_container(image: str, command: List[str]):
     return Container(image=image, command=command, name='standard-server')
 
 

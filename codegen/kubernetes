@@ -2,13 +2,13 @@
 set -e
 
 # Wipe existing kubernetes code
-rm -rf gybe/kubernetes
+rm -rf gybe/kubernetes/v1_26
 
 # Generate pydantic models from Kubernetes OpenAPI 
 datamodel-codegen \
   --input kubernetes/api/openapi-spec/v3/ \
   --input-file-type=openapi \
-  --output=gybe/kubernetes
+  --output=gybe/kubernetes/v1_26
 
 # Replaces "{}" with "None" where appropriate
 python -m gybe.clean
