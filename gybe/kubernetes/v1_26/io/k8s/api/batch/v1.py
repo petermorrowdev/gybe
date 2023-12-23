@@ -20,7 +20,7 @@ class PodFailurePolicyOnExitCodesRequirement(BaseModel):
         description=(
             "Represents the relationship between the container exit code(s) and the"
             " specified values. Containers completed with success (exit code 0) are"
-            " excluded from the requirement check. Possible values are:\n\n- In: the"
+            " excluded from the requirement check. Possible values are: - In: the"
             " requirement is satisfied if at least one container exit code\n  (might be"
             " multiple if there are multiple containers not restricted\n  by the"
             " 'containerName' field) is in the set of specified values.\n- NotIn: the"
@@ -28,7 +28,7 @@ class PodFailurePolicyOnExitCodesRequirement(BaseModel):
             " multiple if there are multiple containers not restricted\n  by the"
             " 'containerName' field) is not in the set of specified values.\nAdditional"
             " values are considered to be added in the future. Clients should react to"
-            " an unknown operator by assuming the requirement is not satisfied."
+            " an unknown operator by assuming the requirement is not satisfied.\n\n"
         ),
     )
     values: List[int] = Field(
@@ -67,14 +67,14 @@ class PodFailurePolicyRule(BaseModel):
         ...,
         description=(
             "Specifies the action taken on a pod failure when the requirements are"
-            " satisfied. Possible values are:\n\n- FailJob: indicates that the pod's"
-            " job is marked as Failed and all\n  running pods are terminated.\n-"
-            " Ignore: indicates that the counter towards the .backoffLimit is not\n "
+            " satisfied. Possible values are: - FailJob: indicates that the pod's job"
+            " is marked as Failed and all\n  running pods are terminated.\n- Ignore:"
+            " indicates that the counter towards the .backoffLimit is not\n "
             " incremented and a replacement pod is created.\n- Count: indicates that"
             " the pod is handled in the default way - the\n  counter towards the"
             " .backoffLimit is incremented.\nAdditional values are considered to be"
             " added in the future. Clients should react to an unknown action by"
-            " skipping the rule."
+            " skipping the rule.\n\n"
         ),
     )
     onExitCodes: Optional[PodFailurePolicyOnExitCodesRequirement] = Field(
@@ -93,10 +93,10 @@ class PodFailurePolicyRule(BaseModel):
 
 class UncountedTerminatedPods(BaseModel):
     failed: Optional[List[str]] = Field(
-        None, description="failed holds UIDs of failed Pods."
+        None, description="Failed holds UIDs of failed Pods."
     )
     succeeded: Optional[List[str]] = Field(
-        None, description="succeeded holds UIDs of succeeded Pods."
+        None, description="Succeeded holds UIDs of succeeded Pods."
     )
 
 
@@ -145,7 +145,7 @@ class JobStatus(BaseModel):
     completedIndexes: Optional[str] = Field(
         None,
         description=(
-            "completedIndexes holds the completed indexes when .spec.completionMode ="
+            "CompletedIndexes holds the completed indexes when .spec.completionMode ="
             ' "Indexed" in a text format. The indexes are represented as decimal'
             " integers separated by commas. The numbers are listed in increasing order."
             " Three or more consecutive numbers are compressed and represented by the"
@@ -201,12 +201,12 @@ class JobStatus(BaseModel):
     uncountedTerminatedPods: Optional[UncountedTerminatedPods] = Field(
         None,
         description=(
-            "uncountedTerminatedPods holds the UIDs of Pods that have terminated but"
+            "UncountedTerminatedPods holds the UIDs of Pods that have terminated but"
             " the job controller hasn't yet accounted for in the status"
             " counters.\n\nThe job controller creates pods with a finalizer. When a pod"
             " terminates (succeeded or failed), the controller does three steps to"
-            " account for it in the job status:\n\n1. Add the pod UID to the arrays in"
-            " this field. 2. Remove the pod finalizer. 3. Remove the pod UID from the"
+            " account for it in the job status: (1) Add the pod UID to the arrays in"
+            " this field. (2) Remove the pod finalizer. (3) Remove the pod UID from the"
             " arrays while increasing the corresponding\n    counter.\n\nOld jobs might"
             " not be tracked using this field, in which case the field remains null."
         ),
@@ -247,7 +247,7 @@ class JobSpec(BaseModel):
     completionMode: Optional[str] = Field(
         None,
         description=(
-            "completionMode specifies how Pod completions are tracked. It can be"
+            "CompletionMode specifies how Pod completions are tracked. It can be"
             " `NonIndexed` (default) or `Indexed`.\n\n`NonIndexed` means that the Job"
             " is considered complete when there have been .spec.completions"
             " successfully completed Pods. Each Pod completion is homologous to each"
@@ -268,7 +268,7 @@ class JobSpec(BaseModel):
         None,
         description=(
             "Specifies the desired number of successfully finished pods the job should"
-            " be run with.  Setting to null means that the success of any pod signals"
+            " be run with.  Setting to nil means that the success of any pod signals"
             " the success of all pods, and allows parallelism to have any positive"
             " value.  Setting to 1 means that parallelism is limited to 1 and the"
             " success of that pod signals the success of the job. More info:"
@@ -324,7 +324,7 @@ class JobSpec(BaseModel):
     suspend: Optional[bool] = Field(
         None,
         description=(
-            "suspend specifies whether the Job controller should create Pods or not. If"
+            "Suspend specifies whether the Job controller should create Pods or not. If"
             " a Job is created with suspend set to true, no Pods are created by the Job"
             " controller. If a Job is suspended after creation (i.e. the flag goes from"
             " false to true), the Job controller will delete all active Pods associated"
@@ -337,9 +337,7 @@ class JobSpec(BaseModel):
     template: v1.PodTemplateSpec = Field(
         ...,
         description=(
-            "Describes the pod that will be created when executing a job. The only"
-            ' allowed template.spec.restartPolicy values are "Never" or "OnFailure".'
-            " More info:"
+            "Describes the pod that will be created when executing a job. More info:"
             " https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/"
         ),
     )
@@ -379,11 +377,11 @@ class CronJobSpec(BaseModel):
     concurrencyPolicy: Optional[str] = Field(
         None,
         description=(
-            "Specifies how to treat concurrent executions of a Job. Valid values"
-            ' are:\n\n- "Allow" (default): allows CronJobs to run concurrently; -'
-            ' "Forbid": forbids concurrent runs, skipping next run if previous run'
-            ' hasn\'t finished yet; - "Replace": cancels currently running job and'
-            " replaces it with a new one"
+            "Specifies how to treat concurrent executions of a Job. Valid values are: -"
+            ' "Allow" (default): allows CronJobs to run concurrently; - "Forbid":'
+            " forbids concurrent runs, skipping next run if previous run hasn't"
+            ' finished yet; - "Replace": cancels currently running job and replaces it'
+            " with a new one\n\n"
         ),
     )
     failedJobsHistoryLimit: Optional[int] = Field(
@@ -441,6 +439,8 @@ class CronJobSpec(BaseModel):
             " create a system event with the reason UnknownTimeZone. More information"
             " can be found in"
             " https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones"
+            " This is beta field and must be enabled via the `CronJobTimeZone` feature"
+            " gate."
         ),
     )
 

@@ -6,21 +6,19 @@ from ...apimachinery.pkg.apis.meta import v1
 
 
 class CrossVersionObjectReference(BaseModel):
-    apiVersion: Optional[str] = Field(
-        None, description="apiVersion is the API version of the referent"
-    )
+    apiVersion: Optional[str] = Field(None, description="API version of the referent")
     kind: str = Field(
         ...,
         description=(
-            "kind is the kind of the referent; More info:"
+            "Kind of the referent; More info:"
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds"
         ),
     )
     name: str = Field(
         ...,
         description=(
-            "name is the name of the referent; More info:"
-            " https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names"
+            "Name of the referent; More info:"
+            " http://kubernetes.io/docs/user-guide/identifiers#names"
         ),
     )
 
@@ -29,16 +27,16 @@ class HPAScalingPolicy(BaseModel):
     periodSeconds: int = Field(
         ...,
         description=(
-            "periodSeconds specifies the window of time for which the policy should"
+            "PeriodSeconds specifies the window of time for which the policy should"
             " hold true. PeriodSeconds must be greater than zero and less than or equal"
             " to 1800 (30 min)."
         ),
     )
-    type: str = Field(..., description="type is used to specify the scaling policy.")
+    type: str = Field(..., description="Type is used to specify the scaling policy.")
     value: int = Field(
         ...,
         description=(
-            "value contains the amount of change which is permitted by the policy. It"
+            "Value contains the amount of change which is permitted by the policy. It"
             " must be greater than zero"
         ),
     )
@@ -63,7 +61,7 @@ class HPAScalingRules(BaseModel):
     stabilizationWindowSeconds: Optional[int] = Field(
         None,
         description=(
-            "stabilizationWindowSeconds is the number of seconds for which past"
+            "StabilizationWindowSeconds is the number of seconds for which past"
             " recommendations should be considered while scaling up or scaling down."
             " StabilizationWindowSeconds must be greater than or equal to zero and less"
             " than or equal to 3600 (one hour). If not set, use the default values: -"
@@ -178,7 +176,7 @@ class ResourceMetricStatus(BaseModel):
     current: MetricValueStatus = Field(
         ..., description="current contains the current value for the given metric"
     )
-    name: str = Field(..., description="name is the name of the resource in question.")
+    name: str = Field(..., description="Name is the name of the resource in question.")
 
 
 class ContainerResourceMetricSource(BaseModel):
@@ -198,13 +196,13 @@ class ContainerResourceMetricStatus(BaseModel):
     container: str = Field(
         ...,
         description=(
-            "container is the name of the container in the pods of the scaling target"
+            "Container is the name of the container in the pods of the scaling target"
         ),
     )
     current: MetricValueStatus = Field(
         ..., description="current contains the current value for the given metric"
     )
-    name: str = Field(..., description="name is the name of the resource in question.")
+    name: str = Field(..., description="Name is the name of the resource in question.")
 
 
 class MetricIdentifier(BaseModel):

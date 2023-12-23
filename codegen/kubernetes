@@ -1,14 +1,27 @@
 #!/usr/bin/env bash
 set -e
 
-# Wipe existing kubernetes code
-rm -rf gybe/kubernetes/v1_26
+(cd kubernetes && git checkout master && git pull)
 
-# Generate pydantic models from Kubernetes OpenAPI 
-datamodel-codegen \
-  --input kubernetes/api/openapi-spec/v3/ \
-  --input-file-type=openapi \
-  --output=gybe/kubernetes/v1_26
+function gen_k8s() {
+  local version="$1"
+  local version_module="$2"
+  (cd kubernetes && git checkout $version)
+  rm -rf gybe/kubernetes/$version_module
+  datamodel-codegen \
+    --input kubernetes/api/openapi-spec/v3/ \
+    --input-file-type=openapi \
+    --output=gybe/kubernetes/$version_module
+  (cd kubernetes && git checkout master)
+}
+
+# https://kubernetes.io/releases/
+gen_k8s 'v1.26.3' 'v1_26'
+gen_k8s 'v1.27.9' 'v1_27'
+gen_k8s 'v1.28.5' 'v1_28'
+gen_k8s 'v1.29.0' 'v1_29'
+
+(cd kubernetes && git checkout master)
 
 # Replaces "{}" with "None" where appropriate
 python -m gybe.clean

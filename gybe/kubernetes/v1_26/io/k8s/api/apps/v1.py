@@ -484,7 +484,7 @@ class StatefulSetUpdateStrategy(BaseModel):
         None,
         description=(
             "Type indicates the type of the StatefulSetUpdateStrategy. Default is"
-            " RollingUpdate."
+            " RollingUpdate.\n\n"
         ),
     )
 
@@ -566,7 +566,7 @@ class DaemonSetUpdateStrategy(BaseModel):
         None,
         description=(
             'Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default'
-            " is RollingUpdate."
+            " is RollingUpdate.\n\n"
         ),
     )
 
@@ -583,7 +583,7 @@ class DeploymentStrategy(BaseModel):
         None,
         description=(
             'Type of deployment. Can be "Recreate" or "RollingUpdate". Default is'
-            " RollingUpdate."
+            " RollingUpdate.\n\n"
         ),
     )
 
@@ -620,8 +620,7 @@ class DaemonSetSpec(BaseModel):
             "An object that describes the pod that will be created. The DaemonSet will"
             " create exactly one copy of this pod on every node that matches the"
             " template's node selector (or on every node if no node selector is"
-            " specified). The only allowed template.spec.restartPolicy value is"
-            ' "Always". More info:'
+            " specified). More info:"
             " https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template"
         ),
     )
@@ -686,11 +685,7 @@ class DeploymentSpec(BaseModel):
         ),
     )
     template: v1_1.PodTemplateSpec = Field(
-        ...,
-        description=(
-            "Template describes the pods that will be created. The only allowed"
-            ' template.spec.restartPolicy value is "Always".'
-        ),
+        ..., description="Template describes the pods that will be created."
     )
 
 
@@ -747,7 +742,7 @@ class StatefulSetSpec(BaseModel):
             ' default ordinals behavior assigns a "0" index to the first replica and'
             " increments the index by one for each additional replica requested. Using"
             " the ordinals field requires the StatefulSetStartOrdinal feature gate to"
-            " be enabled, which is beta."
+            " be enabled, which is alpha."
         ),
     )
     persistentVolumeClaimRetentionPolicy: Optional[
@@ -775,7 +770,7 @@ class StatefulSetSpec(BaseModel):
             " continuing. When scaling down, the pods are removed in the opposite"
             " order. The alternative policy is `Parallel` which will create pods in"
             " parallel to match the desired scale without waiting, and on scale down"
-            " will delete all pods at once."
+            " will delete all pods at once.\n\n"
         ),
     )
     replicas: Optional[int] = Field(
@@ -822,8 +817,7 @@ class StatefulSetSpec(BaseModel):
             " StatefulSet will fulfill this Template, but have a unique identity from"
             " the rest of the StatefulSet. Each pod will be named with the format"
             " <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named"
-            ' "web" with index number "3" would be named "web-3". The only allowed'
-            ' template.spec.restartPolicy value is "Always".'
+            ' "web" with index number "3" would be named "web-3".'
         ),
     )
     updateStrategy: Optional[StatefulSetUpdateStrategy] = Field(

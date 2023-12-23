@@ -4,93 +4,6 @@ from pydantic import BaseModel, Field
 from ...apimachinery.pkg.apis.meta import v1
 
 
-class AuditAnnotation(BaseModel):
-    key: str = Field(
-        ...,
-        description=(
-            "key specifies the audit annotation key. The audit annotation keys of a"
-            " ValidatingAdmissionPolicy must be unique. The key must be a qualified"
-            " name ([A-Za-z0-9][-A-Za-z0-9_.]*) no more than 63 bytes in length.\n\nThe"
-            " key is combined with the resource name of the ValidatingAdmissionPolicy"
-            ' to construct an audit annotation key: "{ValidatingAdmissionPolicy'
-            ' name}/{key}".\n\nIf an admission webhook uses the same resource name as'
-            " this ValidatingAdmissionPolicy and the same audit annotation key, the"
-            " annotation key will be identical. In this case, the first annotation"
-            " written with the key will be included in the audit event and all"
-            " subsequent annotations with the same key will be discarded.\n\nRequired."
-        ),
-    )
-    valueExpression: str = Field(
-        ...,
-        description=(
-            "valueExpression represents the expression which is evaluated by CEL to"
-            " produce an audit annotation value. The expression must evaluate to either"
-            " a string or null value. If the expression evaluates to a string, the"
-            " audit annotation is included with the string value. If the expression"
-            " evaluates to null or empty string the audit annotation will be omitted."
-            " The valueExpression may be no longer than 5kb in length. If the result of"
-            " the valueExpression is more than 10kb in length, it will be truncated to"
-            " 10kb.\n\nIf multiple ValidatingAdmissionPolicyBinding resources match an"
-            " API request, then the valueExpression will be evaluated for each binding."
-            " All unique values produced by the valueExpressions will be joined"
-            " together in a comma-separated list.\n\nRequired."
-        ),
-    )
-
-
-class ExpressionWarning(BaseModel):
-    fieldRef: str = Field(
-        ...,
-        description=(
-            "The path to the field that refers the expression. For example, the"
-            " reference to the expression of the first item of validations is"
-            ' "spec.validations[0].expression"'
-        ),
-    )
-    warning: str = Field(
-        ...,
-        description=(
-            "The content of type checking information in a human-readable form. Each"
-            " line of the warning contains the type that the expression is checked"
-            " against, followed by the type check error from the compiler."
-        ),
-    )
-
-
-class MatchCondition(BaseModel):
-    expression: str = Field(
-        ...,
-        description=(
-            "Expression represents the expression which will be evaluated by CEL. Must"
-            " evaluate to bool. CEL expressions have access to the contents of the"
-            " AdmissionRequest and Authorizer, organized into CEL"
-            " variables:\n\n'object' - The object from the incoming request. The value"
-            " is null for DELETE requests. 'oldObject' - The existing object. The value"
-            " is null for CREATE requests. 'request' - Attributes of the admission"
-            " request(/pkg/apis/admission/types.go#AdmissionRequest). 'authorizer' - A"
-            " CEL Authorizer. May be used to perform authorization checks for the"
-            " principal (user or service account) of the request.\n  See"
-            " https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz\n'authorizer.requestResource'"
-            " - A CEL ResourceCheck constructed from the 'authorizer' and configured"
-            " with the\n  request resource.\nDocumentation on CEL:"
-            " https://kubernetes.io/docs/reference/using-api/cel/\n\nRequired."
-        ),
-    )
-    name: str = Field(
-        ...,
-        description=(
-            "Name is an identifier for this match condition, used for strategic merging"
-            " of MatchConditions, as well as providing an identifier for logging"
-            " purposes. A good name should be descriptive of the associated expression."
-            " Name must be a qualified name consisting of alphanumeric characters, '-',"
-            " '_' or '.', and must start and end with an alphanumeric character (e.g."
-            " 'MyName',  or 'my.name',  or '123-abc', regex used for validation is"
-            " '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]') with an optional DNS"
-            " subdomain prefix and '/' (e.g. 'example.com/MyName')\n\nRequired."
-        ),
-    )
-
-
 class NamedRuleWithOperations(BaseModel):
     apiGroups: Optional[List[str]] = Field(
         None,
@@ -175,34 +88,23 @@ class ParamRef(BaseModel):
     )
 
 
-class TypeChecking(BaseModel):
-    expressionWarnings: Optional[List[ExpressionWarning]] = Field(
-        None, description="The type checking warnings for each expression."
-    )
-
-
 class Validation(BaseModel):
     expression: str = Field(
         ...,
         description=(
             "Expression represents the expression which will be evaluated by CEL. ref:"
             " https://github.com/google/cel-spec CEL expressions have access to the"
-            " contents of the API request/response, organized into CEL variables as"
-            " well as some other useful variables:\n\n- 'object' - The object from"
-            " the incoming request. The value is null for DELETE requests. -"
+            " contents of the Admission request/response, organized into CEL variables"
+            " as well as some other useful variables:\n\n'object' - The object from"
+            " the incoming request. The value is null for DELETE requests."
             " 'oldObject' - The existing object. The value is null for CREATE"
-            " requests. - 'request' - Attributes of the API"
-            " request([ref](/pkg/apis/admission/types.go#AdmissionRequest)). -"
-            " 'params' - Parameter resource referred to by the policy binding being"
-            " evaluated. Only populated if the policy has a ParamKind. - 'authorizer'"
-            " - A CEL Authorizer. May be used to perform authorization checks for the"
-            " principal (user or service account) of the request.\n  See"
-            " https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz\n-"
-            " 'authorizer.requestResource' - A CEL ResourceCheck constructed from the"
-            " 'authorizer' and configured with the\n  request resource.\n\nThe"
-            " `apiVersion`, `kind`, `metadata.name` and `metadata.generateName` are"
-            " always accessible from the root of the object. No other metadata"
-            " properties are accessible.\n\nOnly property names of the form"
+            " requests. 'request' - Attributes of the admission"
+            " request([ref](/pkg/apis/admission/types.go#AdmissionRequest)). 'params'"
+            " - Parameter resource referred to by the policy binding being evaluated."
+            " Only populated if the policy has a ParamKind.\n\nThe `apiVersion`,"
+            " `kind`, `metadata.name` and `metadata.generateName` are always accessible"
+            " from the root of the object. No other metadata properties are"
+            " accessible.\n\nOnly property names of the form"
             " `[a-zA-Z_.-/][a-zA-Z0-9_.-/]*` are accessible. Accessible property names"
             " are escaped according to the following rules when accessed in the"
             " expression: - '__' escapes to '__underscores__' - '.' escapes to"
@@ -238,27 +140,6 @@ class Validation(BaseModel):
             " Expression contains line breaks. Message is required. The message must"
             ' not contain line breaks. If unset, the message is "failed Expression:'
             ' {Expression}".'
-        ),
-    )
-    messageExpression: Optional[str] = Field(
-        None,
-        description=(
-            "messageExpression declares a CEL expression that evaluates to the"
-            " validation failure message that is returned when this rule fails. Since"
-            " messageExpression is used as a failure message, it must evaluate to a"
-            " string. If both message and messageExpression are present on a"
-            " validation, then messageExpression will be used if validation fails. If"
-            " messageExpression results in a runtime error, the runtime error is"
-            " logged, and the validation failure message is produced as if the"
-            " messageExpression field were unset. If messageExpression evaluates to an"
-            " empty string, a string with only spaces, or a string that contains line"
-            " breaks, then the validation failure message will also be produced as if"
-            " the messageExpression field were unset, and the fact that"
-            " messageExpression produced an empty string/string with only spaces/string"
-            " with line breaks will be logged. messageExpression has access to all the"
-            " same variables as the `expression` except for 'authorizer' and"
-            " 'authorizer.requestResource'. Example: \"object.x must be less than max"
-            ' ("+string(params.max)+")"'
         ),
     )
     reason: Optional[str] = Field(
@@ -386,84 +267,17 @@ class ValidatingAdmissionPolicyBindingSpec(BaseModel):
             " Required."
         ),
     )
-    validationActions: Optional[List[str]] = Field(
-        None,
-        description=(
-            "validationActions declares how Validations of the referenced"
-            " ValidatingAdmissionPolicy are enforced. If a validation evaluates to"
-            " false it is always enforced according to these actions.\n\nFailures"
-            " defined by the ValidatingAdmissionPolicy's FailurePolicy are enforced"
-            " according to these actions only if the FailurePolicy is set to Fail,"
-            " otherwise the failures are ignored. This includes compilation errors,"
-            " runtime errors and misconfigurations of the policy.\n\nvalidationActions"
-            " is declared as a set of action values. Order does not matter."
-            " validationActions may not contain duplicates of the same action.\n\nThe"
-            ' supported actions values are:\n\n"Deny" specifies that a validation'
-            ' failure results in a denied request.\n\n"Warn" specifies that a'
-            " validation failure is reported to the request client in HTTP Warning"
-            " headers, with a warning code of 299. Warnings can be sent both for"
-            ' allowed or denied admission responses.\n\n"Audit" specifies that a'
-            " validation failure is included in the published audit event for the"
-            " request. The audit event will contain a"
-            " `validation.policy.admission.k8s.io/validation_failure` audit annotation"
-            " with a value containing the details of the validation failures, formatted"
-            " as a JSON list of objects, each with the following fields: - message: The"
-            " validation failure message string - policy: The resource name of the"
-            " ValidatingAdmissionPolicy - binding: The resource name of the"
-            " ValidatingAdmissionPolicyBinding - expressionIndex: The index of the"
-            " failed validations in the ValidatingAdmissionPolicy - validationActions:"
-            " The enforcement actions enacted for the validation failure Example audit"
-            ' annotation: `"validation.policy.admission.k8s.io/validation_failure":'
-            ' "[{"message": "Invalid value", {"policy": "policy.example.com",'
-            ' {"binding": "policybinding.example.com", {"expressionIndex": "1",'
-            ' {"validationActions": ["Audit"]}]"`\n\nClients should expect to handle'
-            ' additional values by ignoring any values not recognized.\n\n"Deny" and'
-            ' "Warn" may not be used together since this combination needlessly'
-            " duplicates the validation failure both in the API response body and the"
-            " HTTP warning headers.\n\nRequired."
-        ),
-    )
 
 
 class ValidatingAdmissionPolicySpec(BaseModel):
-    auditAnnotations: Optional[List[AuditAnnotation]] = Field(
-        None,
-        description=(
-            "auditAnnotations contains CEL expressions which are used to produce audit"
-            " annotations for the audit event of the API request. validations and"
-            " auditAnnotations may not both be empty; a least one of validations or"
-            " auditAnnotations is required."
-        ),
-    )
     failurePolicy: Optional[str] = Field(
         None,
         description=(
-            "failurePolicy defines how to handle failures for the admission policy."
-            " Failures can occur from CEL expression parse errors, type check errors,"
-            " runtime errors and invalid or mis-configured policy definitions or"
-            " bindings.\n\nA policy is invalid if spec.paramKind refers to a"
-            " non-existent Kind. A binding is invalid if spec.paramRef.name refers to a"
-            " non-existent resource.\n\nfailurePolicy does not define how validations"
-            " that evaluate to false are handled.\n\nWhen failurePolicy is set to Fail,"
-            " ValidatingAdmissionPolicyBinding validationActions define how failures"
-            " are enforced.\n\nAllowed values are Ignore or Fail. Defaults to Fail."
-        ),
-    )
-    matchConditions: Optional[List[MatchCondition]] = Field(
-        None,
-        description=(
-            "MatchConditions is a list of conditions that must be met for a request to"
-            " be validated. Match conditions filter requests that have already been"
-            " matched by the rules, namespaceSelector, and objectSelector. An empty"
-            " list of matchConditions matches all requests. There are a maximum of 64"
-            " match conditions allowed.\n\nIf a parameter object is provided, it can be"
-            " accessed via the `params` handle in the same manner as validation"
-            " expressions.\n\nThe exact matching logic is (in order):\n  1. If ANY"
-            " matchCondition evaluates to FALSE, the policy is skipped.\n  2. If ALL"
-            " matchConditions evaluate to TRUE, the policy is evaluated.\n  3. If any"
-            " matchCondition evaluates to an error (but none are FALSE):\n     - If"
-            " failurePolicy=Fail, reject the request\n     - If failurePolicy=Ignore,"
-            " the policy is skipped"
+            "FailurePolicy defines how to handle failures for the admission policy."
+            " Failures can occur from invalid or mis-configured policy definitions or"
+            " bindings. A policy is invalid if spec.paramKind refers to a non-existent"
+            " Kind. A binding is invalid if spec.paramRef.name refers to a non-existent"
+            " resource. Allowed values are Ignore or Fail. Defaults to Fail."
         ),
     )
     matchConstraints: Optional[MatchResources] = Field(
@@ -489,32 +303,12 @@ class ValidatingAdmissionPolicySpec(BaseModel):
             " null."
         ),
     )
-    validations: Optional[List[Validation]] = Field(
-        None,
+    validations: List[Validation] = Field(
+        ...,
         description=(
             "Validations contain CEL expressions which is used to apply the validation."
-            " Validations and AuditAnnotations may not both be empty; a minimum of one"
-            " Validations or AuditAnnotations is required."
-        ),
-    )
-
-
-class ValidatingAdmissionPolicyStatus(BaseModel):
-    conditions: Optional[List[v1.Condition]] = Field(
-        None,
-        description=(
-            "The conditions represent the latest available observations of a policy's"
-            " current state."
-        ),
-    )
-    observedGeneration: Optional[int] = Field(
-        None, description="The generation observed by the controller."
-    )
-    typeChecking: Optional[TypeChecking] = Field(
-        None,
-        description=(
-            "The results of type checking for each expression. Presence of this field"
-            " indicates the completion of the type checking."
+            " A minimum of one validation is required for a policy definition."
+            " Required."
         ),
     )
 
@@ -549,14 +343,6 @@ class ValidatingAdmissionPolicy(BaseModel):
         None,
         description=(
             "Specification of the desired behavior of the ValidatingAdmissionPolicy."
-        ),
-    )
-    status: Optional[ValidatingAdmissionPolicyStatus] = Field(
-        None,
-        description=(
-            "The status of the ValidatingAdmissionPolicy, including warnings that are"
-            " useful to determine if the policy behaves in the expected way. Populated"
-            " by the system. Read-only."
         ),
     )
 

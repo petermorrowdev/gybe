@@ -4,40 +4,6 @@ from pydantic import BaseModel, Field
 from ...apimachinery.pkg.apis.meta import v1
 
 
-class MatchCondition(BaseModel):
-    expression: str = Field(
-        ...,
-        description=(
-            "Expression represents the expression which will be evaluated by CEL. Must"
-            " evaluate to bool. CEL expressions have access to the contents of the"
-            " AdmissionRequest and Authorizer, organized into CEL"
-            " variables:\n\n'object' - The object from the incoming request. The value"
-            " is null for DELETE requests. 'oldObject' - The existing object. The value"
-            " is null for CREATE requests. 'request' - Attributes of the admission"
-            " request(/pkg/apis/admission/types.go#AdmissionRequest). 'authorizer' - A"
-            " CEL Authorizer. May be used to perform authorization checks for the"
-            " principal (user or service account) of the request.\n  See"
-            " https://pkg.go.dev/k8s.io/apiserver/pkg/cel/library#Authz\n'authorizer.requestResource'"
-            " - A CEL ResourceCheck constructed from the 'authorizer' and configured"
-            " with the\n  request resource.\nDocumentation on CEL:"
-            " https://kubernetes.io/docs/reference/using-api/cel/\n\nRequired."
-        ),
-    )
-    name: str = Field(
-        ...,
-        description=(
-            "Name is an identifier for this match condition, used for strategic merging"
-            " of MatchConditions, as well as providing an identifier for logging"
-            " purposes. A good name should be descriptive of the associated expression."
-            " Name must be a qualified name consisting of alphanumeric characters, '-',"
-            " '_' or '.', and must start and end with an alphanumeric character (e.g."
-            " 'MyName',  or 'my.name',  or '123-abc', regex used for validation is"
-            " '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]') with an optional DNS"
-            " subdomain prefix and '/' (e.g. 'example.com/MyName')\n\nRequired."
-        ),
-    )
-
-
 class RuleWithOperations(BaseModel):
     apiGroups: Optional[List[str]] = Field(
         None,
@@ -173,23 +139,6 @@ class MutatingWebhook(BaseModel):
         description=(
             "FailurePolicy defines how unrecognized errors from the admission endpoint"
             " are handled - allowed values are Ignore or Fail. Defaults to Fail."
-        ),
-    )
-    matchConditions: Optional[List[MatchCondition]] = Field(
-        None,
-        description=(
-            "MatchConditions is a list of conditions that must be met for a request to"
-            " be sent to this webhook. Match conditions filter requests that have"
-            " already been matched by the rules, namespaceSelector, and objectSelector."
-            " An empty list of matchConditions matches all requests. There are a"
-            " maximum of 64 match conditions allowed.\n\nThe exact matching logic is"
-            " (in order):\n  1. If ANY matchCondition evaluates to FALSE, the webhook"
-            " is skipped.\n  2. If ALL matchConditions evaluate to TRUE, the webhook is"
-            " called.\n  3. If any matchCondition evaluates to an error (but none are"
-            " FALSE):\n     - If failurePolicy=Fail, reject the request\n     - If"
-            " failurePolicy=Ignore, the error is ignored and the webhook is"
-            " skipped\n\nThis is an alpha feature and managed by the"
-            " AdmissionWebhookMatchConditions feature gate."
         ),
     )
     matchPolicy: Optional[str] = Field(
@@ -400,23 +349,6 @@ class ValidatingWebhook(BaseModel):
         description=(
             "FailurePolicy defines how unrecognized errors from the admission endpoint"
             " are handled - allowed values are Ignore or Fail. Defaults to Fail."
-        ),
-    )
-    matchConditions: Optional[List[MatchCondition]] = Field(
-        None,
-        description=(
-            "MatchConditions is a list of conditions that must be met for a request to"
-            " be sent to this webhook. Match conditions filter requests that have"
-            " already been matched by the rules, namespaceSelector, and objectSelector."
-            " An empty list of matchConditions matches all requests. There are a"
-            " maximum of 64 match conditions allowed.\n\nThe exact matching logic is"
-            " (in order):\n  1. If ANY matchCondition evaluates to FALSE, the webhook"
-            " is skipped.\n  2. If ALL matchConditions evaluate to TRUE, the webhook is"
-            " called.\n  3. If any matchCondition evaluates to an error (but none are"
-            " FALSE):\n     - If failurePolicy=Fail, reject the request\n     - If"
-            " failurePolicy=Ignore, the error is ignored and the webhook is"
-            " skipped\n\nThis is an alpha feature and managed by the"
-            " AdmissionWebhookMatchConditions feature gate."
         ),
     )
     matchPolicy: Optional[str] = Field(

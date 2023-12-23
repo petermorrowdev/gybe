@@ -79,9 +79,9 @@ class PodDisruptionBudgetSpec(BaseModel):
             " pods will be subject to the PDB for eviction.\n\nAdditional policies may"
             " be added in the future. Clients making eviction decisions should disallow"
             " eviction of unhealthy pods if they encounter an unrecognized policy in"
-            " this field.\n\nThis field is beta-level. The eviction API uses this field"
-            " when the feature gate PDBUnhealthyPodEvictionPolicy is enabled (enabled"
-            " by default)."
+            " this field.\n\nThis field is alpha-level. The eviction API uses this"
+            " field when the feature gate PDBUnhealthyPodEvictionPolicy is enabled"
+            " (disabled by default)."
         ),
     )
 

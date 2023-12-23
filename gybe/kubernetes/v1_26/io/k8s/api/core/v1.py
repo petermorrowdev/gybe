@@ -361,7 +361,7 @@ class NodeSelectorRequirement(BaseModel):
         ...,
         description=(
             "Represents a key's relationship to a set of values. Valid operators are"
-            " In, NotIn, Exists, DoesNotExist. Gt, and Lt."
+            " In, NotIn, Exists, DoesNotExist. Gt, and Lt.\n\n"
         ),
     )
     values: Optional[List[str]] = Field(
@@ -567,7 +567,7 @@ class Toleration(BaseModel):
         description=(
             "Effect indicates the taint effect to match. Empty means match all taint"
             " effects. When specified, allowed values are NoSchedule, PreferNoSchedule"
-            " and NoExecute."
+            " and NoExecute.\n\n"
         ),
     )
     key: Optional[str] = Field(
@@ -583,7 +583,8 @@ class Toleration(BaseModel):
         description=(
             "Operator represents a key's relationship to the value. Valid operators are"
             " Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for"
-            " value, so that a pod can tolerate all taints of a particular category."
+            " value, so that a pod can tolerate all taints of a particular"
+            " category.\n\n"
         ),
     )
     tolerationSeconds: Optional[int] = Field(
@@ -712,23 +713,8 @@ class ContainerPort(BaseModel):
     )
     protocol: Optional[str] = Field(
         "TCP",
-        description='Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".',
-    )
-
-
-class ContainerResizePolicy(BaseModel):
-    resourceName: str = Field(
-        ...,
         description=(
-            "Name of the resource to which this resource resize policy applies."
-            " Supported values: cpu, memory."
-        ),
-    )
-    restartPolicy: str = Field(
-        ...,
-        description=(
-            "Restart policy to apply when specified resource is resized. If not"
-            " specified, it defaults to NotRequired."
+            'Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".\n\n'
         ),
     )
 
@@ -1122,7 +1108,7 @@ class SeccompProfile(BaseModel):
             "type indicates which kind of seccomp profile will be applied. Valid"
             " options are:\n\nLocalhost - a profile defined in a file on the node"
             " should be used. RuntimeDefault - the container runtime default profile"
-            " should be used. Unconfined - no profile should be applied."
+            " should be used. Unconfined - no profile should be applied.\n\n"
         ),
     )
 
@@ -1559,16 +1545,11 @@ class EndpointPort(BaseModel):
     appProtocol: Optional[str] = Field(
         None,
         description=(
-            "The application protocol for this port. This is used as a hint for"
-            " implementations to offer richer behavior for protocols that they"
-            " understand. This field follows standard Kubernetes label syntax. Valid"
-            " values are either:\n\n* Un-prefixed protocol names - reserved for IANA"
-            " standard service names (as per RFC-6335 and"
-            " https://www.iana.org/assignments/service-names).\n\n* Kubernetes-defined"
-            " prefixed names:\n  * 'kubernetes.io/h2c' - HTTP/2 over cleartext as"
-            " described in https://www.rfc-editor.org/rfc/rfc7540\n\n* Other protocols"
-            " should use implementation-defined prefixed names such as"
-            " mycompany.com/my-custom-protocol."
+            "The application protocol for this port. This field follows standard"
+            " Kubernetes label syntax. Un-prefixed names are reserved for IANA standard"
+            " service names (as per RFC-6335 and"
+            " https://www.iana.org/assignments/service-names). Non-standard protocols"
+            " should use prefixed names such as mycompany.com/my-custom-protocol."
         ),
     )
     name: Optional[str] = Field(
@@ -1583,7 +1564,8 @@ class EndpointPort(BaseModel):
     protocol: Optional[str] = Field(
         None,
         description=(
-            "The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP."
+            "The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is"
+            " TCP.\n\n"
         ),
     )
 
@@ -1744,7 +1726,7 @@ class PersistentVolumeStatus(BaseModel):
         description=(
             "phase indicates if a volume is available, bound to a claim, or released by"
             " a claim. More info:"
-            " https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase"
+            " https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase\n\n"
         ),
     )
     reason: Optional[str] = Field(
@@ -1784,7 +1766,7 @@ class PortStatus(BaseModel):
         ...,
         description=(
             "Protocol is the protocol of the service port of which status is recorded"
-            ' here The supported values are: "TCP", "UDP", "SCTP"'
+            ' here The supported values are: "TCP", "UDP", "SCTP"\n\n'
         ),
     )
 
@@ -1794,11 +1776,11 @@ class ScopedResourceSelectorRequirement(BaseModel):
         ...,
         description=(
             "Represents a scope's relationship to a set of values. Valid operators are"
-            " In, NotIn, Exists, DoesNotExist."
+            " In, NotIn, Exists, DoesNotExist.\n\n"
         ),
     )
     scopeName: str = Field(
-        ..., description="The name of the scope that the selector applies to."
+        ..., description="The name of the scope that the selector applies to.\n\n"
     )
     values: Optional[List[str]] = Field(
         None,
@@ -1826,8 +1808,9 @@ class CSIPersistentVolumeSource(BaseModel):
         description=(
             "controllerExpandSecretRef is a reference to the secret object containing"
             " sensitive information to pass to the CSI driver to complete the CSI"
-            " ControllerExpandVolume call. This field is optional, and may be empty if"
-            " no secret is required. If the secret object contains more than one"
+            " ControllerExpandVolume call. This is an beta field and requires enabling"
+            " ExpandCSIVolumes feature gate. This field is optional, and may be empty"
+            " if no secret is required. If the secret object contains more than one"
             " secret, all secrets are passed."
         ),
     )
@@ -1859,7 +1842,7 @@ class CSIPersistentVolumeSource(BaseModel):
         description=(
             "nodeExpandSecretRef is a reference to the secret object containing"
             " sensitive information to pass to the CSI driver to complete the CSI"
-            " NodeExpandVolume call. This is a beta field which is enabled default by"
+            " NodeExpandVolume call. This is an alpha field and requires enabling"
             " CSINodeExpandSecret feature gate. This field is optional, may be omitted"
             " if no secret is required. If the secret object contains more than one"
             " secret, all secrets are passed."
@@ -2449,7 +2432,7 @@ class EmptyDirVolumeSource(BaseModel):
             " usage on memory medium EmptyDir would be the minimum value between the"
             " SizeLimit specified here and the sum of memory limits of all containers"
             " in a pod. The default is nil which means that the limit is undefined."
-            " More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir"
+            " More info: http://kubernetes.io/docs/user-guide/volumes#emptydir"
         ),
     )
 
@@ -2529,7 +2512,8 @@ class HTTPGetAction(BaseModel):
         ),
     )
     scheme: Optional[str] = Field(
-        None, description="Scheme to use for connecting to the host. Defaults to HTTP."
+        None,
+        description="Scheme to use for connecting to the host. Defaults to HTTP.\n\n",
     )
 
 
@@ -2675,7 +2659,8 @@ class PersistentVolumeClaimStatus(BaseModel):
         ),
     )
     phase: Optional[str] = Field(
-        None, description="phase represents the current phase of PersistentVolumeClaim."
+        None,
+        description="phase represents the current phase of PersistentVolumeClaim.\n\n",
     )
     resizeStatus: Optional[str] = Field(
         None,
@@ -2860,8 +2845,8 @@ class ResourceRequirements(BaseModel):
         description=(
             "Requests describes the minimum amount of compute resources required. If"
             " Requests is omitted for a container, it defaults to Limits if that is"
-            " explicitly specified, otherwise to an implementation-defined value."
-            " Requests cannot exceed Limits. More info:"
+            " explicitly specified, otherwise to an implementation-defined value. More"
+            " info:"
             " https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
         ),
     )
@@ -3025,9 +3010,10 @@ class EndpointAddress(BaseModel):
     ip: str = Field(
         ...,
         description=(
-            "The IP of this endpoint. May not be loopback (127.0.0.0/8 or ::1),"
-            " link-local (169.254.0.0/16 or fe80::/10), or link-local multicast"
-            " (224.0.0.0/24 or ff02::/16)."
+            "The IP of this endpoint. May not be loopback (127.0.0.0/8), link-local"
+            " (169.254.0.0/16), or link-local multicast ((224.0.0.0/24). IPv6 is also"
+            " accepted but not fully supported on all platforms. Also, certain"
+            " kubernetes components, like kube-proxy, are not IPv6 ready."
         ),
     )
     nodeName: Optional[str] = Field(
@@ -3172,7 +3158,7 @@ class NamespaceStatus(BaseModel):
         None,
         description=(
             "Phase is the current lifecycle phase of the namespace. More info:"
-            " https://kubernetes.io/docs/tasks/administer-cluster/namespaces/"
+            " https://kubernetes.io/docs/tasks/administer-cluster/namespaces/\n\n"
         ),
     )
 
@@ -3207,10 +3193,7 @@ class NodeStatus(BaseModel):
             " field is declared as mergeable, but the merge key is not sufficiently"
             " unique, which can cause data corruption when it is merged. Callers should"
             " instead use a full-replacement patch. See https://pr.k8s.io/79391 for an"
-            " example. Consumers should assume that addresses can change during the"
-            " lifetime of a Node. However, there are some exceptions where this may not"
-            " be possible, such as Pods that inherit a Node's address in its own status"
-            " or consumers of the downward API (status.hostIP)."
+            " example."
         ),
     )
     allocatable: Optional[Dict[str, resource.Quantity]] = Field(
@@ -3259,7 +3242,7 @@ class NodeStatus(BaseModel):
         description=(
             "NodePhase is the recently observed lifecycle phase of the node. More info:"
             " https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never"
-            " populated, and now is deprecated."
+            " populated, and now is deprecated.\n\n"
         ),
     )
     volumesAttached: Optional[List[AttachedVolume]] = Field(
@@ -3430,7 +3413,7 @@ class ServicePort(BaseModel):
         "TCP",
         description=(
             'The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default'
-            " is TCP."
+            " is TCP.\n\n"
         ),
     )
     targetPort: Optional[intstr.IntOrString] = Field(
@@ -3545,7 +3528,7 @@ class ServiceSpec(BaseModel):
             " traffic sent to an External IP or LoadBalancer IP from within the cluster"
             ' will always get "Cluster" semantics, but clients sending to a NodePort'
             " from within the cluster may need to take traffic policy into account when"
-            " picking a node."
+            " picking a node.\n\n"
         ),
     )
     healthCheckNodePort: Optional[int] = Field(
@@ -3688,7 +3671,7 @@ class ServiceSpec(BaseModel):
             'Supports "ClientIP" and "None". Used to maintain session affinity. Enable'
             " client IP based session affinity. Must be ClientIP or None. Defaults to"
             " None. More info:"
-            " https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies"
+            " https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies\n\n"
         ),
     )
     sessionAffinityConfig: Optional[SessionAffinityConfig] = Field(
@@ -3713,7 +3696,7 @@ class ServiceSpec(BaseModel):
             " current cloud) which routes to the same endpoints as the clusterIP."
             ' "ExternalName" aliases this service to the specified externalName.'
             " Several other fields do not apply to ExternalName services. More info:"
-            " https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types"
+            " https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types\n\n"
         ),
     )
 
@@ -3723,7 +3706,7 @@ class Taint(BaseModel):
         ...,
         description=(
             "Required. The effect of the taint on pods that do not tolerate the taint."
-            " Valid effects are NoSchedule, PreferNoSchedule and NoExecute."
+            " Valid effects are NoSchedule, PreferNoSchedule and NoExecute.\n\n"
         ),
     )
     key: str = Field(
@@ -3900,7 +3883,7 @@ class PersistentVolumeSpec(BaseModel):
             " provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be"
             " supported by the volume plugin underlying this PersistentVolume. More"
             " info:"
-            " https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming"
+            " https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming\n\n"
         ),
     )
     photonPersistentDisk: Optional[PhotonPersistentDiskVolumeSource] = Field(
@@ -4255,7 +4238,11 @@ class Probe(BaseModel):
         ),
     )
     grpc: Optional[GRPCAction] = Field(
-        None, description="GRPC specifies an action involving a GRPC port."
+        None,
+        description=(
+            "GRPC specifies an action involving a GRPC port. This is a beta field and"
+            " requires enabling GRPCContainerProbe feature gate."
+        ),
     )
     httpGet: Optional[HTTPGetAction] = Field(
         None, description="HTTPGet specifies the http request to perform."
@@ -4328,13 +4315,9 @@ class TopologySpreadConstraint(BaseModel):
             " spreading will be calculated. The keys are used to lookup values from the"
             " incoming pod labels, those key-value labels are ANDed with labelSelector"
             " to select the group of existing pods over which spreading will be"
-            " calculated for the incoming pod. The same key is forbidden to exist in"
-            " both MatchLabelKeys and LabelSelector. MatchLabelKeys cannot be set when"
-            " LabelSelector isn't set. Keys that don't exist in the incoming pod labels"
-            " will be ignored. A null or empty list means only match against"
-            " labelSelector.\n\nThis is a beta field and requires the"
-            " MatchLabelKeysInPodTopologySpread feature gate to be enabled (enabled by"
-            " default)."
+            " calculated for the incoming pod. Keys that don't exist in the incoming"
+            " pod labels will be ignored. A null or empty list means only match against"
+            " labelSelector."
         ),
     )
     maxSkew: int = Field(
@@ -4436,7 +4419,7 @@ class TopologySpreadConstraint(BaseModel):
             " scheduled to zone2(zone3) to become 3/2/1(3/1/2) as ActualSkew(2-1) on"
             " zone2(zone3) satisfies MaxSkew(1). In other words, the cluster can still"
             " be imbalanced, but scheduler won't make it *more* imbalanced. It's a"
-            " required field."
+            " required field.\n\n"
         ),
     )
 
@@ -4650,98 +4633,45 @@ class ContainerState(BaseModel):
 
 
 class ContainerStatus(BaseModel):
-    allocatedResources: Optional[Dict[str, resource.Quantity]] = Field(
-        None,
-        description=(
-            "AllocatedResources represents the compute resources allocated for this"
-            " container by the node. Kubelet sets this value to"
-            " Container.Resources.Requests upon successful pod admission and after"
-            " successfully admitting desired pod resize."
-        ),
-    )
     containerID: Optional[str] = Field(
-        None,
-        description=(
-            "ContainerID is the ID of the container in the format"
-            " '<type>://<container_id>'. Where type is a container runtime identifier,"
-            ' returned from Version call of CRI API (for example "containerd").'
-        ),
+        None, description="Container's ID in the format '<type>://<container_id>'."
     )
     image: str = Field(
         ...,
         description=(
-            "Image is the name of container image that the container is running. The"
-            " container image may not match the image used in the PodSpec, as it may"
-            " have been resolved by the runtime. More info:"
+            "The image the container is running. More info:"
             " https://kubernetes.io/docs/concepts/containers/images."
         ),
     )
-    imageID: str = Field(
-        ...,
-        description=(
-            "ImageID is the image ID of the container's image. The image ID may not"
-            " match the image ID of the image used in the PodSpec, as it may have been"
-            " resolved by the runtime."
-        ),
-    )
+    imageID: str = Field(..., description="ImageID of the container's image.")
     lastState: Optional[ContainerState] = Field(
-        None,
-        description=(
-            "LastTerminationState holds the last termination state of the container to"
-            " help debug container crashes and restarts. This field is not populated if"
-            " the container is still running and RestartCount is 0."
-        ),
+        None, description="Details about the container's last termination condition."
     )
     name: str = Field(
         ...,
         description=(
-            "Name is a DNS_LABEL representing the unique name of the container. Each"
-            " container in a pod must have a unique name across all container types."
+            "This must be a DNS_LABEL. Each container in a pod must have a unique name."
             " Cannot be updated."
         ),
     )
     ready: bool = Field(
         ...,
-        description=(
-            "Ready specifies whether the container is currently passing its readiness"
-            " check. The value will change as readiness probes keep executing. If no"
-            " readiness probes are specified, this field defaults to true once the"
-            " container is fully started (see Started field).\n\nThe value is typically"
-            " used to determine whether a container is ready to accept traffic."
-        ),
-    )
-    resources: Optional[ResourceRequirements] = Field(
-        None,
-        description=(
-            "Resources represents the compute resource requests and limits that have"
-            " been successfully enacted on the running container after it has been"
-            " started or has been successfully resized."
-        ),
+        description="Specifies whether the container has passed its readiness probe.",
     )
     restartCount: int = Field(
-        ...,
-        description=(
-            "RestartCount holds the number of times the container has been restarted."
-            " Kubelet makes an effort to always increment the value, but there are"
-            " cases when the state may be lost due to node restarts and then the value"
-            " may be reset to 0. The value is never negative."
-        ),
+        ..., description="The number of times the container has been restarted."
     )
     started: Optional[bool] = Field(
         None,
         description=(
-            "Started indicates whether the container has finished its postStart"
-            " lifecycle hook and passed its startup probe. Initialized as false,"
-            " becomes true after startupProbe is considered successful. Resets to false"
-            " when the container is restarted, or if kubelet loses state temporarily."
-            " In both cases, startup probes will run again. Is always true when no"
-            " startupProbe is defined and container is running and has passed the"
-            " postStart lifecycle hook. The null value must be treated the same as"
-            " false."
+            "Specifies whether the container has passed its startup probe. Initialized"
+            " as false, becomes true after startupProbe is considered successful."
+            " Resets to false when the container is restarted, or if kubelet loses"
+            " state temporarily. Is always true when no startupProbe is defined."
         ),
     )
     state: Optional[ContainerState] = Field(
-        None, description="State holds details about the container's current condition."
+        None, description="Details about the container's current condition."
     )
 
 
@@ -5210,7 +5140,7 @@ class PodStatus(BaseModel):
             " exited with non-zero status or was terminated by the system. Unknown: For"
             " some reason the state of the pod could not be obtained, typically due to"
             " an error in communicating with the host of the pod.\n\nMore info:"
-            " https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase"
+            " https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-phase\n\n"
         ),
     )
     podIP: Optional[str] = Field(
@@ -5235,7 +5165,7 @@ class PodStatus(BaseModel):
             "The Quality of Service (QOS) classification assigned to the pod based on"
             " resource requirements See PodQOSClass type for available QOS classes More"
             " info:"
-            " https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes"
+            " https://git.k8s.io/community/contributors/design-proposals/node/resource-qos.md\n\n"
         ),
     )
     reason: Optional[str] = Field(
@@ -5243,14 +5173,6 @@ class PodStatus(BaseModel):
         description=(
             "A brief CamelCase message indicating details about why the pod is in this"
             " state. e.g. 'Evicted'"
-        ),
-    )
-    resize: Optional[str] = Field(
-        None,
-        description=(
-            "Status of resources resize desired for pod's containers. It is empty if"
-            " no resources resize is pending. Any changes to container resources will"
-            ' automatically set this to "Proposed"'
         ),
     )
     startTime: Optional[v1.Time] = Field(
@@ -6126,7 +6048,7 @@ class Container(BaseModel):
             "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always"
             " if :latest tag is specified, or IfNotPresent otherwise. Cannot be"
             " updated. More info:"
-            " https://kubernetes.io/docs/concepts/containers/images#updating-images"
+            " https://kubernetes.io/docs/concepts/containers/images#updating-images\n\n"
         ),
     )
     lifecycle: Optional[Lifecycle] = Field(
@@ -6170,9 +6092,6 @@ class Container(BaseModel):
             " from service endpoints if the probe fails. Cannot be updated. More info:"
             " https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes"
         ),
-    )
-    resizePolicy: Optional[List[ContainerResizePolicy]] = Field(
-        None, description="Resources resize policy for the container."
     )
     resources: Optional[ResourceRequirements] = Field(
         None,
@@ -6246,7 +6165,7 @@ class Container(BaseModel):
             " last chunk of container log output if the termination message file is"
             " empty and the container exited with an error. The log output is limited"
             " to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot"
-            " be updated."
+            " be updated.\n\n"
         ),
     )
     tty: Optional[bool] = Field(
@@ -6337,7 +6256,7 @@ class EphemeralContainer(BaseModel):
             "Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always"
             " if :latest tag is specified, or IfNotPresent otherwise. Cannot be"
             " updated. More info:"
-            " https://kubernetes.io/docs/concepts/containers/images#updating-images"
+            " https://kubernetes.io/docs/concepts/containers/images#updating-images\n\n"
         ),
     )
     lifecycle: Optional[Lifecycle] = Field(
@@ -6358,9 +6277,6 @@ class EphemeralContainer(BaseModel):
     )
     readinessProbe: Optional[Probe] = Field(
         None, description="Probes are not allowed for ephemeral containers."
-    )
-    resizePolicy: Optional[List[ContainerResizePolicy]] = Field(
-        None, description="Resources resize policy for the container."
     )
     resources: Optional[ResourceRequirements] = Field(
         None,
@@ -6434,7 +6350,7 @@ class EphemeralContainer(BaseModel):
             " last chunk of container log output if the termination message file is"
             " empty and the container exited with an error. The log output is limited"
             " to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot"
-            " be updated."
+            " be updated.\n\n"
         ),
     )
     tty: Optional[bool] = Field(
@@ -6759,7 +6675,7 @@ class PodSpec(BaseModel):
             " 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS"
             " parameters given in DNSConfig will be merged with the policy selected"
             " with DNSPolicy. To have DNS options set along with hostNetwork, you have"
-            " to specify DNS policy explicitly to 'ClusterFirstWithHostNet'."
+            " to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.\n\n"
         ),
     )
     enableServiceLinks: Optional[bool] = Field(
@@ -6960,9 +6876,8 @@ class PodSpec(BaseModel):
         None,
         description=(
             "Restart policy for all containers within the pod. One of Always,"
-            " OnFailure, Never. In some contexts, only a subset of those values may be"
-            " permitted. Default to Always. More info:"
-            " https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy"
+            " OnFailure, Never. Default to Always. More info:"
+            " https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy\n\n"
         ),
     )
     runtimeClassName: Optional[str] = Field(
@@ -6987,11 +6902,9 @@ class PodSpec(BaseModel):
         None,
         description=(
             "SchedulingGates is an opaque list of values that if specified will block"
-            " scheduling the pod. If schedulingGates is not empty, the pod will stay in"
-            " the SchedulingGated state and the scheduler will not attempt to schedule"
-            " the pod.\n\nSchedulingGates can only be set at pod creation time, and be"
-            " removed only afterwards.\n\nThis is a beta feature enabled by the"
-            " PodSchedulingReadiness feature gate."
+            " scheduling the pod. More info: "
+            " https://git.k8s.io/enhancements/keps/sig-scheduling/3521-pod-scheduling-readiness.\n\nThis"
+            " is an alpha-level feature enabled by PodSchedulingReadiness feature gate."
         ),
     )
     securityContext: Optional[PodSecurityContext] = Field(
@@ -7133,8 +7046,7 @@ class ReplicationControllerSpec(BaseModel):
         description=(
             "Template is the object that describes the pod that will be created if"
             " insufficient replicas are detected. This takes precedence over a"
-            " TemplateRef. The only allowed template.spec.restartPolicy value is"
-            ' "Always". More info:'
+            " TemplateRef. More info:"
             " https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller#pod-template"
         ),
     )

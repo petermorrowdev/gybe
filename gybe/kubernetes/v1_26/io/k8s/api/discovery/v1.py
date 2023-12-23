@@ -13,9 +13,7 @@ class EndpointConditions(BaseModel):
             " according to whatever system is managing the endpoint. A nil value"
             " indicates an unknown state. In most cases consumers should interpret this"
             " unknown state as ready. For compatibility reasons, ready should never be"
-            ' "true" for terminating endpoints, except when the normal readiness'
-            " behavior is being explicitly overridden, for example when the associated"
-            " Service has set the publishNotReadyAddresses flag."
+            ' "true" for terminating endpoints.'
         ),
     )
     serving: Optional[bool] = Field(
@@ -41,43 +39,36 @@ class EndpointPort(BaseModel):
     appProtocol: Optional[str] = Field(
         None,
         description=(
-            "The application protocol for this port. This is used as a hint for"
-            " implementations to offer richer behavior for protocols that they"
-            " understand. This field follows standard Kubernetes label syntax. Valid"
-            " values are either:\n\n* Un-prefixed protocol names - reserved for IANA"
-            " standard service names (as per RFC-6335 and"
-            " https://www.iana.org/assignments/service-names).\n\n* Kubernetes-defined"
-            " prefixed names:\n  * 'kubernetes.io/h2c' - HTTP/2 over cleartext as"
-            " described in https://www.rfc-editor.org/rfc/rfc7540\n\n* Other protocols"
-            " should use implementation-defined prefixed names such as"
-            " mycompany.com/my-custom-protocol."
+            "The application protocol for this port. This field follows standard"
+            " Kubernetes label syntax. Un-prefixed names are reserved for IANA standard"
+            " service names (as per RFC-6335 and"
+            " https://www.iana.org/assignments/service-names). Non-standard protocols"
+            " should use prefixed names such as mycompany.com/my-custom-protocol."
         ),
     )
     name: Optional[str] = Field(
         None,
         description=(
-            "name represents the name of this port. All ports in an EndpointSlice must"
-            " have a unique name. If the EndpointSlice is dervied from a Kubernetes"
-            " service, this corresponds to the Service.ports[].name. Name must either"
-            " be an empty string or pass DNS_LABEL validation: * must be no more than"
-            " 63 characters long. * must consist of lower case alphanumeric characters"
-            " or '-'. * must start and end with an alphanumeric character. Default is"
-            " empty string."
+            "The name of this port. All ports in an EndpointSlice must have a unique"
+            " name. If the EndpointSlice is dervied from a Kubernetes service, this"
+            " corresponds to the Service.ports[].name. Name must either be an empty"
+            " string or pass DNS_LABEL validation: * must be no more than 63 characters"
+            " long. * must consist of lower case alphanumeric characters or '-'. * must"
+            " start and end with an alphanumeric character. Default is empty string."
         ),
     )
     port: Optional[int] = Field(
         None,
         description=(
-            "port represents the port number of the endpoint. If this is not specified,"
-            " ports are not restricted and must be interpreted in the context of the"
-            " specific consumer."
+            "The port number of the endpoint. If this is not specified, ports are not"
+            " restricted and must be interpreted in the context of the specific"
+            " consumer."
         ),
     )
     protocol: Optional[str] = Field(
         None,
         description=(
-            "protocol represents the IP protocol for this port. Must be UDP, TCP, or"
-            " SCTP. Default is TCP."
+            "The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP."
         ),
     )
 
@@ -169,7 +160,7 @@ class EndpointSlice(BaseModel):
             " All addresses in this slice must be the same type. This field is"
             " immutable after creation. The following address types are currently"
             " supported: * IPv4: Represents an IPv4 Address. * IPv6: Represents an IPv6"
-            " Address. * FQDN: Represents a Fully Qualified Domain Name."
+            " Address. * FQDN: Represents a Fully Qualified Domain Name.\n\n"
         ),
     )
     apiVersion: Optional[str] = Field(
@@ -222,9 +213,7 @@ class EndpointSliceList(BaseModel):
             " https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources"
         ),
     )
-    items: List[EndpointSlice] = Field(
-        ..., description="items is the list of endpoint slices"
-    )
+    items: List[EndpointSlice] = Field(..., description="List of endpoint slices")
     kind: Optional[str] = Field(
         None,
         description=(
