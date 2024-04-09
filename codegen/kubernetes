@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
-(cd kubernetes && git checkout master && git pull)
+(cd kubernetes && git checkout master -q)
 
 function gen_k8s() {
   local version="$1"
   local version_module="$2"
-  (cd kubernetes && git checkout $version)
+  (cd kubernetes && git checkout $version -q)
   rm -rf gybe/kubernetes/$version_module
-  datamodel-codegen \
-    --input kubernetes/api/openapi-spec/v3/ \
-    --input-file-type=openapi \
-    --output=gybe/kubernetes/$version_module
-  (cd kubernetes && git checkout master)
+  python codegen/generate_k8s.py $version_module
+  ruff check --fix gybe/k8s/v*
+  ruff format gybe/k8s/v*
+  (cd kubernetes && git checkout master -q)
 }
 
 # https://kubernetes.io/releases/
@@ -21,11 +20,4 @@ gen_k8s 'v1.27.9' 'v1_27'
 gen_k8s 'v1.28.5' 'v1_28'
 gen_k8s 'v1.29.0' 'v1_29'
 
-(cd kubernetes && git checkout master)
-
-# Replaces "{}" with "None" where appropriate
-python -m gybe.clean
-
-# Breaks up the long field description strings
-cd "$(dirname "$0")"
-black ../gybe/kubernetes --experimental-string-processing
+(cd kubernetes && git checkout master -q)

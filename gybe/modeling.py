@@ -11,10 +11,6 @@ def create_input_model(func):
     else:
         defaults = dict()
 
-    pyd_params = {
-        k: (t, defaults.get(k, ...))
-        for k, t in argspec.annotations.items()
-        if k != 'return'
-    }
+    pyd_params = {k: (t, defaults.get(k, ...)) for k, t in argspec.annotations.items() if k != 'return'}
 
     return create_model(f'{func.__name__}', **pyd_params)

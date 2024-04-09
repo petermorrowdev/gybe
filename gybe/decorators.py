@@ -1,12 +1,12 @@
-import click
 import json
 import sys
 
+import click
 from pydantic import BaseModel, ValidationError
 
 from gybe.exceptions import InvalidOutputError
 from gybe.modeling import create_input_model
-from gybe.yaml import yaml_loads, yaml_dumps
+from gybe.yaml import yaml_dumps, yaml_loads
 
 
 def _bind_function(f):
@@ -36,14 +36,7 @@ def _bind_function(f):
             raise InvalidOutputError()
 
         # Print manifest
-        print(
-            '---\n'.join(
-                [
-                    yaml_dumps(json.loads(r.json(exclude_none=True)))
-                    for r in manifest
-                ]
-            )
-        )
+        print('---\n'.join([yaml_dumps(json.loads(r.json(exclude_none=True))) for r in manifest]))
 
     func.__name__ = f.__name__
     return func

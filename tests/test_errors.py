@@ -1,5 +1,5 @@
-from gybe.exceptions import InvalidOutputError
 import gybe
+from gybe.exceptions import InvalidOutputError
 
 
 @gybe.transpiler

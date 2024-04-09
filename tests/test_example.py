@@ -1,32 +1,28 @@
 from typing import List
 
-from gybe.kubernetes import Pod, PodSpec, Container
 import gybe
 
 
 def create_standard_container(image: str, command: List[str]):
-    return Container(image=image, command=command, name='standard-server')
+    return gybe.k8s.Container(image=image, command=command, name='standard-server')
 
 
 @gybe.transpiler
-def two_pods(image: str, command: List[str], port: int=8080) -> gybe.Manifest:
-    pod_spec = PodSpec(
-        containers=[
-            create_standard_container(image=image, command=command)
-        ],
-        ports=[dict(port=port)]
+def two_pods(image: str, command: List[str], port: int = 8080) -> gybe.Manifest:
+    pod_spec = gybe.k8s.PodSpec(
+        containers=[create_standard_container(image=image, command=command)],
     )
     return [
-        Pod(
+        gybe.k8s.Pod(
             kind='Pod',
             apiVersion='v1',
-            metadata=dict(name='pod-1'),
+            metadata=gybe.k8s.ObjectMeta(name='pod-1'),
             spec=pod_spec,
         ),
-        Pod(
+        gybe.k8s.Pod(
             kind='Pod',
             apiVersion='v1',
-            metadata=dict(name='pod-2'),
+            metadata=gybe.k8s.ObjectMeta(name='pod-2'),
             spec=pod_spec,
         ),
     ]

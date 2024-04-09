@@ -1,51 +1,64 @@
-"""Tests model definition code generated from codegen/kubernetes import-able
+"""Tests model definition code generated from codegen/k8s import-able
 
-List of actively maintained kubernetes versions here:
-https://kubernetes.io/releases/
+List of actively maintained k8s versions here:
+https://k8s.io/releases/
 """
 
 
 def test_import_default_kuberentes():
-    """Tests default kubernetes module imports"""
-    from gybe import kubernetes
-    assert kubernetes
+    """Tests default k8s module imports"""
+    from gybe import k8s
+
+    assert k8s
 
 
-def test_import_kubernetes_1_26():
-    """Tests kubernetes 1.26 module imports"""
-    from gybe.kubernetes.v1_26.io.k8s.api.apps import v1
-    assert v1
-    from gybe.kubernetes.v1_26.io.k8s.api.batch import v1
-    assert v1
-    from gybe.kubernetes.v1_26.io.k8s.api.core import v1
-    assert v1
+def test_import_k8s_1_26():
+    """Tests k8s 1.26 module imports"""
+    from gybe.k8s.v1_26.apps import v1
 
+    assert v1
+    from gybe.k8s.v1_26.batch import v1
 
-def test_import_kubernetes_1_27():
-    """Tests kubernetes 1.27 module imports"""
-    from gybe.kubernetes.v1_27.io.k8s.api.apps import v1
     assert v1
-    from gybe.kubernetes.v1_27.io.k8s.api.batch import v1
-    assert v1
-    from gybe.kubernetes.v1_27.io.k8s.api.core import v1
+    from gybe.k8s.v1_26.core import v1
+
     assert v1
 
 
-def test_import_kubernetes_1_28():
-    """Tests kubernetes 1.28 module imports"""
-    from gybe.kubernetes.v1_28.io.k8s.api.apps import v1
+def test_import_k8s_1_27():
+    """Tests k8s 1.27 module imports"""
+    from gybe.k8s.v1_27.apps import v1
+
     assert v1
-    from gybe.kubernetes.v1_28.io.k8s.api.batch import v1
+    from gybe.k8s.v1_27.batch import v1
+
     assert v1
-    from gybe.kubernetes.v1_28.io.k8s.api.core import v1
+    from gybe.k8s.v1_27.core import v1
+
     assert v1
 
 
-def test_import_kubernetes_1_29():
-    """Tests kubernetes 1.29 module imports"""
-    from gybe.kubernetes.v1_29.io.k8s.api.apps import v1
+def test_import_k8s_1_28():
+    """Tests k8s 1.28 module imports"""
+    from gybe.k8s.v1_28.apps import v1
+
     assert v1
-    from gybe.kubernetes.v1_29.io.k8s.api.batch import v1
+    from gybe.k8s.v1_28.batch import v1
+
     assert v1
-    from gybe.kubernetes.v1_29.io.k8s.api.core import v1
+    from gybe.k8s.v1_28.core import v1
+
+    assert v1
+
+
+def test_import_k8s_1_29():
+    """Tests k8s 1.29 module imports"""
+    from gybe.k8s.v1_29.apps import v1
+
+    assert v1
+    from gybe.k8s.v1_29.batch import v1
+
+    assert v1
+    from gybe.k8s.v1_29.core import v1
+
     assert v1
