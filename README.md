@@ -9,10 +9,7 @@ that makes it easier to develop modest kubernetes deployments.
 
 ## Reqiurements
 
-Python 3.7+
-
-Gybe uses [pydantic](https://github.com/samuelcolvin/pydantic) for type-hint
-validation and [click](https://github.com/pallets/click) for the CLI.
+Python 3.10+
 
 ## Install
 
@@ -25,7 +22,7 @@ pip install gybe
 Create a simple `values.yaml` file:
 
 ```yaml
-image: python:3.9
+image: python:3
 command:
   - python
   - -m
@@ -35,35 +32,29 @@ command:
 Create a `chart.py` file:
 
 ```python
-from typing import List
-
-from gybe.favorites.kubernetes import Pod, PodSpec, Container
 import gybe
 
 
-def create_standard_container(image: str, command: List[str]) -> Container:
-    return Container(image=image, command=command, name='standard-server')
+def create_standard_container(image: str, command: List[str]):
+    return gybe.k8s.Container(image=image, command=command, name='my-python-server')
 
 
 @gybe.transpiler
-def two_pods(image: str, command: List[str], port: int=8080) -> gybe.Manifest:
-    pod_spec = PodSpec(
-        containers=[
-            create_standard_container(image=image, command=command)
-        ],
-        ports=[dict(port=port)]
+def two_pods(image: str, command: list[str]) -> gybe.Manifest:
+    pod_spec = gybe.k8s.PodSpec(
+        containers=[create_standard_container(image=image, command=command)],
     )
     return [
-        Pod(
+        gybe.k8s.Pod(
             kind='Pod',
             apiVersion='v1',
-            metadata=dict(name='pod-1'),
+            metadata=gybe.k8s.ObjectMeta(name='pod-1'),
             spec=pod_spec,
         ),
-        Pod(
+        gybe.k8s.Pod(
             kind='Pod',
             apiVersion='v1',
-            metadata=dict(name='pod-2'),
+            metadata=gybe.k8s.ObjectMeta(name='pod-2'),
             spec=pod_spec,
         ),
     ]
@@ -90,8 +81,8 @@ spec:
     - python
     - -m
     - http.server
-    image: python:3.9
-    name: standard-server
+    image: python:3
+    name: my-python-server
 ---
 apiVersion: v1
 kind: Pod
@@ -103,8 +94,8 @@ spec:
     - python
     - -m
     - http.server
-    image: python:3.9
-    name: standard-server
+    image: python:3
+    name: my-python-server
 ```
 
 If you're feeling lucky, you can pipe that into `kubectl`:

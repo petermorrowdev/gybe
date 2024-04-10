@@ -1,14 +1,12 @@
-from typing import List
-
 import gybe
 
 
-def create_standard_container(image: str, command: List[str]):
+def create_standard_container(image: str, command: list[str]):
     return gybe.k8s.Container(image=image, command=command, name='standard-server')
 
 
 @gybe.transpiler
-def two_pods(image: str, command: List[str], port: int = 8080) -> gybe.Manifest:
+def two_pods(image: str, command: list[str], port: int = 8080) -> gybe.Manifest:
     pod_spec = gybe.k8s.PodSpec(
         containers=[create_standard_container(image=image, command=command)],
     )
@@ -29,7 +27,7 @@ def two_pods(image: str, command: List[str], port: int = 8080) -> gybe.Manifest:
 
 
 VALID_TWO_POD_YAML = """
-image: python:3.9
+image: python:3
 command:
   - python
   - -m
@@ -47,7 +45,7 @@ spec:
     - python
     - -m
     - http.server
-    image: python:3.9
+    image: python:3
     name: standard-server
 ---
 apiVersion: v1
@@ -60,12 +58,12 @@ spec:
     - python
     - -m
     - http.server
-    image: python:3.9
+    image: python:3
     name: standard-server
 """
 
 INVALID_VALID_TWO_POD_YAML = """
-image: python:3.9
+image: python:3
 command: false
 """
 
