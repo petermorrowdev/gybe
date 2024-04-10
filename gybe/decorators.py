@@ -1,4 +1,5 @@
 import sys
+
 import click
 from cattrs import Converter, transform_error
 
