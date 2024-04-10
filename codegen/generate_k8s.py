@@ -68,7 +68,7 @@ class K8sModule:
 
     def _unparse(self):
         if self._module_name.endswith('api.resource'):
-            return '"""Models generated from Kubernetes OpenAPI Spec."""\nfrom typing import Union\nQuantity = Union[str, int, float]'
+            return '"""Models generated from Kubernetes OpenAPI Spec."""\nQuantity = str | int | float'
 
         imports = [
             '"""Models generated from Kubernetes OpenAPI Spec."""',
