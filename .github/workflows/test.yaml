@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  push: main
   pull_request:
     types: [opened, synchronize]
 
