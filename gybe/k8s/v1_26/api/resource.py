@@ -1,3 +1,5 @@
 """Models generated from Kubernetes OpenAPI Spec."""
 
-Quantity = str | int | float
+from typing import Union
+
+Quantity = Union[str, int, float]
