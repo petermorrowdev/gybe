@@ -36,17 +36,44 @@ command:
   - http.server
 """
 
+EXPECTED_TWO_POD_MANIFEST = """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+  - command:
+    - python
+    - -m
+    - http.server
+    image: python:3.9
+    name: standard-server
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+spec:
+  containers:
+  - command:
+    - python
+    - -m
+    - http.server
+    image: python:3.9
+    name: standard-server
+"""
 
 INVALID_VALID_TWO_POD_YAML = """
 image: python:3.9
-# Expects list of strings so this should fail
-command: python -m http.server
+command: false
 """
 
 
 def test_two_pods_chart_transpiles_with_valid_yaml(run_cli):
     result = run_cli(two_pods, VALID_TWO_POD_YAML)
     assert result.exit_code == 0
+    assert result.stdout.strip() == EXPECTED_TWO_POD_MANIFEST.strip()
 
 
 def test_two_pods_chart_fails_with_invalid_yaml(run_cli):

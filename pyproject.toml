@@ -1,25 +1,79 @@
 [build-system]
-requires = ["flit_core >=2,<4"]
-build-backend = "flit_core.buildapi"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.flit.metadata]
-module = "gybe"
-author = "Peter Morrow"
-author-email = "petermorrowtech@gmail.com"
-home-page = "https://github.com/petermorrow/gybe"
-classifiers = ["License :: OSI Approved :: MIT License"]
-description-file = "README.md"
-requires = [
-    "click >=7.0.0",
-    "pydantic >=2.0.0,<3.0.0",
-    "PyYAML >=5.0.0",
+[project]
+name = "gybe"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Peter Morrow", email = "petermorrowtech@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "click >=7.0.0",
+  "PyYAML >=5.0.0",
+  "attrs",
+  "cattrs",
 ]
 
-[tool.flit.metadata.requires-extra]
-test = [
-    "pytest",
-    "pytest-cov",
+[project.urls]
+Documentation = "https://github.com/petermorrowdev/gybe#readme"
+Issues = "https://github.com/petermorrowdev/gybe/issues"
+Source = "https://github.com/petermorrowdev/gybe"
+
+[tool.hatch.version]
+path = "gybe/__init__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+  "coverage[toml]>=6.5",
+  "mypy",
+  "ruff",
 ]
+[tool.hatch.envs.default.scripts]
+test = "pytest"
+genk8s = "bash codegen/kubernetes"
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+
+[tool.coverage.run]
+source_pkgs = ["gybe", "tests"]
+branch = true
+parallel = true
+
+[tool.coverage.paths]
+gybe = ["src/gybe", "*/gybe/src/gybe"]
+tests = ["tests", "*/gybe/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+[tool.pytest.ini_options]
+addopts = "--ignore kubernetes -v --cov gybe tests --cov-report=term-missing --durations=3"
+testpaths = "tests"
 
 [tool.ruff]
 line-length = 110
@@ -45,7 +99,7 @@ docstring-code-line-length = "dynamic"
 [tool.ruff.lint.flake8-quotes]
 inline-quotes = "single"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
     # at least this three should be fine in tests:
     "S101", # asserts allowed in tests...

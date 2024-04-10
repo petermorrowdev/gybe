@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Optional, TypeAlias, TypedDict, Union
 
 k8s_openapi_dir = Path('kubernetes/api/openapi-spec/v3')
-failed_keys = set()
 # a json-serializable dict
 JSONObj: TypeAlias = Union[dict[str, 'JSONObj'], list['JSONObj'], str, int, float, bool, None]
 JSONDict: TypeAlias = dict[str, Union['JSONObj', 'JSONDict']]
@@ -44,16 +43,6 @@ class JSONSchemaProperties(TypedDict):
     allOf: Optional[list[JSONSchemaProperties]]
 
 
-class K8sModel:
-    def __init__(self, name: str, properties: JSONSchemaProperties):
-        self.name = name
-        self.properties = properties
-
-    @property
-    def module_name(self):
-        return _ref_to_module_name(self.name)
-
-
 class K8sModule:
     def __init__(self, version_module: str, module_name: str):
         self._version_module = version_module
@@ -78,6 +67,9 @@ class K8sModule:
         self._class_defs.append(model_def)
 
     def _unparse(self):
+        if self._module_name.endswith('api.resource'):
+            return '"""Models generated from Kubernetes OpenAPI Spec."""\nQuantity = str | int | float'
+
         imports = [
             '"""Models generated from Kubernetes OpenAPI Spec."""',
             'from __future__ import annotations',
@@ -123,15 +115,7 @@ class K8sModule:
                 fields.append(field)
 
         for field in fields:
-            try:
-                cdef.body.append(ast.parse(field).body[0])
-            except SyntaxError:
-                failed_keys.add(
-                    (
-                        k,
-                        name,
-                    ),
-                )
+            cdef.body.append(ast.parse(field).body[0])
         return cdef
 
     def _prop_desc(self, properties: dict[str, JSONSchemaProperties]) -> str:
