@@ -1,7 +1,6 @@
-from pathlib import Path
 import ast
 import re
-
+from pathlib import Path
 
 CWD = Path(__file__).parent
 PATTERN = r'Model\d*'
@@ -35,11 +34,11 @@ def remove_duplicate_classes():
                     nodes.append(n)
             else:
                 nodes.append(n)
-        
+
         with open(path, 'w') as f:
             for n in nodes:
                 f.write(ast.unparse(n) + '\n')
-    
+
     if len(removed):
         for path in iter_k8s_py():
             with open(path) as f:

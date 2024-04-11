@@ -1,7 +1,7 @@
 from typing import Callable
 
-from click.testing import CliRunner
 import pytest
+from click.testing import CliRunner
 
 
 def _run_cli(cli_fn: Callable, yaml: str):

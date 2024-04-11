@@ -1,6 +1,5 @@
 import inspect
-
-from pydantic import create_model
+from dataclasses import make_dataclass
 
 
 def create_input_model(func):
@@ -11,10 +10,5 @@ def create_input_model(func):
     else:
         defaults = dict()
 
-    pyd_params = {
-        k: (t, defaults.get(k, ...))
-        for k, t in argspec.annotations.items()
-        if k != 'return'
-    }
-
-    return create_model(f'{func.__name__}', **pyd_params)
+    fields = [(k, t, defaults.get(k, ...)) for k, t in argspec.annotations.items() if k != 'return']
+    return make_dataclass(f'{func.__name__}', fields)

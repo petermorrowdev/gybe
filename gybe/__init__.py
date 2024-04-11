@@ -1,13 +1,13 @@
 """A simple YAML transpilation tool for rendering kubernetes manifests"""
 
-__version__ = '0.2.2'
+__version__ = '0.3.0'
 
 
-from typing import List
+from typing import Any, List
 
-from pydantic import ValidationError, BaseModel
-
+from gybe import k8s
 from gybe.decorators import transpiler
 
+Manifest = List[Any]
 
-Manifest = List[BaseModel]
+__all__ = ['k8s', 'Manifest', 'transpiler']
