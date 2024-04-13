@@ -1,5 +1,6 @@
 """Kubernetes models as dataclasses copied from k8s' OpenAPI V3 Spec."""
 
+from gybe.k8s.types import K8sSpec
 from gybe.k8s.v1_29.apps.v1 import (
     DaemonSet,
     DaemonSetSpec,
@@ -28,6 +29,7 @@ from gybe.k8s.v1_29.core.v1 import (
 from gybe.k8s.v1_29.meta.v1 import ObjectMeta
 
 __all__ = [
+    'K8sSpec',
     'Deployment',
     'DeploymentSpec',
     'StatefulSet',

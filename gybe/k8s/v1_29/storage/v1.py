@@ -8,11 +8,11 @@ from typing import List, Optional
 import gybe.k8s.v1_29.api.resource
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj
+from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
 @dataclass
-class CSIDriver:
+class CSIDriver(K8sSpec):
     """CSIDriver captures information about a Container Storage Interface (CSI) volume driver deployed on the
     cluster. Kubernetes attach detach controller uses this object to determine whether attach is required.
     Kubelet uses this object to determine whether pod information needs to be passed on mount. CSIDriver
@@ -40,7 +40,7 @@ class CSIDriver:
 
 
 @dataclass
-class CSIDriverList:
+class CSIDriverList(K8sSpec):
     """CSIDriverList is a collection of CSIDriver objects.
 
     Attributes
@@ -62,7 +62,7 @@ class CSIDriverList:
 
 
 @dataclass
-class CSIDriverSpec:
+class CSIDriverSpec(K8sSpec):
     """CSIDriverSpec is the specification of a CSIDriver.
 
     Attributes
@@ -151,7 +151,7 @@ class CSIDriverSpec:
 
 
 @dataclass
-class CSINode:
+class CSINode(K8sSpec):
     """CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create
     the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the
     kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin
@@ -178,7 +178,7 @@ class CSINode:
 
 
 @dataclass
-class CSINodeDriver:
+class CSINodeDriver(K8sSpec):
     """CSINodeDriver holds information about the specification of one CSI driver installed on a node
     Attributes:
         allocatable: allocatable represents the volume resources of a node that are available for scheduling.
@@ -208,7 +208,7 @@ class CSINodeDriver:
 
 
 @dataclass
-class CSINodeList:
+class CSINodeList(K8sSpec):
     """CSINodeList is a collection of CSINode objects.
 
     Attributes
@@ -230,7 +230,7 @@ class CSINodeList:
 
 
 @dataclass
-class CSINodeSpec:
+class CSINodeSpec(K8sSpec):
     """CSINodeSpec holds information about the specification of all CSI drivers installed on a node
     Attributes:
         drivers: drivers is a list of information of all CSI Drivers existing on a node. If all drivers in the
@@ -242,7 +242,7 @@ class CSINodeSpec:
 
 
 @dataclass
-class CSIStorageCapacity:
+class CSIStorageCapacity(K8sSpec):
     """CSIStorageCapacity stores the result of one CSI GetCapacity call. For a given StorageClass, this
     describes the available capacity in a particular topology segment.  This can be used when considering
     where to instantiate new PersistentVolumes.  For example this can express things like: - StorageClass
@@ -298,7 +298,7 @@ class CSIStorageCapacity:
 
 
 @dataclass
-class CSIStorageCapacityList:
+class CSIStorageCapacityList(K8sSpec):
     """CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 
     Attributes
@@ -320,7 +320,7 @@ class CSIStorageCapacityList:
 
 
 @dataclass
-class StorageClass:
+class StorageClass(K8sSpec):
     """StorageClass describes the parameters for a class of storage for which PersistentVolumes can be
     dynamically provisioned.  StorageClasses are non-namespaced; the name of the storage class according
     to etcd is in ObjectMeta.Name.
@@ -365,7 +365,7 @@ class StorageClass:
 
 
 @dataclass
-class StorageClassList:
+class StorageClassList(K8sSpec):
     """StorageClassList is a collection of storage classes.
 
     Attributes
@@ -387,7 +387,7 @@ class StorageClassList:
 
 
 @dataclass
-class TokenRequest:
+class TokenRequest(K8sSpec):
     """TokenRequest contains parameters of a service account token.
 
     Attributes
@@ -404,7 +404,7 @@ class TokenRequest:
 
 
 @dataclass
-class VolumeAttachment:
+class VolumeAttachment(K8sSpec):
     """VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified
     node.  VolumeAttachment objects are non-namespaced.
 
@@ -431,7 +431,7 @@ class VolumeAttachment:
 
 
 @dataclass
-class VolumeAttachmentList:
+class VolumeAttachmentList(K8sSpec):
     """VolumeAttachmentList is a collection of VolumeAttachment objects.
 
     Attributes
@@ -453,7 +453,7 @@ class VolumeAttachmentList:
 
 
 @dataclass
-class VolumeAttachmentSource:
+class VolumeAttachmentSource(K8sSpec):
     """VolumeAttachmentSource represents a volume that should be attached. Right now only PersistenVolumes
     can be attached via external attacher, in future we may allow also inline volumes in pods. Exactly one
     member can be set.
@@ -473,7 +473,7 @@ class VolumeAttachmentSource:
 
 
 @dataclass
-class VolumeAttachmentSpec:
+class VolumeAttachmentSpec(K8sSpec):
     """VolumeAttachmentSpec is the specification of a VolumeAttachment request.
 
     Attributes
@@ -491,7 +491,7 @@ class VolumeAttachmentSpec:
 
 
 @dataclass
-class VolumeAttachmentStatus:
+class VolumeAttachmentStatus(K8sSpec):
     """VolumeAttachmentStatus is the status of a VolumeAttachment request.
 
     Attributes
@@ -516,7 +516,7 @@ class VolumeAttachmentStatus:
 
 
 @dataclass
-class VolumeError:
+class VolumeError(K8sSpec):
     """VolumeError captures an error encountered during a volume operation.
 
     Attributes
@@ -532,7 +532,7 @@ class VolumeError:
 
 
 @dataclass
-class VolumeNodeResources:
+class VolumeNodeResources(K8sSpec):
     """VolumeNodeResources is a set of resource limits for scheduling of volumes.
 
     Attributes

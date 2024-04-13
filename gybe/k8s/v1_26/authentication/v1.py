@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict
+from gybe.k8s.types import JSONDict, K8sSpec
 
 
 @dataclass
-class UserInfo:
+class UserInfo(K8sSpec):
     """UserInfo holds the information about the user needed to implement the user.Info interface.
 
     Attributes
@@ -30,7 +30,7 @@ class UserInfo:
 
 
 @dataclass
-class BoundObjectReference:
+class BoundObjectReference(K8sSpec):
     """BoundObjectReference is a reference to an object that a token is bound to.
 
     Attributes
@@ -49,7 +49,7 @@ class BoundObjectReference:
 
 
 @dataclass
-class TokenRequest:
+class TokenRequest(K8sSpec):
     """TokenRequest requests a token for a given service account.
 
     Attributes
@@ -73,7 +73,7 @@ class TokenRequest:
 
 
 @dataclass
-class TokenRequestSpec:
+class TokenRequestSpec(K8sSpec):
     """TokenRequestSpec contains client provided parameters of a token request.
 
     Attributes
@@ -98,7 +98,7 @@ class TokenRequestSpec:
 
 
 @dataclass
-class TokenRequestStatus:
+class TokenRequestStatus(K8sSpec):
     """TokenRequestStatus is the result of a token request.
 
     Attributes
@@ -113,7 +113,7 @@ class TokenRequestStatus:
 
 
 @dataclass
-class TokenReview:
+class TokenReview(K8sSpec):
     """TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached
     by the webhook token authenticator plugin in the kube-apiserver.
 
@@ -138,7 +138,7 @@ class TokenReview:
 
 
 @dataclass
-class TokenReviewSpec:
+class TokenReviewSpec(K8sSpec):
     """TokenReviewSpec is a description of the token authentication request.
 
     Attributes
@@ -156,7 +156,7 @@ class TokenReviewSpec:
 
 
 @dataclass
-class TokenReviewStatus:
+class TokenReviewStatus(K8sSpec):
     """TokenReviewStatus is the result of the token authentication request.
 
     Attributes

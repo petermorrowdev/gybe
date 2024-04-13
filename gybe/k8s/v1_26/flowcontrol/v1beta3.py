@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class FlowDistinguisherMethod:
+class FlowDistinguisherMethod(K8sSpec):
     """FlowDistinguisherMethod specifies the method of a flow distinguisher.
 
     Attributes
@@ -24,7 +24,7 @@ class FlowDistinguisherMethod:
 
 
 @dataclass
-class FlowSchema:
+class FlowSchema(K8sSpec):
     """FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API
     requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema
     and a 'flow distinguisher'.
@@ -50,7 +50,7 @@ class FlowSchema:
 
 
 @dataclass
-class FlowSchemaCondition:
+class FlowSchemaCondition(K8sSpec):
     """FlowSchemaCondition describes conditions for a FlowSchema.
 
     Attributes
@@ -72,7 +72,7 @@ class FlowSchemaCondition:
 
 
 @dataclass
-class FlowSchemaList:
+class FlowSchemaList(K8sSpec):
     """FlowSchemaList is a list of FlowSchema objects.
 
     Attributes
@@ -94,7 +94,7 @@ class FlowSchemaList:
 
 
 @dataclass
-class FlowSchemaSpec:
+class FlowSchemaSpec(K8sSpec):
     """FlowSchemaSpec describes how the FlowSchema's specification looks like.
 
     Attributes
@@ -122,7 +122,7 @@ class FlowSchemaSpec:
 
 
 @dataclass
-class FlowSchemaStatus:
+class FlowSchemaStatus(K8sSpec):
     """FlowSchemaStatus represents the current state of a FlowSchema.
 
     Attributes
@@ -135,7 +135,7 @@ class FlowSchemaStatus:
 
 
 @dataclass
-class GroupSubject:
+class GroupSubject(K8sSpec):
     """GroupSubject holds detailed information for group-kind subject.
 
     Attributes
@@ -150,7 +150,7 @@ class GroupSubject:
 
 
 @dataclass
-class LimitResponse:
+class LimitResponse(K8sSpec):
     """LimitResponse defines how to handle requests that can not be executed right now.
 
     Attributes
@@ -168,7 +168,7 @@ class LimitResponse:
 
 
 @dataclass
-class LimitedPriorityLevelConfiguration:
+class LimitedPriorityLevelConfiguration(K8sSpec):
     """LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It
     addresses two issues:   - How are requests for this priority level limited?   - What should be done
     with requests that exceed the limit?
@@ -206,7 +206,7 @@ class LimitedPriorityLevelConfiguration:
 
 
 @dataclass
-class NonResourcePolicyRule:
+class NonResourcePolicyRule(K8sSpec):
     """NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and
     the target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at
     least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches
@@ -229,7 +229,7 @@ class NonResourcePolicyRule:
 
 
 @dataclass
-class PolicyRulesWithSubjects:
+class PolicyRulesWithSubjects(K8sSpec):
     """PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test
     considers the subject making the request, the verb being requested, and the resource to be acted upon.
     This PolicyRulesWithSubjects matches a request if and only if both (a) at least one member of subjects
@@ -255,7 +255,7 @@ class PolicyRulesWithSubjects:
 
 
 @dataclass
-class PriorityLevelConfiguration:
+class PriorityLevelConfiguration(K8sSpec):
     """PriorityLevelConfiguration represents the configuration of a priority level.
 
     Attributes
@@ -279,7 +279,7 @@ class PriorityLevelConfiguration:
 
 
 @dataclass
-class PriorityLevelConfigurationCondition:
+class PriorityLevelConfigurationCondition(K8sSpec):
     """PriorityLevelConfigurationCondition defines the condition of priority level.
 
     Attributes
@@ -301,7 +301,7 @@ class PriorityLevelConfigurationCondition:
 
 
 @dataclass
-class PriorityLevelConfigurationList:
+class PriorityLevelConfigurationList(K8sSpec):
     """PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
 
     Attributes
@@ -323,7 +323,7 @@ class PriorityLevelConfigurationList:
 
 
 @dataclass
-class PriorityLevelConfigurationReference:
+class PriorityLevelConfigurationReference(K8sSpec):
     """PriorityLevelConfigurationReference contains information that points to the 'request-priority' being
     used.
 
@@ -337,7 +337,7 @@ class PriorityLevelConfigurationReference:
 
 
 @dataclass
-class PriorityLevelConfigurationSpec:
+class PriorityLevelConfigurationSpec(K8sSpec):
     """PriorityLevelConfigurationSpec specifies the configuration of a priority level.
 
     Attributes
@@ -358,7 +358,7 @@ class PriorityLevelConfigurationSpec:
 
 
 @dataclass
-class PriorityLevelConfigurationStatus:
+class PriorityLevelConfigurationStatus(K8sSpec):
     """PriorityLevelConfigurationStatus represents the current state of a 'request-priority'.
 
     Attributes
@@ -371,7 +371,7 @@ class PriorityLevelConfigurationStatus:
 
 
 @dataclass
-class QueuingConfiguration:
+class QueuingConfiguration(K8sSpec):
     """QueuingConfiguration holds the configuration parameters for queuing
     Attributes:
         handSize: `handSize` is a small positive number that configures the shuffle sharding of requests into
@@ -397,7 +397,7 @@ class QueuingConfiguration:
 
 
 @dataclass
-class ResourcePolicyRule:
+class ResourcePolicyRule(K8sSpec):
     """ResourcePolicyRule is a predicate that matches some resource requests, testing the request's verb and
     the target resource. A ResourcePolicyRule matches a resource request if and only if: (a) at least one
     member of verbs matches the request, (b) at least one member of apiGroups matches the request, (c) at
@@ -434,7 +434,7 @@ class ResourcePolicyRule:
 
 
 @dataclass
-class ServiceAccountSubject:
+class ServiceAccountSubject(K8sSpec):
     """ServiceAccountSubject holds detailed information for service-account-kind subject.
 
     Attributes
@@ -450,7 +450,7 @@ class ServiceAccountSubject:
 
 
 @dataclass
-class Subject:
+class Subject(K8sSpec):
     """Subject matches the originator of a request, as identified by the request authentication system. There
     are three ways of matching an originator; by user, group, or service account.
 
@@ -470,7 +470,7 @@ class Subject:
 
 
 @dataclass
-class UserSubject:
+class UserSubject(K8sSpec):
     """UserSubject holds detailed information for user-kind subject.
 
     Attributes

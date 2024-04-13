@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class MutatingWebhook:
+class MutatingWebhook(K8sSpec):
     """MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -99,7 +99,7 @@ class MutatingWebhook:
 
 
 @dataclass
-class MutatingWebhookConfiguration:
+class MutatingWebhookConfiguration(K8sSpec):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
@@ -122,7 +122,7 @@ class MutatingWebhookConfiguration:
 
 
 @dataclass
-class MutatingWebhookConfigurationList:
+class MutatingWebhookConfigurationList(K8sSpec):
     """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 
     Attributes
@@ -144,7 +144,7 @@ class MutatingWebhookConfigurationList:
 
 
 @dataclass
-class RuleWithOperations:
+class RuleWithOperations(K8sSpec):
     """RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the
     tuple expansions are valid.
 
@@ -179,7 +179,7 @@ class RuleWithOperations:
 
 
 @dataclass
-class ServiceReference:
+class ServiceReference(K8sSpec):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: `name` is the name of the service. Required
@@ -197,7 +197,7 @@ class ServiceReference:
 
 
 @dataclass
-class ValidatingWebhook:
+class ValidatingWebhook(K8sSpec):
     """ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -274,7 +274,7 @@ class ValidatingWebhook:
 
 
 @dataclass
-class ValidatingWebhookConfiguration:
+class ValidatingWebhookConfiguration(K8sSpec):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
@@ -297,7 +297,7 @@ class ValidatingWebhookConfiguration:
 
 
 @dataclass
-class ValidatingWebhookConfigurationList:
+class ValidatingWebhookConfigurationList(K8sSpec):
     """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 
     Attributes
@@ -319,7 +319,7 @@ class ValidatingWebhookConfigurationList:
 
 
 @dataclass
-class WebhookClientConfig:
+class WebhookClientConfig(K8sSpec):
     """WebhookClientConfig contains the information to make a TLS connection with the webhook
     Attributes:
         caBundle: `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server

@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class APIService:
+class APIService(K8sSpec):
     """APIService represents a server for a particular GroupVersion. Name must be 'version.group'.
 
     Attributes
@@ -34,7 +34,7 @@ class APIService:
 
 
 @dataclass
-class APIServiceCondition:
+class APIServiceCondition(K8sSpec):
     """APIServiceCondition describes the state of an APIService at a particular point
     Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
@@ -53,7 +53,7 @@ class APIServiceCondition:
 
 
 @dataclass
-class APIServiceList:
+class APIServiceList(K8sSpec):
     """APIServiceList is a list of APIService objects.
 
     Attributes
@@ -75,7 +75,7 @@ class APIServiceList:
 
 
 @dataclass
-class APIServiceSpec:
+class APIServiceSpec(K8sSpec):
     """APIServiceSpec contains information for locating and communicating with a server. Only https is
     supported, though you are able to disable certificate verification.
 
@@ -120,7 +120,7 @@ class APIServiceSpec:
 
 
 @dataclass
-class APIServiceStatus:
+class APIServiceStatus(K8sSpec):
     """APIServiceStatus contains derived information about an API server
     Attributes:
         conditions: Current service state of apiService.
@@ -131,7 +131,7 @@ class APIServiceStatus:
 
 
 @dataclass
-class ServiceReference:
+class ServiceReference(K8sSpec):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: Name is the name of the service

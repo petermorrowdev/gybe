@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_27.core.v1
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj
+from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
 @dataclass
-class Overhead:
+class Overhead(K8sSpec):
     """Overhead structure represents the resource overhead associated with running a pod.
 
     Attributes
@@ -24,7 +24,7 @@ class Overhead:
 
 
 @dataclass
-class RuntimeClass:
+class RuntimeClass(K8sSpec):
     """RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used
     to determine which container runtime is used to run all containers in a pod. RuntimeClasses are
     manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is
@@ -63,7 +63,7 @@ class RuntimeClass:
 
 
 @dataclass
-class RuntimeClassList:
+class RuntimeClassList(K8sSpec):
     """RuntimeClassList is a list of RuntimeClass objects.
 
     Attributes
@@ -85,7 +85,7 @@ class RuntimeClassList:
 
 
 @dataclass
-class Scheduling:
+class Scheduling(K8sSpec):
     """Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
 
     Attributes

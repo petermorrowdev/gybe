@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class Scale:
+class Scale(K8sSpec):
     """Scale represents a scaling request for a resource.
 
     Attributes
@@ -34,7 +34,7 @@ class Scale:
 
 
 @dataclass
-class ScaleSpec:
+class ScaleSpec(K8sSpec):
     """ScaleSpec describes the attributes of a scale subresource.
 
     Attributes
@@ -47,7 +47,7 @@ class ScaleSpec:
 
 
 @dataclass
-class ScaleStatus:
+class ScaleStatus(K8sSpec):
     """ScaleStatus represents the current status of a scale subresource.
 
     Attributes
@@ -65,7 +65,7 @@ class ScaleStatus:
 
 
 @dataclass
-class CrossVersionObjectReference:
+class CrossVersionObjectReference(K8sSpec):
     """CrossVersionObjectReference contains enough information to let you identify the referred resource.
 
     Attributes
@@ -82,7 +82,7 @@ class CrossVersionObjectReference:
 
 
 @dataclass
-class HorizontalPodAutoscaler:
+class HorizontalPodAutoscaler(K8sSpec):
     """configuration of a horizontal pod autoscaler.
 
     Attributes
@@ -106,7 +106,7 @@ class HorizontalPodAutoscaler:
 
 
 @dataclass
-class HorizontalPodAutoscalerList:
+class HorizontalPodAutoscalerList(K8sSpec):
     """list of horizontal pod autoscaler objects.
 
     Attributes
@@ -128,7 +128,7 @@ class HorizontalPodAutoscalerList:
 
 
 @dataclass
-class HorizontalPodAutoscalerSpec:
+class HorizontalPodAutoscalerSpec(K8sSpec):
     """specification of a horizontal pod autoscaler.
 
     Attributes
@@ -154,7 +154,7 @@ class HorizontalPodAutoscalerSpec:
 
 
 @dataclass
-class HorizontalPodAutoscalerStatus:
+class HorizontalPodAutoscalerStatus(K8sSpec):
     """current status of a horizontal pod autoscaler
     Attributes:
         currentCPUUtilizationPercentage: currentCPUUtilizationPercentage is the current average CPU

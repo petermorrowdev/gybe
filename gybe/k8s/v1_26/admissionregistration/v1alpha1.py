@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class MatchResources:
+class MatchResources(K8sSpec):
     """MatchResources decides whether to run the admission control policy on an object based on whether it
     meets the match criteria. The exclude rules take precedence over include rules (if a resource matches
     both, it is excluded)
@@ -64,7 +64,7 @@ class MatchResources:
 
 
 @dataclass
-class NamedRuleWithOperations:
+class NamedRuleWithOperations(K8sSpec):
     """NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.
 
     Attributes
@@ -101,7 +101,7 @@ class NamedRuleWithOperations:
 
 
 @dataclass
-class ParamKind:
+class ParamKind(K8sSpec):
     """ParamKind is a tuple of Group Kind and Version.
 
     Attributes
@@ -117,7 +117,7 @@ class ParamKind:
 
 
 @dataclass
-class ParamRef:
+class ParamRef(K8sSpec):
     """ParamRef references a parameter resource
     Attributes:
         name: Name of the resource being referenced.
@@ -130,7 +130,7 @@ class ParamRef:
 
 
 @dataclass
-class ValidatingAdmissionPolicy:
+class ValidatingAdmissionPolicy(K8sSpec):
     """ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or
     rejects an object without changing it.
 
@@ -153,7 +153,7 @@ class ValidatingAdmissionPolicy:
 
 
 @dataclass
-class ValidatingAdmissionPolicyBinding:
+class ValidatingAdmissionPolicyBinding(K8sSpec):
     """ValidatingAdmissionPolicyBinding binds the ValidatingAdmissionPolicy with paramerized resources.
     ValidatingAdmissionPolicyBinding and parameter CRDs together define how cluster administrators
     configure policies for clusters.
@@ -177,7 +177,7 @@ class ValidatingAdmissionPolicyBinding:
 
 
 @dataclass
-class ValidatingAdmissionPolicyBindingList:
+class ValidatingAdmissionPolicyBindingList(K8sSpec):
     """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 
     Attributes
@@ -199,7 +199,7 @@ class ValidatingAdmissionPolicyBindingList:
 
 
 @dataclass
-class ValidatingAdmissionPolicyBindingSpec:
+class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
     """ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 
     Attributes
@@ -228,7 +228,7 @@ class ValidatingAdmissionPolicyBindingSpec:
 
 
 @dataclass
-class ValidatingAdmissionPolicyList:
+class ValidatingAdmissionPolicyList(K8sSpec):
     """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
     Attributes
@@ -250,7 +250,7 @@ class ValidatingAdmissionPolicyList:
 
 
 @dataclass
-class ValidatingAdmissionPolicySpec:
+class ValidatingAdmissionPolicySpec(K8sSpec):
     """ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
 
     Attributes
@@ -281,7 +281,7 @@ class ValidatingAdmissionPolicySpec:
 
 
 @dataclass
-class Validation:
+class Validation(K8sSpec):
     """Validation specifies the CEL expression which is used to apply the validation.
 
     Attributes
