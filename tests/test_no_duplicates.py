@@ -28,7 +28,7 @@ def get_classes_from_ast(node):
     return classes
 
 
-def walk_module(m: Union[ast.Module, ast.ClassDef]) -> Iterator[ast.AST]:
+def walk_module(m: Union[ast.Module, ast.ClassDef]) -> Iterator[ast.stmt]:
     for tree in m.body:
         if isinstance(tree, (ast.Module, ast.ClassDef)):
             yield tree

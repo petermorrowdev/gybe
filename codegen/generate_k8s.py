@@ -75,7 +75,7 @@ class K8sModule:
             'from __future__ import annotations',
             'from typing import List, Optional',
             'from dataclasses import dataclass',
-            'from gybe.k8s.types import JSONObj, JSONDict',
+            'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec',
         ] + sorted(list(self._module_imports))
         mod = ast.parse('\n'.join(imports))
         for c in self._class_defs:
@@ -89,7 +89,7 @@ class K8sModule:
         description: str,
         required: list[str],
     ) -> ast.ClassDef:
-        cdef = ast.parse('@dataclass\nclass ' + name + ':\n    pass').body[0]
+        cdef = ast.parse('@dataclass\nclass ' + name + '(K8sSpec):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')
         sections = [

@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class IPAddress:
+class IPAddress(K8sSpec):
     """IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that
     operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An
     IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of
@@ -35,7 +35,7 @@ class IPAddress:
 
 
 @dataclass
-class IPAddressList:
+class IPAddressList(K8sSpec):
     """IPAddressList contains a list of IPAddress.
 
     Attributes
@@ -57,7 +57,7 @@ class IPAddressList:
 
 
 @dataclass
-class IPAddressSpec:
+class IPAddressSpec(K8sSpec):
     """IPAddressSpec describe the attributes in an IP Address.
 
     Attributes
@@ -71,7 +71,7 @@ class IPAddressSpec:
 
 
 @dataclass
-class ParentReference:
+class ParentReference(K8sSpec):
     """ParentReference describes a reference to a parent object.
 
     Attributes
@@ -90,7 +90,7 @@ class ParentReference:
 
 
 @dataclass
-class ServiceCIDR:
+class ServiceCIDR(K8sSpec):
     """ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
     This range is used to allocate ClusterIPs to Service objects.
 
@@ -115,7 +115,7 @@ class ServiceCIDR:
 
 
 @dataclass
-class ServiceCIDRList:
+class ServiceCIDRList(K8sSpec):
     """ServiceCIDRList contains a list of ServiceCIDR objects.
 
     Attributes
@@ -137,7 +137,7 @@ class ServiceCIDRList:
 
 
 @dataclass
-class ServiceCIDRSpec:
+class ServiceCIDRSpec(K8sSpec):
     """ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
 
     Attributes
@@ -152,7 +152,7 @@ class ServiceCIDRSpec:
 
 
 @dataclass
-class ServiceCIDRStatus:
+class ServiceCIDRStatus(K8sSpec):
     """ServiceCIDRStatus describes the current state of the ServiceCIDR.
 
     Attributes

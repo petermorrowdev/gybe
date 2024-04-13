@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_27.core.v1
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class ClusterCIDR:
+class ClusterCIDR(K8sSpec):
     """ClusterCIDR represents a single configuration for per-Node Pod CIDR allocations when the
     MultiCIDRRangeAllocator is enabled (see the config for kube-controller-manager).  A cluster may have
     any number of ClusterCIDR resources, all of which will be considered when allocating a CIDR for a
@@ -39,7 +39,7 @@ class ClusterCIDR:
 
 
 @dataclass
-class ClusterCIDRList:
+class ClusterCIDRList(K8sSpec):
     """ClusterCIDRList contains a list of ClusterCIDR.
 
     Attributes
@@ -61,7 +61,7 @@ class ClusterCIDRList:
 
 
 @dataclass
-class ClusterCIDRSpec:
+class ClusterCIDRSpec(K8sSpec):
     """ClusterCIDRSpec defines the desired state of ClusterCIDR.
 
     Attributes
@@ -87,7 +87,7 @@ class ClusterCIDRSpec:
 
 
 @dataclass
-class IPAddress:
+class IPAddress(K8sSpec):
     """IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that
     operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An
     IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of
@@ -112,7 +112,7 @@ class IPAddress:
 
 
 @dataclass
-class IPAddressList:
+class IPAddressList(K8sSpec):
     """IPAddressList contains a list of IPAddress.
 
     Attributes
@@ -134,7 +134,7 @@ class IPAddressList:
 
 
 @dataclass
-class IPAddressSpec:
+class IPAddressSpec(K8sSpec):
     """IPAddressSpec describe the attributes in an IP Address.
 
     Attributes
@@ -148,7 +148,7 @@ class IPAddressSpec:
 
 
 @dataclass
-class ParentReference:
+class ParentReference(K8sSpec):
     """ParentReference describes a reference to a parent object.
 
     Attributes

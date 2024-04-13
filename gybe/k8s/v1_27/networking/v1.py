@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_27.core.v1
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class HTTPIngressPath:
+class HTTPIngressPath(K8sSpec):
     """HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the
     backend.
 
@@ -40,7 +40,7 @@ class HTTPIngressPath:
 
 
 @dataclass
-class HTTPIngressRuleValue:
+class HTTPIngressRuleValue(K8sSpec):
     """HTTPIngressRuleValue is a list of http selectors pointing to backends. In the example:
     http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this
     resource will be used to match against everything after the last '/' and before the first '?' or '#'.
@@ -55,7 +55,7 @@ class HTTPIngressRuleValue:
 
 
 @dataclass
-class Ingress:
+class Ingress(K8sSpec):
     """Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a
     backend. An Ingress can be configured to give services externally-reachable urls, load balance
     traffic, terminate SSL, offer name based virtual hosting etc.
@@ -81,7 +81,7 @@ class Ingress:
 
 
 @dataclass
-class IngressBackend:
+class IngressBackend(K8sSpec):
     """IngressBackend describes all endpoints for a given service and port.
 
     Attributes
@@ -99,7 +99,7 @@ class IngressBackend:
 
 
 @dataclass
-class IngressClass:
+class IngressClass(K8sSpec):
     """IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The
     `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass
     should be considered default. When a single IngressClass resource has this annotation set to true, new
@@ -124,7 +124,7 @@ class IngressClass:
 
 
 @dataclass
-class IngressClassList:
+class IngressClassList(K8sSpec):
     """IngressClassList is a collection of IngressClasses.
 
     Attributes
@@ -146,7 +146,7 @@ class IngressClassList:
 
 
 @dataclass
-class IngressClassParametersReference:
+class IngressClassParametersReference(K8sSpec):
     """IngressClassParametersReference identifies an API object. This can be used to specify a cluster or
     namespace-scoped resource.
 
@@ -172,7 +172,7 @@ class IngressClassParametersReference:
 
 
 @dataclass
-class IngressClassSpec:
+class IngressClassSpec(K8sSpec):
     """IngressClassSpec provides information about the class of an Ingress.
 
     Attributes
@@ -192,7 +192,7 @@ class IngressClassSpec:
 
 
 @dataclass
-class IngressList:
+class IngressList(K8sSpec):
     """IngressList is a collection of Ingress.
 
     Attributes
@@ -214,7 +214,7 @@ class IngressList:
 
 
 @dataclass
-class IngressLoadBalancerIngress:
+class IngressLoadBalancerIngress(K8sSpec):
     """IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
 
     Attributes
@@ -231,7 +231,7 @@ class IngressLoadBalancerIngress:
 
 
 @dataclass
-class IngressLoadBalancerStatus:
+class IngressLoadBalancerStatus(K8sSpec):
     """IngressLoadBalancerStatus represents the status of a load-balancer.
 
     Attributes
@@ -244,7 +244,7 @@ class IngressLoadBalancerStatus:
 
 
 @dataclass
-class IngressPortStatus:
+class IngressPortStatus(K8sSpec):
     """IngressPortStatus represents the error condition of a service port
     Attributes:
         error: error is to record the problem with the service port The format of the error shall comply with
@@ -262,7 +262,7 @@ class IngressPortStatus:
 
 
 @dataclass
-class IngressRule:
+class IngressRule(K8sSpec):
     """IngressRule represents the rules mapping the paths under a specified host to the related backend
     services. Incoming requests are first evaluated for a host match, then routed to the backend
     associated with the matching IngressRuleValue.
@@ -293,7 +293,7 @@ class IngressRule:
 
 
 @dataclass
-class IngressServiceBackend:
+class IngressServiceBackend(K8sSpec):
     """IngressServiceBackend references a Kubernetes Service as a Backend.
 
     Attributes
@@ -310,7 +310,7 @@ class IngressServiceBackend:
 
 
 @dataclass
-class IngressSpec:
+class IngressSpec(K8sSpec):
     """IngressSpec describes the Ingress the user wishes to exist.
 
     Attributes
@@ -342,7 +342,7 @@ class IngressSpec:
 
 
 @dataclass
-class IngressStatus:
+class IngressStatus(K8sSpec):
     """IngressStatus describe the current state of the Ingress.
 
     Attributes
@@ -355,7 +355,7 @@ class IngressStatus:
 
 
 @dataclass
-class IngressTLS:
+class IngressTLS(K8sSpec):
     """IngressTLS describes the transport layer security associated with an ingress.
 
     Attributes
@@ -375,7 +375,7 @@ class IngressTLS:
 
 
 @dataclass
-class NetworkPolicy:
+class NetworkPolicy(K8sSpec):
     """NetworkPolicy describes what network traffic is allowed for a set of Pods
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -397,7 +397,7 @@ class NetworkPolicy:
 
 
 @dataclass
-class NetworkPolicyEgressRule:
+class NetworkPolicyEgressRule(K8sSpec):
     """NetworkPolicyEgressRule describes a particular set of traffic that is allowed out of pods matched by a
     NetworkPolicySpec's podSelector. The traffic must match both ports and to. This type is beta-level in
     1.8
@@ -419,7 +419,7 @@ class NetworkPolicyEgressRule:
 
 
 @dataclass
-class NetworkPolicyList:
+class NetworkPolicyList(K8sSpec):
     """NetworkPolicyList is a list of NetworkPolicy objects.
 
     Attributes
@@ -441,7 +441,7 @@ class NetworkPolicyList:
 
 
 @dataclass
-class NetworkPolicyPeer:
+class NetworkPolicyPeer(K8sSpec):
     """NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are
     allowed
     Attributes:
@@ -466,7 +466,7 @@ class NetworkPolicyPeer:
 
 
 @dataclass
-class NetworkPolicyPort:
+class NetworkPolicyPort(K8sSpec):
     """NetworkPolicyPort describes a port to allow traffic on
     Attributes:
         endPort: endPort indicates that the range of ports from port to endPort if set, inclusive, should be
@@ -486,7 +486,7 @@ class NetworkPolicyPort:
 
 
 @dataclass
-class NetworkPolicySpec:
+class NetworkPolicySpec(K8sSpec):
     """NetworkPolicySpec provides the specification of a NetworkPolicy
     Attributes:
         egress: egress is a list of egress rules to be applied to the selected pods. Outgoing traffic is
@@ -525,7 +525,7 @@ class NetworkPolicySpec:
 
 
 @dataclass
-class NetworkPolicyStatus:
+class NetworkPolicyStatus(K8sSpec):
     """NetworkPolicyStatus describes the current state of the NetworkPolicy.
 
     Attributes
@@ -539,7 +539,7 @@ class NetworkPolicyStatus:
 
 
 @dataclass
-class ServiceBackendPort:
+class ServiceBackendPort(K8sSpec):
     """ServiceBackendPort is the service port being referenced.
 
     Attributes

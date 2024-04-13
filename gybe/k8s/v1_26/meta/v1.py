@@ -5,11 +5,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-from gybe.k8s.types import JSONDict, JSONObj
+from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
 @dataclass
-class APIGroup:
+class APIGroup(K8sSpec):
     """APIGroup contains the name, the supported versions, and the preferred version of a group.
 
     Attributes
@@ -42,7 +42,7 @@ class APIGroup:
 
 
 @dataclass
-class GroupVersionForDiscovery:
+class GroupVersionForDiscovery(K8sSpec):
     """GroupVersion contains the 'group/version' and 'version' string of a version. It is made a struct to
     keep extensibility.
 
@@ -59,7 +59,7 @@ class GroupVersionForDiscovery:
 
 
 @dataclass
-class ServerAddressByClientCIDR:
+class ServerAddressByClientCIDR(K8sSpec):
     """ServerAddressByClientCIDR helps the client to determine the server address that they should use,
     depending on the clientCIDR that they match.
 
@@ -77,7 +77,7 @@ class ServerAddressByClientCIDR:
 
 
 @dataclass
-class APIResource:
+class APIResource(K8sSpec):
     """APIResource specifies the name of a resource and whether it is namespaced.
 
     Attributes
@@ -118,7 +118,7 @@ class APIResource:
 
 
 @dataclass
-class APIResourceList:
+class APIResourceList(K8sSpec):
     """APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in
     a specific group and version, and if the resource is namespaced.
 
@@ -141,7 +141,7 @@ class APIResourceList:
 
 
 @dataclass
-class DeleteOptions:
+class DeleteOptions(K8sSpec):
     """DeleteOptions may be provided when deleting an API object.
 
     Attributes
@@ -183,7 +183,7 @@ class DeleteOptions:
 
 
 @dataclass
-class ManagedFieldsEntry:
+class ManagedFieldsEntry(K8sSpec):
     """ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the
     fieldset applies to.
 
@@ -220,7 +220,7 @@ class ManagedFieldsEntry:
 
 
 @dataclass
-class ObjectMeta:
+class ObjectMeta(K8sSpec):
     """ObjectMeta is metadata that all persisted resources must have, which includes all objects users must
     create.
 
@@ -317,7 +317,7 @@ class ObjectMeta:
 
 
 @dataclass
-class OwnerReference:
+class OwnerReference(K8sSpec):
     """OwnerReference contains enough information to let you identify an owning object. An owning object must
     be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.
 
@@ -346,7 +346,7 @@ class OwnerReference:
 
 
 @dataclass
-class Preconditions:
+class Preconditions(K8sSpec):
     """Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
 
     Attributes
@@ -361,7 +361,7 @@ class Preconditions:
 
 
 @dataclass
-class Status:
+class Status(K8sSpec):
     """Status is a return value for calls that don't return other objects.
 
     Attributes
@@ -395,7 +395,7 @@ class Status:
 
 
 @dataclass
-class StatusCause:
+class StatusCause(K8sSpec):
     """StatusCause provides more information about an api.Status failure, including cases when multiple
     errors are encountered.
 
@@ -419,7 +419,7 @@ class StatusCause:
 
 
 @dataclass
-class StatusDetails:
+class StatusDetails(K8sSpec):
     """StatusDetails is a set of additional properties that MAY be set by the server to provide additional
     information about a response. The Reason field of a Status object defines what attributes will be set.
     Clients must ignore fields that do not match the defined type of each attribute, and should assume
@@ -450,7 +450,7 @@ class StatusDetails:
 
 
 @dataclass
-class WatchEvent:
+class WatchEvent(K8sSpec):
     """Event represents a single event to a watched resource.
 
     Attributes
@@ -467,7 +467,7 @@ class WatchEvent:
 
 
 @dataclass
-class LabelSelector:
+class LabelSelector(K8sSpec):
     """A label selector is a label query over a set of resources. The result of matchLabels and
     matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches
     no objects.
@@ -487,7 +487,7 @@ class LabelSelector:
 
 
 @dataclass
-class LabelSelectorRequirement:
+class LabelSelectorRequirement(K8sSpec):
     """A label selector requirement is a selector that contains values, a key, and an operator that relates
     the key and values.
 
@@ -508,7 +508,7 @@ class LabelSelectorRequirement:
 
 
 @dataclass
-class APIGroupList:
+class APIGroupList(K8sSpec):
     """APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
 
     Attributes
@@ -528,7 +528,7 @@ class APIGroupList:
 
 
 @dataclass
-class Condition:
+class Condition(K8sSpec):
     """Condition contains details for one aspect of the current state of this API Resource.
 
     Attributes
@@ -560,7 +560,7 @@ class Condition:
 
 
 @dataclass
-class APIVersions:
+class APIVersions(K8sSpec):
     """APIVersions lists the versions that are available, to allow clients to discover the API at /api, which
     is the root path of the legacy v1 API.
 

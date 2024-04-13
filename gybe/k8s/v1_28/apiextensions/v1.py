@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class CustomResourceColumnDefinition:
+class CustomResourceColumnDefinition(K8sSpec):
     """CustomResourceColumnDefinition specifies a column for server side printing.
 
     Attributes
@@ -39,7 +39,7 @@ class CustomResourceColumnDefinition:
 
 
 @dataclass
-class CustomResourceConversion:
+class CustomResourceConversion(K8sSpec):
     """CustomResourceConversion describes how to convert different versions of a CR.
 
     Attributes
@@ -59,7 +59,7 @@ class CustomResourceConversion:
 
 
 @dataclass
-class CustomResourceDefinition:
+class CustomResourceDefinition(K8sSpec):
     """CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name
     MUST be in the format <.spec.name>.<.spec.group>.
 
@@ -84,7 +84,7 @@ class CustomResourceDefinition:
 
 
 @dataclass
-class CustomResourceDefinitionCondition:
+class CustomResourceDefinitionCondition(K8sSpec):
     """CustomResourceDefinitionCondition contains details for the current condition of this pod.
 
     Attributes
@@ -106,7 +106,7 @@ class CustomResourceDefinitionCondition:
 
 
 @dataclass
-class CustomResourceDefinitionList:
+class CustomResourceDefinitionList(K8sSpec):
     """CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
 
     Attributes
@@ -128,7 +128,7 @@ class CustomResourceDefinitionList:
 
 
 @dataclass
-class CustomResourceDefinitionNames:
+class CustomResourceDefinitionNames(K8sSpec):
     """CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition
     Attributes:
         categories: categories is a list of grouped resources this custom resource belongs to (e.g. 'all').
@@ -156,7 +156,7 @@ class CustomResourceDefinitionNames:
 
 
 @dataclass
-class CustomResourceDefinitionSpec:
+class CustomResourceDefinitionSpec(K8sSpec):
     """CustomResourceDefinitionSpec describes how a user wants their resource to appear
     Attributes:
         conversion: conversion defines conversion settings for the CRD.
@@ -192,7 +192,7 @@ class CustomResourceDefinitionSpec:
 
 
 @dataclass
-class CustomResourceDefinitionStatus:
+class CustomResourceDefinitionStatus(K8sSpec):
     """CustomResourceDefinitionStatus indicates the state of the CustomResourceDefinition
     Attributes:
         acceptedNames: acceptedNames are the names that are actually being used to serve discovery. They may
@@ -212,7 +212,7 @@ class CustomResourceDefinitionStatus:
 
 
 @dataclass
-class CustomResourceDefinitionVersion:
+class CustomResourceDefinitionVersion(K8sSpec):
     """CustomResourceDefinitionVersion describes a version for CRD.
 
     Attributes
@@ -249,7 +249,7 @@ class CustomResourceDefinitionVersion:
 
 
 @dataclass
-class CustomResourceSubresourceScale:
+class CustomResourceSubresourceScale(K8sSpec):
     """CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources.
 
     Attributes
@@ -276,7 +276,7 @@ class CustomResourceSubresourceScale:
 
 
 @dataclass
-class CustomResourceSubresources:
+class CustomResourceSubresources(K8sSpec):
     """CustomResourceSubresources defines the status and scale subresources for CustomResources.
 
     Attributes
@@ -295,7 +295,7 @@ class CustomResourceSubresources:
 
 
 @dataclass
-class CustomResourceValidation:
+class CustomResourceValidation(K8sSpec):
     """CustomResourceValidation is a list of validation methods for CustomResources.
 
     Attributes
@@ -308,7 +308,7 @@ class CustomResourceValidation:
 
 
 @dataclass
-class ExternalDocumentation:
+class ExternalDocumentation(K8sSpec):
     """ExternalDocumentation allows referencing an external resource for extended documentation.
 
     Attributes
@@ -323,7 +323,7 @@ class ExternalDocumentation:
 
 
 @dataclass
-class ServiceReference:
+class ServiceReference(K8sSpec):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: name is the name of the service. Required
@@ -341,7 +341,7 @@ class ServiceReference:
 
 
 @dataclass
-class ValidationRule:
+class ValidationRule(K8sSpec):
     """ValidationRule describes a validation rule written in the CEL expression language.
 
     Attributes
@@ -427,7 +427,7 @@ class ValidationRule:
 
 
 @dataclass
-class WebhookClientConfig:
+class WebhookClientConfig(K8sSpec):
     """WebhookClientConfig contains the information to make a TLS connection with the webhook.
 
     Attributes
@@ -457,7 +457,7 @@ class WebhookClientConfig:
 
 
 @dataclass
-class WebhookConversion:
+class WebhookConversion(K8sSpec):
     """WebhookConversion describes how to call a conversion webhook
     Attributes:
         clientConfig: clientConfig is the instructions for how to call the webhook if strategy is `Webhook`.

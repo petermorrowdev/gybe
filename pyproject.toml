@@ -46,14 +46,14 @@ dependencies = [
   "coverage[toml]>=6.5",
   "mypy",
   "ruff",
+  "types-PyYAML",
 ]
 [tool.hatch.envs.default.scripts]
-test = "pytest"
+test = "pytest && mypy gybe codegen tests && ruff check gybe/k8s"
 genk8s = "bash codegen/kubernetes"
 
 [[tool.hatch.envs.all.matrix]]
 python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
-
 
 [tool.coverage.run]
 source_pkgs = ["gybe", "tests"]
