@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-import gybe.k8s.v1_26.core.v1
-import gybe.k8s.v1_26.meta.v1
+import gybe.k8s.v1_30.core.v1
+import gybe.k8s.v1_30.meta.v1
 from gybe.k8s.types import JSONObj, K8sSpec
 
 
@@ -29,7 +29,7 @@ class CronJob(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
 
@@ -62,7 +62,7 @@ class CronJobSpec(K8sSpec):
 
     Attributes
     ----------
-        concurrencyPolicy: Specifies how to treat concurrent executions of a Job. Valid values are: - 'Allow'
+        concurrencyPolicy: Specifies how to treat concurrent executions of a Job. Valid values are:  - 'Allow'
             (default): allows CronJobs to run concurrently; - 'Forbid': forbids concurrent runs, skipping next
             run if previous run hasn't finished yet; - 'Replace': cancels currently running job and replaces
             it with a new one
@@ -85,8 +85,7 @@ class CronJobSpec(K8sSpec):
             becomes invalid during the lifetime of a CronJob or due to a change in host configuration, the
             controller will stop creating new new Jobs and will create a system event with the reason
             UnknownTimeZone. More information can be found in
-            https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones This is beta field
-            and must be enabled via the `CronJobTimeZone` feature gate.
+            https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#time-zones
 
     """
 
@@ -112,7 +111,7 @@ class CronJobStatus(K8sSpec):
 
     """
 
-    active: Optional[List[gybe.k8s.v1_26.core.v1.ObjectReference]] = None
+    active: Optional[List[gybe.k8s.v1_30.core.v1.ObjectReference]] = None
     lastScheduleTime: Optional[str] = None
     lastSuccessfulTime: Optional[str] = None
 
@@ -136,7 +135,7 @@ class Job(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
     status: Optional[JobStatus] = None
 
@@ -197,7 +196,13 @@ class JobSpec(K8sSpec):
             Job is suspended (at creation or through an update), this timer will effectively be stopped and
             reset when the Job is resumed again.
         backoffLimit: Specifies the number of retries before marking this job failed. Defaults to 6
-        completionMode: CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed`
+        backoffLimitPerIndex: Specifies the limit for the number of retries within an index before marking
+            this index as failed. When enabled the number of failures per index is kept in the pod's
+            batch.kubernetes.io/job-index-failure-count annotation. It can only be set when Job's
+            completionMode=Indexed, and the Pod's restart policy is Never. The field is immutable. This field
+            is beta-level. It can be used when the `JobBackoffLimitPerIndex` feature gate is enabled (enabled
+            by default).
+        completionMode: completionMode specifies how Pod completions are tracked. It can be `NonIndexed`
             (default) or `Indexed`.  `NonIndexed` means that the Job is considered complete when there have
             been .spec.completions successfully completed Pods. Each Pod completion is homologous to each
             other.  `Indexed` means that the Pods of a Job get an associated completion index from 0 to
@@ -209,15 +214,31 @@ class JobSpec(K8sSpec):
             future. If the Job controller observes a mode that it doesn't recognize, which is possible during
             upgrades due to version skew, the controller skips updates for the Job.
         completions: Specifies the desired number of successfully finished pods the job should be run with.
-            Setting to nil means that the success of any pod signals the success of all pods, and allows
+            Setting to null means that the success of any pod signals the success of all pods, and allows
             parallelism to have any positive value.  Setting to 1 means that parallelism is limited to 1 and
             the success of that pod signals the success of the job.
+        managedBy: ManagedBy field indicates the controller that manages a Job. The k8s Job controller
+            reconciles jobs which don't have this field at all or the field value is the reserved string
+            `kubernetes.io/job-controller`, but skips reconciling Jobs with a custom value for this field. The
+            value must be a valid domain-prefixed path (e.g. acme.io/foo) - all characters before the first
+            '/' must be a valid subdomain as defined by RFC 1123. All characters trailing the first '/' must
+            be valid HTTP Path characters as defined by RFC 3986. The value cannot exceed 64 characters.  This
+            field is alpha-level. The job controller accepts setting the field when the feature gate
+            JobManagedBy is enabled (disabled by default).
         manualSelector: manualSelector controls generation of pod labels and pod selectors. Leave
             `manualSelector` unset unless you are certain what you are doing. When false or unset, the system
             pick labels unique to this job and appends those labels to the pod template.  When true, the user
             is responsible for picking unique labels and specifying the selector.  Failure to pick a unique
             label may cause this and other jobs to not function correctly.  However, You may see
             `manualSelector=true` in jobs that were created with the old `extensions/v1beta1` API.
+        maxFailedIndexes: Specifies the maximal number of failed indexes before marking the Job as failed,
+            when backoffLimitPerIndex is set. Once the number of failed indexes exceeds this number the entire
+            Job is marked as Failed and its execution is terminated. When left as null the job continues
+            execution of all of its indexes and is marked with the `Complete` Job condition. It can only be
+            specified when backoffLimitPerIndex is set. It can be null or up to completions. It is required
+            and must be less than or equal to 10^4 when is completions greater than 10^5. This field is beta-
+            level. It can be used when the `JobBackoffLimitPerIndex` feature gate is enabled (enabled by
+            default).
         parallelism: Specifies the maximum desired number of pods the job should run at any given time. The
             actual number of pods running in steady state will be less than this number when
             ((.spec.completions - .status.successful) < .spec.parallelism), i.e. when the work left to do is
@@ -228,15 +249,29 @@ class JobSpec(K8sSpec):
             .status.failed field, is incremented and it is checked against the backoffLimit. This field cannot
             be used in combination with restartPolicy=OnFailure.  This field is beta-level. It can be used
             when the `JobPodFailurePolicy` feature gate is enabled (enabled by default).
+        podReplacementPolicy: podReplacementPolicy specifies when to create replacement Pods. Possible values
+            are: - TerminatingOrFailed means that we recreate pods   when they are terminating (has a
+            metadata.deletionTimestamp) or failed. - Failed means to wait until a previously created Pod is
+            fully terminated (has phase   Failed or Succeeded) before creating a replacement Pod.  When using
+            podFailurePolicy, Failed is the the only allowed value. TerminatingOrFailed and Failed are allowed
+            values when podFailurePolicy is not in use. This is an beta field. To use this, enable the
+            JobPodReplacementPolicy feature toggle. This is on by default.
         selector: A label query over pods that should match the pod count. Normally, the system sets this
             field for you.
-        suspend: Suspend specifies whether the Job controller should create Pods or not. If a Job is created
+        successPolicy: successPolicy specifies the policy when the Job can be declared as succeeded. If empty,
+            the default behavior applies - the Job is declared as succeeded only when the number of succeeded
+            pods equals to the completions. When the field is specified, it must be immutable and works only
+            for the Indexed Jobs. Once the Job meets the SuccessPolicy, the lingering pods are terminated.
+            This field  is alpha-level. To use this field, you must enable the `JobSuccessPolicy` feature gate
+            (disabled by default).
+        suspend: suspend specifies whether the Job controller should create Pods or not. If a Job is created
             with suspend set to true, no Pods are created by the Job controller. If a Job is suspended after
             creation (i.e. the flag goes from false to true), the Job controller will delete all active Pods
             associated with this Job. Users must design their workload to gracefully handle this. Suspending a
             Job will reset the StartTime field of the Job, effectively resetting the ActiveDeadlineSeconds
             timer too. Defaults to false.
-        template: Describes the pod that will be created when executing a job.
+        template: Describes the pod that will be created when executing a job. The only allowed
+            template.spec.restartPolicy values are 'Never' or 'OnFailure'.
         ttlSecondsAfterFinished: ttlSecondsAfterFinished limits the lifetime of a Job that has finished
             execution (either Complete or Failed). If this field is set, ttlSecondsAfterFinished after the Job
             finishes, it is eligible to be automatically deleted. When the Job is being deleted, its lifecycle
@@ -246,15 +281,20 @@ class JobSpec(K8sSpec):
 
     """
 
-    template: gybe.k8s.v1_26.core.v1.PodTemplateSpec
+    template: gybe.k8s.v1_30.core.v1.PodTemplateSpec
     activeDeadlineSeconds: Optional[int] = None
     backoffLimit: Optional[int] = None
+    backoffLimitPerIndex: Optional[int] = None
     completionMode: Optional[str] = None
     completions: Optional[int] = None
+    managedBy: Optional[str] = None
     manualSelector: Optional[bool] = None
+    maxFailedIndexes: Optional[int] = None
     parallelism: Optional[int] = None
     podFailurePolicy: Optional[PodFailurePolicy] = None
-    selector: Optional[gybe.k8s.v1_26.meta.v1.LabelSelector] = None
+    podReplacementPolicy: Optional[str] = None
+    selector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
+    successPolicy: Optional[SuccessPolicy] = None
     suspend: Optional[bool] = None
     ttlSecondsAfterFinished: Optional[int] = None
 
@@ -265,33 +305,52 @@ class JobStatus(K8sSpec):
 
     Attributes
     ----------
-        active: The number of pending and running pods.
-        completedIndexes: CompletedIndexes holds the completed indexes when .spec.completionMode = 'Indexed'
+        active: The number of pending and running pods which are not terminating (without a
+            deletionTimestamp). The value is zero for finished jobs.
+        completedIndexes: completedIndexes holds the completed indexes when .spec.completionMode = 'Indexed'
             in a text format. The indexes are represented as decimal integers separated by commas. The numbers
             are listed in increasing order. Three or more consecutive numbers are compressed and represented
             by the first and last element of the series, separated by a hyphen. For example, if the completed
             indexes are 1, 3, 4, 5 and 7, they are represented as '1,3-5,7'.
         completionTime: Represents time when the job was completed. It is not guaranteed to be set in happens-
             before order across separate operations. It is represented in RFC3339 form and is in UTC. The
-            completion time is only set when the job finishes successfully.
+            completion time is set when the job finishes successfully, and only then. The value cannot be
+            updated or removed. The value indicates the same or later point in time as the startTime field.
         conditions: The latest available observations of an object's current state. When a Job fails, one of
             the conditions will have type 'Failed' and status true. When a Job is suspended, one of the
             conditions will have type 'Suspended' and status true; when the Job is resumed, the status of this
             condition will become false. When a Job is completed, one of the conditions will have type
-            'Complete' and status true.
-        failed: The number of pods which reached phase Failed.
-        ready: The number of pods which have a Ready condition.  This field is beta-level. The job controller
-            populates the field when the feature gate JobReadyPods is enabled (enabled by default).
+            'Complete' and status true.  A job is considered finished when it is in a terminal condition,
+            either 'Complete' or 'Failed'. A Job cannot have both the 'Complete' and 'Failed' conditions.
+            Additionally, it cannot be in the 'Complete' and 'FailureTarget' conditions. The 'Complete',
+            'Failed' and 'FailureTarget' conditions cannot be disabled.
+        failed: The number of pods which reached phase Failed. The value increases monotonically.
+        failedIndexes: FailedIndexes holds the failed indexes when spec.backoffLimitPerIndex is set. The
+            indexes are represented in the text format analogous as for the `completedIndexes` field, ie. they
+            are kept as decimal integers separated by commas. The numbers are listed in increasing order.
+            Three or more consecutive numbers are compressed and represented by the first and last element of
+            the series, separated by a hyphen. For example, if the failed indexes are 1, 3, 4, 5 and 7, they
+            are represented as '1,3-5,7'. The set of failed indexes cannot overlap with the set of completed
+            indexes.  This field is beta-level. It can be used when the `JobBackoffLimitPerIndex` feature gate
+            is enabled (enabled by default).
+        ready: The number of pods which have a Ready condition.
         startTime: Represents time when the job controller started processing a job. When a Job is created in
             the suspended state, this field is not set until the first time it is resumed. This field is reset
             every time a Job is resumed from suspension. It is represented in RFC3339 form and is in UTC.
-        succeeded: The number of pods which reached phase Succeeded.
-        uncountedTerminatedPods: UncountedTerminatedPods holds the UIDs of Pods that have terminated but the
+            Once set, the field can only be removed when the job is suspended. The field cannot be modified
+            while the job is unsuspended or finished.
+        succeeded: The number of pods which reached phase Succeeded. The value increases monotonically for a
+            given spec. However, it may decrease in reaction to scale down of elastic indexed jobs.
+        terminating: The number of pods which are terminating (in phase Pending or Running and have a
+            deletionTimestamp).  This field is beta-level. The job controller populates the field when the
+            feature gate JobPodReplacementPolicy is enabled (enabled by default).
+        uncountedTerminatedPods: uncountedTerminatedPods holds the UIDs of Pods that have terminated but the
             job controller hasn't yet accounted for in the status counters.  The job controller creates pods
             with a finalizer. When a pod terminates (succeeded or failed), the controller does three steps to
-            account for it in the job status: (1) Add the pod UID to the arrays in this field. (2) Remove the
-            pod finalizer. (3) Remove the pod UID from the arrays while increasing the corresponding
+            account for it in the job status:  1. Add the pod UID to the arrays in this field. 2. Remove the
+            pod finalizer. 3. Remove the pod UID from the arrays while increasing the corresponding
             counter.  Old jobs might not be tracked using this field, in which case the field remains null.
+            The structure is empty for finished jobs.
 
     """
 
@@ -300,9 +359,11 @@ class JobStatus(K8sSpec):
     completionTime: Optional[str] = None
     conditions: Optional[List[JobCondition]] = None
     failed: Optional[int] = None
+    failedIndexes: Optional[str] = None
     ready: Optional[int] = None
     startTime: Optional[str] = None
     succeeded: Optional[int] = None
+    terminating: Optional[int] = None
     uncountedTerminatedPods: Optional[UncountedTerminatedPods] = None
 
 
@@ -315,7 +376,7 @@ class JobTemplateSpec(K8sSpec):
 
     """
 
-    metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
 
 
@@ -350,7 +411,7 @@ class PodFailurePolicyOnExitCodesRequirement(K8sSpec):
             initContainer names in the pod template.
         operator: Represents the relationship between the container exit code(s) and the specified values.
             Containers completed with success (exit code 0) are excluded from the requirement check. Possible
-            values are: - In: the requirement is satisfied if at least one container exit code   (might be
+            values are:  - In: the requirement is satisfied if at least one container exit code   (might be
             multiple if there are multiple containers not restricted   by the 'containerName' field) is in the
             set of specified values. - NotIn: the requirement is satisfied if at least one container exit code
             (might be multiple if there are multiple containers not restricted   by the 'containerName' field)
@@ -388,16 +449,19 @@ class PodFailurePolicyOnPodConditionsPattern(K8sSpec):
 @dataclass
 class PodFailurePolicyRule(K8sSpec):
     """PodFailurePolicyRule describes how a pod failure is handled when the requirements are met. One of
-    OnExitCodes and onPodConditions, but not both, can be used in each rule.
+    onExitCodes and onPodConditions, but not both, can be used in each rule.
 
     Attributes
     ----------
         action: Specifies the action taken on a pod failure when the requirements are satisfied. Possible
-            values are: - FailJob: indicates that the pod's job is marked as Failed and all   running pods are
-            terminated. - Ignore: indicates that the counter towards the .backoffLimit is not   incremented
-            and a replacement pod is created. - Count: indicates that the pod is handled in the default way -
-            the   counter towards the .backoffLimit is incremented. Additional values are considered to be
-            added in the future. Clients should react to an unknown action by skipping the rule.
+            values are:  - FailJob: indicates that the pod's job is marked as Failed and all   running pods
+            are terminated. - FailIndex: indicates that the pod's index is marked as Failed and will   not be
+            restarted.   This value is beta-level. It can be used when the   `JobBackoffLimitPerIndex` feature
+            gate is enabled (enabled by default). - Ignore: indicates that the counter towards the
+            .backoffLimit is not   incremented and a replacement pod is created. - Count: indicates that the
+            pod is handled in the default way - the   counter towards the .backoffLimit is incremented.
+            Additional values are considered to be added in the future. Clients should react to an unknown
+            action by skipping the rule.
         onExitCodes: Represents the requirement on the container exit codes.
         onPodConditions: Represents the requirement on the pod conditions. The requirement is represented as a
             list of pod condition patterns. The requirement is satisfied if at least one pattern matches an
@@ -411,14 +475,60 @@ class PodFailurePolicyRule(K8sSpec):
 
 
 @dataclass
+class SuccessPolicy(K8sSpec):
+    """SuccessPolicy describes when a Job can be declared as succeeded based on the success of some indexes.
+
+    Attributes
+    ----------
+        rules: rules represents the list of alternative rules for the declaring the Jobs as successful before
+            `.status.succeeded >= .spec.completions`. Once any of the rules are met, the
+            'SucceededCriteriaMet' condition is added, and the lingering pods are removed. The terminal state
+            for such a Job has the 'Complete' condition. Additionally, these rules are evaluated in order;
+            Once the Job meets one of the rules, other rules are ignored. At most 20 elements are allowed.
+
+    """
+
+    rules: List[SuccessPolicyRule]
+
+
+@dataclass
+class SuccessPolicyRule(K8sSpec):
+    """SuccessPolicyRule describes rule for declaring a Job as succeeded. Each rule must have at least one of
+    the 'succeededIndexes' or 'succeededCount' specified.
+
+    Attributes
+    ----------
+        succeededCount: succeededCount specifies the minimal required size of the actual set of the succeeded
+            indexes for the Job. When succeededCount is used along with succeededIndexes, the check is
+            constrained only to the set of indexes specified by succeededIndexes. For example, given that
+            succeededIndexes is '1-4', succeededCount is '3', and completed indexes are '1', '3', and '5', the
+            Job isn't declared as succeeded because only '1' and '3' indexes are considered in that rules.
+            When this field is null, this doesn't default to any value and is never evaluated at any time.
+            When specified it needs to be a positive integer.
+        succeededIndexes: succeededIndexes specifies the set of indexes which need to be contained in the
+            actual set of the succeeded indexes for the Job. The list of indexes must be within 0 to
+            '.spec.completions-1' and must not contain duplicates. At least one element is required. The
+            indexes are represented as intervals separated by commas. The intervals can be a decimal integer
+            or a pair of decimal integers separated by a hyphen. The number are listed in represented by the
+            first and last element of the series, separated by a hyphen. For example, if the completed indexes
+            are 1, 3, 4, 5 and 7, they are represented as '1,3-5,7'. When this field is null, this field
+            doesn't default to any value and is never evaluated at any time.
+
+    """
+
+    succeededCount: Optional[int] = None
+    succeededIndexes: Optional[str] = None
+
+
+@dataclass
 class UncountedTerminatedPods(K8sSpec):
     """UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job
     status counters.
 
     Attributes
     ----------
-        failed: Failed holds UIDs of failed Pods.
-        succeeded: Succeeded holds UIDs of succeeded Pods.
+        failed: failed holds UIDs of failed Pods.
+        succeeded: succeeded holds UIDs of succeeded Pods.
 
     """
 

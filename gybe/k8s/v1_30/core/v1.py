@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Optional
 
-import gybe.k8s.v1_29.api.resource
-import gybe.k8s.v1_29.meta.v1
+import gybe.k8s.v1_30.api.resource
+import gybe.k8s.v1_30.meta.v1
 from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
@@ -877,6 +877,25 @@ class Affinity(K8sSpec):
 
 
 @dataclass
+class AppArmorProfile(K8sSpec):
+    """AppArmorProfile defines a pod or container's AppArmor settings.
+
+    Attributes
+    ----------
+        localhostProfile: localhostProfile indicates a profile loaded on the node that should be used. The
+            profile must be preconfigured on the node to work. Must match the loaded name of the profile. Must
+            be set if and only if type is 'Localhost'.
+        type: type indicates which kind of AppArmor profile will be applied. Valid options are:   Localhost -
+            a profile pre-loaded on the node.   RuntimeDefault - the container runtime's default profile.
+            Unconfined - no AppArmor enforcement.
+
+    """
+
+    type: str
+    localhostProfile: Optional[str] = None
+
+
+@dataclass
 class AzureFileVolumeSource(K8sSpec):
     """AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
 
@@ -1031,7 +1050,7 @@ class ClusterTrustBundleProjection(K8sSpec):
     """
 
     path: str
-    labelSelector: Optional[gybe.k8s.v1_29.meta.v1.LabelSelector] = None
+    labelSelector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
     name: Optional[str] = None
     optional: Optional[bool] = None
     signerName: Optional[str] = None
@@ -1044,7 +1063,8 @@ class ConfigMapEnvSource(K8sSpec):
 
     Attributes
     ----------
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: Specify whether the ConfigMap must be defined
 
     """
@@ -1060,7 +1080,8 @@ class ConfigMapKeySelector(K8sSpec):
     Attributes
     ----------
         key: The key to select.
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: Specify whether the ConfigMap or its key must be defined
 
     """
@@ -1084,7 +1105,8 @@ class ConfigMapProjection(K8sSpec):
             the listed keys will be projected into the specified paths, and unlisted keys will not be present.
             If a key is specified which is not present in the ConfigMap, the volume setup will error unless it
             is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: optional specify whether the ConfigMap or its keys must be defined
 
     """
@@ -1113,7 +1135,8 @@ class ConfigMapVolumeSource(K8sSpec):
             the listed keys will be projected into the specified paths, and unlisted keys will not be present.
             If a key is specified which is not present in the ConfigMap, the volume setup will error unless it
             is marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: optional specify whether the ConfigMap or its keys must be defined
 
     """
@@ -1298,7 +1321,7 @@ class DownwardAPIProjection(K8sSpec):
 class DownwardAPIVolumeFile(K8sSpec):
     """DownwardAPIVolumeFile represents information to create the file containing the pod field
     Attributes:
-        fieldRef: Required: Selects a field of the pod: only annotations, labels, name and namespace are
+        fieldRef: Required: Selects a field of the pod: only annotations, labels, name, namespace and uid are
             supported.
         mode: Optional: mode bits used to set permissions on this file, must be an octal value between 0000
             and 0777 or a decimal value between 0 and 511. YAML accepts both octal and decimal values, JSON
@@ -1357,7 +1380,7 @@ class EmptyDirVolumeSource(K8sSpec):
     """
 
     medium: Optional[str] = None
-    sizeLimit: Optional[gybe.k8s.v1_29.api.resource.Quantity] = None
+    sizeLimit: Optional[gybe.k8s.v1_30.api.resource.Quantity] = None
 
 
 @dataclass
@@ -1702,8 +1725,8 @@ class HostAlias(K8sSpec):
 
     """
 
+    ip: str
     hostnames: Optional[List[str]] = None
-    ip: Optional[str] = None
 
 
 @dataclass
@@ -1823,7 +1846,8 @@ class LocalObjectReference(K8sSpec):
 
     Attributes
     ----------
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
 
     """
 
@@ -1906,7 +1930,7 @@ class PersistentVolumeClaim(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeClaimSpec] = None
     status: Optional[PersistentVolumeClaimStatus] = None
 
@@ -1920,7 +1944,7 @@ class PersistentVolumeClaimCondition(K8sSpec):
             another.
         message: message is the human-readable message indicating details about last transition.
         reason: reason is a unique, this should be a short, machine understandable string that gives the
-            reason for condition's last transition. If it reports 'ResizeStarted' that means the underlying
+            reason for condition's last transition. If it reports 'Resizing' that means the underlying
             persistent volume is being resized.
         status: ...
         type: ...
@@ -1990,7 +2014,7 @@ class PersistentVolumeClaimSpec(K8sSpec):
     dataSource: Optional[TypedLocalObjectReference] = None
     dataSourceRef: Optional[TypedObjectReference] = None
     resources: Optional[VolumeResourceRequirements] = None
-    selector: Optional[gybe.k8s.v1_29.meta.v1.LabelSelector] = None
+    selector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
     storageClassName: Optional[str] = None
     volumeAttributesClassName: Optional[str] = None
     volumeMode: Optional[str] = None
@@ -2045,7 +2069,7 @@ class PersistentVolumeClaimStatus(K8sSpec):
             enabling RecoverVolumeExpansionFailure feature.
         capacity: capacity represents the actual resources of the underlying volume.
         conditions: conditions is the current Condition of persistent volume claim. If underlying persistent
-            volume is being resized then the Condition will be set to 'ResizeStarted'.
+            volume is being resized then the Condition will be set to 'Resizing'.
         currentVolumeAttributesClassName: currentVolumeAttributesClassName is the current name of the
             VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to
             this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass
@@ -2083,7 +2107,7 @@ class PersistentVolumeClaimTemplate(K8sSpec):
     """
 
     spec: PersistentVolumeClaimSpec
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
@@ -2142,19 +2166,19 @@ class PodAffinityTerm(K8sSpec):
             PodAffinityTerm matches with no Pods.
         matchLabelKeys: MatchLabelKeys is a set of pod label keys to select which pods will be taken into
             consideration. The keys are used to lookup values from the incoming pod labels, those key-value
-            labels are merged with `LabelSelector` as `key in (value)` to select the group of existing pods
+            labels are merged with `labelSelector` as `key in (value)` to select the group of existing pods
             which pods will be taken into consideration for the incoming pod's pod (anti) affinity. Keys that
             don't exist in the incoming pod labels will be ignored. The default value is empty. The same key
-            is forbidden to exist in both MatchLabelKeys and LabelSelector. Also, MatchLabelKeys cannot be set
-            when LabelSelector isn't set. This is an alpha field and requires enabling
+            is forbidden to exist in both matchLabelKeys and labelSelector. Also, matchLabelKeys cannot be set
+            when labelSelector isn't set. This is an alpha field and requires enabling
             MatchLabelKeysInPodAffinity feature gate.
         mismatchLabelKeys: MismatchLabelKeys is a set of pod label keys to select which pods will be taken
             into consideration. The keys are used to lookup values from the incoming pod labels, those key-
-            value labels are merged with `LabelSelector` as `key notin (value)` to select the group of
+            value labels are merged with `labelSelector` as `key notin (value)` to select the group of
             existing pods which pods will be taken into consideration for the incoming pod's pod (anti)
             affinity. Keys that don't exist in the incoming pod labels will be ignored. The default value is
-            empty. The same key is forbidden to exist in both MismatchLabelKeys and LabelSelector. Also,
-            MismatchLabelKeys cannot be set when LabelSelector isn't set. This is an alpha field and requires
+            empty. The same key is forbidden to exist in both mismatchLabelKeys and labelSelector. Also,
+            mismatchLabelKeys cannot be set when labelSelector isn't set. This is an alpha field and requires
             enabling MatchLabelKeysInPodAffinity feature gate.
         namespaceSelector: A label query over the set of namespaces that the term applies to. The term is
             applied to the union of the namespaces selected by this field and the ones listed in the
@@ -2172,10 +2196,10 @@ class PodAffinityTerm(K8sSpec):
     """
 
     topologyKey: str
-    labelSelector: Optional[gybe.k8s.v1_29.meta.v1.LabelSelector] = None
+    labelSelector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
     matchLabelKeys: Optional[List[str]] = None
     mismatchLabelKeys: Optional[List[str]] = None
-    namespaceSelector: Optional[gybe.k8s.v1_29.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
     namespaces: Optional[List[str]] = None
 
 
@@ -2308,6 +2332,8 @@ class PodSecurityContext(K8sSpec):
 
     Attributes
     ----------
+        appArmorProfile: appArmorProfile is the AppArmor options to use by the containers in this pod. Note
+            that this field cannot be set when spec.os.name is windows.
         fsGroup: A special supplemental group that applies to all containers in a pod. Some volume types allow
             the Kubelet to change the ownership of that volume to be owned by the pod:  1. The owning GID will
             be the FSGroup 2. The setgid bit is set (new files created in the volume will be owned by FSGroup)
@@ -2355,6 +2381,7 @@ class PodSecurityContext(K8sSpec):
 
     """
 
+    appArmorProfile: Optional[AppArmorProfile] = None
     fsGroup: Optional[int] = None
     fsGroupChangePolicy: Optional[str] = None
     runAsGroup: Optional[int] = None
@@ -2394,7 +2421,7 @@ class PodSpec(K8sSpec):
             when creating a pod, and it cannot be modified by updating the pod spec. In order to add an
             ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource.
         hostAliases: HostAliases is an optional list of hosts and IPs that will be injected into the pod's
-            hosts file if specified. This is only valid for non-hostNetwork pods.
+            hosts file if specified.
         hostIPC: Use the host's ipc namespace. Optional: Default to false.
         hostNetwork: Host networking requested for this pod. Use the host's network namespace. If this option
             is set, the ports that will be used must be specified. Default to false.
@@ -2427,11 +2454,13 @@ class PodSpec(K8sSpec):
         os: Specifies the OS of the containers in the pod. Some pod and container fields are restricted if
             this is set.  If the OS field is set to linux, the following fields must be unset:
             -securityContext.windowsOptions  If the OS field is set to windows, following fields must be
-            unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.seLinuxOptions -
-            spec.securityContext.seccompProfile - spec.securityContext.fsGroup -
-            spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls -
-            spec.shareProcessNamespace - spec.securityContext.runAsUser - spec.securityContext.runAsGroup -
-            spec.securityContext.supplementalGroups - spec.containers[*].securityContext.seLinuxOptions -
+            unset: - spec.hostPID - spec.hostIPC - spec.hostUsers - spec.securityContext.appArmorProfile -
+            spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile -
+            spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy -
+            spec.securityContext.sysctls - spec.shareProcessNamespace - spec.securityContext.runAsUser -
+            spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups -
+            spec.containers[*].securityContext.appArmorProfile -
+            spec.containers[*].securityContext.seLinuxOptions -
             spec.containers[*].securityContext.seccompProfile -
             spec.containers[*].securityContext.capabilities -
             spec.containers[*].securityContext.readOnlyRootFilesystem -
@@ -2474,12 +2503,11 @@ class PodSpec(K8sSpec):
         schedulingGates: SchedulingGates is an opaque list of values that if specified will block scheduling
             the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the
             scheduler will not attempt to schedule the pod.  SchedulingGates can only be set at pod creation
-            time, and be removed only afterwards.  This is a beta feature enabled by the
-            PodSchedulingReadiness feature gate.
+            time, and be removed only afterwards.
         securityContext: SecurityContext holds pod-level security attributes and common container settings.
             Optional: Defaults to empty.  See type description for default values of each field.
-        serviceAccount: DeprecatedServiceAccount is a depreciated alias for ServiceAccountName. Deprecated:
-            Use serviceAccountName instead.
+        serviceAccount: DeprecatedServiceAccount is a deprecated alias for ServiceAccountName. Deprecated: Use
+            serviceAccountName instead.
         serviceAccountName: ServiceAccountName is the name of the ServiceAccount to use to run this pod.
         setHostnameAsFQDN: If true the pod's hostname will be configured as the pod's FQDN, rather than the
             leaf name (the default). In Linux containers, this means setting the FQDN in the hostname field of
@@ -2558,7 +2586,7 @@ class PodTemplateSpec(K8sSpec):
 
     """
 
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[PodSpec] = None
 
 
@@ -2696,7 +2724,7 @@ class ResourceFieldSelector(K8sSpec):
 
     resource: str
     containerName: Optional[str] = None
-    divisor: Optional[gybe.k8s.v1_29.api.resource.Quantity] = None
+    divisor: Optional[gybe.k8s.v1_30.api.resource.Quantity] = None
 
 
 @dataclass
@@ -2799,7 +2827,8 @@ class SecretEnvSource(K8sSpec):
 
     Attributes
     ----------
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: Specify whether the Secret must be defined
 
     """
@@ -2815,7 +2844,8 @@ class SecretKeySelector(K8sSpec):
     Attributes
     ----------
         key: The key of the secret to select from.  Must be a valid secret key.
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: Specify whether the Secret or its key must be defined
 
     """
@@ -2838,7 +2868,8 @@ class SecretProjection(K8sSpec):
             the listed keys will be projected into the specified paths, and unlisted keys will not be present.
             If a key is specified which is not present in the Secret, the volume setup will error unless it is
             marked optional. Paths must be relative and may not contain the '..' path or start with '..'.
-        name: Name of the referent.
+        name: Name of the referent. This field is effectively required, but due to backwards compatibility is
+            allowed to be empty. Instances of this type with an empty value here are almost certainly wrong.
         optional: optional field specify whether the Secret or its key must be defined
 
     """
@@ -2889,6 +2920,9 @@ class SecurityContext(K8sSpec):
             than its parent process. This bool directly controls if the no_new_privs flag will be set on the
             container process. AllowPrivilegeEscalation is true always when the container is: 1) run as
             Privileged 2) has CAP_SYS_ADMIN Note that this field cannot be set when spec.os.name is windows.
+        appArmorProfile: appArmorProfile is the AppArmor options to use by this container. If set, this
+            profile overrides the pod's appArmorProfile. Note that this field cannot be set when spec.os.name
+            is windows.
         capabilities: The capabilities to add/drop when running containers. Defaults to the default set of
             capabilities granted by the container runtime. Note that this field cannot be set when
             spec.os.name is windows.
@@ -2929,6 +2963,7 @@ class SecurityContext(K8sSpec):
     """
 
     allowPrivilegeEscalation: Optional[bool] = None
+    appArmorProfile: Optional[AppArmorProfile] = None
     capabilities: Optional[Capabilities] = None
     privileged: Optional[bool] = None
     procMount: Optional[str] = None
@@ -3074,8 +3109,7 @@ class TopologySpreadConstraint(K8sSpec):
             zone3 | |  P P  |  P P  |  P P  | The number of domains is less than 5(MinDomains), so 'global
             minimum' is treated as 0. In this situation, new pod with the same labelSelector cannot be
             scheduled, because computed skew will be 3(3 - 0) if new Pod is scheduled to any of the three
-            zones, it will violate MaxSkew.  This is a beta field and requires the
-            MinDomainsInPodTopologySpread feature gate to be enabled (enabled by default).
+            zones, it will violate MaxSkew.
         nodeAffinityPolicy: NodeAffinityPolicy indicates how we will treat Pod's nodeAffinity/nodeSelector
             when calculating pod topology spread skew. Options are: - Honor: only nodes matching
             nodeAffinity/nodeSelector are included in the calculations. - Ignore: nodeAffinity/nodeSelector
@@ -3112,7 +3146,7 @@ class TopologySpreadConstraint(K8sSpec):
     maxSkew: int
     topologyKey: str
     whenUnsatisfiable: str
-    labelSelector: Optional[gybe.k8s.v1_29.meta.v1.LabelSelector] = None
+    labelSelector: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
     matchLabelKeys: Optional[List[str]] = None
     minDomains: Optional[int] = None
     nodeAffinityPolicy: Optional[str] = None
@@ -3282,9 +3316,20 @@ class VolumeMount(K8sSpec):
     ----------
         mountPath: Path within the container at which the volume should be mounted.  Must not contain ':'.
         mountPropagation: mountPropagation determines how mounts are propagated from the host to container and
-            the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10.
+            the other way around. When not set, MountPropagationNone is used. This field is beta in 1.10. When
+            RecursiveReadOnly is set to IfPossible or to Enabled, MountPropagation must be None or unspecified
+            (which defaults to None).
         name: This must match the Name of a Volume.
         readOnly: Mounted read-only if true, read-write otherwise (false or unspecified). Defaults to false.
+        recursiveReadOnly: RecursiveReadOnly specifies whether read-only mounts should be handled recursively.
+            If ReadOnly is false, this field has no meaning and must be unspecified.  If ReadOnly is true, and
+            this field is set to Disabled, the mount is not made recursively read-only.  If this field is set
+            to IfPossible, the mount is made recursively read-only, if it is supported by the container
+            runtime.  If this field is set to Enabled, the mount is made recursively read-only if it is
+            supported by the container runtime, otherwise the pod will not be started and an error will be
+            generated to indicate the reason.  If this field is set to IfPossible or Enabled, MountPropagation
+            must be set to None (or be unspecified, which defaults to None).  If this field is not specified,
+            it is treated as an equivalent of Disabled.
         subPath: Path within the volume from which the container's volume should be mounted. Defaults to ''
             (volume's root).
         subPathExpr: Expanded path within the volume from which the container's volume should be mounted.
@@ -3298,6 +3343,7 @@ class VolumeMount(K8sSpec):
     mountPath: str
     mountPropagation: Optional[str] = None
     readOnly: Optional[bool] = None
+    recursiveReadOnly: Optional[str] = None
     subPath: Optional[str] = None
     subPathExpr: Optional[str] = None
 
@@ -3420,7 +3466,7 @@ class Binding(K8sSpec):
     target: ObjectReference
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
@@ -3476,7 +3522,7 @@ class ComponentStatus(K8sSpec):
     apiVersion: Optional[str] = None
     conditions: Optional[List[ComponentCondition]] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
@@ -3531,7 +3577,7 @@ class ConfigMap(K8sSpec):
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
@@ -3703,6 +3749,7 @@ class ContainerStatus(K8sSpec):
             is running and has passed the postStart lifecycle hook. The null value must be treated the same as
             false.
         state: State holds details about the container's current condition.
+        volumeMounts: Status of volume mounts.
 
     """
 
@@ -3717,6 +3764,7 @@ class ContainerStatus(K8sSpec):
     resources: Optional[ResourceRequirements] = None
     started: Optional[bool] = None
     state: Optional[ContainerState] = None
+    volumeMounts: Optional[List[VolumeMountStatus]] = None
 
 
 @dataclass
@@ -3833,7 +3881,7 @@ class Endpoints(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     subsets: Optional[List[EndpointSubset]] = None
 
 
@@ -3893,7 +3941,7 @@ class Event(K8sSpec):
 
     """
 
-    metadata: gybe.k8s.v1_29.meta.v1.ObjectMeta
+    metadata: gybe.k8s.v1_30.meta.v1.ObjectMeta
     involvedObject: ObjectReference
     action: Optional[str] = None
     apiVersion: Optional[str] = None
@@ -3981,7 +4029,7 @@ class LimitRange(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[LimitRangeSpec] = None
 
 
@@ -4106,7 +4154,7 @@ class Namespace(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[NamespaceSpec] = None
     status: Optional[NamespaceStatus] = None
 
@@ -4204,7 +4252,7 @@ class Node(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[NodeSpec] = None
     status: Optional[NodeStatus] = None
 
@@ -4340,6 +4388,35 @@ class NodeList(K8sSpec):
 
 
 @dataclass
+class NodeRuntimeHandler(K8sSpec):
+    """NodeRuntimeHandler is a set of runtime handler information.
+
+    Attributes
+    ----------
+        features: Supported features.
+        name: Runtime handler name. Empty for the default runtime handler.
+
+    """
+
+    features: Optional[NodeRuntimeHandlerFeatures] = None
+    name: Optional[str] = None
+
+
+@dataclass
+class NodeRuntimeHandlerFeatures(K8sSpec):
+    """NodeRuntimeHandlerFeatures is a set of runtime features.
+
+    Attributes
+    ----------
+        recursiveReadOnlyMounts: RecursiveReadOnlyMounts is set to true if the runtime handler supports
+            RecursiveReadOnlyMounts.
+
+    """
+
+    recursiveReadOnlyMounts: Optional[bool] = None
+
+
+@dataclass
 class NodeSpec(K8sSpec):
     """NodeSpec describes the attributes that a node is created with.
 
@@ -4386,6 +4463,7 @@ class NodeStatus(K8sSpec):
         images: List of container images on this node
         nodeInfo: Set of ids/uuids to uniquely identify the node.
         phase: NodePhase is the recently observed lifecycle phase of the node.
+        runtimeHandlers: The available runtime handlers.
         volumesAttached: List of volumes that are attached to the node.
         volumesInUse: List of attachable volumes in use (mounted) by the node.
 
@@ -4400,6 +4478,7 @@ class NodeStatus(K8sSpec):
     images: Optional[List[ContainerImage]] = None
     nodeInfo: Optional[NodeSystemInfo] = None
     phase: Optional[str] = None
+    runtimeHandlers: Optional[List[NodeRuntimeHandler]] = None
     volumesAttached: Optional[List[AttachedVolume]] = None
     volumesInUse: Optional[List[str]] = None
 
@@ -4460,7 +4539,7 @@ class PersistentVolume(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeSpec] = None
     status: Optional[PersistentVolumeStatus] = None
 
@@ -4553,7 +4632,7 @@ class Pod(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[PodSpec] = None
     status: Optional[PodStatus] = None
 
@@ -4729,7 +4808,7 @@ class PodTemplate(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     template: Optional[PodTemplateSpec] = None
 
 
@@ -4797,7 +4876,7 @@ class ReplicationController(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[ReplicationControllerSpec] = None
     status: Optional[ReplicationControllerStatus] = None
 
@@ -4918,7 +4997,7 @@ class ResourceQuota(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[ResourceQuotaSpec] = None
     status: Optional[ResourceQuotaStatus] = None
 
@@ -5046,7 +5125,7 @@ class Secret(K8sSpec):
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     stringData: Optional[JSONDict] = None
     type: Optional[str] = None
 
@@ -5095,7 +5174,7 @@ class Service(K8sSpec):
 
     apiVersion: Optional[str] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[ServiceSpec] = None
     status: Optional[ServiceStatus] = None
 
@@ -5131,7 +5210,7 @@ class ServiceAccount(K8sSpec):
     automountServiceAccountToken: Optional[bool] = None
     imagePullSecrets: Optional[List[LocalObjectReference]] = None
     kind: Optional[str] = None
-    metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
+    metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     secrets: Optional[List[ObjectReference]] = None
 
 
@@ -5339,6 +5418,12 @@ class ServiceSpec(K8sSpec):
         sessionAffinity: Supports 'ClientIP' and 'None'. Used to maintain session affinity. Enable client IP
             based session affinity. Must be ClientIP or None. Defaults to None.
         sessionAffinityConfig: sessionAffinityConfig contains the configurations of session affinity.
+        trafficDistribution: TrafficDistribution offers a way to express preferences for how traffic is
+            distributed to Service endpoints. Implementations can use this field as a hint, but are not
+            required to guarantee strict adherence. If the field is not set, the implementation will apply its
+            default routing strategy. If set to 'PreferClose', implementations should prioritize endpoints
+            that are topologically close (e.g., same zone). This is an alpha field and requires enabling
+            ServiceTrafficDistribution feature.
         type: type determines how the Service is exposed. Defaults to ClusterIP. Valid options are
             ExternalName, ClusterIP, NodePort, and LoadBalancer. 'ClusterIP' allocates a cluster-internal IP
             address for load-balancing to endpoints. Endpoints are determined by the selector or if that is
@@ -5370,6 +5455,7 @@ class ServiceSpec(K8sSpec):
     selector: Optional[JSONDict] = None
     sessionAffinity: Optional[str] = None
     sessionAffinityConfig: Optional[SessionAffinityConfig] = None
+    trafficDistribution: Optional[str] = None
     type: Optional[str] = None
 
 
@@ -5384,7 +5470,7 @@ class ServiceStatus(K8sSpec):
 
     """
 
-    conditions: Optional[List[gybe.k8s.v1_29.meta.v1.Condition]] = None
+    conditions: Optional[List[gybe.k8s.v1_30.meta.v1.Condition]] = None
     loadBalancer: Optional[LoadBalancerStatus] = None
 
 
@@ -5420,3 +5506,24 @@ class Taint(K8sSpec):
     effect: str
     timeAdded: Optional[str] = None
     value: Optional[str] = None
+
+
+@dataclass
+class VolumeMountStatus(K8sSpec):
+    """VolumeMountStatus shows status of volume mounts.
+
+    Attributes
+    ----------
+        mountPath: MountPath corresponds to the original VolumeMount.
+        name: Name corresponds to the name of the original VolumeMount.
+        readOnly: ReadOnly corresponds to the original VolumeMount.
+        recursiveReadOnly: RecursiveReadOnly must be set to Disabled, Enabled, or unspecified (for non-
+            readonly mounts). An IfPossible value in the original VolumeMount must be translated to Disabled
+            or Enabled, depending on the mount result.
+
+    """
+
+    name: str
+    mountPath: str
+    readOnly: Optional[bool] = None
+    recursiveReadOnly: Optional[str] = None

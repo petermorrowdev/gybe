@@ -1613,7 +1613,8 @@ class HTTPGetAction(K8sSpec):
 class HTTPHeader(K8sSpec):
     """HTTPHeader describes a custom header to be used in HTTP probes
     Attributes:
-        name: The header field name
+        name: The header field name. This will be canonicalized upon output, so case-variant names will be
+            understood as the same header.
         value: The header field value
 
     """

@@ -1,7 +1,7 @@
 """Kubernetes models as dataclasses copied from k8s' OpenAPI V3 Spec."""
 
 from gybe.k8s.types import K8sSpec
-from gybe.k8s.v1_29.apps.v1 import (
+from gybe.k8s.v1_30.apps.v1 import (
     DaemonSet,
     DaemonSetSpec,
     Deployment,
@@ -10,8 +10,8 @@ from gybe.k8s.v1_29.apps.v1 import (
     StatefulSet,
     StatefulSetSpec,
 )
-from gybe.k8s.v1_29.batch.v1 import Job, JobSpec
-from gybe.k8s.v1_29.core.v1 import (
+from gybe.k8s.v1_30.batch.v1 import Job, JobSpec
+from gybe.k8s.v1_30.core.v1 import (
     Affinity,
     Container,
     ContainerPort,
@@ -44,8 +44,8 @@ from gybe.k8s.v1_29.core.v1 import (
     VolumeResourceRequirements,
     WeightedPodAffinityTerm,
 )
-from gybe.k8s.v1_29.meta.v1 import LabelSelector, LabelSelectorRequirement, ObjectMeta
-from gybe.k8s.v1_29.networking.v1 import (
+from gybe.k8s.v1_30.meta.v1 import LabelSelector, LabelSelectorRequirement, ObjectMeta
+from gybe.k8s.v1_30.networking.v1 import (
     Ingress,
     IngressBackend,
     IngressServiceBackend,
