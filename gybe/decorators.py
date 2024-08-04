@@ -1,28 +1,44 @@
 import sys
+from dataclasses import fields
+from typing import Any
 
 import click
 from cattrs import Converter, transform_error
 
 from gybe.exceptions import InvalidOutputError
+from gybe.k8s.types import K8sSpec
 from gybe.modeling import create_input_model
 from gybe.yaml import yaml_dumps, yaml_loads
 
-c = Converter(omit_if_default=True)
+
+def _omit_none_values(obj: K8sSpec) -> dict[str, Any]:
+    u = {}
+    for f in fields(obj):
+        v = getattr(obj, f.name)
+        if v is not None:
+            u[f.name] = _c.unstructure(v)
+    return u
+
+
+_c = Converter()
+_c.register_unstructure_hook(K8sSpec, _omit_none_values)
 
 
 def _bind_function(f):
     @click.argument('file', required=True, type=click.File('r'))
     def func(file):
         input_data = yaml_loads(file.read()) or dict()
+        input_model = create_input_model(f)
         try:
-            input_obj = c.structure(input_data, create_input_model(f))
+            input_obj = _c.structure(input_data, input_model)
         except Exception as exc:
             print('Validation Error:')
             for m in transform_error(exc):
                 print('-', m)
             sys.exit(-1)
 
-        _kwargs = c.unstructure(input_obj)
+        input_fields = [f.name for f in fields(input_model)]
+        _kwargs = {kwarg: getattr(input_obj, kwarg) for kwarg in input_fields}
         manifest = f(**_kwargs)
 
         # Validate outputs
@@ -30,7 +46,7 @@ def _bind_function(f):
             raise InvalidOutputError()
 
         # Print manifest
-        print('---\n'.join([yaml_dumps(c.unstructure(r)) for r in manifest]))
+        print('---\n'.join([yaml_dumps(_c.unstructure(r)) for r in manifest]))
 
     func.__name__ = f.__name__
     return func
