@@ -185,6 +185,13 @@ def write_k8s_models(k8s_version_module: str) -> None:
 
     for name, schema in model_schemas.items():
         properties = schema.get('properties')
+        if properties:
+            prop_names = set(properties.keys())
+            resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
+            if len(resource_prop_names - prop_names) == 0 and 'beta' not in name and 'alpha' not in name:
+                print('FOUND RESORCE TYPE')
+                print(name)
+                print('-' * 80)
         description = schema.get('description')
         required = schema.get('required')
         if properties:
