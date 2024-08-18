@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-(cd kubernetes && git checkout master -q)
+(cd kubernetes && git checkout master -q && git pull -q)
 
 function gen_k8s() {
   local version="$1"
