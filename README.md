@@ -13,13 +13,13 @@ Python 3.10+
 
 ## Install
 
-```
+```bash
 pip install gybe
 ```
 
 ## Example
 
-Create a simple `values.yaml` file:
+Create a `values.yaml` file:
 
 ```yaml
 image: python:3
