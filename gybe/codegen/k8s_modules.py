@@ -1,6 +1,7 @@
+"""Code generation logic for k8s modules."""
+
 from __future__ import annotations
 
-import argparse
 import ast
 import json
 import textwrap
@@ -62,13 +63,25 @@ resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
 
 
 class JSONSchemaProperties(TypedDict):
+    """A subset of attributes expected in kubernetes' JSON schema spec."""
+
     type: str
     items: JSONSchemaProperties
     allOf: Optional[list[JSONSchemaProperties]]
 
 
 class K8sModule:
+    """An abstract representation of a kubernetes module in gybe."""
+
     def __init__(self, version_module: str, module_name: str):
+        """Initialize a K8sModule.
+
+        Attributes
+        ----------
+        version_module: Python version submodule under the k8s module (ex: 'v1_30')
+        module_name: Python non-relative import path (ex: 'gybe.k8s.v1_30.apps.v1').
+
+        """
         self._version_module = version_module
         self._module_name = module_name
         self._module_path = Path(self._module_name.replace('.', '/') + '.py')
@@ -78,10 +91,18 @@ class K8sModule:
         self._line_length = 110
 
     def write_module(self):
+        """Write abstract module to python file."""
         with open(self._module_path, 'w') as f:
             f.write(self._unparse())
 
-    def add_model(self, name, properties, description, required):
+    def add_model(
+        self,
+        name: str,
+        properties: dict[str, JSONSchemaProperties],
+        description: str,
+        required: list[str],
+    ) -> None:
+        """Add a kubernetes JSON schema specification to the module as a dataclass ast."""
         name_parts = name.split('.')
         prop_names = set(properties.keys())
         literal_properties = dict()
@@ -251,9 +272,7 @@ def _ref_to_module_name(ref: str, version_module: str) -> str:
     return '.'.join(_ref_to_model_path(ref, version_module).split('.')[:-1])
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('k8s_version_module')
-    args = parser.parse_args()
-    _write_module_init(args.k8s_version_module)
-    _write_k8s_models(args.k8s_version_module)
+def write_module(k8s_version_module):
+    """Write generated k8s module based on kubernetes JSON schema."""
+    _write_module_init(k8s_version_module)
+    _write_k8s_models(k8s_version_module)

@@ -6,7 +6,7 @@ import click
 from cattrs import Converter, transform_error
 
 from gybe.exceptions import InvalidOutputError
-from gybe.k8s.types import K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 from gybe.modeling import create_input_model
 from gybe.yaml import yaml_dumps, yaml_loads
 
@@ -44,6 +44,10 @@ def _bind_function(f):
         # Validate outputs
         if not isinstance(manifest, list):
             raise InvalidOutputError()
+
+        for resource in manifest:
+            if not isinstance(resource, K8sResource):
+                raise InvalidOutputError()
 
         # Print manifest
         print('---\n'.join([yaml_dumps(_c.unstructure(r)) for r in manifest]))

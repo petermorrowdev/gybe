@@ -8,7 +8,7 @@ function gen_k8s() {
   local version_module="$2"
   (cd kubernetes && git checkout $version -q)
   rm -rf gybe/kubernetes/$version_module
-  python codegen/generate_k8s.py $version_module
+  python -m gybe.codegen $version_module
   ruff check --quiet --fix gybe/k8s/v*
   ruff format --quiet gybe/k8s/v*
   (cd kubernetes && git checkout master -q)
