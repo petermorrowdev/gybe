@@ -58,6 +58,7 @@ resource_api_versions = {
     'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions': 'apiextensions.k8s.io',
     'io.k8s.kube-aggregator.pkg.apis.apiregistration': 'apiregistration.k8s.io',
 }
+resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
 
 
 class JSONSchemaProperties(TypedDict):
@@ -81,11 +82,24 @@ class K8sModule:
             f.write(self._unparse())
 
     def add_model(self, name, properties, description, required):
+        name_parts = name.split('.')
+        prop_names = set(properties.keys())
+        literal_properties = dict()
+        if len(resource_prop_names - prop_names) == 0:
+            k = '.'.join(name_parts[:-2])
+            api_group = resource_api_versions.get(k)
+            if api_group:
+                api_version = api_group + '/' + name_parts[-2]
+            else:
+                api_version = name_parts[-2]
+            literal_properties['apiVersion'] = api_version
+            literal_properties['kind'] = name_parts[-1]
         model_def = self._model_def(
-            name.split('.')[-1],
-            properties,
-            description or f'Schema model {name}.',
-            required or [],
+            name=name_parts[-1],
+            properties=properties,
+            description=description or f'Schema model {name}.',
+            required=required or [],
+            literal_properties=literal_properties,
         )
         self._class_defs.append(model_def)
 
@@ -96,7 +110,7 @@ class K8sModule:
         imports = [
             '"""Models generated from Kubernetes OpenAPI Spec."""',
             'from __future__ import annotations',
-            'from typing import List, Optional',
+            'from typing import List, Optional, Literal',
             'from dataclasses import dataclass',
             'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec',
         ] + sorted(list(self._module_imports))
@@ -111,6 +125,7 @@ class K8sModule:
         properties: dict[str, JSONSchemaProperties],
         description: str,
         required: list[str],
+        literal_properties: Optional[dict[str, str]] = None,
     ) -> ast.ClassDef:
         cdef = ast.parse('@dataclass\nclass ' + name + '(K8sSpec):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
@@ -125,19 +140,22 @@ class K8sModule:
         docstring = textwrap.indent(docstring, '    ')
         cdef.body = [ast.parse(f'"""\n{docstring}\n"""').body[0]]
 
-        fields = []
-        for k in required:
-            field_type = self._type_hint_for(properties[k])
-            field = f'{k}: {field_type}'
-            fields.append(field)
-
+        literal_props = literal_properties or dict()
+        fields: list[tuple[str, int]] = []
         for k, v in properties.items():
-            if k not in required:
+            if k in literal_props:
+                literal_value = literal_props[k]
+                fields.append((f"{k}: Literal['{literal_value}'] = '{literal_value}'", 200))
+            elif k in required:
+                field_type = self._type_hint_for(properties[k])
+                field = f'{k}: {field_type}'
+                fields.append((field, required.index(k)))
+            else:
                 field_type = self._type_hint_for(v)
                 field = f'{k}: Optional[{field_type}] = None'
-                fields.append(field)
+                fields.append((field, 300))
 
-        for field in fields:
+        for field, _ in sorted(fields, key=lambda f: f[1]):
             cdef.body.append(ast.parse(field).body[0])
         return cdef
 
@@ -208,14 +226,6 @@ def _write_k8s_models(k8s_version_module: str) -> None:
 
     for name, schema in model_schemas.items():
         properties = schema.get('properties')
-        if properties:
-            prop_names = set(properties.keys())
-            resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
-            if len(resource_prop_names - prop_names) == 0:
-                print('FOUND RESORCE TYPE')
-                *n, _ = name.split('.')
-                k = '.'.join(n[:-1])
-                api_version = resource_api_versions.get(k)
         description = schema.get('description')
         required = schema.get('required')
         if properties:
