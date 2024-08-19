@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.meta.v1
 from gybe.k8s.types import JSONObj, K8sSpec
@@ -26,8 +26,8 @@ class Scale(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['autoscaling/v1'] = 'autoscaling/v1'
+    kind: Literal['Scale'] = 'Scale'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[ScaleSpec] = None
     status: Optional[ScaleStatus] = None
@@ -98,8 +98,8 @@ class HorizontalPodAutoscaler(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['autoscaling/v1'] = 'autoscaling/v1'
+    kind: Literal['HorizontalPodAutoscaler'] = 'HorizontalPodAutoscaler'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[HorizontalPodAutoscalerSpec] = None
     status: Optional[HorizontalPodAutoscalerStatus] = None

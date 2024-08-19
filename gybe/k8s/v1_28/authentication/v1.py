@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
 from gybe.k8s.types import JSONDict, K8sSpec
@@ -66,8 +66,8 @@ class TokenRequest(K8sSpec):
     """
 
     spec: TokenRequestSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
+    kind: Literal['TokenRequest'] = 'TokenRequest'
     metadata: Optional[gybe.k8s.v1_28.meta.v1.ObjectMeta] = None
     status: Optional[TokenRequestStatus] = None
 
@@ -169,8 +169,8 @@ class TokenReview(K8sSpec):
     """
 
     spec: TokenReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
+    kind: Literal['TokenReview'] = 'TokenReview'
     metadata: Optional[gybe.k8s.v1_28.meta.v1.ObjectMeta] = None
     status: Optional[TokenReviewStatus] = None
 

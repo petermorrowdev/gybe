@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.api.resource
 import gybe.k8s.v1_26.core.v1
@@ -423,8 +423,8 @@ class VolumeAttachment(K8sSpec):
     """
 
     spec: VolumeAttachmentSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['VolumeAttachment'] = 'VolumeAttachment'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     status: Optional[VolumeAttachmentStatus] = None
 

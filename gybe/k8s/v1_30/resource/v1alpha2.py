@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.api.resource
 import gybe.k8s.v1_30.core.v1
@@ -223,8 +223,8 @@ class PodSchedulingContext(K8sSpec):
     """
 
     spec: PodSchedulingContextSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['PodSchedulingContext'] = 'PodSchedulingContext'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[PodSchedulingContextStatus] = None
 
@@ -305,8 +305,8 @@ class ResourceClaim(K8sSpec):
     """
 
     spec: ResourceClaimSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaim'] = 'ResourceClaim'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
 

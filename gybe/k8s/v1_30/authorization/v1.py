@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
 from gybe.k8s.types import JSONDict, K8sSpec
@@ -30,8 +30,8 @@ class LocalSubjectAccessReview(K8sSpec):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['LocalSubjectAccessReview'] = 'LocalSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
@@ -137,8 +137,8 @@ class SelfSubjectAccessReview(K8sSpec):
     """
 
     spec: SelfSubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SelfSubjectAccessReview'] = 'SelfSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
@@ -182,8 +182,8 @@ class SelfSubjectRulesReview(K8sSpec):
     """
 
     spec: SelfSubjectRulesReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SelfSubjectRulesReview'] = 'SelfSubjectRulesReview'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[SubjectRulesReviewStatus] = None
 
@@ -219,8 +219,8 @@ class SubjectAccessReview(K8sSpec):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SubjectAccessReview'] = 'SubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 

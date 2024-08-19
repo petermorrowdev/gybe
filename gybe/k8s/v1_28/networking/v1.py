@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.core.v1
 import gybe.k8s.v1_28.meta.v1
@@ -73,8 +73,8 @@ class Ingress(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['Ingress'] = 'Ingress'
     metadata: Optional[gybe.k8s.v1_28.meta.v1.ObjectMeta] = None
     spec: Optional[IngressSpec] = None
     status: Optional[IngressStatus] = None

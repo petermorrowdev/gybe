@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
 from gybe.k8s.types import JSONObj, K8sSpec
@@ -259,8 +259,8 @@ class ValidatingAdmissionPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['ValidatingAdmissionPolicy'] = 'ValidatingAdmissionPolicy'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[ValidatingAdmissionPolicySpec] = None
     status: Optional[ValidatingAdmissionPolicyStatus] = None

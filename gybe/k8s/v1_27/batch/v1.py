@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.core.v1
 import gybe.k8s.v1_27.meta.v1
@@ -27,8 +27,8 @@ class CronJob(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['CronJob'] = 'CronJob'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
@@ -133,8 +133,8 @@ class Job(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['Job'] = 'Job'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
     status: Optional[JobStatus] = None
