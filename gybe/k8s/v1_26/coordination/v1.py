@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class Lease(K8sSpec):
+class Lease(K8sResource):
     """Lease defines a lease concept.
 
     Attributes
@@ -32,7 +32,7 @@ class Lease(K8sSpec):
 
 
 @dataclass
-class LeaseList(K8sSpec):
+class LeaseList(K8sResource):
     """LeaseList is a list of Lease objects.
 
     Attributes
@@ -54,7 +54,7 @@ class LeaseList(K8sSpec):
 
 
 @dataclass
-class LeaseSpec(K8sSpec):
+class LeaseSpec(K8sResource):
     """LeaseSpec is a specification of a Lease.
 
     Attributes

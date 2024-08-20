@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class PriorityClass(K8sSpec):
+class PriorityClass(K8sResource):
     """PriorityClass defines mapping from a priority class name to the priority integer value. The value can
     be any valid integer.
 
@@ -46,7 +46,7 @@ class PriorityClass(K8sSpec):
 
 
 @dataclass
-class PriorityClassList(K8sSpec):
+class PriorityClassList(K8sResource):
     """PriorityClassList is a collection of priority classes.
 
     Attributes

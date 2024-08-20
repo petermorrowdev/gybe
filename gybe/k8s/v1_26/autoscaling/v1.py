@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class Scale(K8sSpec):
+class Scale(K8sResource):
     """Scale represents a scaling request for a resource.
 
     Attributes
@@ -34,7 +34,7 @@ class Scale(K8sSpec):
 
 
 @dataclass
-class ScaleSpec(K8sSpec):
+class ScaleSpec(K8sResource):
     """ScaleSpec describes the attributes of a scale subresource.
 
     Attributes
@@ -47,7 +47,7 @@ class ScaleSpec(K8sSpec):
 
 
 @dataclass
-class ScaleStatus(K8sSpec):
+class ScaleStatus(K8sResource):
     """ScaleStatus represents the current status of a scale subresource.
 
     Attributes
@@ -65,7 +65,7 @@ class ScaleStatus(K8sSpec):
 
 
 @dataclass
-class CrossVersionObjectReference(K8sSpec):
+class CrossVersionObjectReference(K8sResource):
     """CrossVersionObjectReference contains enough information to let you identify the referred resource.
 
     Attributes
@@ -82,7 +82,7 @@ class CrossVersionObjectReference(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscaler(K8sSpec):
+class HorizontalPodAutoscaler(K8sResource):
     """configuration of a horizontal pod autoscaler.
 
     Attributes
@@ -106,7 +106,7 @@ class HorizontalPodAutoscaler(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerList(K8sSpec):
+class HorizontalPodAutoscalerList(K8sResource):
     """list of horizontal pod autoscaler objects.
 
     Attributes
@@ -128,7 +128,7 @@ class HorizontalPodAutoscalerList(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerSpec(K8sSpec):
+class HorizontalPodAutoscalerSpec(K8sResource):
     """specification of a horizontal pod autoscaler.
 
     Attributes
@@ -153,7 +153,7 @@ class HorizontalPodAutoscalerSpec(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerStatus(K8sSpec):
+class HorizontalPodAutoscalerStatus(K8sResource):
     """current status of a horizontal pod autoscaler
     Attributes:
         currentCPUUtilizationPercentage: current average CPU utilization over all pods, represented as a

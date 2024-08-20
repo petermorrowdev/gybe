@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource
 
 
 @dataclass
-class Eviction(K8sSpec):
+class Eviction(K8sResource):
     """Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a
     subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod
     name>/evictions.
@@ -34,7 +34,7 @@ class Eviction(K8sSpec):
 
 
 @dataclass
-class PodDisruptionBudget(K8sSpec):
+class PodDisruptionBudget(K8sResource):
     """PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of
     pods
     Attributes:
@@ -57,7 +57,7 @@ class PodDisruptionBudget(K8sSpec):
 
 
 @dataclass
-class PodDisruptionBudgetList(K8sSpec):
+class PodDisruptionBudgetList(K8sResource):
     """PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
 
     Attributes
@@ -79,7 +79,7 @@ class PodDisruptionBudgetList(K8sSpec):
 
 
 @dataclass
-class PodDisruptionBudgetSpec(K8sSpec):
+class PodDisruptionBudgetSpec(K8sResource):
     """PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
 
     Attributes
@@ -118,7 +118,7 @@ class PodDisruptionBudgetSpec(K8sSpec):
 
 
 @dataclass
-class PodDisruptionBudgetStatus(K8sSpec):
+class PodDisruptionBudgetStatus(K8sResource):
     """PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may
     trail the actual state of a system.
 

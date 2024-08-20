@@ -133,7 +133,7 @@ class K8sModule:
             'from __future__ import annotations',
             'from typing import List, Optional, Literal',
             'from dataclasses import dataclass',
-            'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec',
+            'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec, K8sResource',
         ] + sorted(list(self._module_imports))
         mod = ast.parse('\n'.join(imports))
         for c in self._class_defs:
@@ -148,7 +148,8 @@ class K8sModule:
         required: list[str],
         literal_properties: Optional[dict[str, str]] = None,
     ) -> ast.ClassDef:
-        cdef = ast.parse('@dataclass\nclass ' + name + '(K8sSpec):\n    pass').body[0]
+        base_cls = 'K8sSpec' if literal_properties is None else 'K8sResource'
+        cdef = ast.parse('@dataclass\nclass ' + name + f'({base_cls}):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')
         sections = [

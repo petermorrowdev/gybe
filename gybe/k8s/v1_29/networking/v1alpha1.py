@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class IPAddress(K8sSpec):
+class IPAddress(K8sResource):
     """IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that
     operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An
     IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of
@@ -35,7 +35,7 @@ class IPAddress(K8sSpec):
 
 
 @dataclass
-class IPAddressList(K8sSpec):
+class IPAddressList(K8sResource):
     """IPAddressList contains a list of IPAddress.
 
     Attributes
@@ -57,7 +57,7 @@ class IPAddressList(K8sSpec):
 
 
 @dataclass
-class IPAddressSpec(K8sSpec):
+class IPAddressSpec(K8sResource):
     """IPAddressSpec describe the attributes in an IP Address.
 
     Attributes
@@ -71,7 +71,7 @@ class IPAddressSpec(K8sSpec):
 
 
 @dataclass
-class ParentReference(K8sSpec):
+class ParentReference(K8sResource):
     """ParentReference describes a reference to a parent object.
 
     Attributes
@@ -90,7 +90,7 @@ class ParentReference(K8sSpec):
 
 
 @dataclass
-class ServiceCIDR(K8sSpec):
+class ServiceCIDR(K8sResource):
     """ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
     This range is used to allocate ClusterIPs to Service objects.
 
@@ -115,7 +115,7 @@ class ServiceCIDR(K8sSpec):
 
 
 @dataclass
-class ServiceCIDRList(K8sSpec):
+class ServiceCIDRList(K8sResource):
     """ServiceCIDRList contains a list of ServiceCIDR objects.
 
     Attributes
@@ -137,7 +137,7 @@ class ServiceCIDRList(K8sSpec):
 
 
 @dataclass
-class ServiceCIDRSpec(K8sSpec):
+class ServiceCIDRSpec(K8sResource):
     """ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
 
     Attributes
@@ -152,7 +152,7 @@ class ServiceCIDRSpec(K8sSpec):
 
 
 @dataclass
-class ServiceCIDRStatus(K8sSpec):
+class ServiceCIDRStatus(K8sResource):
     """ServiceCIDRStatus describes the current state of the ServiceCIDR.
 
     Attributes

@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource
 
 
 @dataclass
-class CertificateSigningRequest(K8sSpec):
+class CertificateSigningRequest(K8sResource):
     """CertificateSigningRequest objects provide a mechanism to obtain x509 certificates by submitting a
     certificate signing request, and having it asynchronously approved and issued.  Kubelets use this API
     to obtain:  1. client certificates to authenticate to kube-apiserver (with the 'kubernetes.io/kube-
@@ -43,7 +43,7 @@ class CertificateSigningRequest(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestCondition(K8sSpec):
+class CertificateSigningRequestCondition(K8sResource):
     """CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
     Attributes:
         lastTransitionTime: lastTransitionTime is the time the condition last transitioned from one status to
@@ -73,7 +73,7 @@ class CertificateSigningRequestCondition(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestList(K8sSpec):
+class CertificateSigningRequestList(K8sResource):
     """CertificateSigningRequestList is a collection of CertificateSigningRequest objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -93,7 +93,7 @@ class CertificateSigningRequestList(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestSpec(K8sSpec):
+class CertificateSigningRequestSpec(K8sResource):
     """CertificateSigningRequestSpec contains the certificate request.
 
     Attributes
@@ -162,7 +162,7 @@ class CertificateSigningRequestSpec(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestStatus(K8sSpec):
+class CertificateSigningRequestStatus(K8sResource):
     """CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of
     the request, and the issued certificate.
 

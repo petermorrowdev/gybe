@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class ExemptPriorityLevelConfiguration(K8sSpec):
+class ExemptPriorityLevelConfiguration(K8sResource):
     """ExemptPriorityLevelConfiguration describes the configurable aspects of the handling of exempt
     requests. In the mandatory exempt configuration object the values in the fields here can be modified
     by authorized users, unlike the rest of the `spec`.
@@ -38,7 +38,7 @@ class ExemptPriorityLevelConfiguration(K8sSpec):
 
 
 @dataclass
-class FlowDistinguisherMethod(K8sSpec):
+class FlowDistinguisherMethod(K8sResource):
     """FlowDistinguisherMethod specifies the method of a flow distinguisher.
 
     Attributes
@@ -52,7 +52,7 @@ class FlowDistinguisherMethod(K8sSpec):
 
 
 @dataclass
-class FlowSchema(K8sSpec):
+class FlowSchema(K8sResource):
     """FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API
     requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema
     and a 'flow distinguisher'.
@@ -78,7 +78,7 @@ class FlowSchema(K8sSpec):
 
 
 @dataclass
-class FlowSchemaCondition(K8sSpec):
+class FlowSchemaCondition(K8sResource):
     """FlowSchemaCondition describes conditions for a FlowSchema.
 
     Attributes
@@ -100,7 +100,7 @@ class FlowSchemaCondition(K8sSpec):
 
 
 @dataclass
-class FlowSchemaList(K8sSpec):
+class FlowSchemaList(K8sResource):
     """FlowSchemaList is a list of FlowSchema objects.
 
     Attributes
@@ -122,7 +122,7 @@ class FlowSchemaList(K8sSpec):
 
 
 @dataclass
-class FlowSchemaSpec(K8sSpec):
+class FlowSchemaSpec(K8sResource):
     """FlowSchemaSpec describes how the FlowSchema's specification looks like.
 
     Attributes
@@ -150,7 +150,7 @@ class FlowSchemaSpec(K8sSpec):
 
 
 @dataclass
-class FlowSchemaStatus(K8sSpec):
+class FlowSchemaStatus(K8sResource):
     """FlowSchemaStatus represents the current state of a FlowSchema.
 
     Attributes
@@ -163,7 +163,7 @@ class FlowSchemaStatus(K8sSpec):
 
 
 @dataclass
-class GroupSubject(K8sSpec):
+class GroupSubject(K8sResource):
     """GroupSubject holds detailed information for group-kind subject.
 
     Attributes
@@ -178,7 +178,7 @@ class GroupSubject(K8sSpec):
 
 
 @dataclass
-class LimitResponse(K8sSpec):
+class LimitResponse(K8sResource):
     """LimitResponse defines how to handle requests that can not be executed right now.
 
     Attributes
@@ -196,7 +196,7 @@ class LimitResponse(K8sSpec):
 
 
 @dataclass
-class LimitedPriorityLevelConfiguration(K8sSpec):
+class LimitedPriorityLevelConfiguration(K8sResource):
     """LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It
     addresses two issues:   - How are requests for this priority level limited?   - What should be done
     with requests that exceed the limit?
@@ -234,7 +234,7 @@ class LimitedPriorityLevelConfiguration(K8sSpec):
 
 
 @dataclass
-class NonResourcePolicyRule(K8sSpec):
+class NonResourcePolicyRule(K8sResource):
     """NonResourcePolicyRule is a predicate that matches non-resource requests according to their verb and
     the target non-resource URL. A NonResourcePolicyRule matches a request if and only if both (a) at
     least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches
@@ -257,7 +257,7 @@ class NonResourcePolicyRule(K8sSpec):
 
 
 @dataclass
-class PolicyRulesWithSubjects(K8sSpec):
+class PolicyRulesWithSubjects(K8sResource):
     """PolicyRulesWithSubjects prescribes a test that applies to a request to an apiserver. The test
     considers the subject making the request, the verb being requested, and the resource to be acted upon.
     This PolicyRulesWithSubjects matches a request if and only if both (a) at least one member of subjects
@@ -283,7 +283,7 @@ class PolicyRulesWithSubjects(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfiguration(K8sSpec):
+class PriorityLevelConfiguration(K8sResource):
     """PriorityLevelConfiguration represents the configuration of a priority level.
 
     Attributes
@@ -307,7 +307,7 @@ class PriorityLevelConfiguration(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationCondition(K8sSpec):
+class PriorityLevelConfigurationCondition(K8sResource):
     """PriorityLevelConfigurationCondition defines the condition of priority level.
 
     Attributes
@@ -329,7 +329,7 @@ class PriorityLevelConfigurationCondition(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationList(K8sSpec):
+class PriorityLevelConfigurationList(K8sResource):
     """PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
 
     Attributes
@@ -351,7 +351,7 @@ class PriorityLevelConfigurationList(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationReference(K8sSpec):
+class PriorityLevelConfigurationReference(K8sResource):
     """PriorityLevelConfigurationReference contains information that points to the 'request-priority' being
     used.
 
@@ -365,7 +365,7 @@ class PriorityLevelConfigurationReference(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationSpec(K8sSpec):
+class PriorityLevelConfigurationSpec(K8sResource):
     """PriorityLevelConfigurationSpec specifies the configuration of a priority level.
 
     Attributes
@@ -390,7 +390,7 @@ class PriorityLevelConfigurationSpec(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationStatus(K8sSpec):
+class PriorityLevelConfigurationStatus(K8sResource):
     """PriorityLevelConfigurationStatus represents the current state of a 'request-priority'.
 
     Attributes
@@ -403,7 +403,7 @@ class PriorityLevelConfigurationStatus(K8sSpec):
 
 
 @dataclass
-class QueuingConfiguration(K8sSpec):
+class QueuingConfiguration(K8sResource):
     """QueuingConfiguration holds the configuration parameters for queuing
     Attributes:
         handSize: `handSize` is a small positive number that configures the shuffle sharding of requests into
@@ -429,7 +429,7 @@ class QueuingConfiguration(K8sSpec):
 
 
 @dataclass
-class ResourcePolicyRule(K8sSpec):
+class ResourcePolicyRule(K8sResource):
     """ResourcePolicyRule is a predicate that matches some resource requests, testing the request's verb and
     the target resource. A ResourcePolicyRule matches a resource request if and only if: (a) at least one
     member of verbs matches the request, (b) at least one member of apiGroups matches the request, (c) at
@@ -466,7 +466,7 @@ class ResourcePolicyRule(K8sSpec):
 
 
 @dataclass
-class ServiceAccountSubject(K8sSpec):
+class ServiceAccountSubject(K8sResource):
     """ServiceAccountSubject holds detailed information for service-account-kind subject.
 
     Attributes
@@ -482,7 +482,7 @@ class ServiceAccountSubject(K8sSpec):
 
 
 @dataclass
-class Subject(K8sSpec):
+class Subject(K8sResource):
     """Subject matches the originator of a request, as identified by the request authentication system. There
     are three ways of matching an originator; by user, group, or service account.
 
@@ -502,7 +502,7 @@ class Subject(K8sSpec):
 
 
 @dataclass
-class UserSubject(K8sSpec):
+class UserSubject(K8sResource):
     """UserSubject holds detailed information for user-kind subject.
 
     Attributes

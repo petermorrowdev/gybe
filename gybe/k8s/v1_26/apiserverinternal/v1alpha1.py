@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class ServerStorageVersion(K8sSpec):
+class ServerStorageVersion(K8sResource):
     """An API server instance reports the version it can decode and the version it encodes objects to when
     persisting objects in the backend.
 
@@ -30,7 +30,7 @@ class ServerStorageVersion(K8sSpec):
 
 
 @dataclass
-class StorageVersion(K8sSpec):
+class StorageVersion(K8sResource):
     """Storage version of a specific resource.
 
     Attributes
@@ -55,7 +55,7 @@ class StorageVersion(K8sSpec):
 
 
 @dataclass
-class StorageVersionCondition(K8sSpec):
+class StorageVersionCondition(K8sResource):
     """Describes the state of the storageVersion at a certain point.
 
     Attributes
@@ -79,7 +79,7 @@ class StorageVersionCondition(K8sSpec):
 
 
 @dataclass
-class StorageVersionList(K8sSpec):
+class StorageVersionList(K8sResource):
     """A list of StorageVersions.
 
     Attributes
@@ -101,7 +101,7 @@ class StorageVersionList(K8sSpec):
 
 
 @dataclass
-class StorageVersionStatus(K8sSpec):
+class StorageVersionStatus(K8sResource):
     """API server instances report the versions they can decode and the version they encode objects to when
     persisting objects in the backend.
 

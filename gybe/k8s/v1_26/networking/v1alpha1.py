@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class ClusterCIDR(K8sSpec):
+class ClusterCIDR(K8sResource):
     """ClusterCIDR represents a single configuration for per-Node Pod CIDR allocations when the
     MultiCIDRRangeAllocator is enabled (see the config for kube-controller-manager).  A cluster may have
     any number of ClusterCIDR resources, all of which will be considered when allocating a CIDR for a
@@ -39,7 +39,7 @@ class ClusterCIDR(K8sSpec):
 
 
 @dataclass
-class ClusterCIDRList(K8sSpec):
+class ClusterCIDRList(K8sResource):
     """ClusterCIDRList contains a list of ClusterCIDR.
 
     Attributes
@@ -61,7 +61,7 @@ class ClusterCIDRList(K8sSpec):
 
 
 @dataclass
-class ClusterCIDRSpec(K8sSpec):
+class ClusterCIDRSpec(K8sResource):
     """ClusterCIDRSpec defines the desired state of ClusterCIDR.
 
     Attributes

@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class AuditAnnotation(K8sSpec):
+class AuditAnnotation(K8sResource):
     """AuditAnnotation describes how to produce an audit annotation for an API request.
 
     Attributes
@@ -40,7 +40,7 @@ class AuditAnnotation(K8sSpec):
 
 
 @dataclass
-class ExpressionWarning(K8sSpec):
+class ExpressionWarning(K8sResource):
     """ExpressionWarning is a warning information that targets a specific expression.
 
     Attributes
@@ -58,7 +58,7 @@ class ExpressionWarning(K8sSpec):
 
 
 @dataclass
-class MatchCondition(K8sSpec):
+class MatchCondition(K8sResource):
     """MatchCondition represents a condition which must by fulfilled for a request to be sent to a webhook.
 
     Attributes
@@ -87,7 +87,7 @@ class MatchCondition(K8sSpec):
 
 
 @dataclass
-class MatchResources(K8sSpec):
+class MatchResources(K8sResource):
     """MatchResources decides whether to run the admission control policy on an object based on whether it
     meets the match criteria. The exclude rules take precedence over include rules (if a resource matches
     both, it is excluded)
@@ -141,7 +141,7 @@ class MatchResources(K8sSpec):
 
 
 @dataclass
-class MutatingWebhook(K8sSpec):
+class MutatingWebhook(K8sResource):
     """MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -239,7 +239,7 @@ class MutatingWebhook(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfiguration(K8sSpec):
+class MutatingWebhookConfiguration(K8sResource):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
@@ -262,7 +262,7 @@ class MutatingWebhookConfiguration(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfigurationList(K8sSpec):
+class MutatingWebhookConfigurationList(K8sResource):
     """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 
     Attributes
@@ -284,7 +284,7 @@ class MutatingWebhookConfigurationList(K8sSpec):
 
 
 @dataclass
-class NamedRuleWithOperations(K8sSpec):
+class NamedRuleWithOperations(K8sResource):
     """NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.
 
     Attributes
@@ -321,7 +321,7 @@ class NamedRuleWithOperations(K8sSpec):
 
 
 @dataclass
-class ParamKind(K8sSpec):
+class ParamKind(K8sResource):
     """ParamKind is a tuple of Group Kind and Version.
 
     Attributes
@@ -337,7 +337,7 @@ class ParamKind(K8sSpec):
 
 
 @dataclass
-class ParamRef(K8sSpec):
+class ParamRef(K8sResource):
     """ParamRef describes how to locate the params to be used as input to expressions of rules applied by a
     policy binding.
 
@@ -375,7 +375,7 @@ class ParamRef(K8sSpec):
 
 
 @dataclass
-class RuleWithOperations(K8sSpec):
+class RuleWithOperations(K8sResource):
     """RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the
     tuple expansions are valid.
 
@@ -410,7 +410,7 @@ class RuleWithOperations(K8sSpec):
 
 
 @dataclass
-class ServiceReference(K8sSpec):
+class ServiceReference(K8sResource):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: `name` is the name of the service. Required
@@ -428,7 +428,7 @@ class ServiceReference(K8sSpec):
 
 
 @dataclass
-class TypeChecking(K8sSpec):
+class TypeChecking(K8sResource):
     """TypeChecking contains results of type checking the expressions in the ValidatingAdmissionPolicy
     Attributes:
         expressionWarnings: The type checking warnings for each expression.
@@ -439,7 +439,7 @@ class TypeChecking(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicy(K8sSpec):
+class ValidatingAdmissionPolicy(K8sResource):
     """ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or
     rejects an object without changing it.
 
@@ -465,7 +465,7 @@ class ValidatingAdmissionPolicy(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyBinding(K8sSpec):
+class ValidatingAdmissionPolicyBinding(K8sResource):
     """ValidatingAdmissionPolicyBinding binds the ValidatingAdmissionPolicy with paramerized resources.
     ValidatingAdmissionPolicyBinding and parameter CRDs together define how cluster administrators
     configure policies for clusters.  For a given admission request, each binding will cause its policy to
@@ -494,7 +494,7 @@ class ValidatingAdmissionPolicyBinding(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyBindingList(K8sSpec):
+class ValidatingAdmissionPolicyBindingList(K8sResource):
     """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 
     Attributes
@@ -516,7 +516,7 @@ class ValidatingAdmissionPolicyBindingList(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
+class ValidatingAdmissionPolicyBindingSpec(K8sResource):
     """ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 
     Attributes
@@ -570,7 +570,7 @@ class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyList(K8sSpec):
+class ValidatingAdmissionPolicyList(K8sResource):
     """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
     Attributes
@@ -592,7 +592,7 @@ class ValidatingAdmissionPolicyList(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicySpec(K8sSpec):
+class ValidatingAdmissionPolicySpec(K8sResource):
     """ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
 
     Attributes
@@ -648,7 +648,7 @@ class ValidatingAdmissionPolicySpec(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyStatus(K8sSpec):
+class ValidatingAdmissionPolicyStatus(K8sResource):
     """ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.
 
     Attributes
@@ -666,7 +666,7 @@ class ValidatingAdmissionPolicyStatus(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhook(K8sSpec):
+class ValidatingWebhook(K8sResource):
     """ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -752,7 +752,7 @@ class ValidatingWebhook(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfiguration(K8sSpec):
+class ValidatingWebhookConfiguration(K8sResource):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
@@ -775,7 +775,7 @@ class ValidatingWebhookConfiguration(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfigurationList(K8sSpec):
+class ValidatingWebhookConfigurationList(K8sResource):
     """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 
     Attributes
@@ -797,7 +797,7 @@ class ValidatingWebhookConfigurationList(K8sSpec):
 
 
 @dataclass
-class Validation(K8sSpec):
+class Validation(K8sResource):
     """Validation specifies the CEL expression which is used to apply the validation.
 
     Attributes
@@ -866,7 +866,7 @@ class Validation(K8sSpec):
 
 
 @dataclass
-class Variable(K8sSpec):
+class Variable(K8sResource):
     """Variable is the definition of a variable that is used for composition. A variable is defined as a
     named expression.
 
@@ -885,7 +885,7 @@ class Variable(K8sSpec):
 
 
 @dataclass
-class WebhookClientConfig(K8sSpec):
+class WebhookClientConfig(K8sResource):
     """WebhookClientConfig contains the information to make a TLS connection with the webhook
     Attributes:
         caBundle: `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server

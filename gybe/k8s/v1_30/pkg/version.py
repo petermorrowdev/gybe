@@ -4,11 +4,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from gybe.k8s.types import K8sSpec
+from gybe.k8s.types import K8sResource
 
 
 @dataclass
-class Info(K8sSpec):
+class Info(K8sResource):
     """Info contains versioning information. how we'll want to distribute that information.
 
     Attributes

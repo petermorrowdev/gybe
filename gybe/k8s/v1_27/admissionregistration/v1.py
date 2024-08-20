@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class MatchCondition(K8sSpec):
+class MatchCondition(K8sResource):
     """MatchCondition represents a condition which must by fulfilled for a request to be sent to a webhook.
 
     Attributes
@@ -39,7 +39,7 @@ class MatchCondition(K8sSpec):
 
 
 @dataclass
-class MutatingWebhook(K8sSpec):
+class MutatingWebhook(K8sResource):
     """MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -138,7 +138,7 @@ class MutatingWebhook(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfiguration(K8sSpec):
+class MutatingWebhookConfiguration(K8sResource):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
@@ -161,7 +161,7 @@ class MutatingWebhookConfiguration(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfigurationList(K8sSpec):
+class MutatingWebhookConfigurationList(K8sResource):
     """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 
     Attributes
@@ -183,7 +183,7 @@ class MutatingWebhookConfigurationList(K8sSpec):
 
 
 @dataclass
-class RuleWithOperations(K8sSpec):
+class RuleWithOperations(K8sResource):
     """RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the
     tuple expansions are valid.
 
@@ -218,7 +218,7 @@ class RuleWithOperations(K8sSpec):
 
 
 @dataclass
-class ServiceReference(K8sSpec):
+class ServiceReference(K8sResource):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: `name` is the name of the service. Required
@@ -236,7 +236,7 @@ class ServiceReference(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhook(K8sSpec):
+class ValidatingWebhook(K8sResource):
     """ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 
     Attributes
@@ -323,7 +323,7 @@ class ValidatingWebhook(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfiguration(K8sSpec):
+class ValidatingWebhookConfiguration(K8sResource):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
@@ -346,7 +346,7 @@ class ValidatingWebhookConfiguration(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfigurationList(K8sSpec):
+class ValidatingWebhookConfigurationList(K8sResource):
     """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 
     Attributes
@@ -368,7 +368,7 @@ class ValidatingWebhookConfigurationList(K8sSpec):
 
 
 @dataclass
-class WebhookClientConfig(K8sSpec):
+class WebhookClientConfig(K8sResource):
     """WebhookClientConfig contains the information to make a TLS connection with the webhook
     Attributes:
         caBundle: `caBundle` is a PEM encoded CA bundle which will be used to validate the webhook's server

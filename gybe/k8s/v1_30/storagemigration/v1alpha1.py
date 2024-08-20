@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class GroupVersionResource(K8sSpec):
+class GroupVersionResource(K8sResource):
     """The names of the group, the version, and the resource.
 
     Attributes
@@ -27,7 +27,7 @@ class GroupVersionResource(K8sSpec):
 
 
 @dataclass
-class MigrationCondition(K8sSpec):
+class MigrationCondition(K8sResource):
     """Describes the state of a migration at a certain point.
 
     Attributes
@@ -48,7 +48,7 @@ class MigrationCondition(K8sSpec):
 
 
 @dataclass
-class StorageVersionMigration(K8sSpec):
+class StorageVersionMigration(K8sResource):
     """StorageVersionMigration represents a migration of stored data to the latest storage version.
 
     Attributes
@@ -72,7 +72,7 @@ class StorageVersionMigration(K8sSpec):
 
 
 @dataclass
-class StorageVersionMigrationList(K8sSpec):
+class StorageVersionMigrationList(K8sResource):
     """StorageVersionMigrationList is a collection of storage version migrations.
 
     Attributes
@@ -94,7 +94,7 @@ class StorageVersionMigrationList(K8sSpec):
 
 
 @dataclass
-class StorageVersionMigrationSpec(K8sSpec):
+class StorageVersionMigrationSpec(K8sResource):
     """Spec of the storage version migration.
 
     Attributes
@@ -112,7 +112,7 @@ class StorageVersionMigrationSpec(K8sSpec):
 
 
 @dataclass
-class StorageVersionMigrationStatus(K8sSpec):
+class StorageVersionMigrationStatus(K8sResource):
     """Status of the storage version migration.
 
     Attributes

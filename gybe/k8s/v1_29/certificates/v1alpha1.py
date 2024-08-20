@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class ClusterTrustBundle(K8sSpec):
+class ClusterTrustBundle(K8sResource):
     """ClusterTrustBundle is a cluster-scoped container for X.509 trust anchors (root certificates).
     ClusterTrustBundle objects are considered to be readable by any authenticated user in the cluster,
     because they can be mounted by pods using the `clusterTrustBundle` projection.  All service accounts
@@ -40,7 +40,7 @@ class ClusterTrustBundle(K8sSpec):
 
 
 @dataclass
-class ClusterTrustBundleList(K8sSpec):
+class ClusterTrustBundleList(K8sResource):
     """ClusterTrustBundleList is a collection of ClusterTrustBundle objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -60,7 +60,7 @@ class ClusterTrustBundleList(K8sSpec):
 
 
 @dataclass
-class ClusterTrustBundleSpec(K8sSpec):
+class ClusterTrustBundleSpec(K8sResource):
     """ClusterTrustBundleSpec contains the signer and trust anchors.
 
     Attributes

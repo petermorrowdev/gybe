@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class Event(K8sSpec):
+class Event(K8sResource):
     """Event is a report of an event somewhere in the cluster. It generally denotes some state change in the
     system. Events have a limited retention time and triggers and messages may evolve with time.  Event
     consumers should not rely on the timing of an event with a given Reason reflecting a consistent
@@ -76,7 +76,7 @@ class Event(K8sSpec):
 
 
 @dataclass
-class EventList(K8sSpec):
+class EventList(K8sResource):
     """EventList is a list of Event objects.
 
     Attributes
@@ -98,7 +98,7 @@ class EventList(K8sSpec):
 
 
 @dataclass
-class EventSeries(K8sSpec):
+class EventSeries(K8sResource):
     """EventSeries contain information on series of events, i.e. thing that was/is happening continuously for
     some time. How often to update the EventSeries is up to the event reporters. The default event
     reporter in 'k8s.io/client-go/tools/events/event_broadcaster.go' shows how this struct is updated on

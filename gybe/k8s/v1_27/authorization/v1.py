@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONDict, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource
 
 
 @dataclass
-class LocalSubjectAccessReview(K8sSpec):
+class LocalSubjectAccessReview(K8sResource):
     """LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given
     namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy
     that includes permissions checking.
@@ -37,7 +37,7 @@ class LocalSubjectAccessReview(K8sSpec):
 
 
 @dataclass
-class NonResourceAttributes(K8sSpec):
+class NonResourceAttributes(K8sResource):
     """NonResourceAttributes includes the authorization attributes available for non-resource requests to the
     Authorizer interface
     Attributes:
@@ -51,7 +51,7 @@ class NonResourceAttributes(K8sSpec):
 
 
 @dataclass
-class NonResourceRule(K8sSpec):
+class NonResourceRule(K8sResource):
     """NonResourceRule holds information that describes a rule for the non-resource
     Attributes:
         nonResourceURLs: NonResourceURLs is a set of partial urls that a user should have access to.  *s are
@@ -66,7 +66,7 @@ class NonResourceRule(K8sSpec):
 
 
 @dataclass
-class ResourceAttributes(K8sSpec):
+class ResourceAttributes(K8sResource):
     """ResourceAttributes includes the authorization attributes available for resource requests to the
     Authorizer interface
     Attributes:
@@ -95,7 +95,7 @@ class ResourceAttributes(K8sSpec):
 
 
 @dataclass
-class ResourceRule(K8sSpec):
+class ResourceRule(K8sResource):
     """ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering
     isn't significant, may contain duplicates, and possibly be incomplete.
 
@@ -120,7 +120,7 @@ class ResourceRule(K8sSpec):
 
 
 @dataclass
-class SelfSubjectAccessReview(K8sSpec):
+class SelfSubjectAccessReview(K8sResource):
     """SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a
     spec.namespace means 'in all namespaces'.  Self is a special case, because users should always be able
     to check whether they can perform an action
@@ -144,7 +144,7 @@ class SelfSubjectAccessReview(K8sSpec):
 
 
 @dataclass
-class SelfSubjectAccessReviewSpec(K8sSpec):
+class SelfSubjectAccessReviewSpec(K8sResource):
     """SelfSubjectAccessReviewSpec is a description of the access request.  Exactly one of
     ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
     Attributes:
@@ -159,7 +159,7 @@ class SelfSubjectAccessReviewSpec(K8sSpec):
 
 
 @dataclass
-class SelfSubjectRulesReview(K8sSpec):
+class SelfSubjectRulesReview(K8sResource):
     """SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace.
     The returned list of actions may be incomplete depending on the server's authorization mode, and any
     errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide
@@ -189,7 +189,7 @@ class SelfSubjectRulesReview(K8sSpec):
 
 
 @dataclass
-class SelfSubjectRulesReviewSpec(K8sSpec):
+class SelfSubjectRulesReviewSpec(K8sResource):
     """SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
 
     Attributes
@@ -202,7 +202,7 @@ class SelfSubjectRulesReviewSpec(K8sSpec):
 
 
 @dataclass
-class SubjectAccessReview(K8sSpec):
+class SubjectAccessReview(K8sResource):
     """SubjectAccessReview checks whether or not a user or group can perform an action.
 
     Attributes
@@ -226,7 +226,7 @@ class SubjectAccessReview(K8sSpec):
 
 
 @dataclass
-class SubjectAccessReviewSpec(K8sSpec):
+class SubjectAccessReviewSpec(K8sResource):
     """SubjectAccessReviewSpec is a description of the access request.  Exactly one of
     ResourceAuthorizationAttributes and NonResourceAuthorizationAttributes must be set
     Attributes:
@@ -251,7 +251,7 @@ class SubjectAccessReviewSpec(K8sSpec):
 
 
 @dataclass
-class SubjectAccessReviewStatus(K8sSpec):
+class SubjectAccessReviewStatus(K8sResource):
     """SubjectAccessReviewStatus
     Attributes:
         allowed: Allowed is required. True if the action would be allowed, false otherwise.
@@ -273,7 +273,7 @@ class SubjectAccessReviewStatus(K8sSpec):
 
 
 @dataclass
-class SubjectRulesReviewStatus(K8sSpec):
+class SubjectRulesReviewStatus(K8sResource):
     """SubjectRulesReviewStatus contains the result of a rules check. This check can be incomplete depending
     on the set of authorizers the server is configured with and any errors experienced during evaluation.
     Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject

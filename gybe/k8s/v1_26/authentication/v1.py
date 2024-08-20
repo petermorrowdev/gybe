@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource
 
 
 @dataclass
-class UserInfo(K8sSpec):
+class UserInfo(K8sResource):
     """UserInfo holds the information about the user needed to implement the user.Info interface.
 
     Attributes
@@ -30,7 +30,7 @@ class UserInfo(K8sSpec):
 
 
 @dataclass
-class BoundObjectReference(K8sSpec):
+class BoundObjectReference(K8sResource):
     """BoundObjectReference is a reference to an object that a token is bound to.
 
     Attributes
@@ -49,7 +49,7 @@ class BoundObjectReference(K8sSpec):
 
 
 @dataclass
-class TokenRequest(K8sSpec):
+class TokenRequest(K8sResource):
     """TokenRequest requests a token for a given service account.
 
     Attributes
@@ -73,7 +73,7 @@ class TokenRequest(K8sSpec):
 
 
 @dataclass
-class TokenRequestSpec(K8sSpec):
+class TokenRequestSpec(K8sResource):
     """TokenRequestSpec contains client provided parameters of a token request.
 
     Attributes
@@ -98,7 +98,7 @@ class TokenRequestSpec(K8sSpec):
 
 
 @dataclass
-class TokenRequestStatus(K8sSpec):
+class TokenRequestStatus(K8sResource):
     """TokenRequestStatus is the result of a token request.
 
     Attributes
@@ -113,7 +113,7 @@ class TokenRequestStatus(K8sSpec):
 
 
 @dataclass
-class TokenReview(K8sSpec):
+class TokenReview(K8sResource):
     """TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached
     by the webhook token authenticator plugin in the kube-apiserver.
 
@@ -138,7 +138,7 @@ class TokenReview(K8sSpec):
 
 
 @dataclass
-class TokenReviewSpec(K8sSpec):
+class TokenReviewSpec(K8sResource):
     """TokenReviewSpec is a description of the token authentication request.
 
     Attributes
@@ -156,7 +156,7 @@ class TokenReviewSpec(K8sSpec):
 
 
 @dataclass
-class TokenReviewStatus(K8sSpec):
+class TokenReviewStatus(K8sResource):
     """TokenReviewStatus is the result of the token authentication request.
 
     Attributes

@@ -7,11 +7,11 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.api.resource
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class ContainerResourceMetricSource(K8sSpec):
+class ContainerResourceMetricSource(K8sResource):
     """ContainerResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as
     specified in requests and limits, describing each pod in the current scale target (e.g. CPU or
     memory).  The values will be averaged together before being compared to the target.  Such metrics are
@@ -32,7 +32,7 @@ class ContainerResourceMetricSource(K8sSpec):
 
 
 @dataclass
-class ContainerResourceMetricStatus(K8sSpec):
+class ContainerResourceMetricStatus(K8sResource):
     """ContainerResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as
     specified in requests and limits, describing a single container in each pod in the current scale
     target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling
@@ -52,7 +52,7 @@ class ContainerResourceMetricStatus(K8sSpec):
 
 
 @dataclass
-class CrossVersionObjectReference(K8sSpec):
+class CrossVersionObjectReference(K8sResource):
     """CrossVersionObjectReference contains enough information to let you identify the referred resource.
 
     Attributes
@@ -69,7 +69,7 @@ class CrossVersionObjectReference(K8sSpec):
 
 
 @dataclass
-class ExternalMetricSource(K8sSpec):
+class ExternalMetricSource(K8sResource):
     """ExternalMetricSource indicates how to scale on a metric not associated with any Kubernetes object (for
     example length of queue in cloud messaging service, or QPS from loadbalancer running outside of
     cluster).
@@ -86,7 +86,7 @@ class ExternalMetricSource(K8sSpec):
 
 
 @dataclass
-class ExternalMetricStatus(K8sSpec):
+class ExternalMetricStatus(K8sResource):
     """ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes
     object.
 
@@ -102,7 +102,7 @@ class ExternalMetricStatus(K8sSpec):
 
 
 @dataclass
-class HPAScalingPolicy(K8sSpec):
+class HPAScalingPolicy(K8sResource):
     """HPAScalingPolicy is a single policy which must hold true for a specified past interval.
 
     Attributes
@@ -121,7 +121,7 @@ class HPAScalingPolicy(K8sSpec):
 
 
 @dataclass
-class HPAScalingRules(K8sSpec):
+class HPAScalingRules(K8sResource):
     """HPAScalingRules configures the scaling behavior for one direction. These Rules are applied after
     calculating DesiredReplicas from metrics for the HPA. They can limit the scaling velocity by
     specifying scaling policies. They can prevent flapping by specifying the stabilization window, so that
@@ -148,7 +148,7 @@ class HPAScalingRules(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscaler(K8sSpec):
+class HorizontalPodAutoscaler(K8sResource):
     """HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically
     manages the replica count of any resource implementing the scale subresource based on the metrics
     specified.
@@ -174,7 +174,7 @@ class HorizontalPodAutoscaler(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerBehavior(K8sSpec):
+class HorizontalPodAutoscalerBehavior(K8sResource):
     """HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and Down
     directions (scaleUp and scaleDown fields respectively).
 
@@ -194,7 +194,7 @@ class HorizontalPodAutoscalerBehavior(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerCondition(K8sSpec):
+class HorizontalPodAutoscalerCondition(K8sResource):
     """HorizontalPodAutoscalerCondition describes the state of a HorizontalPodAutoscaler at a certain point.
 
     Attributes
@@ -216,7 +216,7 @@ class HorizontalPodAutoscalerCondition(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerList(K8sSpec):
+class HorizontalPodAutoscalerList(K8sResource):
     """HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
 
     Attributes
@@ -238,7 +238,7 @@ class HorizontalPodAutoscalerList(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerSpec(K8sSpec):
+class HorizontalPodAutoscalerSpec(K8sResource):
     """HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
 
     Attributes
@@ -271,7 +271,7 @@ class HorizontalPodAutoscalerSpec(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerStatus(K8sSpec):
+class HorizontalPodAutoscalerStatus(K8sResource):
     """HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler.
 
     Attributes
@@ -298,7 +298,7 @@ class HorizontalPodAutoscalerStatus(K8sSpec):
 
 
 @dataclass
-class MetricIdentifier(K8sSpec):
+class MetricIdentifier(K8sResource):
     """MetricIdentifier defines the name and optionally selector for a metric
     Attributes:
         name: name is the name of the given metric
@@ -313,7 +313,7 @@ class MetricIdentifier(K8sSpec):
 
 
 @dataclass
-class MetricSpec(K8sSpec):
+class MetricSpec(K8sResource):
     """MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field
     should be set at once).
 
@@ -352,7 +352,7 @@ class MetricSpec(K8sSpec):
 
 
 @dataclass
-class MetricStatus(K8sSpec):
+class MetricStatus(K8sResource):
     """MetricStatus describes the last-read state of a single metric.
 
     Attributes
@@ -389,7 +389,7 @@ class MetricStatus(K8sSpec):
 
 
 @dataclass
-class MetricTarget(K8sSpec):
+class MetricTarget(K8sResource):
     """MetricTarget defines the target value, average value, or average utilization of a specific metric
     Attributes:
         averageUtilization: averageUtilization is the target value of the average of the resource metric
@@ -409,7 +409,7 @@ class MetricTarget(K8sSpec):
 
 
 @dataclass
-class MetricValueStatus(K8sSpec):
+class MetricValueStatus(K8sResource):
     """MetricValueStatus holds the current value for a metric
     Attributes:
         averageUtilization: currentAverageUtilization is the current value of the average of the resource
@@ -427,7 +427,7 @@ class MetricValueStatus(K8sSpec):
 
 
 @dataclass
-class ObjectMetricSource(K8sSpec):
+class ObjectMetricSource(K8sResource):
     """ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example,
     hits-per-second on an Ingress object).
 
@@ -445,7 +445,7 @@ class ObjectMetricSource(K8sSpec):
 
 
 @dataclass
-class ObjectMetricStatus(K8sSpec):
+class ObjectMetricStatus(K8sResource):
     """ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for
     example, hits-per-second on an Ingress object).
 
@@ -463,7 +463,7 @@ class ObjectMetricStatus(K8sSpec):
 
 
 @dataclass
-class PodsMetricSource(K8sSpec):
+class PodsMetricSource(K8sResource):
     """PodsMetricSource indicates how to scale on a metric describing each pod in the current scale target
     (for example, transactions-processed-per-second). The values will be averaged together before being
     compared to the target value.
@@ -480,7 +480,7 @@ class PodsMetricSource(K8sSpec):
 
 
 @dataclass
-class PodsMetricStatus(K8sSpec):
+class PodsMetricStatus(K8sResource):
     """PodsMetricStatus indicates the current value of a metric describing each pod in the current scale
     target (for example, transactions-processed-per-second).
 
@@ -496,7 +496,7 @@ class PodsMetricStatus(K8sSpec):
 
 
 @dataclass
-class ResourceMetricSource(K8sSpec):
+class ResourceMetricSource(K8sResource):
     """ResourceMetricSource indicates how to scale on a resource metric known to Kubernetes, as specified in
     requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  The values
     will be averaged together before being compared to the target.  Such metrics are built in to
@@ -515,7 +515,7 @@ class ResourceMetricSource(K8sSpec):
 
 
 @dataclass
-class ResourceMetricStatus(K8sSpec):
+class ResourceMetricStatus(K8sResource):
     """ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as
     specified in requests and limits, describing each pod in the current scale target (e.g. CPU or
     memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those

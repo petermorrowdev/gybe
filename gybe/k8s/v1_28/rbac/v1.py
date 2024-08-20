@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class AggregationRule(K8sSpec):
+class AggregationRule(K8sResource):
     """AggregationRule describes how to locate ClusterRoles to aggregate into the ClusterRole
     Attributes:
         clusterRoleSelectors: ClusterRoleSelectors holds a list of selectors which will be used to find
@@ -23,7 +23,7 @@ class AggregationRule(K8sSpec):
 
 
 @dataclass
-class ClusterRole(K8sSpec):
+class ClusterRole(K8sResource):
     """ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding or ClusterRoleBinding.
 
@@ -50,7 +50,7 @@ class ClusterRole(K8sSpec):
 
 
 @dataclass
-class ClusterRoleBinding(K8sSpec):
+class ClusterRoleBinding(K8sResource):
     """ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in
     the global namespace, and adds who information via Subject.
 
@@ -76,7 +76,7 @@ class ClusterRoleBinding(K8sSpec):
 
 
 @dataclass
-class ClusterRoleBindingList(K8sSpec):
+class ClusterRoleBindingList(K8sResource):
     """ClusterRoleBindingList is a collection of ClusterRoleBindings
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -96,7 +96,7 @@ class ClusterRoleBindingList(K8sSpec):
 
 
 @dataclass
-class ClusterRoleList(K8sSpec):
+class ClusterRoleList(K8sResource):
     """ClusterRoleList is a collection of ClusterRoles
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -116,7 +116,7 @@ class ClusterRoleList(K8sSpec):
 
 
 @dataclass
-class PolicyRule(K8sSpec):
+class PolicyRule(K8sResource):
     """PolicyRule holds information that describes a policy rule, but does not contain information about who
     the rule applies to or which namespace the rule applies to.
 
@@ -146,7 +146,7 @@ class PolicyRule(K8sSpec):
 
 
 @dataclass
-class Role(K8sSpec):
+class Role(K8sResource):
     """Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding.
 
@@ -169,7 +169,7 @@ class Role(K8sSpec):
 
 
 @dataclass
-class RoleBinding(K8sSpec):
+class RoleBinding(K8sResource):
     """RoleBinding references a role, but does not contain it.  It can reference a Role in the same namespace
     or a ClusterRole in the global namespace. It adds who information via Subjects and namespace
     information by which namespace it exists in.  RoleBindings in a given namespace only have effect in
@@ -198,7 +198,7 @@ class RoleBinding(K8sSpec):
 
 
 @dataclass
-class RoleBindingList(K8sSpec):
+class RoleBindingList(K8sResource):
     """RoleBindingList is a collection of RoleBindings
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -218,7 +218,7 @@ class RoleBindingList(K8sSpec):
 
 
 @dataclass
-class RoleList(K8sSpec):
+class RoleList(K8sResource):
     """RoleList is a collection of Roles
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -238,7 +238,7 @@ class RoleList(K8sSpec):
 
 
 @dataclass
-class RoleRef(K8sSpec):
+class RoleRef(K8sResource):
     """RoleRef contains information that points to the role being used
     Attributes:
         apiGroup: APIGroup is the group for the resource being referenced
@@ -253,7 +253,7 @@ class RoleRef(K8sSpec):
 
 
 @dataclass
-class Subject(K8sSpec):
+class Subject(K8sResource):
     """Subject contains a reference to the object or user identities a role binding applies to.  This can
     either hold a direct API object reference, or a value for non-objects such as user and group names.
 

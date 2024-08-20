@@ -7,11 +7,11 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class CronJob(K8sSpec):
+class CronJob(K8sResource):
     """CronJob represents the configuration of a single cron job.
 
     Attributes
@@ -35,7 +35,7 @@ class CronJob(K8sSpec):
 
 
 @dataclass
-class CronJobList(K8sSpec):
+class CronJobList(K8sResource):
     """CronJobList is a collection of cron jobs.
 
     Attributes
@@ -57,7 +57,7 @@ class CronJobList(K8sSpec):
 
 
 @dataclass
-class CronJobSpec(K8sSpec):
+class CronJobSpec(K8sResource):
     """CronJobSpec describes how the job execution will look like and when it will actually run.
 
     Attributes
@@ -101,7 +101,7 @@ class CronJobSpec(K8sSpec):
 
 
 @dataclass
-class CronJobStatus(K8sSpec):
+class CronJobStatus(K8sResource):
     """CronJobStatus represents the current state of a cron job.
 
     Attributes
@@ -118,7 +118,7 @@ class CronJobStatus(K8sSpec):
 
 
 @dataclass
-class Job(K8sSpec):
+class Job(K8sResource):
     """Job represents the configuration of a single job.
 
     Attributes
@@ -142,7 +142,7 @@ class Job(K8sSpec):
 
 
 @dataclass
-class JobCondition(K8sSpec):
+class JobCondition(K8sResource):
     """JobCondition describes current state of a job.
 
     Attributes
@@ -165,7 +165,7 @@ class JobCondition(K8sSpec):
 
 
 @dataclass
-class JobList(K8sSpec):
+class JobList(K8sResource):
     """JobList is a collection of jobs.
 
     Attributes
@@ -187,7 +187,7 @@ class JobList(K8sSpec):
 
 
 @dataclass
-class JobSpec(K8sSpec):
+class JobSpec(K8sResource):
     """JobSpec describes how the job execution will look like.
 
     Attributes
@@ -260,7 +260,7 @@ class JobSpec(K8sSpec):
 
 
 @dataclass
-class JobStatus(K8sSpec):
+class JobStatus(K8sResource):
     """JobStatus represents the current state of a Job.
 
     Attributes
@@ -307,7 +307,7 @@ class JobStatus(K8sSpec):
 
 
 @dataclass
-class JobTemplateSpec(K8sSpec):
+class JobTemplateSpec(K8sResource):
     """JobTemplateSpec describes the data a Job should have when created from a template
     Attributes:
         metadata: Standard object's metadata of the jobs created from this template.
@@ -320,7 +320,7 @@ class JobTemplateSpec(K8sSpec):
 
 
 @dataclass
-class PodFailurePolicy(K8sSpec):
+class PodFailurePolicy(K8sResource):
     """PodFailurePolicy describes how failed pods influence the backoffLimit.
 
     Attributes
@@ -336,7 +336,7 @@ class PodFailurePolicy(K8sSpec):
 
 
 @dataclass
-class PodFailurePolicyOnExitCodesRequirement(K8sSpec):
+class PodFailurePolicyOnExitCodesRequirement(K8sResource):
     """PodFailurePolicyOnExitCodesRequirement describes the requirement for handling a failed pod based on
     its container exit codes. In particular, it lookups the .state.terminated.exitCode for each app
     container and init container status, represented by the .status.containerStatuses and
@@ -369,7 +369,7 @@ class PodFailurePolicyOnExitCodesRequirement(K8sSpec):
 
 
 @dataclass
-class PodFailurePolicyOnPodConditionsPattern(K8sSpec):
+class PodFailurePolicyOnPodConditionsPattern(K8sResource):
     """PodFailurePolicyOnPodConditionsPattern describes a pattern for matching an actual pod condition type.
 
     Attributes
@@ -386,7 +386,7 @@ class PodFailurePolicyOnPodConditionsPattern(K8sSpec):
 
 
 @dataclass
-class PodFailurePolicyRule(K8sSpec):
+class PodFailurePolicyRule(K8sResource):
     """PodFailurePolicyRule describes how a pod failure is handled when the requirements are met. One of
     OnExitCodes and onPodConditions, but not both, can be used in each rule.
 
@@ -411,7 +411,7 @@ class PodFailurePolicyRule(K8sSpec):
 
 
 @dataclass
-class UncountedTerminatedPods(K8sSpec):
+class UncountedTerminatedPods(K8sResource):
     """UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job
     status counters.
 

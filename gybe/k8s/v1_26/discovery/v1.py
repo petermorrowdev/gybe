@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource
 
 
 @dataclass
-class Endpoint(K8sSpec):
+class Endpoint(K8sResource):
     """Endpoint represents a single logical 'backend' implementing a service.
 
     Attributes
@@ -50,7 +50,7 @@ class Endpoint(K8sSpec):
 
 
 @dataclass
-class EndpointConditions(K8sSpec):
+class EndpointConditions(K8sResource):
     """EndpointConditions represents the current condition of an endpoint.
 
     Attributes
@@ -73,7 +73,7 @@ class EndpointConditions(K8sSpec):
 
 
 @dataclass
-class EndpointHints(K8sSpec):
+class EndpointHints(K8sResource):
     """EndpointHints provides hints describing how an endpoint should be consumed.
 
     Attributes
@@ -87,7 +87,7 @@ class EndpointHints(K8sSpec):
 
 
 @dataclass
-class EndpointPort(K8sSpec):
+class EndpointPort(K8sResource):
     """EndpointPort represents a Port used by an EndpointSlice
     Attributes:
         appProtocol: The application protocol for this port. This field follows standard Kubernetes label
@@ -112,7 +112,7 @@ class EndpointPort(K8sSpec):
 
 
 @dataclass
-class EndpointSlice(K8sSpec):
+class EndpointSlice(K8sResource):
     """EndpointSlice represents a subset of the endpoints that implement a service. For a given service there
     may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full
     set of endpoints.
@@ -147,7 +147,7 @@ class EndpointSlice(K8sSpec):
 
 
 @dataclass
-class EndpointSliceList(K8sSpec):
+class EndpointSliceList(K8sResource):
     """EndpointSliceList represents a list of endpoint slices
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -167,7 +167,7 @@ class EndpointSliceList(K8sSpec):
 
 
 @dataclass
-class ForZone(K8sSpec):
+class ForZone(K8sResource):
     """ForZone provides information about which zones should consume this endpoint.
 
     Attributes
