@@ -1,6 +1,6 @@
 """Kubernetes models as dataclasses copied from k8s' OpenAPI V3 Spec."""
 
-from gybe.k8s.types import K8sSpec, K8sResource
+from gybe.k8s.types import K8sResource, K8sSpec
 from gybe.k8s.v1_30.apps.v1 import (
     DaemonSet,
     DaemonSetSpec,

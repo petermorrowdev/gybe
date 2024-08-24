@@ -4,6 +4,6 @@ __version__ = '0.3.1'
 
 
 from gybe import k8s
-from gybe.decorators import transpiler, Manifest
+from gybe.decorators import Manifest, transpiler
 
 __all__ = ['k8s', 'Manifest', 'transpiler']
