@@ -17,3 +17,6 @@ class K8sSpec:
 @dataclass
 class K8sResource(K8sSpec):
     """Base model for kubernetes resources, like Deployment, Service and StatefulSet"""
+
+
+Manifest: TypeAlias = list[K8sResource]

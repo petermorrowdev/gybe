@@ -50,7 +50,7 @@ dependencies = [
   "types-PyYAML",
 ]
 [tool.hatch.envs.default.scripts]
-test = "pytest && mypy gybe codegen tests && ruff check gybe/k8s"
+test = "pytest && mypy gybe tests && ruff check gybe"
 genk8s = "bash codegen/kubernetes"
 
 [[tool.hatch.envs.all.matrix]]

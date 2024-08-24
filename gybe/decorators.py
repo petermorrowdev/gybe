@@ -1,3 +1,5 @@
+"""Decorators for building CLI commands."""
+
 import sys
 from dataclasses import fields
 from typing import Any, Callable
@@ -6,11 +8,9 @@ import click
 from cattrs import Converter, transform_error
 
 from gybe.exceptions import InvalidOutputError
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec, Manifest
 from gybe.modeling import create_input_model
 from gybe.yaml import yaml_dumps, yaml_loads
-
-Manifest = list[K8sResource]
 
 
 def _omit_none_values(obj: K8sSpec) -> dict[str, Any]:
