@@ -49,7 +49,7 @@ resource_api_versions = {
     'io.k8s.api.autoscaling': 'autoscaling',
     'io.k8s.api.batch': 'batch',
     'io.k8s.api.certificates': 'certificates.k8s.io',
-    'io.k8s.api.core': '',  # just `v1`
+    'io.k8s.api.core': '',  # `apiVersion: v1`, `apiVersion: v2`, ect.
     'io.k8s.api.flowcontrol': 'flowcontrol.apiserver.k8s.io',
     'io.k8s.api.networking': 'networking.k8s.io',
     'io.k8s.api.policy': 'policy',
