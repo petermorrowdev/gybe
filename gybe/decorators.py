@@ -10,7 +10,6 @@ from gybe.k8s.types import K8sResource, K8sSpec
 from gybe.modeling import create_input_model
 from gybe.yaml import yaml_dumps, yaml_loads
 
-
 Manifest = list[K8sResource]
 
 
