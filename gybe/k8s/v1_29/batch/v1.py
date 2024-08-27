@@ -7,11 +7,11 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CronJob(K8sResource):
+class CronJob(K8sSpec):
     """CronJob represents the configuration of a single cron job.
 
     Attributes
@@ -117,7 +117,7 @@ class CronJobStatus(K8sResource):
 
 
 @dataclass
-class Job(K8sResource):
+class Job(K8sSpec):
     """Job represents the configuration of a single job.
 
     Attributes

@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class Scale(K8sResource):
+class Scale(K8sSpec):
     """Scale represents a scaling request for a resource.
 
     Attributes
@@ -82,7 +82,7 @@ class CrossVersionObjectReference(K8sResource):
 
 
 @dataclass
-class HorizontalPodAutoscaler(K8sResource):
+class HorizontalPodAutoscaler(K8sSpec):
     """configuration of a horizontal pod autoscaler.
 
     Attributes

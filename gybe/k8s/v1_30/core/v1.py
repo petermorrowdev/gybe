@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.api.resource
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -1914,7 +1914,7 @@ class ObjectFieldSelector(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaim(K8sResource):
+class PersistentVolumeClaim(K8sSpec):
     """PersistentVolumeClaim is a user's request for and claim to a persistent volume
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -4136,7 +4136,7 @@ class LoadBalancerStatus(K8sResource):
 
 
 @dataclass
-class Namespace(K8sResource):
+class Namespace(K8sSpec):
     """Namespace provides a scope for Names. Use of multiple namespaces is optional.
 
     Attributes
@@ -4232,7 +4232,7 @@ class NamespaceStatus(K8sResource):
 
 
 @dataclass
-class Node(K8sResource):
+class Node(K8sSpec):
     """Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in
     etcd).
 
@@ -4520,7 +4520,7 @@ class NodeSystemInfo(K8sResource):
 
 
 @dataclass
-class PersistentVolume(K8sResource):
+class PersistentVolume(K8sSpec):
     """PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a
     node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
     Attributes:
@@ -4612,7 +4612,7 @@ class PersistentVolumeStatus(K8sResource):
 
 
 @dataclass
-class Pod(K8sResource):
+class Pod(K8sSpec):
     """Pod is a collection of containers that can run on a host. This resource is created by clients and
     scheduled onto hosts.
 
@@ -4856,7 +4856,7 @@ class PortStatus(K8sResource):
 
 
 @dataclass
-class ReplicationController(K8sResource):
+class ReplicationController(K8sSpec):
     """ReplicationController represents the configuration of a replication controller.
 
     Attributes
@@ -4978,7 +4978,7 @@ class ReplicationControllerStatus(K8sResource):
 
 
 @dataclass
-class ResourceQuota(K8sResource):
+class ResourceQuota(K8sSpec):
     """ResourceQuota sets aggregate quota restrictions enforced per namespace
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -5153,7 +5153,7 @@ class SecretList(K8sResource):
 
 
 @dataclass
-class Service(K8sResource):
+class Service(K8sSpec):
     """Service is a named abstraction of software service (for example, mysql) consisting of local port (for
     example 3306) that the proxy listens on, and the selector that determines which pods will answer
     requests sent through the proxy.

@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -63,7 +63,7 @@ class ControllerRevisionList(K8sResource):
 
 
 @dataclass
-class DaemonSet(K8sResource):
+class DaemonSet(K8sSpec):
     """DaemonSet represents the configuration of a daemon set.
 
     Attributes
@@ -212,7 +212,7 @@ class DaemonSetUpdateStrategy(K8sResource):
 
 
 @dataclass
-class Deployment(K8sResource):
+class Deployment(K8sSpec):
     """Deployment enables declarative updates for Pods and ReplicaSets.
 
     Attributes
@@ -365,7 +365,7 @@ class DeploymentStrategy(K8sResource):
 
 
 @dataclass
-class ReplicaSet(K8sResource):
+class ReplicaSet(K8sSpec):
     """ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 
     Attributes
@@ -571,7 +571,7 @@ class RollingUpdateStatefulSetStrategy(K8sResource):
 
 
 @dataclass
-class StatefulSet(K8sResource):
+class StatefulSet(K8sSpec):
     """StatefulSet represents a set of pods with consistent identities. Identities are defined as:   -
     Network: A single stable DNS and hostname.   - Storage: As many VolumeClaims as requested.  The
     StatefulSet guarantees that a given network identity will always map to the same storage identity.

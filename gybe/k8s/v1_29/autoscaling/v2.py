@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.api.resource
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -148,7 +148,7 @@ class HPAScalingRules(K8sResource):
 
 
 @dataclass
-class HorizontalPodAutoscaler(K8sResource):
+class HorizontalPodAutoscaler(K8sSpec):
     """HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically
     manages the replica count of any resource implementing the scale subresource based on the metrics
     specified.

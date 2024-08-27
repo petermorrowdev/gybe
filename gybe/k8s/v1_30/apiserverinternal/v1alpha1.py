@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -33,7 +33,7 @@ class ServerStorageVersion(K8sResource):
 
 
 @dataclass
-class StorageVersion(K8sResource):
+class StorageVersion(K8sSpec):
     """Storage version of a specific resource.
 
     Attributes

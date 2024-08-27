@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, K8sResource
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
@@ -49,7 +49,7 @@ class BoundObjectReference(K8sResource):
 
 
 @dataclass
-class TokenRequest(K8sResource):
+class TokenRequest(K8sSpec):
     """TokenRequest requests a token for a given service account.
 
     Attributes
@@ -113,7 +113,7 @@ class TokenRequestStatus(K8sResource):
 
 
 @dataclass
-class TokenReview(K8sResource):
+class TokenReview(K8sSpec):
     """TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached
     by the webhook token authenticator plugin in the kube-apiserver.
 

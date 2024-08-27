@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.core.v1
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -37,7 +37,7 @@ class AllocationResult(K8sResource):
 
 
 @dataclass
-class PodSchedulingContext(K8sResource):
+class PodSchedulingContext(K8sSpec):
     """PodSchedulingContext objects hold information that is needed to schedule a Pod with ResourceClaims
     that use 'WaitForFirstConsumer' allocation mode.  This is an alpha type and requires enabling the
     DynamicResourceAllocation feature gate.
@@ -118,7 +118,7 @@ class PodSchedulingContextStatus(K8sResource):
 
 
 @dataclass
-class ResourceClaim(K8sResource):
+class ResourceClaim(K8sSpec):
     """ResourceClaim describes which resources are needed by a resource consumer. Its status tracks whether
     the resource has been allocated and what the resulting attributes are.  This is an alpha type and
     requires enabling the DynamicResourceAllocation feature gate.

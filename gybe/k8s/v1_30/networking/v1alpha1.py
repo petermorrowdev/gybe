@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -90,7 +90,7 @@ class ParentReference(K8sResource):
 
 
 @dataclass
-class ServiceCIDR(K8sResource):
+class ServiceCIDR(K8sSpec):
     """ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
     This range is used to allocate ClusterIPs to Service objects.
 

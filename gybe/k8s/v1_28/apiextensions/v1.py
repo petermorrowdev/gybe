@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -59,7 +59,7 @@ class CustomResourceConversion(K8sResource):
 
 
 @dataclass
-class CustomResourceDefinition(K8sResource):
+class CustomResourceDefinition(K8sSpec):
     """CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name
     MUST be in the format <.spec.name>.<.spec.group>.
 

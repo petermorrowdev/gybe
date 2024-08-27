@@ -8,7 +8,7 @@ from typing import List, Literal, Optional
 import gybe.k8s.v1_29.api.resource
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -404,7 +404,7 @@ class TokenRequest(K8sResource):
 
 
 @dataclass
-class VolumeAttachment(K8sResource):
+class VolumeAttachment(K8sSpec):
     """VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified
     node.  VolumeAttachment objects are non-namespaced.
 

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -48,7 +48,7 @@ class MigrationCondition(K8sResource):
 
 
 @dataclass
-class StorageVersionMigration(K8sResource):
+class StorageVersionMigration(K8sSpec):
     """StorageVersionMigration represents a migration of stored data to the latest storage version.
 
     Attributes

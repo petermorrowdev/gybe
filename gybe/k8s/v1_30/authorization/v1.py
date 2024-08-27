@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, K8sResource
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
-class LocalSubjectAccessReview(K8sResource):
+class LocalSubjectAccessReview(K8sSpec):
     """LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given
     namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy
     that includes permissions checking.
@@ -120,7 +120,7 @@ class ResourceRule(K8sResource):
 
 
 @dataclass
-class SelfSubjectAccessReview(K8sResource):
+class SelfSubjectAccessReview(K8sSpec):
     """SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a
     spec.namespace means 'in all namespaces'.  Self is a special case, because users should always be able
     to check whether they can perform an action
@@ -159,7 +159,7 @@ class SelfSubjectAccessReviewSpec(K8sResource):
 
 
 @dataclass
-class SelfSubjectRulesReview(K8sResource):
+class SelfSubjectRulesReview(K8sSpec):
     """SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace.
     The returned list of actions may be incomplete depending on the server's authorization mode, and any
     errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide
@@ -202,7 +202,7 @@ class SelfSubjectRulesReviewSpec(K8sResource):
 
 
 @dataclass
-class SubjectAccessReview(K8sResource):
+class SubjectAccessReview(K8sSpec):
     """SubjectAccessReview checks whether or not a user or group can perform an action.
 
     Attributes

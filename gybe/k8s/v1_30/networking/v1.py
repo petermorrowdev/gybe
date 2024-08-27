@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -55,7 +55,7 @@ class HTTPIngressRuleValue(K8sResource):
 
 
 @dataclass
-class Ingress(K8sResource):
+class Ingress(K8sSpec):
     """Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a
     backend. An Ingress can be configured to give services externally-reachable urls, load balance
     traffic, terminate SSL, offer name based virtual hosting etc.

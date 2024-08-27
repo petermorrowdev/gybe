@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CertificateSigningRequest(K8sResource):
+class CertificateSigningRequest(K8sSpec):
     """CertificateSigningRequest objects provide a mechanism to obtain x509 certificates by submitting a
     certificate signing request, and having it asynchronously approved and issued.  Kubelets use this API
     to obtain:  1. client certificates to authenticate to kube-apiserver (with the 'kubernetes.io/kube-

@@ -120,7 +120,7 @@ class K8sModule:
             properties=properties,
             description=description or f'Schema model {name}.',
             required=required or [],
-            literal_properties=literal_properties,
+            resource_properties=literal_properties,
         )
         self._class_defs.append(model_def)
 
@@ -146,9 +146,9 @@ class K8sModule:
         properties: dict[str, JSONSchemaProperties],
         description: str,
         required: list[str],
-        literal_properties: Optional[dict[str, str]] = None,
+        resource_properties: dict[str, str],
     ) -> ast.ClassDef:
-        base_cls = 'K8sSpec' if literal_properties is None else 'K8sResource'
+        base_cls = 'K8sSpec' if len(resource_properties) > 0 else 'K8sResource'
         cdef = ast.parse('@dataclass\nclass ' + name + f'({base_cls}):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')
@@ -162,7 +162,7 @@ class K8sModule:
         docstring = textwrap.indent(docstring, '    ')
         cdef.body = [ast.parse(f'"""\n{docstring}\n"""').body[0]]
 
-        literal_props = literal_properties or dict()
+        literal_props = resource_properties or dict()
         fields: list[tuple[str, int]] = []
         for k, v in properties.items():
             if k in literal_props:

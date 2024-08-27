@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class APIService(K8sResource):
+class APIService(K8sSpec):
     """APIService represents a server for a particular GroupVersion. Name must be 'version.group'.
 
     Attributes

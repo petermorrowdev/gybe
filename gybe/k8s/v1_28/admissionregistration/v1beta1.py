@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -243,7 +243,7 @@ class TypeChecking(K8sResource):
 
 
 @dataclass
-class ValidatingAdmissionPolicy(K8sResource):
+class ValidatingAdmissionPolicy(K8sSpec):
     """ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or
     rejects an object without changing it.
 

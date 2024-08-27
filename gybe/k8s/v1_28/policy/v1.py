@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -34,7 +34,7 @@ class Eviction(K8sResource):
 
 
 @dataclass
-class PodDisruptionBudget(K8sResource):
+class PodDisruptionBudget(K8sSpec):
     """PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of
     pods
     Attributes:
