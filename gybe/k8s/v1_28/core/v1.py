@@ -11,7 +11,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class EventSource(K8sResource):
+class EventSource(K8sSpec):
     """EventSource contains information for an event.
 
     Attributes
@@ -26,7 +26,7 @@ class EventSource(K8sResource):
 
 
 @dataclass
-class ObjectReference(K8sResource):
+class ObjectReference(K8sSpec):
     """ObjectReference contains enough information to let you inspect or modify the referred object.
 
     Attributes
@@ -56,7 +56,7 @@ class ObjectReference(K8sResource):
 
 
 @dataclass
-class AWSElasticBlockStoreVolumeSource(K8sResource):
+class AWSElasticBlockStoreVolumeSource(K8sSpec):
     """Represents a Persistent Disk resource in AWS.  An AWS EBS disk must exist before mounting to a
     container. The disk must also be in the same AWS zone as the kubelet. An AWS EBS disk can only be
     mounted as read/write once. AWS EBS volumes support ownership management and SELinux relabeling.
@@ -81,7 +81,7 @@ class AWSElasticBlockStoreVolumeSource(K8sResource):
 
 
 @dataclass
-class AzureDiskVolumeSource(K8sResource):
+class AzureDiskVolumeSource(K8sSpec):
     """AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
 
     Attributes
@@ -108,7 +108,7 @@ class AzureDiskVolumeSource(K8sResource):
 
 
 @dataclass
-class AzureFilePersistentVolumeSource(K8sResource):
+class AzureFilePersistentVolumeSource(K8sSpec):
     """AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
 
     Attributes
@@ -129,7 +129,7 @@ class AzureFilePersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class CSIPersistentVolumeSource(K8sResource):
+class CSIPersistentVolumeSource(K8sSpec):
     """Represents storage that is managed by an external CSI volume driver (Beta feature)
 
     Attributes
@@ -178,7 +178,7 @@ class CSIPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class CephFSPersistentVolumeSource(K8sResource):
+class CephFSPersistentVolumeSource(K8sSpec):
     """Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support
     ownership management or SELinux relabeling.
 
@@ -205,7 +205,7 @@ class CephFSPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class CinderPersistentVolumeSource(K8sResource):
+class CinderPersistentVolumeSource(K8sSpec):
     """Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a
     container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership
     management and SELinux relabeling.
@@ -229,7 +229,7 @@ class CinderPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class FCVolumeSource(K8sResource):
+class FCVolumeSource(K8sSpec):
     """Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre
     Channel volumes support ownership management and SELinux relabeling.
 
@@ -254,7 +254,7 @@ class FCVolumeSource(K8sResource):
 
 
 @dataclass
-class FlexPersistentVolumeSource(K8sResource):
+class FlexPersistentVolumeSource(K8sSpec):
     """FlexPersistentVolumeSource represents a generic persistent volume resource that is
     provisioned/attached using an exec based plugin.
 
@@ -280,7 +280,7 @@ class FlexPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class FlockerVolumeSource(K8sResource):
+class FlockerVolumeSource(K8sSpec):
     """Represents a Flocker volume mounted by the Flocker agent. One and only one of datasetName and
     datasetUUID should be set. Flocker volumes do not support ownership management or SELinux relabeling.
 
@@ -297,7 +297,7 @@ class FlockerVolumeSource(K8sResource):
 
 
 @dataclass
-class GCEPersistentDiskVolumeSource(K8sResource):
+class GCEPersistentDiskVolumeSource(K8sSpec):
     """Represents a Persistent Disk resource in Google Compute Engine.  A GCE PD must exist before mounting
     to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can
     only be mounted as read/write once or read-only many times. GCE PDs support ownership management and
@@ -323,7 +323,7 @@ class GCEPersistentDiskVolumeSource(K8sResource):
 
 
 @dataclass
-class GlusterfsPersistentVolumeSource(K8sResource):
+class GlusterfsPersistentVolumeSource(K8sSpec):
     """Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support
     ownership management or SELinux relabeling.
 
@@ -345,7 +345,7 @@ class GlusterfsPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class HostPathVolumeSource(K8sResource):
+class HostPathVolumeSource(K8sSpec):
     """Represents a host path mapped into a pod. Host path volumes do not support ownership management or
     SELinux relabeling.
 
@@ -362,7 +362,7 @@ class HostPathVolumeSource(K8sResource):
 
 
 @dataclass
-class ISCSIPersistentVolumeSource(K8sResource):
+class ISCSIPersistentVolumeSource(K8sSpec):
     """ISCSIPersistentVolumeSource represents an ISCSI disk. ISCSI volumes can only be mounted as read/write
     once. ISCSI volumes support ownership management and SELinux relabeling.
 
@@ -403,7 +403,7 @@ class ISCSIPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class LocalVolumeSource(K8sResource):
+class LocalVolumeSource(K8sSpec):
     """Local represents directly-attached storage with node affinity (Beta feature)
 
     Attributes
@@ -421,7 +421,7 @@ class LocalVolumeSource(K8sResource):
 
 
 @dataclass
-class NFSVolumeSource(K8sResource):
+class NFSVolumeSource(K8sSpec):
     """Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership
     management or SELinux relabeling.
 
@@ -440,7 +440,7 @@ class NFSVolumeSource(K8sResource):
 
 
 @dataclass
-class NodeSelector(K8sResource):
+class NodeSelector(K8sSpec):
     """A node selector represents the union of the results of one or more label queries over a set of nodes;
     that is, it represents the OR of the selectors represented by the node selector terms.
 
@@ -454,7 +454,7 @@ class NodeSelector(K8sResource):
 
 
 @dataclass
-class NodeSelectorRequirement(K8sResource):
+class NodeSelectorRequirement(K8sSpec):
     """A node selector requirement is a selector that contains values, a key, and an operator that relates
     the key and values.
 
@@ -476,7 +476,7 @@ class NodeSelectorRequirement(K8sResource):
 
 
 @dataclass
-class NodeSelectorTerm(K8sResource):
+class NodeSelectorTerm(K8sSpec):
     """A null or empty node selector term matches no objects. The requirements of them are ANDed. The
     TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
 
@@ -492,7 +492,7 @@ class NodeSelectorTerm(K8sResource):
 
 
 @dataclass
-class PersistentVolumeSpec(K8sResource):
+class PersistentVolumeSpec(K8sSpec):
     """PersistentVolumeSpec is the specification of a persistent volume.
 
     Attributes
@@ -584,7 +584,7 @@ class PersistentVolumeSpec(K8sResource):
 
 
 @dataclass
-class PhotonPersistentDiskVolumeSource(K8sResource):
+class PhotonPersistentDiskVolumeSource(K8sSpec):
     """Represents a Photon Controller persistent disk resource.
 
     Attributes
@@ -600,7 +600,7 @@ class PhotonPersistentDiskVolumeSource(K8sResource):
 
 
 @dataclass
-class PortworxVolumeSource(K8sResource):
+class PortworxVolumeSource(K8sSpec):
     """PortworxVolumeSource represents a Portworx volume resource.
 
     Attributes
@@ -619,7 +619,7 @@ class PortworxVolumeSource(K8sResource):
 
 
 @dataclass
-class QuobyteVolumeSource(K8sResource):
+class QuobyteVolumeSource(K8sSpec):
     """Represents a Quobyte mount that lasts the lifetime of a pod. Quobyte volumes do not support ownership
     management or SELinux relabeling.
 
@@ -647,7 +647,7 @@ class QuobyteVolumeSource(K8sResource):
 
 
 @dataclass
-class RBDPersistentVolumeSource(K8sResource):
+class RBDPersistentVolumeSource(K8sSpec):
     """Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership
     management and SELinux relabeling.
 
@@ -678,7 +678,7 @@ class RBDPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class ScaleIOPersistentVolumeSource(K8sResource):
+class ScaleIOPersistentVolumeSource(K8sSpec):
     """ScaleIOPersistentVolumeSource represents a persistent ScaleIO volume
     Attributes:
         fsType: fsType is the filesystem type to mount. Must be a filesystem type supported by the host
@@ -713,7 +713,7 @@ class ScaleIOPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class SecretReference(K8sResource):
+class SecretReference(K8sSpec):
     """SecretReference represents a Secret Reference. It has enough information to retrieve secret in any
     namespace
     Attributes:
@@ -727,7 +727,7 @@ class SecretReference(K8sResource):
 
 
 @dataclass
-class StorageOSPersistentVolumeSource(K8sResource):
+class StorageOSPersistentVolumeSource(K8sSpec):
     """Represents a StorageOS persistent volume resource.
 
     Attributes
@@ -756,7 +756,7 @@ class StorageOSPersistentVolumeSource(K8sResource):
 
 
 @dataclass
-class TopologySelectorLabelRequirement(K8sResource):
+class TopologySelectorLabelRequirement(K8sSpec):
     """A topology selector requirement is a selector that matches given label. This is an alpha feature and
     may change in the future.
 
@@ -773,7 +773,7 @@ class TopologySelectorLabelRequirement(K8sResource):
 
 
 @dataclass
-class TopologySelectorTerm(K8sResource):
+class TopologySelectorTerm(K8sSpec):
     """A topology selector term represents the result of label queries. A null or empty topology selector
     term matches no objects. The requirements of them are ANDed. It provides a subset of functionality as
     NodeSelectorTerm. This is an alpha feature and may change in the future.
@@ -788,7 +788,7 @@ class TopologySelectorTerm(K8sResource):
 
 
 @dataclass
-class VolumeNodeAffinity(K8sResource):
+class VolumeNodeAffinity(K8sSpec):
     """VolumeNodeAffinity defines constraints that limit what nodes this volume can be accessed from.
 
     Attributes
@@ -801,7 +801,7 @@ class VolumeNodeAffinity(K8sResource):
 
 
 @dataclass
-class VsphereVirtualDiskVolumeSource(K8sResource):
+class VsphereVirtualDiskVolumeSource(K8sSpec):
     """Represents a vSphere volume resource.
 
     Attributes
@@ -822,7 +822,7 @@ class VsphereVirtualDiskVolumeSource(K8sResource):
 
 
 @dataclass
-class Toleration(K8sResource):
+class Toleration(K8sSpec):
     """The pod this Toleration is attached to tolerates any taint that matches the triple <key,value,effect>
     using the matching operator <operator>.
 
@@ -852,7 +852,7 @@ class Toleration(K8sResource):
 
 
 @dataclass
-class Affinity(K8sResource):
+class Affinity(K8sSpec):
     """Affinity is a group of affinity scheduling rules.
 
     Attributes
@@ -871,7 +871,7 @@ class Affinity(K8sResource):
 
 
 @dataclass
-class AzureFileVolumeSource(K8sResource):
+class AzureFileVolumeSource(K8sSpec):
     """AzureFile represents an Azure File Service mount on the host and bind mount to the pod.
 
     Attributes
@@ -889,7 +889,7 @@ class AzureFileVolumeSource(K8sResource):
 
 
 @dataclass
-class CSIVolumeSource(K8sResource):
+class CSIVolumeSource(K8sSpec):
     """Represents a source location of a volume to mount, managed by an external CSI driver
     Attributes:
         driver: driver is the name of the CSI driver that handles this volume. Consult with your admin for the
@@ -914,7 +914,7 @@ class CSIVolumeSource(K8sResource):
 
 
 @dataclass
-class Capabilities(K8sResource):
+class Capabilities(K8sSpec):
     """Adds and removes POSIX capabilities from running containers.
 
     Attributes
@@ -929,7 +929,7 @@ class Capabilities(K8sResource):
 
 
 @dataclass
-class CephFSVolumeSource(K8sResource):
+class CephFSVolumeSource(K8sSpec):
     """Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support
     ownership management or SELinux relabeling.
 
@@ -956,7 +956,7 @@ class CephFSVolumeSource(K8sResource):
 
 
 @dataclass
-class CinderVolumeSource(K8sResource):
+class CinderVolumeSource(K8sSpec):
     """Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a
     container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership
     management and SELinux relabeling.
@@ -981,7 +981,7 @@ class CinderVolumeSource(K8sResource):
 
 
 @dataclass
-class ClaimSource(K8sResource):
+class ClaimSource(K8sSpec):
     """ClaimSource describes a reference to a ResourceClaim.  Exactly one of these fields should be set.
     Consumers of this type must treat an empty object as if it has an unknown value.
 
@@ -1004,7 +1004,7 @@ class ClaimSource(K8sResource):
 
 
 @dataclass
-class ConfigMapEnvSource(K8sResource):
+class ConfigMapEnvSource(K8sSpec):
     """ConfigMapEnvSource selects a ConfigMap to populate the environment variables with.  The contents of
     the target ConfigMap's Data field will represent the key-value pairs as environment variables.
 
@@ -1020,7 +1020,7 @@ class ConfigMapEnvSource(K8sResource):
 
 
 @dataclass
-class ConfigMapKeySelector(K8sResource):
+class ConfigMapKeySelector(K8sSpec):
     """Selects a key from a ConfigMap.
 
     Attributes
@@ -1037,7 +1037,7 @@ class ConfigMapKeySelector(K8sResource):
 
 
 @dataclass
-class ConfigMapProjection(K8sResource):
+class ConfigMapProjection(K8sSpec):
     """Adapts a ConfigMap into a projected volume.  The contents of the target ConfigMap's Data field will be
     presented in a projected volume as files using the keys in the Data field as the file names, unless
     the items element is populated with specific mappings of keys to paths. Note that this is identical to
@@ -1061,7 +1061,7 @@ class ConfigMapProjection(K8sResource):
 
 
 @dataclass
-class ConfigMapVolumeSource(K8sResource):
+class ConfigMapVolumeSource(K8sSpec):
     """Adapts a ConfigMap into a volume.  The contents of the target ConfigMap's Data field will be presented
     in a volume as files using the keys in the Data field as the file names, unless the items element is
     populated with specific mappings of keys to paths. ConfigMap volumes support ownership management and
@@ -1091,7 +1091,7 @@ class ConfigMapVolumeSource(K8sResource):
 
 
 @dataclass
-class Container(K8sResource):
+class Container(K8sSpec):
     """A single application container that you want to run within a pod.
 
     Attributes
@@ -1205,7 +1205,7 @@ class Container(K8sResource):
 
 
 @dataclass
-class ContainerPort(K8sResource):
+class ContainerPort(K8sSpec):
     """ContainerPort represents a network port in a single container.
 
     Attributes
@@ -1230,7 +1230,7 @@ class ContainerPort(K8sResource):
 
 
 @dataclass
-class ContainerResizePolicy(K8sResource):
+class ContainerResizePolicy(K8sSpec):
     """ContainerResizePolicy represents resource resize policy for the container.
 
     Attributes
@@ -1247,7 +1247,7 @@ class ContainerResizePolicy(K8sResource):
 
 
 @dataclass
-class DownwardAPIProjection(K8sResource):
+class DownwardAPIProjection(K8sSpec):
     """Represents downward API info for projecting into a projected volume. Note that this is identical to a
     downwardAPI volume source without the default mode.
 
@@ -1261,7 +1261,7 @@ class DownwardAPIProjection(K8sResource):
 
 
 @dataclass
-class DownwardAPIVolumeFile(K8sResource):
+class DownwardAPIVolumeFile(K8sSpec):
     """DownwardAPIVolumeFile represents information to create the file containing the pod field
     Attributes:
         fieldRef: Required: Selects a field of the pod: only annotations, labels, name and namespace are
@@ -1286,7 +1286,7 @@ class DownwardAPIVolumeFile(K8sResource):
 
 
 @dataclass
-class DownwardAPIVolumeSource(K8sResource):
+class DownwardAPIVolumeSource(K8sSpec):
     """DownwardAPIVolumeSource represents a volume containing downward API info. Downward API volumes support
     ownership management and SELinux relabeling.
 
@@ -1307,7 +1307,7 @@ class DownwardAPIVolumeSource(K8sResource):
 
 
 @dataclass
-class EmptyDirVolumeSource(K8sResource):
+class EmptyDirVolumeSource(K8sSpec):
     """Represents an empty directory for a pod. Empty directory volumes support ownership management and
     SELinux relabeling.
 
@@ -1327,7 +1327,7 @@ class EmptyDirVolumeSource(K8sResource):
 
 
 @dataclass
-class EnvFromSource(K8sResource):
+class EnvFromSource(K8sSpec):
     """EnvFromSource represents the source of a set of ConfigMaps
     Attributes:
         configMapRef: The ConfigMap to select from
@@ -1342,7 +1342,7 @@ class EnvFromSource(K8sResource):
 
 
 @dataclass
-class EnvVar(K8sResource):
+class EnvVar(K8sSpec):
     """EnvVar represents an environment variable present in a Container.
 
     Attributes
@@ -1364,7 +1364,7 @@ class EnvVar(K8sResource):
 
 
 @dataclass
-class EnvVarSource(K8sResource):
+class EnvVarSource(K8sSpec):
     """EnvVarSource represents a source for the value of an EnvVar.
 
     Attributes
@@ -1387,7 +1387,7 @@ class EnvVarSource(K8sResource):
 
 
 @dataclass
-class EphemeralContainer(K8sResource):
+class EphemeralContainer(K8sSpec):
     """An EphemeralContainer is a temporary container that you may add to an existing Pod for user-initiated
     activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they
     will not be restarted when they exit or when a Pod is removed or restarted. The kubelet may evict a
@@ -1496,7 +1496,7 @@ class EphemeralContainer(K8sResource):
 
 
 @dataclass
-class EphemeralVolumeSource(K8sResource):
+class EphemeralVolumeSource(K8sSpec):
     """Represents an ephemeral volume that is handled by a normal storage driver.
 
     Attributes
@@ -1519,7 +1519,7 @@ class EphemeralVolumeSource(K8sResource):
 
 
 @dataclass
-class ExecAction(K8sResource):
+class ExecAction(K8sSpec):
     """ExecAction describes a 'run in container' action.
 
     Attributes
@@ -1536,7 +1536,7 @@ class ExecAction(K8sResource):
 
 
 @dataclass
-class FlexVolumeSource(K8sResource):
+class FlexVolumeSource(K8sSpec):
     """FlexVolume represents a generic volume resource that is provisioned/attached using an exec based
     plugin.
 
@@ -1562,7 +1562,7 @@ class FlexVolumeSource(K8sResource):
 
 
 @dataclass
-class GRPCAction(K8sResource):
+class GRPCAction(K8sSpec):
     """Schema model io.k8s.api.core.v1.GRPCAction.
 
     Attributes
@@ -1579,7 +1579,7 @@ class GRPCAction(K8sResource):
 
 
 @dataclass
-class GitRepoVolumeSource(K8sResource):
+class GitRepoVolumeSource(K8sSpec):
     """Represents a volume that is populated with the contents of a git repository. Git repo volumes do not
     support ownership management. Git repo volumes support SELinux relabeling.  DEPRECATED: GitRepo is
     deprecated. To provision a container with a git repo, mount an EmptyDir into an InitContainer that
@@ -1601,7 +1601,7 @@ class GitRepoVolumeSource(K8sResource):
 
 
 @dataclass
-class GlusterfsVolumeSource(K8sResource):
+class GlusterfsVolumeSource(K8sSpec):
     """Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support
     ownership management or SELinux relabeling.
 
@@ -1620,7 +1620,7 @@ class GlusterfsVolumeSource(K8sResource):
 
 
 @dataclass
-class HTTPGetAction(K8sResource):
+class HTTPGetAction(K8sSpec):
     """HTTPGetAction describes an action based on HTTP Get requests.
 
     Attributes
@@ -1643,7 +1643,7 @@ class HTTPGetAction(K8sResource):
 
 
 @dataclass
-class HTTPHeader(K8sResource):
+class HTTPHeader(K8sSpec):
     """HTTPHeader describes a custom header to be used in HTTP probes
     Attributes:
         name: The header field name. This will be canonicalized upon output, so case-variant names will be
@@ -1657,7 +1657,7 @@ class HTTPHeader(K8sResource):
 
 
 @dataclass
-class HostAlias(K8sResource):
+class HostAlias(K8sSpec):
     """HostAlias holds the mapping between IP and hostnames that will be injected as an entry in the pod's
     hosts file.
 
@@ -1673,7 +1673,7 @@ class HostAlias(K8sResource):
 
 
 @dataclass
-class ISCSIVolumeSource(K8sResource):
+class ISCSIVolumeSource(K8sSpec):
     """Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support
     ownership management and SELinux relabeling.
 
@@ -1714,7 +1714,7 @@ class ISCSIVolumeSource(K8sResource):
 
 
 @dataclass
-class KeyToPath(K8sResource):
+class KeyToPath(K8sSpec):
     """Maps a string key to a path within a volume.
 
     Attributes
@@ -1736,7 +1736,7 @@ class KeyToPath(K8sResource):
 
 
 @dataclass
-class Lifecycle(K8sResource):
+class Lifecycle(K8sSpec):
     """Lifecycle describes actions that the management system should take in response to container lifecycle
     events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the
     action is complete, unless the container process fails, in which case the handler is aborted.
@@ -1761,7 +1761,7 @@ class Lifecycle(K8sResource):
 
 
 @dataclass
-class LifecycleHandler(K8sResource):
+class LifecycleHandler(K8sSpec):
     """LifecycleHandler defines a specific action that should be taken in a lifecycle hook. One and only one
     of the fields, except TCPSocket must be specified.
 
@@ -1781,7 +1781,7 @@ class LifecycleHandler(K8sResource):
 
 
 @dataclass
-class LocalObjectReference(K8sResource):
+class LocalObjectReference(K8sSpec):
     """LocalObjectReference contains enough information to let you locate the referenced object inside the
     same namespace.
 
@@ -1795,7 +1795,7 @@ class LocalObjectReference(K8sResource):
 
 
 @dataclass
-class NodeAffinity(K8sResource):
+class NodeAffinity(K8sSpec):
     """Node affinity is a group of node affinity scheduling rules.
 
     Attributes
@@ -1819,7 +1819,7 @@ class NodeAffinity(K8sResource):
 
 
 @dataclass
-class ObjectFieldSelector(K8sResource):
+class ObjectFieldSelector(K8sSpec):
     """ObjectFieldSelector selects an APIVersioned field of an object.
 
     Attributes
@@ -1834,7 +1834,7 @@ class ObjectFieldSelector(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaim(K8sSpec):
+class PersistentVolumeClaim(K8sResource):
     """PersistentVolumeClaim is a user's request for and claim to a persistent volume
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -1856,7 +1856,7 @@ class PersistentVolumeClaim(K8sSpec):
 
 
 @dataclass
-class PersistentVolumeClaimCondition(K8sResource):
+class PersistentVolumeClaimCondition(K8sSpec):
     """PersistentVolumeClaimCondition contains details about state of pvc
     Attributes:
         lastProbeTime: lastProbeTime is the time we probed the condition.
@@ -1880,7 +1880,7 @@ class PersistentVolumeClaimCondition(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimSpec(K8sResource):
+class PersistentVolumeClaimSpec(K8sSpec):
     """PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for
     provider-specific attributes
     Attributes:
@@ -1932,7 +1932,7 @@ class PersistentVolumeClaimSpec(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimStatus(K8sResource):
+class PersistentVolumeClaimStatus(K8sSpec):
     """PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 
     Attributes
@@ -1993,7 +1993,7 @@ class PersistentVolumeClaimStatus(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimTemplate(K8sResource):
+class PersistentVolumeClaimTemplate(K8sSpec):
     """PersistentVolumeClaimTemplate is used to produce PersistentVolumeClaim objects as part of an
     EphemeralVolumeSource.
 
@@ -2012,7 +2012,7 @@ class PersistentVolumeClaimTemplate(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimVolumeSource(K8sResource):
+class PersistentVolumeClaimVolumeSource(K8sSpec):
     """PersistentVolumeClaimVolumeSource references the user's PVC in the same namespace. This volume finds
     the bound PV and mounts that volume for the pod. A PersistentVolumeClaimVolumeSource is, essentially,
     a wrapper around another type of volume that is owned by someone else (the system).
@@ -2030,7 +2030,7 @@ class PersistentVolumeClaimVolumeSource(K8sResource):
 
 
 @dataclass
-class PodAffinity(K8sResource):
+class PodAffinity(K8sSpec):
     """Pod affinity is a group of inter pod affinity scheduling rules.
 
     Attributes
@@ -2057,7 +2057,7 @@ class PodAffinity(K8sResource):
 
 
 @dataclass
-class PodAffinityTerm(K8sResource):
+class PodAffinityTerm(K8sSpec):
     """Defines a set of pods (namely those matching the labelSelector relative to the given namespace(s))
     that this pod should be co-located (affinity) or not co-located (anti-affinity) with, where co-located
     is defined as running on a node whose value of the label with key <topologyKey> matches that of any
@@ -2086,7 +2086,7 @@ class PodAffinityTerm(K8sResource):
 
 
 @dataclass
-class PodAntiAffinity(K8sResource):
+class PodAntiAffinity(K8sSpec):
     """Pod anti affinity is a group of inter pod anti affinity scheduling rules.
 
     Attributes
@@ -2113,7 +2113,7 @@ class PodAntiAffinity(K8sResource):
 
 
 @dataclass
-class PodDNSConfig(K8sResource):
+class PodDNSConfig(K8sSpec):
     """PodDNSConfig defines the DNS parameters of a pod in addition to those generated from DNSPolicy.
 
     Attributes
@@ -2134,7 +2134,7 @@ class PodDNSConfig(K8sResource):
 
 
 @dataclass
-class PodDNSConfigOption(K8sResource):
+class PodDNSConfigOption(K8sSpec):
     """PodDNSConfigOption defines DNS resolver options of a pod.
 
     Attributes
@@ -2149,7 +2149,7 @@ class PodDNSConfigOption(K8sResource):
 
 
 @dataclass
-class PodOS(K8sResource):
+class PodOS(K8sSpec):
     """PodOS defines the OS parameters of a pod.
 
     Attributes
@@ -2166,7 +2166,7 @@ class PodOS(K8sResource):
 
 
 @dataclass
-class PodReadinessGate(K8sResource):
+class PodReadinessGate(K8sSpec):
     """PodReadinessGate contains the reference to a pod condition
     Attributes:
         conditionType: ConditionType refers to a condition in the pod's condition list with matching type.
@@ -2177,7 +2177,7 @@ class PodReadinessGate(K8sResource):
 
 
 @dataclass
-class PodResourceClaim(K8sResource):
+class PodResourceClaim(K8sSpec):
     """PodResourceClaim references exactly one ResourceClaim through a ClaimSource. It adds a name to it that
     uniquely identifies the ResourceClaim inside the Pod. Containers that need access to the ResourceClaim
     reference it with this name.
@@ -2194,7 +2194,7 @@ class PodResourceClaim(K8sResource):
 
 
 @dataclass
-class PodSchedulingGate(K8sResource):
+class PodSchedulingGate(K8sSpec):
     """PodSchedulingGate is associated to a Pod to guard its scheduling.
 
     Attributes
@@ -2207,7 +2207,7 @@ class PodSchedulingGate(K8sResource):
 
 
 @dataclass
-class PodSecurityContext(K8sResource):
+class PodSecurityContext(K8sSpec):
     """PodSecurityContext holds pod-level security attributes and common container settings. Some fields are
     also present in container.securityContext.  Field values of container.securityContext take precedence
     over field values of PodSecurityContext.
@@ -2274,7 +2274,7 @@ class PodSecurityContext(K8sResource):
 
 
 @dataclass
-class PodSpec(K8sResource):
+class PodSpec(K8sSpec):
     """PodSpec is a description of a pod.
 
     Attributes
@@ -2456,7 +2456,7 @@ class PodSpec(K8sResource):
 
 
 @dataclass
-class PodTemplateSpec(K8sResource):
+class PodTemplateSpec(K8sSpec):
     """PodTemplateSpec describes the data a pod should have when created from a template
     Attributes:
         metadata: Standard object's metadata.
@@ -2469,7 +2469,7 @@ class PodTemplateSpec(K8sResource):
 
 
 @dataclass
-class PreferredSchedulingTerm(K8sResource):
+class PreferredSchedulingTerm(K8sSpec):
     """An empty preferred scheduling term matches all objects with implicit weight 0 (i.e. it's a no-op). A
     null preferred scheduling term matches no objects (i.e. is also a no-op).
 
@@ -2485,7 +2485,7 @@ class PreferredSchedulingTerm(K8sResource):
 
 
 @dataclass
-class Probe(K8sResource):
+class Probe(K8sSpec):
     """Probe describes a health check to be performed against a container to determine whether it is alive or
     ready to receive traffic.
 
@@ -2529,7 +2529,7 @@ class Probe(K8sResource):
 
 
 @dataclass
-class ProjectedVolumeSource(K8sResource):
+class ProjectedVolumeSource(K8sSpec):
     """Represents a projected volume source
     Attributes:
         defaultMode: defaultMode are the mode bits used to set permissions on created files by default. Must
@@ -2546,7 +2546,7 @@ class ProjectedVolumeSource(K8sResource):
 
 
 @dataclass
-class RBDVolumeSource(K8sResource):
+class RBDVolumeSource(K8sSpec):
     """Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership
     management and SELinux relabeling.
 
@@ -2577,7 +2577,7 @@ class RBDVolumeSource(K8sResource):
 
 
 @dataclass
-class ResourceClaim(K8sResource):
+class ResourceClaim(K8sSpec):
     """ResourceClaim references one entry in PodSpec.ResourceClaims.
 
     Attributes
@@ -2591,7 +2591,7 @@ class ResourceClaim(K8sResource):
 
 
 @dataclass
-class ResourceFieldSelector(K8sResource):
+class ResourceFieldSelector(K8sSpec):
     """ResourceFieldSelector represents container resources (cpu, memory) and their output format
     Attributes:
         containerName: Container name: required for volumes, optional for env vars
@@ -2606,7 +2606,7 @@ class ResourceFieldSelector(K8sResource):
 
 
 @dataclass
-class ResourceRequirements(K8sResource):
+class ResourceRequirements(K8sSpec):
     """ResourceRequirements describes the compute resource requirements.
 
     Attributes
@@ -2627,7 +2627,7 @@ class ResourceRequirements(K8sResource):
 
 
 @dataclass
-class SELinuxOptions(K8sResource):
+class SELinuxOptions(K8sSpec):
     """SELinuxOptions are the labels to be applied to the container
     Attributes:
         level: Level is SELinux level label that applies to the container.
@@ -2644,7 +2644,7 @@ class SELinuxOptions(K8sResource):
 
 
 @dataclass
-class ScaleIOVolumeSource(K8sResource):
+class ScaleIOVolumeSource(K8sSpec):
     """ScaleIOVolumeSource represents a persistent ScaleIO volume
     Attributes:
         fsType: fsType is the filesystem type to mount. Must be a filesystem type supported by the host
@@ -2679,7 +2679,7 @@ class ScaleIOVolumeSource(K8sResource):
 
 
 @dataclass
-class SeccompProfile(K8sResource):
+class SeccompProfile(K8sSpec):
     """SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.
 
     Attributes
@@ -2699,7 +2699,7 @@ class SeccompProfile(K8sResource):
 
 
 @dataclass
-class SecretEnvSource(K8sResource):
+class SecretEnvSource(K8sSpec):
     """SecretEnvSource selects a Secret to populate the environment variables with.  The contents of the
     target Secret's Data field will represent the key-value pairs as environment variables.
 
@@ -2715,7 +2715,7 @@ class SecretEnvSource(K8sResource):
 
 
 @dataclass
-class SecretKeySelector(K8sResource):
+class SecretKeySelector(K8sSpec):
     """SecretKeySelector selects a key of a Secret.
 
     Attributes
@@ -2732,7 +2732,7 @@ class SecretKeySelector(K8sResource):
 
 
 @dataclass
-class SecretProjection(K8sResource):
+class SecretProjection(K8sSpec):
     """Adapts a secret into a projected volume.  The contents of the target Secret's Data field will be
     presented in a projected volume as files using the keys in the Data field as the file names. Note that
     this is identical to a secret volume source without the default mode.
@@ -2755,7 +2755,7 @@ class SecretProjection(K8sResource):
 
 
 @dataclass
-class SecretVolumeSource(K8sResource):
+class SecretVolumeSource(K8sSpec):
     """Adapts a Secret into a volume.  The contents of the target Secret's Data field will be presented in a
     volume as files using the keys in the Data field as the file names. Secret volumes support ownership
     management and SELinux relabeling.
@@ -2784,7 +2784,7 @@ class SecretVolumeSource(K8sResource):
 
 
 @dataclass
-class SecurityContext(K8sResource):
+class SecurityContext(K8sSpec):
     """SecurityContext holds security configuration that will be applied to a container. Some fields are
     present in both SecurityContext and PodSecurityContext.  When both are set, the values in
     SecurityContext take precedence.
@@ -2848,7 +2848,7 @@ class SecurityContext(K8sResource):
 
 
 @dataclass
-class ServiceAccountTokenProjection(K8sResource):
+class ServiceAccountTokenProjection(K8sSpec):
     """ServiceAccountTokenProjection represents a projected service account token volume. This projection can
     be used to insert a service account token into the pods runtime filesystem for use against APIs
     (Kubernetes API Server or otherwise).
@@ -2873,7 +2873,7 @@ class ServiceAccountTokenProjection(K8sResource):
 
 
 @dataclass
-class StorageOSVolumeSource(K8sResource):
+class StorageOSVolumeSource(K8sSpec):
     """Represents a StorageOS persistent volume resource.
 
     Attributes
@@ -2902,7 +2902,7 @@ class StorageOSVolumeSource(K8sResource):
 
 
 @dataclass
-class Sysctl(K8sResource):
+class Sysctl(K8sSpec):
     """Sysctl defines a kernel parameter to be set
     Attributes:
         name: Name of a property to set
@@ -2915,7 +2915,7 @@ class Sysctl(K8sResource):
 
 
 @dataclass
-class TCPSocketAction(K8sResource):
+class TCPSocketAction(K8sSpec):
     """TCPSocketAction describes an action based on opening a socket
     Attributes:
         host: Optional: Host name to connect to, defaults to the pod IP.
@@ -2929,7 +2929,7 @@ class TCPSocketAction(K8sResource):
 
 
 @dataclass
-class TopologySpreadConstraint(K8sResource):
+class TopologySpreadConstraint(K8sSpec):
     """TopologySpreadConstraint specifies how to spread matching pods among the given topology.
 
     Attributes
@@ -3013,7 +3013,7 @@ class TopologySpreadConstraint(K8sResource):
 
 
 @dataclass
-class TypedLocalObjectReference(K8sResource):
+class TypedLocalObjectReference(K8sSpec):
     """TypedLocalObjectReference contains enough information to let you locate the typed referenced object
     inside the same namespace.
 
@@ -3033,7 +3033,7 @@ class TypedLocalObjectReference(K8sResource):
 
 
 @dataclass
-class TypedObjectReference(K8sResource):
+class TypedObjectReference(K8sSpec):
     """Schema model io.k8s.api.core.v1.TypedObjectReference.
 
     Attributes
@@ -3058,7 +3058,7 @@ class TypedObjectReference(K8sResource):
 
 
 @dataclass
-class Volume(K8sResource):
+class Volume(K8sSpec):
     """Volume represents a named volume in a pod that may be accessed by any container in the pod.
 
     Attributes
@@ -3153,7 +3153,7 @@ class Volume(K8sResource):
 
 
 @dataclass
-class VolumeDevice(K8sResource):
+class VolumeDevice(K8sSpec):
     """volumeDevice describes a mapping of a raw block device within a container.
 
     Attributes
@@ -3168,7 +3168,7 @@ class VolumeDevice(K8sResource):
 
 
 @dataclass
-class VolumeMount(K8sResource):
+class VolumeMount(K8sSpec):
     """VolumeMount describes a mounting of a Volume within a container.
 
     Attributes
@@ -3196,7 +3196,7 @@ class VolumeMount(K8sResource):
 
 
 @dataclass
-class VolumeProjection(K8sResource):
+class VolumeProjection(K8sSpec):
     """Projection that may be projected along with other supported volume types
     Attributes:
         configMap: configMap information about the configMap data to project
@@ -3213,7 +3213,7 @@ class VolumeProjection(K8sResource):
 
 
 @dataclass
-class WeightedPodAffinityTerm(K8sResource):
+class WeightedPodAffinityTerm(K8sSpec):
     """The weights of all of the matched WeightedPodAffinityTerm fields are added per-node to find the most
     preferred node(s)
 
@@ -3229,7 +3229,7 @@ class WeightedPodAffinityTerm(K8sResource):
 
 
 @dataclass
-class WindowsSecurityContextOptions(K8sResource):
+class WindowsSecurityContextOptions(K8sSpec):
     """WindowsSecurityContextOptions contain Windows-specific options and credentials.
 
     Attributes
@@ -3256,7 +3256,7 @@ class WindowsSecurityContextOptions(K8sResource):
 
 
 @dataclass
-class AttachedVolume(K8sResource):
+class AttachedVolume(K8sSpec):
     """AttachedVolume describes a volume attached to a node
     Attributes:
         devicePath: DevicePath represents the device path where the volume should be available
@@ -3269,7 +3269,7 @@ class AttachedVolume(K8sResource):
 
 
 @dataclass
-class Binding(K8sResource):
+class Binding(K8sSpec):
     """Binding ties one object to another; for example, a pod is bound to a node by a scheduler. Deprecated
     in 1.7, please use the bindings subresource of pods instead.
 
@@ -3292,7 +3292,7 @@ class Binding(K8sResource):
 
 
 @dataclass
-class ClientIPConfig(K8sResource):
+class ClientIPConfig(K8sSpec):
     """ClientIPConfig represents the configurations of Client IP based session affinity.
 
     Attributes
@@ -3307,7 +3307,7 @@ class ClientIPConfig(K8sResource):
 
 
 @dataclass
-class ComponentCondition(K8sResource):
+class ComponentCondition(K8sSpec):
     """Information about the condition of a component.
 
     Attributes
@@ -3327,7 +3327,7 @@ class ComponentCondition(K8sResource):
 
 
 @dataclass
-class ComponentStatus(K8sResource):
+class ComponentStatus(K8sSpec):
     """ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is
     deprecated in v1.19+
     Attributes:
@@ -3348,7 +3348,7 @@ class ComponentStatus(K8sResource):
 
 
 @dataclass
-class ComponentStatusList(K8sResource):
+class ComponentStatusList(K8sSpec):
     """Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This
     API is deprecated in v1.19+
     Attributes:
@@ -3369,7 +3369,7 @@ class ComponentStatusList(K8sResource):
 
 
 @dataclass
-class ConfigMap(K8sResource):
+class ConfigMap(K8sSpec):
     """ConfigMap holds configuration data for pods to consume.
 
     Attributes
@@ -3403,7 +3403,7 @@ class ConfigMap(K8sResource):
 
 
 @dataclass
-class ConfigMapList(K8sResource):
+class ConfigMapList(K8sSpec):
     """ConfigMapList is a resource containing a list of ConfigMap objects.
 
     Attributes
@@ -3425,7 +3425,7 @@ class ConfigMapList(K8sResource):
 
 
 @dataclass
-class ConfigMapNodeConfigSource(K8sResource):
+class ConfigMapNodeConfigSource(K8sSpec):
     """ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the
     Node. This API is deprecated since 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-
     kubelet-configuration
@@ -3450,7 +3450,7 @@ class ConfigMapNodeConfigSource(K8sResource):
 
 
 @dataclass
-class ContainerImage(K8sResource):
+class ContainerImage(K8sSpec):
     """Describe a container image
     Attributes:
         names: Names by which this image is known. e.g. ['kubernetes.example/hyperkube:v1.0.7', 'cloud-
@@ -3464,7 +3464,7 @@ class ContainerImage(K8sResource):
 
 
 @dataclass
-class ContainerState(K8sResource):
+class ContainerState(K8sSpec):
     """ContainerState holds a possible state of container. Only one of its members may be specified. If none
     of them is specified, the default one is ContainerStateWaiting.
 
@@ -3482,7 +3482,7 @@ class ContainerState(K8sResource):
 
 
 @dataclass
-class ContainerStateRunning(K8sResource):
+class ContainerStateRunning(K8sSpec):
     """ContainerStateRunning is a running state of a container.
 
     Attributes
@@ -3495,7 +3495,7 @@ class ContainerStateRunning(K8sResource):
 
 
 @dataclass
-class ContainerStateTerminated(K8sResource):
+class ContainerStateTerminated(K8sSpec):
     """ContainerStateTerminated is a terminated state of a container.
 
     Attributes
@@ -3520,7 +3520,7 @@ class ContainerStateTerminated(K8sResource):
 
 
 @dataclass
-class ContainerStateWaiting(K8sResource):
+class ContainerStateWaiting(K8sSpec):
     """ContainerStateWaiting is a waiting state of a container.
 
     Attributes
@@ -3535,7 +3535,7 @@ class ContainerStateWaiting(K8sResource):
 
 
 @dataclass
-class ContainerStatus(K8sResource):
+class ContainerStatus(K8sSpec):
     """ContainerStatus contains details for the current status of this container.
 
     Attributes
@@ -3588,7 +3588,7 @@ class ContainerStatus(K8sResource):
 
 
 @dataclass
-class DaemonEndpoint(K8sResource):
+class DaemonEndpoint(K8sSpec):
     """DaemonEndpoint contains information about a single Daemon endpoint.
 
     Attributes
@@ -3601,7 +3601,7 @@ class DaemonEndpoint(K8sResource):
 
 
 @dataclass
-class EndpointAddress(K8sResource):
+class EndpointAddress(K8sSpec):
     """EndpointAddress is a tuple that describes single IP address.
 
     Attributes
@@ -3622,7 +3622,7 @@ class EndpointAddress(K8sResource):
 
 
 @dataclass
-class EndpointPort(K8sResource):
+class EndpointPort(K8sSpec):
     """EndpointPort is a tuple that describes a single port.
 
     Attributes
@@ -3650,7 +3650,7 @@ class EndpointPort(K8sResource):
 
 
 @dataclass
-class EndpointSubset(K8sResource):
+class EndpointSubset(K8sSpec):
     """EndpointSubset is a group of addresses with a common set of ports. The expanded set of endpoints is
     the Cartesian product of Addresses x Ports. For example, given:          {           Addresses:
     [{'ip': '10.10.1.1'}, {'ip': '10.10.2.2'}],           Ports:     [{'name': 'a', 'port': 8675},
@@ -3674,7 +3674,7 @@ class EndpointSubset(K8sResource):
 
 
 @dataclass
-class Endpoints(K8sResource):
+class Endpoints(K8sSpec):
     """Endpoints is a collection of endpoints that implement the actual service. Example:           Name:
     'mysvc',          Subsets: [            {              Addresses: [{'ip': '10.10.1.1'}, {'ip':
     '10.10.2.2'}],              Ports: [{'name': 'a', 'port': 8675}, {'name': 'b', 'port': 309}]
@@ -3705,7 +3705,7 @@ class Endpoints(K8sResource):
 
 
 @dataclass
-class EndpointsList(K8sResource):
+class EndpointsList(K8sSpec):
     """EndpointsList is a list of endpoints.
 
     Attributes
@@ -3727,7 +3727,7 @@ class EndpointsList(K8sResource):
 
 
 @dataclass
-class Event(K8sResource):
+class Event(K8sSpec):
     """Event is a report of an event somewhere in the cluster.  Events have a limited retention time and
     triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event
     with a given Reason reflecting a consistent underlying trigger, or the continued existence of events
@@ -3780,7 +3780,7 @@ class Event(K8sResource):
 
 
 @dataclass
-class EventList(K8sResource):
+class EventList(K8sSpec):
     """EventList is a list of events.
 
     Attributes
@@ -3802,7 +3802,7 @@ class EventList(K8sResource):
 
 
 @dataclass
-class EventSeries(K8sResource):
+class EventSeries(K8sSpec):
     """EventSeries contain information on series of events, i.e. thing that was/is happening continuously for
     some time.
 
@@ -3818,7 +3818,7 @@ class EventSeries(K8sResource):
 
 
 @dataclass
-class HostIP(K8sResource):
+class HostIP(K8sSpec):
     """HostIP represents a single IP address allocated to the host.
 
     Attributes
@@ -3831,7 +3831,7 @@ class HostIP(K8sResource):
 
 
 @dataclass
-class LimitRange(K8sResource):
+class LimitRange(K8sSpec):
     """LimitRange sets resource usage limits for each kind of resource in a Namespace.
 
     Attributes
@@ -3853,7 +3853,7 @@ class LimitRange(K8sResource):
 
 
 @dataclass
-class LimitRangeItem(K8sResource):
+class LimitRangeItem(K8sSpec):
     """LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
 
     Attributes
@@ -3879,7 +3879,7 @@ class LimitRangeItem(K8sResource):
 
 
 @dataclass
-class LimitRangeList(K8sResource):
+class LimitRangeList(K8sSpec):
     """LimitRangeList is a list of LimitRange items.
 
     Attributes
@@ -3901,7 +3901,7 @@ class LimitRangeList(K8sResource):
 
 
 @dataclass
-class LimitRangeSpec(K8sResource):
+class LimitRangeSpec(K8sSpec):
     """LimitRangeSpec defines a min/max usage limit for resources that match on kind.
 
     Attributes
@@ -3914,7 +3914,7 @@ class LimitRangeSpec(K8sResource):
 
 
 @dataclass
-class LoadBalancerIngress(K8sResource):
+class LoadBalancerIngress(K8sSpec):
     """LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the
     service should be sent to an ingress point.
 
@@ -3935,7 +3935,7 @@ class LoadBalancerIngress(K8sResource):
 
 
 @dataclass
-class LoadBalancerStatus(K8sResource):
+class LoadBalancerStatus(K8sSpec):
     """LoadBalancerStatus represents the status of a load-balancer.
 
     Attributes
@@ -3949,7 +3949,7 @@ class LoadBalancerStatus(K8sResource):
 
 
 @dataclass
-class Namespace(K8sSpec):
+class Namespace(K8sResource):
     """Namespace provides a scope for Names. Use of multiple namespaces is optional.
 
     Attributes
@@ -3973,7 +3973,7 @@ class Namespace(K8sSpec):
 
 
 @dataclass
-class NamespaceCondition(K8sResource):
+class NamespaceCondition(K8sSpec):
     """NamespaceCondition contains details about state of namespace.
 
     Attributes
@@ -3994,7 +3994,7 @@ class NamespaceCondition(K8sResource):
 
 
 @dataclass
-class NamespaceList(K8sResource):
+class NamespaceList(K8sSpec):
     """NamespaceList is a list of Namespaces.
 
     Attributes
@@ -4016,7 +4016,7 @@ class NamespaceList(K8sResource):
 
 
 @dataclass
-class NamespaceSpec(K8sResource):
+class NamespaceSpec(K8sSpec):
     """NamespaceSpec describes the attributes on a Namespace.
 
     Attributes
@@ -4030,7 +4030,7 @@ class NamespaceSpec(K8sResource):
 
 
 @dataclass
-class NamespaceStatus(K8sResource):
+class NamespaceStatus(K8sSpec):
     """NamespaceStatus is information about the current status of a Namespace.
 
     Attributes
@@ -4045,7 +4045,7 @@ class NamespaceStatus(K8sResource):
 
 
 @dataclass
-class Node(K8sSpec):
+class Node(K8sResource):
     """Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in
     etcd).
 
@@ -4071,7 +4071,7 @@ class Node(K8sSpec):
 
 
 @dataclass
-class NodeAddress(K8sResource):
+class NodeAddress(K8sSpec):
     """NodeAddress contains information for the node's address.
 
     Attributes
@@ -4086,7 +4086,7 @@ class NodeAddress(K8sResource):
 
 
 @dataclass
-class NodeCondition(K8sResource):
+class NodeCondition(K8sSpec):
     """NodeCondition contains condition information for a node.
 
     Attributes
@@ -4109,7 +4109,7 @@ class NodeCondition(K8sResource):
 
 
 @dataclass
-class NodeConfigSource(K8sResource):
+class NodeConfigSource(K8sSpec):
     """NodeConfigSource specifies a source of node configuration. Exactly one subfield (excluding metadata)
     must be non-nil. This API is deprecated since 1.22
     Attributes:
@@ -4121,7 +4121,7 @@ class NodeConfigSource(K8sResource):
 
 
 @dataclass
-class NodeConfigStatus(K8sResource):
+class NodeConfigStatus(K8sSpec):
     """NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
 
     Attributes
@@ -4166,7 +4166,7 @@ class NodeConfigStatus(K8sResource):
 
 
 @dataclass
-class NodeDaemonEndpoints(K8sResource):
+class NodeDaemonEndpoints(K8sSpec):
     """NodeDaemonEndpoints lists ports opened by daemons running on the Node.
 
     Attributes
@@ -4179,7 +4179,7 @@ class NodeDaemonEndpoints(K8sResource):
 
 
 @dataclass
-class NodeList(K8sResource):
+class NodeList(K8sSpec):
     """NodeList is the whole list of all Nodes which have been registered with master.
 
     Attributes
@@ -4201,7 +4201,7 @@ class NodeList(K8sResource):
 
 
 @dataclass
-class NodeSpec(K8sResource):
+class NodeSpec(K8sSpec):
     """NodeSpec describes the attributes that a node is created with.
 
     Attributes
@@ -4232,7 +4232,7 @@ class NodeSpec(K8sResource):
 
 
 @dataclass
-class NodeStatus(K8sResource):
+class NodeStatus(K8sSpec):
     """NodeStatus is information about the current status of a node.
 
     Attributes
@@ -4266,7 +4266,7 @@ class NodeStatus(K8sResource):
 
 
 @dataclass
-class NodeSystemInfo(K8sResource):
+class NodeSystemInfo(K8sSpec):
     """NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
 
     Attributes
@@ -4302,7 +4302,7 @@ class NodeSystemInfo(K8sResource):
 
 
 @dataclass
-class PersistentVolume(K8sSpec):
+class PersistentVolume(K8sResource):
     """PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a
     node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
     Attributes:
@@ -4327,7 +4327,7 @@ class PersistentVolume(K8sSpec):
 
 
 @dataclass
-class PersistentVolumeClaimList(K8sResource):
+class PersistentVolumeClaimList(K8sSpec):
     """PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
 
     Attributes
@@ -4349,7 +4349,7 @@ class PersistentVolumeClaimList(K8sResource):
 
 
 @dataclass
-class PersistentVolumeList(K8sResource):
+class PersistentVolumeList(K8sSpec):
     """PersistentVolumeList is a list of PersistentVolume items.
 
     Attributes
@@ -4371,7 +4371,7 @@ class PersistentVolumeList(K8sResource):
 
 
 @dataclass
-class PersistentVolumeStatus(K8sResource):
+class PersistentVolumeStatus(K8sSpec):
     """PersistentVolumeStatus is the current status of a persistent volume.
 
     Attributes
@@ -4393,7 +4393,7 @@ class PersistentVolumeStatus(K8sResource):
 
 
 @dataclass
-class Pod(K8sSpec):
+class Pod(K8sResource):
     """Pod is a collection of containers that can run on a host. This resource is created by clients and
     scheduled onto hosts.
 
@@ -4419,7 +4419,7 @@ class Pod(K8sSpec):
 
 
 @dataclass
-class PodCondition(K8sResource):
+class PodCondition(K8sSpec):
     """PodCondition contains details for the current condition of this pod.
 
     Attributes
@@ -4442,7 +4442,7 @@ class PodCondition(K8sResource):
 
 
 @dataclass
-class PodIP(K8sResource):
+class PodIP(K8sSpec):
     """PodIP represents a single IP address allocated to the pod.
 
     Attributes
@@ -4455,7 +4455,7 @@ class PodIP(K8sResource):
 
 
 @dataclass
-class PodList(K8sResource):
+class PodList(K8sSpec):
     """PodList is a list of Pods.
 
     Attributes
@@ -4477,7 +4477,7 @@ class PodList(K8sResource):
 
 
 @dataclass
-class PodResourceClaimStatus(K8sResource):
+class PodResourceClaimStatus(K8sSpec):
     """PodResourceClaimStatus is stored in the PodStatus for each PodResourceClaim which references a
     ResourceClaimTemplate. It stores the generated name for the corresponding ResourceClaim.
 
@@ -4496,7 +4496,7 @@ class PodResourceClaimStatus(K8sResource):
 
 
 @dataclass
-class PodStatus(K8sResource):
+class PodStatus(K8sSpec):
     """PodStatus represents information about the status of a pod. Status may trail the actual state of a
     system, especially if the node that hosts the pod cannot contact the control plane.
 
@@ -4570,7 +4570,7 @@ class PodStatus(K8sResource):
 
 
 @dataclass
-class PodTemplate(K8sResource):
+class PodTemplate(K8sSpec):
     """PodTemplate describes a template for creating copies of a predefined pod.
 
     Attributes
@@ -4594,7 +4594,7 @@ class PodTemplate(K8sResource):
 
 
 @dataclass
-class PodTemplateList(K8sResource):
+class PodTemplateList(K8sSpec):
     """PodTemplateList is a list of PodTemplates.
 
     Attributes
@@ -4616,7 +4616,7 @@ class PodTemplateList(K8sResource):
 
 
 @dataclass
-class PortStatus(K8sResource):
+class PortStatus(K8sSpec):
     """Schema model io.k8s.api.core.v1.PortStatus.
 
     Attributes
@@ -4637,7 +4637,7 @@ class PortStatus(K8sResource):
 
 
 @dataclass
-class ReplicationController(K8sSpec):
+class ReplicationController(K8sResource):
     """ReplicationController represents the configuration of a replication controller.
 
     Attributes
@@ -4663,7 +4663,7 @@ class ReplicationController(K8sSpec):
 
 
 @dataclass
-class ReplicationControllerCondition(K8sResource):
+class ReplicationControllerCondition(K8sSpec):
     """ReplicationControllerCondition describes the state of a replication controller at a certain point.
 
     Attributes
@@ -4684,7 +4684,7 @@ class ReplicationControllerCondition(K8sResource):
 
 
 @dataclass
-class ReplicationControllerList(K8sResource):
+class ReplicationControllerList(K8sSpec):
     """ReplicationControllerList is a collection of replication controllers.
 
     Attributes
@@ -4706,7 +4706,7 @@ class ReplicationControllerList(K8sResource):
 
 
 @dataclass
-class ReplicationControllerSpec(K8sResource):
+class ReplicationControllerSpec(K8sSpec):
     """ReplicationControllerSpec is the specification of a replication controller.
 
     Attributes
@@ -4733,7 +4733,7 @@ class ReplicationControllerSpec(K8sResource):
 
 
 @dataclass
-class ReplicationControllerStatus(K8sResource):
+class ReplicationControllerStatus(K8sSpec):
     """ReplicationControllerStatus represents the current status of a replication controller.
 
     Attributes
@@ -4759,7 +4759,7 @@ class ReplicationControllerStatus(K8sResource):
 
 
 @dataclass
-class ResourceQuota(K8sSpec):
+class ResourceQuota(K8sResource):
     """ResourceQuota sets aggregate quota restrictions enforced per namespace
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -4784,7 +4784,7 @@ class ResourceQuota(K8sSpec):
 
 
 @dataclass
-class ResourceQuotaList(K8sResource):
+class ResourceQuotaList(K8sSpec):
     """ResourceQuotaList is a list of ResourceQuota items.
 
     Attributes
@@ -4806,7 +4806,7 @@ class ResourceQuotaList(K8sResource):
 
 
 @dataclass
-class ResourceQuotaSpec(K8sResource):
+class ResourceQuotaSpec(K8sSpec):
     """ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
 
     Attributes
@@ -4826,7 +4826,7 @@ class ResourceQuotaSpec(K8sResource):
 
 
 @dataclass
-class ResourceQuotaStatus(K8sResource):
+class ResourceQuotaStatus(K8sSpec):
     """ResourceQuotaStatus defines the enforced hard limits and observed use.
 
     Attributes
@@ -4841,7 +4841,7 @@ class ResourceQuotaStatus(K8sResource):
 
 
 @dataclass
-class ScopeSelector(K8sResource):
+class ScopeSelector(K8sSpec):
     """A scope selector represents the AND of the selectors represented by the scoped-resource selector
     requirements.
 
@@ -4855,7 +4855,7 @@ class ScopeSelector(K8sResource):
 
 
 @dataclass
-class ScopedResourceSelectorRequirement(K8sResource):
+class ScopedResourceSelectorRequirement(K8sSpec):
     """A scoped-resource selector requirement is a selector that contains values, a scope name, and an
     operator that relates the scope name and values.
 
@@ -4876,7 +4876,7 @@ class ScopedResourceSelectorRequirement(K8sResource):
 
 
 @dataclass
-class Secret(K8sResource):
+class Secret(K8sSpec):
     """Secret holds secret data of a certain type. The total bytes of the values in the Data field must be
     less than MaxSecretSize bytes.
 
@@ -4912,7 +4912,7 @@ class Secret(K8sResource):
 
 
 @dataclass
-class SecretList(K8sResource):
+class SecretList(K8sSpec):
     """SecretList is a list of Secret.
 
     Attributes
@@ -4934,7 +4934,7 @@ class SecretList(K8sResource):
 
 
 @dataclass
-class Service(K8sSpec):
+class Service(K8sResource):
     """Service is a named abstraction of software service (for example, mysql) consisting of local port (for
     example 3306) that the proxy listens on, and the selector that determines which pods will answer
     requests sent through the proxy.
@@ -4961,7 +4961,7 @@ class Service(K8sSpec):
 
 
 @dataclass
-class ServiceAccount(K8sResource):
+class ServiceAccount(K8sSpec):
     """ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for
     an identity * a principal that can be authenticated and authorized * a set of secrets
     Attributes:
@@ -4996,7 +4996,7 @@ class ServiceAccount(K8sResource):
 
 
 @dataclass
-class ServiceAccountList(K8sResource):
+class ServiceAccountList(K8sSpec):
     """ServiceAccountList is a list of ServiceAccount objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -5016,7 +5016,7 @@ class ServiceAccountList(K8sResource):
 
 
 @dataclass
-class ServiceList(K8sResource):
+class ServiceList(K8sSpec):
     """ServiceList holds a list of services.
 
     Attributes
@@ -5038,7 +5038,7 @@ class ServiceList(K8sResource):
 
 
 @dataclass
-class ServicePort(K8sResource):
+class ServicePort(K8sSpec):
     """ServicePort contains information on service's port.
 
     Attributes
@@ -5080,7 +5080,7 @@ class ServicePort(K8sResource):
 
 
 @dataclass
-class ServiceSpec(K8sResource):
+class ServiceSpec(K8sSpec):
     """ServiceSpec describes the attributes that a user creates on a service.
 
     Attributes
@@ -5233,7 +5233,7 @@ class ServiceSpec(K8sResource):
 
 
 @dataclass
-class ServiceStatus(K8sResource):
+class ServiceStatus(K8sSpec):
     """ServiceStatus represents the current status of a service.
 
     Attributes
@@ -5248,7 +5248,7 @@ class ServiceStatus(K8sResource):
 
 
 @dataclass
-class SessionAffinityConfig(K8sResource):
+class SessionAffinityConfig(K8sSpec):
     """SessionAffinityConfig represents the configurations of session affinity.
 
     Attributes
@@ -5261,7 +5261,7 @@ class SessionAffinityConfig(K8sResource):
 
 
 @dataclass
-class Taint(K8sResource):
+class Taint(K8sSpec):
     """The node this Taint is attached to has the 'effect' on any pod that does not tolerate the Taint.
 
     Attributes

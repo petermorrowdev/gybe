@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
 @dataclass
-class VolumeAttributesClass(K8sResource):
+class VolumeAttributesClass(K8sSpec):
     """VolumeAttributesClass represents a specification of mutable volume attributes defined by the CSI
     driver. The class can be specified during dynamic provisioning of PersistentVolumeClaims, and changed
     in the PersistentVolumeClaim spec after provisioning.
@@ -44,7 +44,7 @@ class VolumeAttributesClass(K8sResource):
 
 
 @dataclass
-class VolumeAttributesClassList(K8sResource):
+class VolumeAttributesClassList(K8sSpec):
     """VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
 
     Attributes

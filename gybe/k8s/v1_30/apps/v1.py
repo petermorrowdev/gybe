@@ -11,7 +11,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class ControllerRevision(K8sResource):
+class ControllerRevision(K8sSpec):
     """ControllerRevision implements an immutable snapshot of state data. Clients are responsible for
     serializing and deserializing the objects that contain their internal state. Once a ControllerRevision
     has been successfully created, it can not be updated. The API Server will fail validation of all
@@ -41,7 +41,7 @@ class ControllerRevision(K8sResource):
 
 
 @dataclass
-class ControllerRevisionList(K8sResource):
+class ControllerRevisionList(K8sSpec):
     """ControllerRevisionList is a resource containing a list of ControllerRevision objects.
 
     Attributes
@@ -63,7 +63,7 @@ class ControllerRevisionList(K8sResource):
 
 
 @dataclass
-class DaemonSet(K8sSpec):
+class DaemonSet(K8sResource):
     """DaemonSet represents the configuration of a daemon set.
 
     Attributes
@@ -88,7 +88,7 @@ class DaemonSet(K8sSpec):
 
 
 @dataclass
-class DaemonSetCondition(K8sResource):
+class DaemonSetCondition(K8sSpec):
     """DaemonSetCondition describes the state of a DaemonSet at a certain point.
 
     Attributes
@@ -109,7 +109,7 @@ class DaemonSetCondition(K8sResource):
 
 
 @dataclass
-class DaemonSetList(K8sResource):
+class DaemonSetList(K8sSpec):
     """DaemonSetList is a collection of daemon sets.
 
     Attributes
@@ -131,7 +131,7 @@ class DaemonSetList(K8sResource):
 
 
 @dataclass
-class DaemonSetSpec(K8sResource):
+class DaemonSetSpec(K8sSpec):
     """DaemonSetSpec is the specification of a daemon set.
 
     Attributes
@@ -158,7 +158,7 @@ class DaemonSetSpec(K8sResource):
 
 
 @dataclass
-class DaemonSetStatus(K8sResource):
+class DaemonSetStatus(K8sSpec):
     """DaemonSetStatus represents the current status of a daemon set.
 
     Attributes
@@ -197,7 +197,7 @@ class DaemonSetStatus(K8sResource):
 
 
 @dataclass
-class DaemonSetUpdateStrategy(K8sResource):
+class DaemonSetUpdateStrategy(K8sSpec):
     """DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
 
     Attributes
@@ -212,7 +212,7 @@ class DaemonSetUpdateStrategy(K8sResource):
 
 
 @dataclass
-class Deployment(K8sSpec):
+class Deployment(K8sResource):
     """Deployment enables declarative updates for Pods and ReplicaSets.
 
     Attributes
@@ -236,7 +236,7 @@ class Deployment(K8sSpec):
 
 
 @dataclass
-class DeploymentCondition(K8sResource):
+class DeploymentCondition(K8sSpec):
     """DeploymentCondition describes the state of a deployment at a certain point.
 
     Attributes
@@ -259,7 +259,7 @@ class DeploymentCondition(K8sResource):
 
 
 @dataclass
-class DeploymentList(K8sResource):
+class DeploymentList(K8sSpec):
     """DeploymentList is a list of Deployments.
 
     Attributes
@@ -281,7 +281,7 @@ class DeploymentList(K8sResource):
 
 
 @dataclass
-class DeploymentSpec(K8sResource):
+class DeploymentSpec(K8sSpec):
     """DeploymentSpec is the specification of the desired behavior of the Deployment.
 
     Attributes
@@ -317,7 +317,7 @@ class DeploymentSpec(K8sResource):
 
 
 @dataclass
-class DeploymentStatus(K8sResource):
+class DeploymentStatus(K8sSpec):
     """DeploymentStatus is the most recently observed status of the Deployment.
 
     Attributes
@@ -351,7 +351,7 @@ class DeploymentStatus(K8sResource):
 
 
 @dataclass
-class DeploymentStrategy(K8sResource):
+class DeploymentStrategy(K8sSpec):
     """DeploymentStrategy describes how to replace existing pods with new ones.
 
     Attributes
@@ -366,7 +366,7 @@ class DeploymentStrategy(K8sResource):
 
 
 @dataclass
-class ReplicaSet(K8sSpec):
+class ReplicaSet(K8sResource):
     """ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 
     Attributes
@@ -392,7 +392,7 @@ class ReplicaSet(K8sSpec):
 
 
 @dataclass
-class ReplicaSetCondition(K8sResource):
+class ReplicaSetCondition(K8sSpec):
     """ReplicaSetCondition describes the state of a replica set at a certain point.
 
     Attributes
@@ -413,7 +413,7 @@ class ReplicaSetCondition(K8sResource):
 
 
 @dataclass
-class ReplicaSetList(K8sResource):
+class ReplicaSetList(K8sSpec):
     """ReplicaSetList is a collection of ReplicaSets.
 
     Attributes
@@ -435,7 +435,7 @@ class ReplicaSetList(K8sResource):
 
 
 @dataclass
-class ReplicaSetSpec(K8sResource):
+class ReplicaSetSpec(K8sSpec):
     """ReplicaSetSpec is the specification of a ReplicaSet.
 
     Attributes
@@ -460,7 +460,7 @@ class ReplicaSetSpec(K8sResource):
 
 
 @dataclass
-class ReplicaSetStatus(K8sResource):
+class ReplicaSetStatus(K8sSpec):
     """ReplicaSetStatus represents the current status of a ReplicaSet.
 
     Attributes
@@ -486,7 +486,7 @@ class ReplicaSetStatus(K8sResource):
 
 
 @dataclass
-class RollingUpdateDaemonSet(K8sResource):
+class RollingUpdateDaemonSet(K8sSpec):
     """Spec to control the desired behavior of daemon set rolling update.
 
     Attributes
@@ -521,7 +521,7 @@ class RollingUpdateDaemonSet(K8sResource):
 
 
 @dataclass
-class RollingUpdateDeployment(K8sResource):
+class RollingUpdateDeployment(K8sSpec):
     """Spec to control the desired behavior of rolling update.
 
     Attributes
@@ -548,7 +548,7 @@ class RollingUpdateDeployment(K8sResource):
 
 
 @dataclass
-class RollingUpdateStatefulSetStrategy(K8sResource):
+class RollingUpdateStatefulSetStrategy(K8sSpec):
     """RollingUpdateStatefulSetStrategy is used to communicate parameter for
     RollingUpdateStatefulSetStrategyType.
 
@@ -572,7 +572,7 @@ class RollingUpdateStatefulSetStrategy(K8sResource):
 
 
 @dataclass
-class StatefulSet(K8sSpec):
+class StatefulSet(K8sResource):
     """StatefulSet represents a set of pods with consistent identities. Identities are defined as:   -
     Network: A single stable DNS and hostname.   - Storage: As many VolumeClaims as requested.  The
     StatefulSet guarantees that a given network identity will always map to the same storage identity.
@@ -599,7 +599,7 @@ class StatefulSet(K8sSpec):
 
 
 @dataclass
-class StatefulSetCondition(K8sResource):
+class StatefulSetCondition(K8sSpec):
     """StatefulSetCondition describes the state of a statefulset at a certain point.
 
     Attributes
@@ -620,7 +620,7 @@ class StatefulSetCondition(K8sResource):
 
 
 @dataclass
-class StatefulSetList(K8sResource):
+class StatefulSetList(K8sSpec):
     """StatefulSetList is a collection of StatefulSets.
 
     Attributes
@@ -642,7 +642,7 @@ class StatefulSetList(K8sResource):
 
 
 @dataclass
-class StatefulSetOrdinals(K8sResource):
+class StatefulSetOrdinals(K8sSpec):
     """StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.
 
     Attributes
@@ -659,7 +659,7 @@ class StatefulSetOrdinals(K8sResource):
 
 
 @dataclass
-class StatefulSetPersistentVolumeClaimRetentionPolicy(K8sResource):
+class StatefulSetPersistentVolumeClaimRetentionPolicy(K8sSpec):
     """StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the
     StatefulSet VolumeClaimTemplates.
 
@@ -680,7 +680,7 @@ class StatefulSetPersistentVolumeClaimRetentionPolicy(K8sResource):
 
 
 @dataclass
-class StatefulSetSpec(K8sResource):
+class StatefulSetSpec(K8sSpec):
     """A StatefulSetSpec is the specification of a StatefulSet.
 
     Attributes
@@ -745,7 +745,7 @@ class StatefulSetSpec(K8sResource):
 
 
 @dataclass
-class StatefulSetStatus(K8sResource):
+class StatefulSetStatus(K8sSpec):
     """StatefulSetStatus represents the current state of a StatefulSet.
 
     Attributes
@@ -785,7 +785,7 @@ class StatefulSetStatus(K8sResource):
 
 
 @dataclass
-class StatefulSetUpdateStrategy(K8sResource):
+class StatefulSetUpdateStrategy(K8sSpec):
     """StatefulSetUpdateStrategy indicates the strategy that the StatefulSet controller will use to perform
     updates. It includes any additional parameters necessary to perform the update for the indicated
     strategy.

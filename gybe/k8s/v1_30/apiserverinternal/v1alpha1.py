@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class ServerStorageVersion(K8sResource):
+class ServerStorageVersion(K8sSpec):
     """An API server instance reports the version it can decode and the version it encodes objects to when
     persisting objects in the backend.
 
@@ -33,7 +33,7 @@ class ServerStorageVersion(K8sResource):
 
 
 @dataclass
-class StorageVersion(K8sSpec):
+class StorageVersion(K8sResource):
     """Storage version of a specific resource.
 
     Attributes
@@ -58,7 +58,7 @@ class StorageVersion(K8sSpec):
 
 
 @dataclass
-class StorageVersionCondition(K8sResource):
+class StorageVersionCondition(K8sSpec):
     """Describes the state of the storageVersion at a certain point.
 
     Attributes
@@ -82,7 +82,7 @@ class StorageVersionCondition(K8sResource):
 
 
 @dataclass
-class StorageVersionList(K8sResource):
+class StorageVersionList(K8sSpec):
     """A list of StorageVersions.
 
     Attributes
@@ -104,7 +104,7 @@ class StorageVersionList(K8sResource):
 
 
 @dataclass
-class StorageVersionStatus(K8sResource):
+class StorageVersionStatus(K8sSpec):
     """API server instances report the versions they can decode and the version they encode objects to when
     persisting objects in the backend.
 

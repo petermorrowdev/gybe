@@ -148,7 +148,7 @@ class K8sModule:
         required: list[str],
         resource_properties: dict[str, str],
     ) -> ast.ClassDef:
-        base_cls = 'K8sSpec' if len(resource_properties) > 0 else 'K8sResource'
+        base_cls = 'K8sSpec' if len(resource_properties) == 0 else 'K8sResource'
         cdef = ast.parse('@dataclass\nclass ' + name + f'({base_cls}):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')

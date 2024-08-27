@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 
 
 @dataclass
-class Endpoint(K8sResource):
+class Endpoint(K8sSpec):
     """Endpoint represents a single logical 'backend' implementing a service.
 
     Attributes
@@ -50,7 +50,7 @@ class Endpoint(K8sResource):
 
 
 @dataclass
-class EndpointConditions(K8sResource):
+class EndpointConditions(K8sSpec):
     """EndpointConditions represents the current condition of an endpoint.
 
     Attributes
@@ -74,7 +74,7 @@ class EndpointConditions(K8sResource):
 
 
 @dataclass
-class EndpointHints(K8sResource):
+class EndpointHints(K8sSpec):
     """EndpointHints provides hints describing how an endpoint should be consumed.
 
     Attributes
@@ -88,7 +88,7 @@ class EndpointHints(K8sResource):
 
 
 @dataclass
-class EndpointPort(K8sResource):
+class EndpointPort(K8sSpec):
     """EndpointPort represents a Port used by an EndpointSlice
     Attributes:
         appProtocol: The application protocol for this port. This is used as a hint for implementations to
@@ -120,7 +120,7 @@ class EndpointPort(K8sResource):
 
 
 @dataclass
-class EndpointSlice(K8sResource):
+class EndpointSlice(K8sSpec):
     """EndpointSlice represents a subset of the endpoints that implement a service. For a given service there
     may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full
     set of endpoints.
@@ -155,7 +155,7 @@ class EndpointSlice(K8sResource):
 
 
 @dataclass
-class EndpointSliceList(K8sResource):
+class EndpointSliceList(K8sSpec):
     """EndpointSliceList represents a list of endpoint slices
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -175,7 +175,7 @@ class EndpointSliceList(K8sResource):
 
 
 @dataclass
-class ForZone(K8sResource):
+class ForZone(K8sSpec):
     """ForZone provides information about which zones should consume this endpoint.
 
     Attributes

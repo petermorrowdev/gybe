@@ -7,11 +7,11 @@ from typing import Optional
 
 import gybe.k8s.v1_27.authentication.v1
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import K8sResource
+from gybe.k8s.types import K8sSpec
 
 
 @dataclass
-class SelfSubjectReview(K8sResource):
+class SelfSubjectReview(K8sSpec):
     """SelfSubjectReview contains the user information that the kube-apiserver has about the user making this
     request. When using impersonation, users will receive the user info of the user being impersonated.
     If impersonation or request header authentication is used, any extra keys will have their case ignored
@@ -36,7 +36,7 @@ class SelfSubjectReview(K8sResource):
 
 
 @dataclass
-class SelfSubjectReviewStatus(K8sResource):
+class SelfSubjectReviewStatus(K8sSpec):
     """SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 
     Attributes

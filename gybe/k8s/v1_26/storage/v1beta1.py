@@ -7,11 +7,11 @@ from typing import List, Optional
 
 import gybe.k8s.v1_26.api.resource
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import JSONObj, K8sSpec
 
 
 @dataclass
-class CSIStorageCapacity(K8sResource):
+class CSIStorageCapacity(K8sSpec):
     """CSIStorageCapacity stores the result of one CSI GetCapacity call. For a given StorageClass, this
     describes the available capacity in a particular topology segment.  This can be used when considering
     where to instantiate new PersistentVolumes.  For example this can express things like: - StorageClass
@@ -67,7 +67,7 @@ class CSIStorageCapacity(K8sResource):
 
 
 @dataclass
-class CSIStorageCapacityList(K8sResource):
+class CSIStorageCapacityList(K8sSpec):
     """CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 
     Attributes

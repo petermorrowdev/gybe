@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class GroupVersionResource(K8sResource):
+class GroupVersionResource(K8sSpec):
     """The names of the group, the version, and the resource.
 
     Attributes
@@ -27,7 +27,7 @@ class GroupVersionResource(K8sResource):
 
 
 @dataclass
-class MigrationCondition(K8sResource):
+class MigrationCondition(K8sSpec):
     """Describes the state of a migration at a certain point.
 
     Attributes
@@ -48,7 +48,7 @@ class MigrationCondition(K8sResource):
 
 
 @dataclass
-class StorageVersionMigration(K8sSpec):
+class StorageVersionMigration(K8sResource):
     """StorageVersionMigration represents a migration of stored data to the latest storage version.
 
     Attributes
@@ -72,7 +72,7 @@ class StorageVersionMigration(K8sSpec):
 
 
 @dataclass
-class StorageVersionMigrationList(K8sResource):
+class StorageVersionMigrationList(K8sSpec):
     """StorageVersionMigrationList is a collection of storage version migrations.
 
     Attributes
@@ -94,7 +94,7 @@ class StorageVersionMigrationList(K8sResource):
 
 
 @dataclass
-class StorageVersionMigrationSpec(K8sResource):
+class StorageVersionMigrationSpec(K8sSpec):
     """Spec of the storage version migration.
 
     Attributes
@@ -112,7 +112,7 @@ class StorageVersionMigrationSpec(K8sResource):
 
 
 @dataclass
-class StorageVersionMigrationStatus(K8sResource):
+class StorageVersionMigrationStatus(K8sSpec):
     """Status of the storage version migration.
 
     Attributes

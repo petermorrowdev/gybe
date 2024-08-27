@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CertificateSigningRequest(K8sSpec):
+class CertificateSigningRequest(K8sResource):
     """CertificateSigningRequest objects provide a mechanism to obtain x509 certificates by submitting a
     certificate signing request, and having it asynchronously approved and issued.  Kubelets use this API
     to obtain:  1. client certificates to authenticate to kube-apiserver (with the 'kubernetes.io/kube-
@@ -43,7 +43,7 @@ class CertificateSigningRequest(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestCondition(K8sResource):
+class CertificateSigningRequestCondition(K8sSpec):
     """CertificateSigningRequestCondition describes a condition of a CertificateSigningRequest object
     Attributes:
         lastTransitionTime: lastTransitionTime is the time the condition last transitioned from one status to
@@ -73,7 +73,7 @@ class CertificateSigningRequestCondition(K8sResource):
 
 
 @dataclass
-class CertificateSigningRequestList(K8sResource):
+class CertificateSigningRequestList(K8sSpec):
     """CertificateSigningRequestList is a collection of CertificateSigningRequest objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -93,7 +93,7 @@ class CertificateSigningRequestList(K8sResource):
 
 
 @dataclass
-class CertificateSigningRequestSpec(K8sResource):
+class CertificateSigningRequestSpec(K8sSpec):
     """CertificateSigningRequestSpec contains the certificate request.
 
     Attributes
@@ -162,7 +162,7 @@ class CertificateSigningRequestSpec(K8sResource):
 
 
 @dataclass
-class CertificateSigningRequestStatus(K8sResource):
+class CertificateSigningRequestStatus(K8sSpec):
     """CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of
     the request, and the issued certificate.
 

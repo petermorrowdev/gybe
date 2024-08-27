@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class APIService(K8sSpec):
+class APIService(K8sResource):
     """APIService represents a server for a particular GroupVersion. Name must be 'version.group'.
 
     Attributes
@@ -34,7 +34,7 @@ class APIService(K8sSpec):
 
 
 @dataclass
-class APIServiceCondition(K8sResource):
+class APIServiceCondition(K8sSpec):
     """APIServiceCondition describes the state of an APIService at a particular point
     Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
@@ -53,7 +53,7 @@ class APIServiceCondition(K8sResource):
 
 
 @dataclass
-class APIServiceList(K8sResource):
+class APIServiceList(K8sSpec):
     """APIServiceList is a list of APIService objects.
 
     Attributes
@@ -75,7 +75,7 @@ class APIServiceList(K8sResource):
 
 
 @dataclass
-class APIServiceSpec(K8sResource):
+class APIServiceSpec(K8sSpec):
     """APIServiceSpec contains information for locating and communicating with a server. Only https is
     supported, though you are able to disable certificate verification.
 
@@ -120,7 +120,7 @@ class APIServiceSpec(K8sResource):
 
 
 @dataclass
-class APIServiceStatus(K8sResource):
+class APIServiceStatus(K8sSpec):
     """APIServiceStatus contains derived information about an API server
     Attributes:
         conditions: Current service state of apiService.
@@ -131,7 +131,7 @@ class APIServiceStatus(K8sResource):
 
 
 @dataclass
-class ServiceReference(K8sResource):
+class ServiceReference(K8sSpec):
     """ServiceReference holds a reference to Service.legacy.k8s.io
     Attributes:
         name: Name is the name of the service

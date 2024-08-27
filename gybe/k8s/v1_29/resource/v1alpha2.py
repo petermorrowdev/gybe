@@ -11,7 +11,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class AllocationResult(K8sResource):
+class AllocationResult(K8sSpec):
     """AllocationResult contains attributes of an allocated resource.
 
     Attributes
@@ -37,7 +37,7 @@ class AllocationResult(K8sResource):
 
 
 @dataclass
-class PodSchedulingContext(K8sSpec):
+class PodSchedulingContext(K8sResource):
     """PodSchedulingContext objects hold information that is needed to schedule a Pod with ResourceClaims
     that use 'WaitForFirstConsumer' allocation mode.  This is an alpha type and requires enabling the
     DynamicResourceAllocation feature gate.
@@ -63,7 +63,7 @@ class PodSchedulingContext(K8sSpec):
 
 
 @dataclass
-class PodSchedulingContextList(K8sResource):
+class PodSchedulingContextList(K8sSpec):
     """PodSchedulingContextList is a collection of Pod scheduling objects.
 
     Attributes
@@ -85,7 +85,7 @@ class PodSchedulingContextList(K8sResource):
 
 
 @dataclass
-class PodSchedulingContextSpec(K8sResource):
+class PodSchedulingContextSpec(K8sSpec):
     """PodSchedulingContextSpec describes where resources for the Pod are needed.
 
     Attributes
@@ -104,7 +104,7 @@ class PodSchedulingContextSpec(K8sResource):
 
 
 @dataclass
-class PodSchedulingContextStatus(K8sResource):
+class PodSchedulingContextStatus(K8sSpec):
     """PodSchedulingContextStatus describes where resources for the Pod can be allocated.
 
     Attributes
@@ -118,7 +118,7 @@ class PodSchedulingContextStatus(K8sResource):
 
 
 @dataclass
-class ResourceClaim(K8sSpec):
+class ResourceClaim(K8sResource):
     """ResourceClaim describes which resources are needed by a resource consumer. Its status tracks whether
     the resource has been allocated and what the resulting attributes are.  This is an alpha type and
     requires enabling the DynamicResourceAllocation feature gate.
@@ -145,7 +145,7 @@ class ResourceClaim(K8sSpec):
 
 
 @dataclass
-class ResourceClaimConsumerReference(K8sResource):
+class ResourceClaimConsumerReference(K8sSpec):
     """ResourceClaimConsumerReference contains enough information to let you locate the consumer of a
     ResourceClaim. The user must be a resource in the same namespace as the ResourceClaim.
 
@@ -166,7 +166,7 @@ class ResourceClaimConsumerReference(K8sResource):
 
 
 @dataclass
-class ResourceClaimList(K8sResource):
+class ResourceClaimList(K8sSpec):
     """ResourceClaimList is a collection of claims.
 
     Attributes
@@ -188,7 +188,7 @@ class ResourceClaimList(K8sResource):
 
 
 @dataclass
-class ResourceClaimParametersReference(K8sResource):
+class ResourceClaimParametersReference(K8sSpec):
     """ResourceClaimParametersReference contains enough information to let you locate the parameters for a
     ResourceClaim. The object must be in the same namespace as the ResourceClaim.
 
@@ -208,7 +208,7 @@ class ResourceClaimParametersReference(K8sResource):
 
 
 @dataclass
-class ResourceClaimSchedulingStatus(K8sResource):
+class ResourceClaimSchedulingStatus(K8sSpec):
     """ResourceClaimSchedulingStatus contains information about one particular ResourceClaim with
     'WaitForFirstConsumer' allocation mode.
 
@@ -226,7 +226,7 @@ class ResourceClaimSchedulingStatus(K8sResource):
 
 
 @dataclass
-class ResourceClaimSpec(K8sResource):
+class ResourceClaimSpec(K8sSpec):
     """ResourceClaimSpec defines how a resource is to be allocated.
 
     Attributes
@@ -247,7 +247,7 @@ class ResourceClaimSpec(K8sResource):
 
 
 @dataclass
-class ResourceClaimStatus(K8sResource):
+class ResourceClaimStatus(K8sSpec):
     """ResourceClaimStatus tracks whether the resource has been allocated and what the resulting attributes
     are.
 
@@ -273,7 +273,7 @@ class ResourceClaimStatus(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplate(K8sResource):
+class ResourceClaimTemplate(K8sSpec):
     """ResourceClaimTemplate is used to produce ResourceClaim objects.
 
     Attributes
@@ -296,7 +296,7 @@ class ResourceClaimTemplate(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sResource):
+class ResourceClaimTemplateList(K8sSpec):
     """ResourceClaimTemplateList is a collection of claim templates.
 
     Attributes
@@ -318,7 +318,7 @@ class ResourceClaimTemplateList(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplateSpec(K8sResource):
+class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
     Attributes
@@ -335,7 +335,7 @@ class ResourceClaimTemplateSpec(K8sResource):
 
 
 @dataclass
-class ResourceClass(K8sResource):
+class ResourceClass(K8sSpec):
     """ResourceClass is used by administrators to influence how resources are allocated.  This is an alpha
     type and requires enabling the DynamicResourceAllocation feature gate.
 
@@ -368,7 +368,7 @@ class ResourceClass(K8sResource):
 
 
 @dataclass
-class ResourceClassList(K8sResource):
+class ResourceClassList(K8sSpec):
     """ResourceClassList is a collection of classes.
 
     Attributes
@@ -390,7 +390,7 @@ class ResourceClassList(K8sResource):
 
 
 @dataclass
-class ResourceClassParametersReference(K8sResource):
+class ResourceClassParametersReference(K8sSpec):
     """ResourceClassParametersReference contains enough information to let you locate the parameters for a
     ResourceClass.
 
@@ -413,7 +413,7 @@ class ResourceClassParametersReference(K8sResource):
 
 
 @dataclass
-class ResourceHandle(K8sResource):
+class ResourceHandle(K8sSpec):
     """ResourceHandle holds opaque resource data for processing by a specific kubelet plugin.
 
     Attributes
