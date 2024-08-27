@@ -1,7 +1,6 @@
 # Gybe
 
 ![PyPI Package](https://img.shields.io/pypi/v/gybe?color=%2334D058&label=PyPI%20Package)
-![codecov.io](https://codecov.io/github/petermorrow/gybe/coverage.svg?branch=main)
 
 Transpile Kubernetes manifests with your simple values.yaml files using python type-hints.
 Gybe is a simple, declarative, and more pythonic alternative to [helm](https://helm.sh/)
