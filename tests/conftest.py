@@ -14,4 +14,5 @@ def _run_cli(cli_fn: BaseCommand, yaml: str):
 
 @pytest.fixture
 def run_cli():
+    """Invoke test CLI"""
     return _run_cli
