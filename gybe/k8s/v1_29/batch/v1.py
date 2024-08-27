@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CronJob(K8sSpec):
+class CronJob(K8sResource):
     """CronJob represents the configuration of a single cron job.
 
     Attributes
@@ -27,8 +27,8 @@ class CronJob(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['CronJob'] = 'CronJob'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
@@ -117,7 +117,7 @@ class CronJobStatus(K8sSpec):
 
 
 @dataclass
-class Job(K8sSpec):
+class Job(K8sResource):
     """Job represents the configuration of a single job.
 
     Attributes
@@ -133,8 +133,8 @@ class Job(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['Job'] = 'Job'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
     status: Optional[JobStatus] = None

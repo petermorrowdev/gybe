@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -34,7 +34,7 @@ class Eviction(K8sSpec):
 
 
 @dataclass
-class PodDisruptionBudget(K8sSpec):
+class PodDisruptionBudget(K8sResource):
     """PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of
     pods
     Attributes:
@@ -49,8 +49,8 @@ class PodDisruptionBudget(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1'] = 'policy/v1'
+    kind: Literal['PodDisruptionBudget'] = 'PodDisruptionBudget'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[PodDisruptionBudgetSpec] = None
     status: Optional[PodDisruptionBudgetStatus] = None

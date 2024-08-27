@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_28.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -59,7 +59,7 @@ class CustomResourceConversion(K8sSpec):
 
 
 @dataclass
-class CustomResourceDefinition(K8sSpec):
+class CustomResourceDefinition(K8sResource):
     """CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name
     MUST be in the format <.spec.name>.<.spec.group>.
 
@@ -77,8 +77,8 @@ class CustomResourceDefinition(K8sSpec):
     """
 
     spec: CustomResourceDefinitionSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apiextensions.k8s.io/v1'] = 'apiextensions.k8s.io/v1'
+    kind: Literal['CustomResourceDefinition'] = 'CustomResourceDefinition'
     metadata: Optional[gybe.k8s.v1_28.meta.v1.ObjectMeta] = None
     status: Optional[CustomResourceDefinitionStatus] = None
 

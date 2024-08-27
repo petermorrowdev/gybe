@@ -1,8 +1,14 @@
+"""Make models from functions for downstream tooling."""
+
 import inspect
 from dataclasses import make_dataclass
+from typing import Callable
+
+from gybe.k8s.types import Manifest
 
 
-def create_input_model(func):
+def create_input_model(func: Callable[..., Manifest]) -> type:
+    """Create dataclass input model from a decorated function."""
     argspec = inspect.getfullargspec(func)
     if argspec.defaults:
         positional_count = len(argspec.args) - len(argspec.defaults)

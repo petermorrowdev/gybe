@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.api.resource
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -1613,7 +1613,8 @@ class HTTPGetAction(K8sSpec):
 class HTTPHeader(K8sSpec):
     """HTTPHeader describes a custom header to be used in HTTP probes
     Attributes:
-        name: The header field name
+        name: The header field name. This will be canonicalized upon output, so case-variant names will be
+            understood as the same header.
         value: The header field value
 
     """
@@ -1800,7 +1801,7 @@ class ObjectFieldSelector(K8sSpec):
 
 
 @dataclass
-class PersistentVolumeClaim(K8sSpec):
+class PersistentVolumeClaim(K8sResource):
     """PersistentVolumeClaim is a user's request for and claim to a persistent volume
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -1814,8 +1815,8 @@ class PersistentVolumeClaim(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PersistentVolumeClaim'] = 'PersistentVolumeClaim'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeClaimSpec] = None
     status: Optional[PersistentVolumeClaimStatus] = None
@@ -3844,7 +3845,7 @@ class LoadBalancerStatus(K8sSpec):
 
 
 @dataclass
-class Namespace(K8sSpec):
+class Namespace(K8sResource):
     """Namespace provides a scope for Names. Use of multiple namespaces is optional.
 
     Attributes
@@ -3860,8 +3861,8 @@ class Namespace(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Namespace'] = 'Namespace'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[NamespaceSpec] = None
     status: Optional[NamespaceStatus] = None
@@ -3940,7 +3941,7 @@ class NamespaceStatus(K8sSpec):
 
 
 @dataclass
-class Node(K8sSpec):
+class Node(K8sResource):
     """Node is a worker node in Kubernetes. Each node will have a unique identifier in the cache (i.e. in
     etcd).
 
@@ -3958,8 +3959,8 @@ class Node(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Node'] = 'Node'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[NodeSpec] = None
     status: Optional[NodeStatus] = None
@@ -4197,7 +4198,7 @@ class NodeSystemInfo(K8sSpec):
 
 
 @dataclass
-class PersistentVolume(K8sSpec):
+class PersistentVolume(K8sResource):
     """PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a
     node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
     Attributes:
@@ -4214,8 +4215,8 @@ class PersistentVolume(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PersistentVolume'] = 'PersistentVolume'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeSpec] = None
     status: Optional[PersistentVolumeStatus] = None
@@ -4284,7 +4285,7 @@ class PersistentVolumeStatus(K8sSpec):
 
 
 @dataclass
-class Pod(K8sSpec):
+class Pod(K8sResource):
     """Pod is a collection of containers that can run on a host. This resource is created by clients and
     scheduled onto hosts.
 
@@ -4302,8 +4303,8 @@ class Pod(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Pod'] = 'Pod'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[PodSpec] = None
     status: Optional[PodStatus] = None
@@ -4498,7 +4499,7 @@ class PortStatus(K8sSpec):
 
 
 @dataclass
-class ReplicationController(K8sSpec):
+class ReplicationController(K8sResource):
     """ReplicationController represents the configuration of a replication controller.
 
     Attributes
@@ -4516,8 +4517,8 @@ class ReplicationController(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ReplicationController'] = 'ReplicationController'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[ReplicationControllerSpec] = None
     status: Optional[ReplicationControllerStatus] = None
@@ -4619,7 +4620,7 @@ class ReplicationControllerStatus(K8sSpec):
 
 
 @dataclass
-class ResourceQuota(K8sSpec):
+class ResourceQuota(K8sResource):
     """ResourceQuota sets aggregate quota restrictions enforced per namespace
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -4636,8 +4637,8 @@ class ResourceQuota(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ResourceQuota'] = 'ResourceQuota'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[ResourceQuotaSpec] = None
     status: Optional[ResourceQuotaStatus] = None
@@ -4794,7 +4795,7 @@ class SecretList(K8sSpec):
 
 
 @dataclass
-class Service(K8sSpec):
+class Service(K8sResource):
     """Service is a named abstraction of software service (for example, mysql) consisting of local port (for
     example 3306) that the proxy listens on, and the selector that determines which pods will answer
     requests sent through the proxy.
@@ -4813,8 +4814,8 @@ class Service(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Service'] = 'Service'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[ServiceSpec] = None
     status: Optional[ServiceStatus] = None

@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class APIService(K8sSpec):
+class APIService(K8sResource):
     """APIService represents a server for a particular GroupVersion. Name must be 'version.group'.
 
     Attributes
@@ -26,8 +26,8 @@ class APIService(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apiregistration.k8s.io/v1'] = 'apiregistration.k8s.io/v1'
+    kind: Literal['APIService'] = 'APIService'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[APIServiceSpec] = None
     status: Optional[APIServiceStatus] = None

@@ -1,8 +1,14 @@
 import ast
 import re
+from pathlib import Path
 from typing import Iterator, Union
 
-from gybe.clean import PATTERN, iter_k8s_py
+PROJECT_ROOT = Path(__file__).parent
+PATTERN = r'Model\d*'
+
+
+def iter_k8s_py():
+    return PROJECT_ROOT.parent.glob('gybe/kubernetes/**/*.py')
 
 
 def test_no_duplicate_models():

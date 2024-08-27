@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -63,7 +63,7 @@ class ControllerRevisionList(K8sSpec):
 
 
 @dataclass
-class DaemonSet(K8sSpec):
+class DaemonSet(K8sResource):
     """DaemonSet represents the configuration of a daemon set.
 
     Attributes
@@ -80,8 +80,8 @@ class DaemonSet(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['DaemonSet'] = 'DaemonSet'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[DaemonSetSpec] = None
     status: Optional[DaemonSetStatus] = None
@@ -212,7 +212,7 @@ class DaemonSetUpdateStrategy(K8sSpec):
 
 
 @dataclass
-class Deployment(K8sSpec):
+class Deployment(K8sResource):
     """Deployment enables declarative updates for Pods and ReplicaSets.
 
     Attributes
@@ -228,8 +228,8 @@ class Deployment(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['Deployment'] = 'Deployment'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[DeploymentSpec] = None
     status: Optional[DeploymentStatus] = None
@@ -366,7 +366,7 @@ class DeploymentStrategy(K8sSpec):
 
 
 @dataclass
-class ReplicaSet(K8sSpec):
+class ReplicaSet(K8sResource):
     """ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 
     Attributes
@@ -384,8 +384,8 @@ class ReplicaSet(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ReplicaSet'] = 'ReplicaSet'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[ReplicaSetSpec] = None
     status: Optional[ReplicaSetStatus] = None
@@ -572,7 +572,7 @@ class RollingUpdateStatefulSetStrategy(K8sSpec):
 
 
 @dataclass
-class StatefulSet(K8sSpec):
+class StatefulSet(K8sResource):
     """StatefulSet represents a set of pods with consistent identities. Identities are defined as:   -
     Network: A single stable DNS and hostname.   - Storage: As many VolumeClaims as requested.  The
     StatefulSet guarantees that a given network identity will always map to the same storage identity.
@@ -591,8 +591,8 @@ class StatefulSet(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['StatefulSet'] = 'StatefulSet'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[StatefulSetSpec] = None
     status: Optional[StatefulSetStatus] = None

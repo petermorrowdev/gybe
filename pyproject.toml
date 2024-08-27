@@ -40,6 +40,7 @@ Source = "https://github.com/petermorrowdev/gybe"
 path = "gybe/__init__.py"
 
 [tool.hatch.envs.default]
+installer = "uv"
 dependencies = [
   "pytest",
   "pytest-cov",
@@ -49,7 +50,7 @@ dependencies = [
   "types-PyYAML",
 ]
 [tool.hatch.envs.default.scripts]
-test = "pytest && mypy gybe codegen tests && ruff check gybe/k8s"
+test = "pytest && mypy gybe tests && ruff check gybe tests"
 genk8s = "bash codegen/kubernetes"
 
 [[tool.hatch.envs.all.matrix]]
@@ -101,9 +102,9 @@ inline-quotes = "single"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = [
-    # at least this three should be fine in tests:
-    "S101", # asserts allowed in tests...
-    "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    "D", # docstrings not required in tests
+    "S101", # asserts allowed in tests
+    "ARG", # Unused function args, like pytest fixures are okay
     "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
     # The below are debateable
     "PLR2004", # Magic value used in comparison, ...

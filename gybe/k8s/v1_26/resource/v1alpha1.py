@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -33,7 +33,7 @@ class AllocationResult(K8sSpec):
 
 
 @dataclass
-class PodScheduling(K8sSpec):
+class PodScheduling(K8sResource):
     """PodScheduling objects hold information that is needed to schedule a Pod with ResourceClaims that use
     'WaitForFirstConsumer' allocation mode.  This is an alpha type and requires enabling the
     DynamicResourceAllocation feature gate.
@@ -52,8 +52,8 @@ class PodScheduling(K8sSpec):
     """
 
     spec: PodSchedulingSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha1'] = 'policy/v1alpha1'
+    kind: Literal['PodScheduling'] = 'PodScheduling'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     status: Optional[PodSchedulingStatus] = None
 
@@ -114,7 +114,7 @@ class PodSchedulingStatus(K8sSpec):
 
 
 @dataclass
-class ResourceClaim(K8sSpec):
+class ResourceClaim(K8sResource):
     """ResourceClaim describes which resources are needed by a resource consumer. Its status tracks whether
     the resource has been allocated and what the resulting attributes are.  This is an alpha type and
     requires enabling the DynamicResourceAllocation feature gate.
@@ -134,8 +134,8 @@ class ResourceClaim(K8sSpec):
     """
 
     spec: ResourceClaimSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha1'] = 'policy/v1alpha1'
+    kind: Literal['ResourceClaim'] = 'ResourceClaim'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
 

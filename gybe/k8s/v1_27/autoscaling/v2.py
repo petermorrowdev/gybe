@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.api.resource
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -148,7 +148,7 @@ class HPAScalingRules(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscaler(K8sSpec):
+class HorizontalPodAutoscaler(K8sResource):
     """HorizontalPodAutoscaler is the configuration for a horizontal pod autoscaler, which automatically
     manages the replica count of any resource implementing the scale subresource based on the metrics
     specified.
@@ -166,8 +166,8 @@ class HorizontalPodAutoscaler(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['autoscaling/v2'] = 'autoscaling/v2'
+    kind: Literal['HorizontalPodAutoscaler'] = 'HorizontalPodAutoscaler'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[HorizontalPodAutoscalerSpec] = None
     status: Optional[HorizontalPodAutoscalerStatus] = None

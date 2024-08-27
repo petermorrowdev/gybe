@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -52,7 +52,7 @@ class FlowDistinguisherMethod(K8sSpec):
 
 
 @dataclass
-class FlowSchema(K8sSpec):
+class FlowSchema(K8sResource):
     """FlowSchema defines the schema of a group of flows. Note that a flow is made up of a set of inbound API
     requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema
     and a 'flow distinguisher'.
@@ -70,8 +70,8 @@ class FlowSchema(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1beta3'] = 'flowcontrol.apiserver.k8s.io/v1beta3'
+    kind: Literal['FlowSchema'] = 'FlowSchema'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[FlowSchemaSpec] = None
     status: Optional[FlowSchemaStatus] = None
@@ -283,7 +283,7 @@ class PolicyRulesWithSubjects(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfiguration(K8sSpec):
+class PriorityLevelConfiguration(K8sResource):
     """PriorityLevelConfiguration represents the configuration of a priority level.
 
     Attributes
@@ -299,8 +299,8 @@ class PriorityLevelConfiguration(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1beta3'] = 'flowcontrol.apiserver.k8s.io/v1beta3'
+    kind: Literal['PriorityLevelConfiguration'] = 'PriorityLevelConfiguration'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[PriorityLevelConfigurationSpec] = None
     status: Optional[PriorityLevelConfigurationStatus] = None

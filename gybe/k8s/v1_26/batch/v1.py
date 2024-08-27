@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CronJob(K8sSpec):
+class CronJob(K8sResource):
     """CronJob represents the configuration of a single cron job.
 
     Attributes
@@ -27,8 +27,8 @@ class CronJob(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['CronJob'] = 'CronJob'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
@@ -118,7 +118,7 @@ class CronJobStatus(K8sSpec):
 
 
 @dataclass
-class Job(K8sSpec):
+class Job(K8sResource):
     """Job represents the configuration of a single job.
 
     Attributes
@@ -134,8 +134,8 @@ class Job(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['Job'] = 'Job'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
     status: Optional[JobStatus] = None
@@ -226,8 +226,8 @@ class JobSpec(K8sSpec):
             the set of actions and conditions which need to be satisfied to take the associated action. If
             empty, the default behaviour applies - the counter of failed pods, represented by the jobs's
             .status.failed field, is incremented and it is checked against the backoffLimit. This field cannot
-            be used in combination with restartPolicy=OnFailure.  This field is alpha-level. To use this
-            field, you must enable the `JobPodFailurePolicy` feature gate (disabled by default).
+            be used in combination with restartPolicy=OnFailure.  This field is beta-level. It can be used
+            when the `JobPodFailurePolicy` feature gate is enabled (enabled by default).
         selector: A label query over pods that should match the pod count. Normally, the system sets this
             field for you.
         suspend: Suspend specifies whether the Job controller should create Pods or not. If a Job is created
@@ -406,8 +406,8 @@ class PodFailurePolicyRule(K8sSpec):
     """
 
     action: str
-    onPodConditions: List[PodFailurePolicyOnPodConditionsPattern]
     onExitCodes: Optional[PodFailurePolicyOnExitCodesRequirement] = None
+    onPodConditions: Optional[List[PodFailurePolicyOnPodConditionsPattern]] = None
 
 
 @dataclass

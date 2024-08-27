@@ -1,6 +1,7 @@
+"""Code generation logic for k8s modules."""
+
 from __future__ import annotations
 
-import argparse
 import ast
 import json
 import textwrap
@@ -35,16 +36,52 @@ ignore_models = {
     'StorageVersionSpec',
     'FieldsV1',
 }
+# NOTE: The expected `apiVersion` values for k8s resources are documented here:
+# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/
+# in the tables with `Group`, `Version` and `Kind`. This data does not exist in
+# the kubernetes JSON schema, so it's manually mapped below.
+resource_api_versions = {
+    'io.k8s.api.admissionregistration': 'admissionregistration.k8s.io',
+    'io.k8s.api.apiserverinternal': 'admissionregistration.k8s.io',
+    'io.k8s.api.apps': 'apps',
+    'io.k8s.api.authentication': 'authentication.k8s.io',
+    'io.k8s.api.authorization': 'rbac.authorization.k8s.io',
+    'io.k8s.api.autoscaling': 'autoscaling',
+    'io.k8s.api.batch': 'batch',
+    'io.k8s.api.certificates': 'certificates.k8s.io',
+    'io.k8s.api.core': '',  # `apiVersion: v1`, `apiVersion: v2`, ect.
+    'io.k8s.api.flowcontrol': 'flowcontrol.apiserver.k8s.io',
+    'io.k8s.api.networking': 'networking.k8s.io',
+    'io.k8s.api.policy': 'policy',
+    'io.k8s.api.resource': 'policy',
+    'io.k8s.api.storage': 'storage.k8s.io',
+    'io.k8s.api.storagemigration': 'storage.k8s.io',
+    'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions': 'apiextensions.k8s.io',
+    'io.k8s.kube-aggregator.pkg.apis.apiregistration': 'apiregistration.k8s.io',
+}
+resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
 
 
 class JSONSchemaProperties(TypedDict):
+    """A subset of attributes expected in kubernetes' JSON schema spec."""
+
     type: str
     items: JSONSchemaProperties
     allOf: Optional[list[JSONSchemaProperties]]
 
 
 class K8sModule:
+    """An abstract representation of a kubernetes module in gybe."""
+
     def __init__(self, version_module: str, module_name: str):
+        """Initialize a K8sModule.
+
+        Attributes
+        ----------
+        version_module: Python version submodule under the k8s module (ex: 'v1_30')
+        module_name: Python non-relative import path (ex: 'gybe.k8s.v1_30.apps.v1').
+
+        """
         self._version_module = version_module
         self._module_name = module_name
         self._module_path = Path(self._module_name.replace('.', '/') + '.py')
@@ -54,15 +91,36 @@ class K8sModule:
         self._line_length = 110
 
     def write_module(self):
+        """Write abstract module to python file."""
         with open(self._module_path, 'w') as f:
             f.write(self._unparse())
 
-    def add_model(self, name, properties, description, required):
+    def add_model(
+        self,
+        name: str,
+        properties: dict[str, JSONSchemaProperties],
+        description: str,
+        required: list[str],
+    ) -> None:
+        """Add a kubernetes JSON schema specification to the module as a dataclass ast."""
+        name_parts = name.split('.')
+        prop_names = set(properties.keys())
+        literal_properties = dict()
+        if len(resource_prop_names - prop_names) == 0:
+            k = '.'.join(name_parts[:-2])
+            api_group = resource_api_versions.get(k)
+            if api_group:
+                api_version = api_group + '/' + name_parts[-2]
+            else:
+                api_version = name_parts[-2]
+            literal_properties['apiVersion'] = api_version
+            literal_properties['kind'] = name_parts[-1]
         model_def = self._model_def(
-            name.split('.')[-1],
-            properties,
-            description or f'Schema model {name}.',
-            required or [],
+            name=name_parts[-1],
+            properties=properties,
+            description=description or f'Schema model {name}.',
+            required=required or [],
+            resource_properties=literal_properties,
         )
         self._class_defs.append(model_def)
 
@@ -73,9 +131,9 @@ class K8sModule:
         imports = [
             '"""Models generated from Kubernetes OpenAPI Spec."""',
             'from __future__ import annotations',
-            'from typing import List, Optional',
+            'from typing import List, Optional, Literal',
             'from dataclasses import dataclass',
-            'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec',
+            'from gybe.k8s.types import JSONObj, JSONDict, K8sSpec, K8sResource',
         ] + sorted(list(self._module_imports))
         mod = ast.parse('\n'.join(imports))
         for c in self._class_defs:
@@ -88,8 +146,10 @@ class K8sModule:
         properties: dict[str, JSONSchemaProperties],
         description: str,
         required: list[str],
+        resource_properties: dict[str, str],
     ) -> ast.ClassDef:
-        cdef = ast.parse('@dataclass\nclass ' + name + '(K8sSpec):\n    pass').body[0]
+        base_cls = 'K8sSpec' if len(resource_properties) == 0 else 'K8sResource'
+        cdef = ast.parse('@dataclass\nclass ' + name + f'({base_cls}):\n    pass').body[0]
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')
         sections = [
@@ -102,19 +162,22 @@ class K8sModule:
         docstring = textwrap.indent(docstring, '    ')
         cdef.body = [ast.parse(f'"""\n{docstring}\n"""').body[0]]
 
-        fields = []
-        for k in required:
-            field_type = self._type_hint_for(properties[k])
-            field = f'{k}: {field_type}'
-            fields.append(field)
-
+        literal_props = resource_properties or dict()
+        fields: list[tuple[str, int]] = []
         for k, v in properties.items():
-            if k not in required:
+            if k in literal_props:
+                literal_value = literal_props[k]
+                fields.append((f"{k}: Literal['{literal_value}'] = '{literal_value}'", 200))
+            elif k in required:
+                field_type = self._type_hint_for(properties[k])
+                field = f'{k}: {field_type}'
+                fields.append((field, required.index(k)))
+            else:
                 field_type = self._type_hint_for(v)
                 field = f'{k}: Optional[{field_type}] = None'
-                fields.append(field)
+                fields.append((field, 300))
 
-        for field in fields:
+        for field, _ in sorted(fields, key=lambda f: f[1]):
             cdef.body.append(ast.parse(field).body[0])
         return cdef
 
@@ -166,18 +229,18 @@ class K8sModule:
         return schema_type_map['string']
 
 
-def write_k8s_models(k8s_version_module: str) -> None:
+def _write_k8s_models(k8s_version_module: str) -> None:
     model_schemas = dict()
     for p in k8s_openapi_dir.iterdir():
         with p.open() as f:
             spec = json.load(f)
         schemas = spec.get('components', dict()).get('schemas') or dict()
         for name, schema in schemas.items():
-            is_ignored = any(m in name for m in ignore_models)
-            if name.startswith('io.k8s') and not is_ignored:
-                model_schemas[name] = schema
+            if name.startswith('io.k8s'):
+                if not any(m in name for m in ignore_models):
+                    model_schemas[name] = schema
 
-    k8s_modules = dict()
+    k8s_modules: dict[str, K8sModule] = dict()
     for name in model_schemas.keys():
         if name not in k8s_modules:
             module_name = _ref_to_module_name(name, k8s_version_module)
@@ -195,6 +258,13 @@ def write_k8s_models(k8s_version_module: str) -> None:
         k8s_module.write_module()
 
 
+def _write_module_init(k8s_version_module: str) -> None:
+    module_path = Path('gybe/k8s/' + k8s_version_module)
+    module_path.mkdir(exist_ok=True)
+    with open(module_path / '__init__.py', 'w') as f:
+        f.write('"""k8s dataclass models generated by gybe"""')
+
+
 def _ref_to_model_path(ref: str, version_module: str) -> str:
     return f'gybe.k8s.{version_module}.' + '.'.join(ref.split('/')[-1].split('.')[-3:])
 
@@ -203,16 +273,7 @@ def _ref_to_module_name(ref: str, version_module: str) -> str:
     return '.'.join(_ref_to_model_path(ref, version_module).split('.')[:-1])
 
 
-def _remove_if_first(d: list[str], v: str) -> list[str]:
-    if len(d) and d[0] == v:
-        return d[1:]
-    else:
-        return d
-
-
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('k8s_version_module')
-    args = parser.parse_args()
-    Path('gybe/k8s/' + args.k8s_version_module).mkdir(exist_ok=True)
-    write_k8s_models(args.k8s_version_module)
+def write_module(k8s_version_module):
+    """Write generated k8s module based on kubernetes JSON schema."""
+    _write_module_init(k8s_version_module)
+    _write_k8s_models(k8s_version_module)

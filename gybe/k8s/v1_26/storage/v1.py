@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.api.resource
 import gybe.k8s.v1_26.core.v1
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -404,7 +404,7 @@ class TokenRequest(K8sSpec):
 
 
 @dataclass
-class VolumeAttachment(K8sSpec):
+class VolumeAttachment(K8sResource):
     """VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified
     node.  VolumeAttachment objects are non-namespaced.
 
@@ -423,8 +423,8 @@ class VolumeAttachment(K8sSpec):
     """
 
     spec: VolumeAttachmentSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['VolumeAttachment'] = 'VolumeAttachment'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     status: Optional[VolumeAttachmentStatus] = None
 

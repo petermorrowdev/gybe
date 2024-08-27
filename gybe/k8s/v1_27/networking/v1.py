@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.core.v1
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -55,7 +55,7 @@ class HTTPIngressRuleValue(K8sSpec):
 
 
 @dataclass
-class Ingress(K8sSpec):
+class Ingress(K8sResource):
     """Ingress is a collection of rules that allow inbound connections to reach the endpoints defined by a
     backend. An Ingress can be configured to give services externally-reachable urls, load balance
     traffic, terminate SSL, offer name based virtual hosting etc.
@@ -73,8 +73,8 @@ class Ingress(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['Ingress'] = 'Ingress'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[IngressSpec] = None
     status: Optional[IngressStatus] = None
@@ -375,7 +375,7 @@ class IngressTLS(K8sSpec):
 
 
 @dataclass
-class NetworkPolicy(K8sSpec):
+class NetworkPolicy(K8sResource):
     """NetworkPolicy describes what network traffic is allowed for a set of Pods
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -389,8 +389,8 @@ class NetworkPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['NetworkPolicy'] = 'NetworkPolicy'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     spec: Optional[NetworkPolicySpec] = None
     status: Optional[NetworkPolicyStatus] = None

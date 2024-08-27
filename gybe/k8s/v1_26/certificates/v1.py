@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_26.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CertificateSigningRequest(K8sSpec):
+class CertificateSigningRequest(K8sResource):
     """CertificateSigningRequest objects provide a mechanism to obtain x509 certificates by submitting a
     certificate signing request, and having it asynchronously approved and issued.  Kubelets use this API
     to obtain:  1. client certificates to authenticate to kube-apiserver (with the 'kubernetes.io/kube-
@@ -36,8 +36,8 @@ class CertificateSigningRequest(K8sSpec):
     """
 
     spec: CertificateSigningRequestSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['certificates.k8s.io/v1'] = 'certificates.k8s.io/v1'
+    kind: Literal['CertificateSigningRequest'] = 'CertificateSigningRequest'
     metadata: Optional[gybe.k8s.v1_26.meta.v1.ObjectMeta] = None
     status: Optional[CertificateSigningRequestStatus] = None
 

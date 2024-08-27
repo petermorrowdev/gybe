@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_27.meta.v1
-from gybe.k8s.types import JSONDict, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
-class LocalSubjectAccessReview(K8sSpec):
+class LocalSubjectAccessReview(K8sResource):
     """LocalSubjectAccessReview checks whether or not a user or group can perform an action in a given
     namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy
     that includes permissions checking.
@@ -30,8 +30,8 @@ class LocalSubjectAccessReview(K8sSpec):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['LocalSubjectAccessReview'] = 'LocalSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
@@ -120,7 +120,7 @@ class ResourceRule(K8sSpec):
 
 
 @dataclass
-class SelfSubjectAccessReview(K8sSpec):
+class SelfSubjectAccessReview(K8sResource):
     """SelfSubjectAccessReview checks whether or the current user can perform an action.  Not filling in a
     spec.namespace means 'in all namespaces'.  Self is a special case, because users should always be able
     to check whether they can perform an action
@@ -137,8 +137,8 @@ class SelfSubjectAccessReview(K8sSpec):
     """
 
     spec: SelfSubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SelfSubjectAccessReview'] = 'SelfSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
@@ -159,7 +159,7 @@ class SelfSubjectAccessReviewSpec(K8sSpec):
 
 
 @dataclass
-class SelfSubjectRulesReview(K8sSpec):
+class SelfSubjectRulesReview(K8sResource):
     """SelfSubjectRulesReview enumerates the set of actions the current user can perform within a namespace.
     The returned list of actions may be incomplete depending on the server's authorization mode, and any
     errors experienced during the evaluation. SelfSubjectRulesReview should be used by UIs to show/hide
@@ -182,8 +182,8 @@ class SelfSubjectRulesReview(K8sSpec):
     """
 
     spec: SelfSubjectRulesReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SelfSubjectRulesReview'] = 'SelfSubjectRulesReview'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     status: Optional[SubjectRulesReviewStatus] = None
 
@@ -202,7 +202,7 @@ class SelfSubjectRulesReviewSpec(K8sSpec):
 
 
 @dataclass
-class SubjectAccessReview(K8sSpec):
+class SubjectAccessReview(K8sResource):
     """SubjectAccessReview checks whether or not a user or group can perform an action.
 
     Attributes
@@ -219,8 +219,8 @@ class SubjectAccessReview(K8sSpec):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['SubjectAccessReview'] = 'SubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_27.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
