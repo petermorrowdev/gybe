@@ -1,6 +1,6 @@
 """A simple YAML transpilation tool for rendering kubernetes manifests"""
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 
 from gybe import k8s
