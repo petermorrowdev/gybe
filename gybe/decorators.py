@@ -1,5 +1,6 @@
 """Decorators for building CLI commands."""
 
+import inspect
 import sys
 from dataclasses import fields
 from typing import Any, Callable
@@ -18,7 +19,10 @@ def _omit_none_values(obj: K8sSpec) -> dict[str, Any]:
     for f in fields(obj):
         v = getattr(obj, f.name)
         if v is not None:
-            u[f.name] = _c.unstructure(v)
+            if inspect.isclass(f.type) and issubclass(f.type, K8sSpec):
+                u[f.name] = _c.unstructure(v, f.type)
+            else:
+                u[f.name] = _c.unstructure(v)
     return u
 
 
@@ -34,7 +38,7 @@ def _bind_function(f):
         try:
             input_obj = _c.structure(input_data, input_model)
         except Exception as exc:
-            print('Validation Error:')
+            print('validation errors:')
             for m in transform_error(exc):
                 print('-', m)
             sys.exit(-1)
