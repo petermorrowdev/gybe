@@ -34,7 +34,7 @@ Create a `chart.py` file:
 import gybe
 
 
-def create_standard_container(image: str, command: List[str]):
+def create_standard_container(image: str, command: list[str]):
     return gybe.k8s.Container(image=image, command=command, name='my-python-server')
 
 
