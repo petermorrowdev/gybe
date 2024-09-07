@@ -10,21 +10,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ['3.10', '3.11', '3.12']
-      fail-fast: false
 
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
           cache: pip
 
       - name: Install Hatch 
         run: pip install hatch
         
       - name: Test
-        run: hatch run test
+        run: hatch test --parallel --all
