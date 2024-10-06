@@ -20,8 +20,7 @@ class ControllerRevision(K8sSpec):
     object is beta. However, it may be subject to name and representation changes in future releases, and
     clients should not depend on its stability. It is primarily for internal use by controllers.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -44,8 +43,7 @@ class ControllerRevision(K8sSpec):
 class ControllerRevisionList(K8sSpec):
     """ControllerRevisionList is a resource containing a list of ControllerRevision objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -66,8 +64,7 @@ class ControllerRevisionList(K8sSpec):
 class DaemonSet(K8sResource):
     """DaemonSet represents the configuration of a daemon set.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -91,8 +88,7 @@ class DaemonSet(K8sResource):
 class DaemonSetCondition(K8sSpec):
     """DaemonSetCondition describes the state of a DaemonSet at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
         message: A human readable message indicating details about the transition.
         reason: The reason for the condition's last transition.
@@ -112,8 +108,7 @@ class DaemonSetCondition(K8sSpec):
 class DaemonSetList(K8sSpec):
     """DaemonSetList is a collection of daemon sets.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -134,8 +129,7 @@ class DaemonSetList(K8sSpec):
 class DaemonSetSpec(K8sSpec):
     """DaemonSetSpec is the specification of a daemon set.
 
-    Attributes
-    ----------
+    Attributes:
         minReadySeconds: The minimum number of seconds for which a newly created DaemonSet pod should be ready
             without any of its container crashing, for it to be considered available. Defaults to 0 (pod will
             be considered available as soon as it is ready).
@@ -161,8 +155,7 @@ class DaemonSetSpec(K8sSpec):
 class DaemonSetStatus(K8sSpec):
     """DaemonSetStatus represents the current status of a daemon set.
 
-    Attributes
-    ----------
+    Attributes:
         collisionCount: Count of hash collisions for the DaemonSet. The DaemonSet controller uses this field
             as a collision avoidance mechanism when it needs to create the name for the newest
             ControllerRevision.
@@ -200,8 +193,7 @@ class DaemonSetStatus(K8sSpec):
 class DaemonSetUpdateStrategy(K8sSpec):
     """DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
 
-    Attributes
-    ----------
+    Attributes:
         rollingUpdate: Rolling update config params. Present only if type = 'RollingUpdate'.
         type: Type of daemon set update. Can be 'RollingUpdate' or 'OnDelete'. Default is RollingUpdate.
 
@@ -215,8 +207,7 @@ class DaemonSetUpdateStrategy(K8sSpec):
 class Deployment(K8sResource):
     """Deployment enables declarative updates for Pods and ReplicaSets.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -239,8 +230,7 @@ class Deployment(K8sResource):
 class DeploymentCondition(K8sSpec):
     """DeploymentCondition describes the state of a deployment at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
         lastUpdateTime: The last time this condition was updated.
         message: A human readable message indicating details about the transition.
@@ -262,8 +252,7 @@ class DeploymentCondition(K8sSpec):
 class DeploymentList(K8sSpec):
     """DeploymentList is a list of Deployments.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -284,8 +273,7 @@ class DeploymentList(K8sSpec):
 class DeploymentSpec(K8sSpec):
     """DeploymentSpec is the specification of the desired behavior of the Deployment.
 
-    Attributes
-    ----------
+    Attributes:
         minReadySeconds: Minimum number of seconds for which a newly created pod should be ready without any
             of its container crashing, for it to be considered available. Defaults to 0 (pod will be
             considered available as soon as it is ready)
@@ -320,8 +308,7 @@ class DeploymentSpec(K8sSpec):
 class DeploymentStatus(K8sSpec):
     """DeploymentStatus is the most recently observed status of the Deployment.
 
-    Attributes
-    ----------
+    Attributes:
         availableReplicas: Total number of available pods (ready for at least minReadySeconds) targeted by
             this deployment.
         collisionCount: Count of hash collisions for the Deployment. The Deployment controller uses this field
@@ -354,8 +341,7 @@ class DeploymentStatus(K8sSpec):
 class DeploymentStrategy(K8sSpec):
     """DeploymentStrategy describes how to replace existing pods with new ones.
 
-    Attributes
-    ----------
+    Attributes:
         rollingUpdate: Rolling update config params. Present only if DeploymentStrategyType = RollingUpdate.
         type: Type of deployment. Can be 'Recreate' or 'RollingUpdate'. Default is RollingUpdate.
 
@@ -369,8 +355,7 @@ class DeploymentStrategy(K8sSpec):
 class ReplicaSet(K8sResource):
     """ReplicaSet ensures that a specified number of pod replicas are running at any given time.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -395,8 +380,7 @@ class ReplicaSet(K8sResource):
 class ReplicaSetCondition(K8sSpec):
     """ReplicaSetCondition describes the state of a replica set at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: The last time the condition transitioned from one status to another.
         message: A human readable message indicating details about the transition.
         reason: The reason for the condition's last transition.
@@ -416,8 +400,7 @@ class ReplicaSetCondition(K8sSpec):
 class ReplicaSetList(K8sSpec):
     """ReplicaSetList is a collection of ReplicaSets.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -438,8 +421,7 @@ class ReplicaSetList(K8sSpec):
 class ReplicaSetSpec(K8sSpec):
     """ReplicaSetSpec is the specification of a ReplicaSet.
 
-    Attributes
-    ----------
+    Attributes:
         minReadySeconds: Minimum number of seconds for which a newly created pod should be ready without any
             of its container crashing, for it to be considered available. Defaults to 0 (pod will be
             considered available as soon as it is ready)
@@ -463,8 +445,7 @@ class ReplicaSetSpec(K8sSpec):
 class ReplicaSetStatus(K8sSpec):
     """ReplicaSetStatus represents the current status of a ReplicaSet.
 
-    Attributes
-    ----------
+    Attributes:
         availableReplicas: The number of available replicas (ready for at least minReadySeconds) for this
             replica set.
         conditions: Represents the latest available observations of a replica set's current state.
@@ -489,8 +470,7 @@ class ReplicaSetStatus(K8sSpec):
 class RollingUpdateDaemonSet(K8sSpec):
     """Spec to control the desired behavior of daemon set rolling update.
 
-    Attributes
-    ----------
+    Attributes:
         maxSurge: The maximum number of nodes with an existing available DaemonSet pod that can have an
             updated DaemonSet pod during during an update. Value can be an absolute number (ex: 5) or a
             percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is
@@ -524,8 +504,7 @@ class RollingUpdateDaemonSet(K8sSpec):
 class RollingUpdateDeployment(K8sSpec):
     """Spec to control the desired behavior of rolling update.
 
-    Attributes
-    ----------
+    Attributes:
         maxSurge: The maximum number of pods that can be scheduled above the desired number of pods. Value can
             be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if
             MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to
@@ -552,8 +531,7 @@ class RollingUpdateStatefulSetStrategy(K8sSpec):
     """RollingUpdateStatefulSetStrategy is used to communicate parameter for
     RollingUpdateStatefulSetStrategyType.
 
-    Attributes
-    ----------
+    Attributes:
         maxUnavailable: The maximum number of pods that can be unavailable during the update. Value can be an
             absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated
             from percentage by rounding up. This can not be 0. Defaults to 1. This field is alpha-level and is
@@ -577,8 +555,7 @@ class StatefulSet(K8sResource):
     Network: A single stable DNS and hostname.   - Storage: As many VolumeClaims as requested.  The
     StatefulSet guarantees that a given network identity will always map to the same storage identity.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -602,8 +579,7 @@ class StatefulSet(K8sResource):
 class StatefulSetCondition(K8sSpec):
     """StatefulSetCondition describes the state of a statefulset at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
         message: A human readable message indicating details about the transition.
         reason: The reason for the condition's last transition.
@@ -623,8 +599,7 @@ class StatefulSetCondition(K8sSpec):
 class StatefulSetList(K8sSpec):
     """StatefulSetList is a collection of StatefulSets.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -645,8 +620,7 @@ class StatefulSetList(K8sSpec):
 class StatefulSetOrdinals(K8sSpec):
     """StatefulSetOrdinals describes the policy used for replica ordinal assignment in this StatefulSet.
 
-    Attributes
-    ----------
+    Attributes:
         start: start is the number representing the first replica's index. It may be used to number replicas
             from an alternate index (eg: 1-indexed) over the default 0-indexed names, or to orchestrate
             progressive movement of replicas from one StatefulSet to another. If set, replica indices will be
@@ -663,8 +637,7 @@ class StatefulSetPersistentVolumeClaimRetentionPolicy(K8sSpec):
     """StatefulSetPersistentVolumeClaimRetentionPolicy describes the policy used for PVCs created from the
     StatefulSet VolumeClaimTemplates.
 
-    Attributes
-    ----------
+    Attributes:
         whenDeleted: WhenDeleted specifies what happens to PVCs created from StatefulSet VolumeClaimTemplates
             when the StatefulSet is deleted. The default policy of `Retain` causes PVCs to not be affected by
             StatefulSet deletion. The `Delete` policy causes those PVCs to be deleted.
@@ -683,8 +656,7 @@ class StatefulSetPersistentVolumeClaimRetentionPolicy(K8sSpec):
 class StatefulSetSpec(K8sSpec):
     """A StatefulSetSpec is the specification of a StatefulSet.
 
-    Attributes
-    ----------
+    Attributes:
         minReadySeconds: Minimum number of seconds for which a newly created pod should be ready without any
             of its container crashing for it to be considered available. Defaults to 0 (pod will be considered
             available as soon as it is ready)
@@ -748,8 +720,7 @@ class StatefulSetSpec(K8sSpec):
 class StatefulSetStatus(K8sSpec):
     """StatefulSetStatus represents the current state of a StatefulSet.
 
-    Attributes
-    ----------
+    Attributes:
         availableReplicas: Total number of available pods (ready for at least minReadySeconds) targeted by
             this statefulset.
         collisionCount: collisionCount is the count of hash collisions for the StatefulSet. The StatefulSet
@@ -790,8 +761,7 @@ class StatefulSetUpdateStrategy(K8sSpec):
     updates. It includes any additional parameters necessary to perform the update for the indicated
     strategy.
 
-    Attributes
-    ----------
+    Attributes:
         rollingUpdate: RollingUpdate is used to communicate parameters when Type is
             RollingUpdateStatefulSetStrategyType.
         type: Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.

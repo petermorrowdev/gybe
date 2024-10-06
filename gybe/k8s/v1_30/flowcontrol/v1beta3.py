@@ -15,8 +15,7 @@ class ExemptPriorityLevelConfiguration(K8sSpec):
     requests. In the mandatory exempt configuration object the values in the fields here can be modified
     by authorized users, unlike the rest of the `spec`.
 
-    Attributes
-    ----------
+    Attributes:
         lendablePercent: `lendablePercent` prescribes the fraction of the level's NominalCL that can be
             borrowed by other priority levels.  This value of this field must be between 0 and 100, inclusive,
             and it defaults to 0. The number of seats that other levels can borrow from this level, known as
@@ -41,8 +40,7 @@ class ExemptPriorityLevelConfiguration(K8sSpec):
 class FlowDistinguisherMethod(K8sSpec):
     """FlowDistinguisherMethod specifies the method of a flow distinguisher.
 
-    Attributes
-    ----------
+    Attributes:
         type: `type` is the type of flow distinguisher method The supported types are 'ByUser' and
             'ByNamespace'. Required.
 
@@ -57,8 +55,7 @@ class FlowSchema(K8sResource):
     requests with similar attributes and is identified by a pair of strings: the name of the FlowSchema
     and a 'flow distinguisher'.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -81,8 +78,7 @@ class FlowSchema(K8sResource):
 class FlowSchemaCondition(K8sSpec):
     """FlowSchemaCondition describes conditions for a FlowSchema.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: `lastTransitionTime` is the last time the condition transitioned from one status
             to another.
         message: `message` is a human-readable message indicating details about last transition.
@@ -103,8 +99,7 @@ class FlowSchemaCondition(K8sSpec):
 class FlowSchemaList(K8sSpec):
     """FlowSchemaList is a list of FlowSchema objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -125,8 +120,7 @@ class FlowSchemaList(K8sSpec):
 class FlowSchemaSpec(K8sSpec):
     """FlowSchemaSpec describes how the FlowSchema's specification looks like.
 
-    Attributes
-    ----------
+    Attributes:
         distinguisherMethod: `distinguisherMethod` defines how to compute the flow distinguisher for requests
             that match this schema. `nil` specifies that the distinguisher is disabled and thus will always be
             the empty string.
@@ -153,8 +147,7 @@ class FlowSchemaSpec(K8sSpec):
 class FlowSchemaStatus(K8sSpec):
     """FlowSchemaStatus represents the current state of a FlowSchema.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: `conditions` is a list of the current states of FlowSchema.
 
     """
@@ -166,8 +159,7 @@ class FlowSchemaStatus(K8sSpec):
 class GroupSubject(K8sSpec):
     """GroupSubject holds detailed information for group-kind subject.
 
-    Attributes
-    ----------
+    Attributes:
         name: name is the user group that matches, or '*' to match all user groups. See
             https://github.com/kubernetes/apiserver/blob/master/pkg/authentication/user/user.go for some well-
             known group names. Required.
@@ -181,8 +173,7 @@ class GroupSubject(K8sSpec):
 class LimitResponse(K8sSpec):
     """LimitResponse defines how to handle requests that can not be executed right now.
 
-    Attributes
-    ----------
+    Attributes:
         queuing: `queuing` holds the configuration parameters for queuing. This field may be non-empty only if
             `type` is `'Queue'`.
         type: `type` is 'Queue' or 'Reject'. 'Queue' means that requests that can not be executed upon arrival
@@ -240,8 +231,7 @@ class NonResourcePolicyRule(K8sSpec):
     least one member of verbs matches the request and (b) at least one member of nonResourceURLs matches
     the request.
 
-    Attributes
-    ----------
+    Attributes:
         nonResourceURLs: `nonResourceURLs` is a set of url prefixes that a user should have access to and may
             not be empty. For example:   - '/healthz' is legal   - '/hea*' is illegal   - '/hea' is legal but
             matches nothing   - '/hea/*' also matches nothing   - '/healthz/*' matches all per-component
@@ -264,8 +254,7 @@ class PolicyRulesWithSubjects(K8sSpec):
     matches the request and (b) at least one member of resourceRules or nonResourceRules matches the
     request.
 
-    Attributes
-    ----------
+    Attributes:
         nonResourceRules: `nonResourceRules` is a list of NonResourcePolicyRules that identify matching
             requests according to their verb and the target non-resource URL.
         resourceRules: `resourceRules` is a slice of ResourcePolicyRules that identify matching requests
@@ -286,8 +275,7 @@ class PolicyRulesWithSubjects(K8sSpec):
 class PriorityLevelConfiguration(K8sResource):
     """PriorityLevelConfiguration represents the configuration of a priority level.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -310,8 +298,7 @@ class PriorityLevelConfiguration(K8sResource):
 class PriorityLevelConfigurationCondition(K8sSpec):
     """PriorityLevelConfigurationCondition defines the condition of priority level.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: `lastTransitionTime` is the last time the condition transitioned from one status
             to another.
         message: `message` is a human-readable message indicating details about last transition.
@@ -332,8 +319,7 @@ class PriorityLevelConfigurationCondition(K8sSpec):
 class PriorityLevelConfigurationList(K8sSpec):
     """PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -355,8 +341,7 @@ class PriorityLevelConfigurationReference(K8sSpec):
     """PriorityLevelConfigurationReference contains information that points to the 'request-priority' being
     used.
 
-    Attributes
-    ----------
+    Attributes:
         name: `name` is the name of the priority level configuration being referenced Required.
 
     """
@@ -368,8 +353,7 @@ class PriorityLevelConfigurationReference(K8sSpec):
 class PriorityLevelConfigurationSpec(K8sSpec):
     """PriorityLevelConfigurationSpec specifies the configuration of a priority level.
 
-    Attributes
-    ----------
+    Attributes:
         exempt: `exempt` specifies how requests are handled for an exempt priority level. This field MUST be
             empty if `type` is `'Limited'`. This field MAY be non-empty if `type` is `'Exempt'`. If empty and
             `type` is `'Exempt'` then the default values for `ExemptPriorityLevelConfiguration` apply.
@@ -393,8 +377,7 @@ class PriorityLevelConfigurationSpec(K8sSpec):
 class PriorityLevelConfigurationStatus(K8sSpec):
     """PriorityLevelConfigurationStatus represents the current state of a 'request-priority'.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: `conditions` is the current state of 'request-priority'.
 
     """
@@ -437,8 +420,7 @@ class ResourcePolicyRule(K8sSpec):
     namespace (i.e., `Namespace==''`) and clusterScope is true or (d2) the request specifies a namespace
     and least one member of namespaces matches the request's namespace.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroups: `apiGroups` is a list of matching API groups and may not be empty. '*' matches all API
             groups and, if present, must be the only entry. Required.
         clusterScope: `clusterScope` indicates whether to match requests that do not specify a namespace
@@ -469,8 +451,7 @@ class ResourcePolicyRule(K8sSpec):
 class ServiceAccountSubject(K8sSpec):
     """ServiceAccountSubject holds detailed information for service-account-kind subject.
 
-    Attributes
-    ----------
+    Attributes:
         name: `name` is the name of matching ServiceAccount objects, or '*' to match regardless of name.
             Required.
         namespace: `namespace` is the namespace of matching ServiceAccount objects. Required.
@@ -486,8 +467,7 @@ class Subject(K8sSpec):
     """Subject matches the originator of a request, as identified by the request authentication system. There
     are three ways of matching an originator; by user, group, or service account.
 
-    Attributes
-    ----------
+    Attributes:
         group: `group` matches based on user group name.
         kind: `kind` indicates which one of the other fields is non-empty. Required
         serviceAccount: `serviceAccount` matches ServiceAccounts.
@@ -505,8 +485,7 @@ class Subject(K8sSpec):
 class UserSubject(K8sSpec):
     """UserSubject holds detailed information for user-kind subject.
 
-    Attributes
-    ----------
+    Attributes:
         name: `name` is the username that matches, or '*' to match all usernames. Required.
 
     """

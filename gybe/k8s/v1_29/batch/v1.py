@@ -14,8 +14,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class CronJob(K8sResource):
     """CronJob represents the configuration of a single cron job.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -38,8 +37,7 @@ class CronJob(K8sResource):
 class CronJobList(K8sSpec):
     """CronJobList is a collection of cron jobs.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -60,8 +58,7 @@ class CronJobList(K8sSpec):
 class CronJobSpec(K8sSpec):
     """CronJobSpec describes how the job execution will look like and when it will actually run.
 
-    Attributes
-    ----------
+    Attributes:
         concurrencyPolicy: Specifies how to treat concurrent executions of a Job. Valid values are:  - 'Allow'
             (default): allows CronJobs to run concurrently; - 'Forbid': forbids concurrent runs, skipping next
             run if previous run hasn't finished yet; - 'Replace': cancels currently running job and replaces
@@ -103,8 +100,7 @@ class CronJobSpec(K8sSpec):
 class CronJobStatus(K8sSpec):
     """CronJobStatus represents the current state of a cron job.
 
-    Attributes
-    ----------
+    Attributes:
         active: A list of pointers to currently running jobs.
         lastScheduleTime: Information when was the last time the job was successfully scheduled.
         lastSuccessfulTime: Information when was the last time the job successfully completed.
@@ -120,8 +116,7 @@ class CronJobStatus(K8sSpec):
 class Job(K8sResource):
     """Job represents the configuration of a single job.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -144,8 +139,7 @@ class Job(K8sResource):
 class JobCondition(K8sSpec):
     """JobCondition describes current state of a job.
 
-    Attributes
-    ----------
+    Attributes:
         lastProbeTime: Last time the condition was checked.
         lastTransitionTime: Last time the condition transit from one status to another.
         message: Human readable message indicating details about last transition.
@@ -167,8 +161,7 @@ class JobCondition(K8sSpec):
 class JobList(K8sSpec):
     """JobList is a collection of jobs.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -189,8 +182,7 @@ class JobList(K8sSpec):
 class JobSpec(K8sSpec):
     """JobSpec describes how the job execution will look like.
 
-    Attributes
-    ----------
+    Attributes:
         activeDeadlineSeconds: Specifies the duration in seconds relative to the startTime that the job may be
             continuously active before the system tries to terminate it; value must be positive integer. If a
             Job is suspended (at creation or through an update), this timer will effectively be stopped and
@@ -287,8 +279,7 @@ class JobSpec(K8sSpec):
 class JobStatus(K8sSpec):
     """JobStatus represents the current state of a Job.
 
-    Attributes
-    ----------
+    Attributes:
         active: The number of pending and running pods.
         completedIndexes: completedIndexes holds the completed indexes when .spec.completionMode = 'Indexed'
             in a text format. The indexes are represented as decimal integers separated by commas. The numbers
@@ -358,8 +349,7 @@ class JobTemplateSpec(K8sSpec):
 class PodFailurePolicy(K8sSpec):
     """PodFailurePolicy describes how failed pods influence the backoffLimit.
 
-    Attributes
-    ----------
+    Attributes:
         rules: A list of pod failure policy rules. The rules are evaluated in order. Once a rule matches a Pod
             failure, the remaining of the rules are ignored. When no rule matches the Pod failure, the default
             handling applies - the counter of pod failures is incremented and it is checked against the
@@ -378,8 +368,7 @@ class PodFailurePolicyOnExitCodesRequirement(K8sSpec):
     .status.initContainerStatuses fields in the Pod status, respectively. Containers completed with
     success (exit code 0) are excluded from the requirement check.
 
-    Attributes
-    ----------
+    Attributes:
         containerName: Restricts the check for exit codes to the container with the specified name. When null,
             the rule applies to all containers. When specified, it should match one the container or
             initContainer names in the pod template.
@@ -407,8 +396,7 @@ class PodFailurePolicyOnExitCodesRequirement(K8sSpec):
 class PodFailurePolicyOnPodConditionsPattern(K8sSpec):
     """PodFailurePolicyOnPodConditionsPattern describes a pattern for matching an actual pod condition type.
 
-    Attributes
-    ----------
+    Attributes:
         status: Specifies the required Pod condition status. To match a pod condition it is required that the
             specified status equals the pod condition status. Defaults to True.
         type: Specifies the required Pod condition type. To match a pod condition it is required that
@@ -425,8 +413,7 @@ class PodFailurePolicyRule(K8sSpec):
     """PodFailurePolicyRule describes how a pod failure is handled when the requirements are met. One of
     onExitCodes and onPodConditions, but not both, can be used in each rule.
 
-    Attributes
-    ----------
+    Attributes:
         action: Specifies the action taken on a pod failure when the requirements are satisfied. Possible
             values are:  - FailJob: indicates that the pod's job is marked as Failed and all   running pods
             are terminated. - FailIndex: indicates that the pod's index is marked as Failed and will   not be
@@ -453,8 +440,7 @@ class UncountedTerminatedPods(K8sSpec):
     """UncountedTerminatedPods holds UIDs of Pods that have terminated but haven't been accounted in Job
     status counters.
 
-    Attributes
-    ----------
+    Attributes:
         failed: failed holds UIDs of failed Pods.
         succeeded: succeeded holds UIDs of succeeded Pods.
 

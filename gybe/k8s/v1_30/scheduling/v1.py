@@ -14,8 +14,7 @@ class PriorityClass(K8sSpec):
     """PriorityClass defines mapping from a priority class name to the priority integer value. The value can
     be any valid integer.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -49,8 +48,7 @@ class PriorityClass(K8sSpec):
 class PriorityClassList(K8sSpec):
     """PriorityClassList is a collection of priority classes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.

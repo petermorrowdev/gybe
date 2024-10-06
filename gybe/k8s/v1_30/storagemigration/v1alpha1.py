@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class GroupVersionResource(K8sSpec):
     """The names of the group, the version, and the resource.
 
-    Attributes
-    ----------
+    Attributes:
         group: The name of the group.
         resource: The name of the resource.
         version: The name of the version.
@@ -30,8 +29,7 @@ class GroupVersionResource(K8sSpec):
 class MigrationCondition(K8sSpec):
     """Describes the state of a migration at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastUpdateTime: The last time this condition was updated.
         message: A human readable message indicating details about the transition.
         reason: The reason for the condition's last transition.
@@ -51,8 +49,7 @@ class MigrationCondition(K8sSpec):
 class StorageVersionMigration(K8sResource):
     """StorageVersionMigration represents a migration of stored data to the latest storage version.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -75,8 +72,7 @@ class StorageVersionMigration(K8sResource):
 class StorageVersionMigrationList(K8sSpec):
     """StorageVersionMigrationList is a collection of storage version migrations.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -97,8 +93,7 @@ class StorageVersionMigrationList(K8sSpec):
 class StorageVersionMigrationSpec(K8sSpec):
     """Spec of the storage version migration.
 
-    Attributes
-    ----------
+    Attributes:
         continueToken: The token used in the list options to get the next chunk of objects to migrate. When
             the .status.conditions indicates the migration is 'Running', users can use this token to check the
             progress of the migration.
@@ -115,8 +110,7 @@ class StorageVersionMigrationSpec(K8sSpec):
 class StorageVersionMigrationStatus(K8sSpec):
     """Status of the storage version migration.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: The latest available observations of the migration's current state.
         resourceVersion: ResourceVersion to compare with the GC cache for performing the migration. This is
             the current resource version of given group, version and resource when kube-controller-manager

@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class AuditAnnotation(K8sSpec):
     """AuditAnnotation describes how to produce an audit annotation for an API request.
 
-    Attributes
-    ----------
+    Attributes:
         key: key specifies the audit annotation key. The audit annotation keys of a ValidatingAdmissionPolicy
             must be unique. The key must be a qualified name ([A-Za-z0-9][-A-Za-z0-9_.]*) no more than 63
             bytes in length.  The key is combined with the resource name of the ValidatingAdmissionPolicy to
@@ -43,8 +42,7 @@ class AuditAnnotation(K8sSpec):
 class ExpressionWarning(K8sSpec):
     """ExpressionWarning is a warning information that targets a specific expression.
 
-    Attributes
-    ----------
+    Attributes:
         fieldRef: The path to the field that refers the expression. For example, the reference to the
             expression of the first item of validations is 'spec.validations[0].expression'
         warning: The content of type checking information in a human-readable form. Each line of the warning
@@ -61,8 +59,7 @@ class ExpressionWarning(K8sSpec):
 class MatchCondition(K8sSpec):
     """MatchCondition represents a condition which must be fulfilled for a request to be sent to a webhook.
 
-    Attributes
-    ----------
+    Attributes:
         expression: Expression represents the expression which will be evaluated by CEL. Must evaluate to
             bool. CEL expressions have access to the contents of the AdmissionRequest and Authorizer,
             organized into CEL variables:  'object' - The object from the incoming request. The value is null
@@ -92,8 +89,7 @@ class MatchResources(K8sSpec):
     meets the match criteria. The exclude rules take precedence over include rules (if a resource matches
     both, it is excluded)
 
-    Attributes
-    ----------
+    Attributes:
         excludeResourceRules: ExcludeResourceRules describes what operations on what resources/subresources
             the ValidatingAdmissionPolicy should not care about. The exclude rules take precedence over
             include rules (if a resource matches both, it is excluded)
@@ -144,8 +140,7 @@ class MatchResources(K8sSpec):
 class NamedRuleWithOperations(K8sSpec):
     """NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroups: APIGroups is the API groups the resources belong to. '*' is all groups. If '*' is present,
             the length of the slice must be one. Required.
         apiVersions: APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is
@@ -181,8 +176,7 @@ class NamedRuleWithOperations(K8sSpec):
 class ParamKind(K8sSpec):
     """ParamKind is a tuple of Group Kind and Version.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion is the API group version the resources belong to. In format of 'group/version'.
             Required.
         kind: Kind is the API kind the resources belong to. Required.
@@ -198,8 +192,7 @@ class ParamRef(K8sSpec):
     """ParamRef describes how to locate the params to be used as input to expressions of rules applied by a
     policy binding.
 
-    Attributes
-    ----------
+    Attributes:
         name: name is the name of the resource being referenced.  One of `name` or `selector` must be set, but
             `name` and `selector` are mutually exclusive properties. If one is set, the other must be unset.
             A single parameter used for all admission requests can be configured by setting the `name` field,
@@ -247,8 +240,7 @@ class ValidatingAdmissionPolicy(K8sResource):
     """ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or
     rejects an object without changing it.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -279,8 +271,7 @@ class ValidatingAdmissionPolicyBinding(K8sSpec):
     budget. Adding/removing policies, bindings, or params can not affect whether a given (policy, binding,
     param) combination is within its own CEL budget.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -301,8 +292,7 @@ class ValidatingAdmissionPolicyBinding(K8sSpec):
 class ValidatingAdmissionPolicyBindingList(K8sSpec):
     """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -313,8 +303,8 @@ class ValidatingAdmissionPolicyBindingList(K8sSpec):
 
     """
 
+    items: List[ValidatingAdmissionPolicyBinding]
     apiVersion: Optional[str] = None
-    items: Optional[List[ValidatingAdmissionPolicyBinding]] = None
     kind: Optional[str] = None
     metadata: Optional[JSONObj] = None
 
@@ -323,8 +313,7 @@ class ValidatingAdmissionPolicyBindingList(K8sSpec):
 class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
     """ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 
-    Attributes
-    ----------
+    Attributes:
         matchResources: MatchResources declares what resources match this binding and will be validated by it.
             Note that this is intersected with the policy's matchConstraints, so only requests that are
             matched by the policy can be selected by this. If this is unset, all resources matched by the
@@ -377,8 +366,7 @@ class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
 class ValidatingAdmissionPolicyList(K8sSpec):
     """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -389,8 +377,8 @@ class ValidatingAdmissionPolicyList(K8sSpec):
 
     """
 
+    items: List[ValidatingAdmissionPolicy]
     apiVersion: Optional[str] = None
-    items: Optional[List[ValidatingAdmissionPolicy]] = None
     kind: Optional[str] = None
     metadata: Optional[JSONObj] = None
 
@@ -399,8 +387,7 @@ class ValidatingAdmissionPolicyList(K8sSpec):
 class ValidatingAdmissionPolicySpec(K8sSpec):
     """ValidatingAdmissionPolicySpec is the specification of the desired behavior of the AdmissionPolicy.
 
-    Attributes
-    ----------
+    Attributes:
         auditAnnotations: auditAnnotations contains CEL expressions which are used to produce audit
             annotations for the audit event of the API request. validations and auditAnnotations may not both
             be empty; a least one of validations or auditAnnotations is required.
@@ -455,8 +442,7 @@ class ValidatingAdmissionPolicySpec(K8sSpec):
 class ValidatingAdmissionPolicyStatus(K8sSpec):
     """ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: The conditions represent the latest available observations of a policy's current state.
         observedGeneration: The generation observed by the controller.
         typeChecking: The results of type checking for each expression. Presence of this field indicates the
@@ -473,8 +459,7 @@ class ValidatingAdmissionPolicyStatus(K8sSpec):
 class Validation(K8sSpec):
     """Validation specifies the CEL expression which is used to apply the validation.
 
-    Attributes
-    ----------
+    Attributes:
         expression: Expression represents the expression which will be evaluated by CEL. ref:
             https://github.com/google/cel-spec CEL expressions have access to the contents of the API
             request/response, organized into CEL variables as well as some other useful variables:  - 'object'
@@ -543,8 +528,7 @@ class Variable(K8sSpec):
     """Variable is the definition of a variable that is used for composition. A variable is defined as a
     named expression.
 
-    Attributes
-    ----------
+    Attributes:
         expression: Expression is the expression that will be evaluated as the value of the variable. The CEL
             expression has access to the same identifiers as the CEL expressions in Validation.
         name: Name is the name of the variable. The name must be a valid CEL identifier and unique among all

@@ -15,8 +15,7 @@ class VolumeAttributesClass(K8sSpec):
     driver. The class can be specified during dynamic provisioning of PersistentVolumeClaims, and changed
     in the PersistentVolumeClaim spec after provisioning.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -47,8 +46,7 @@ class VolumeAttributesClass(K8sSpec):
 class VolumeAttributesClassList(K8sSpec):
     """VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.

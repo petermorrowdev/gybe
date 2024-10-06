@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class Scale(K8sResource):
     """Scale represents a scaling request for a resource.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -37,8 +36,7 @@ class Scale(K8sResource):
 class ScaleSpec(K8sSpec):
     """ScaleSpec describes the attributes of a scale subresource.
 
-    Attributes
-    ----------
+    Attributes:
         replicas: replicas is the desired number of instances for the scaled object.
 
     """
@@ -50,8 +48,7 @@ class ScaleSpec(K8sSpec):
 class ScaleStatus(K8sSpec):
     """ScaleStatus represents the current status of a scale subresource.
 
-    Attributes
-    ----------
+    Attributes:
         replicas: replicas is the actual number of observed instances of the scaled object.
         selector: selector is the label query over pods that should match the replicas count. This is same as
             the label selector but in the string format to avoid introspection by clients. The string will be
@@ -68,8 +65,7 @@ class ScaleStatus(K8sSpec):
 class CrossVersionObjectReference(K8sSpec):
     """CrossVersionObjectReference contains enough information to let you identify the referred resource.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: apiVersion is the API version of the referent
         kind: kind is the kind of the referent;
         name: name is the name of the referent;
@@ -85,8 +81,7 @@ class CrossVersionObjectReference(K8sSpec):
 class HorizontalPodAutoscaler(K8sResource):
     """configuration of a horizontal pod autoscaler.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -109,8 +104,7 @@ class HorizontalPodAutoscaler(K8sResource):
 class HorizontalPodAutoscalerList(K8sSpec):
     """list of horizontal pod autoscaler objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -131,8 +125,7 @@ class HorizontalPodAutoscalerList(K8sSpec):
 class HorizontalPodAutoscalerSpec(K8sSpec):
     """specification of a horizontal pod autoscaler.
 
-    Attributes
-    ----------
+    Attributes:
         maxReplicas: maxReplicas is the upper limit for the number of pods that can be set by the autoscaler;
             cannot be smaller than MinReplicas.
         minReplicas: minReplicas is the lower limit for the number of replicas to which the autoscaler can

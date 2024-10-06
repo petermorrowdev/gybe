@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sSpec
 class Lease(K8sSpec):
     """Lease defines a lease concept.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -35,8 +34,7 @@ class Lease(K8sSpec):
 class LeaseList(K8sSpec):
     """LeaseList is a list of Lease objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -57,8 +55,7 @@ class LeaseList(K8sSpec):
 class LeaseSpec(K8sSpec):
     """LeaseSpec is a specification of a Lease.
 
-    Attributes
-    ----------
+    Attributes:
         acquireTime: acquireTime is a time when the current lease was acquired.
         holderIdentity: holderIdentity contains the identity of the holder of a current lease.
         leaseDurationSeconds: leaseDurationSeconds is a duration that candidates for a lease need to wait to

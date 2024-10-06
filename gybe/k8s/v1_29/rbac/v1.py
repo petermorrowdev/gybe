@@ -27,8 +27,7 @@ class ClusterRole(K8sSpec):
     """ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding or ClusterRoleBinding.
 
-    Attributes
-    ----------
+    Attributes:
         aggregationRule: AggregationRule is an optional field that describes how to build the Rules for this
             ClusterRole. If AggregationRule is set, then the Rules are controller managed and direct changes
             to Rules will be stomped by the controller.
@@ -54,8 +53,7 @@ class ClusterRoleBinding(K8sSpec):
     """ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in
     the global namespace, and adds who information via Subject.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -120,8 +118,7 @@ class PolicyRule(K8sSpec):
     """PolicyRule holds information that describes a policy rule, but does not contain information about who
     the rule applies to or which namespace the rule applies to.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroups: APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups
             are specified, any action requested against one of the enumerated resources in any API group will
             be allowed. '' represents the core API group and '*' represents all API groups.
@@ -150,8 +147,7 @@ class Role(K8sSpec):
     """Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -175,8 +171,7 @@ class RoleBinding(K8sSpec):
     information by which namespace it exists in.  RoleBindings in a given namespace only have effect in
     that namespace.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -257,8 +252,7 @@ class Subject(K8sSpec):
     """Subject contains a reference to the object or user identities a role binding applies to.  This can
     either hold a direct API object reference, or a value for non-objects such as user and group names.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup holds the API group of the referenced subject. Defaults to '' for ServiceAccount
             subjects. Defaults to 'rbac.authorization.k8s.io' for User and Group subjects.
         kind: Kind of object being referenced. Values defined by this API group are 'User', 'Group', and

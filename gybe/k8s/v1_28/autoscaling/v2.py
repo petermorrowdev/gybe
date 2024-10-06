@@ -18,8 +18,7 @@ class ContainerResourceMetricSource(K8sSpec):
     built in to Kubernetes, and have special scaling options on top of those available to normal per-pod
     metrics using the 'pods' source.  Only one 'target' type should be set.
 
-    Attributes
-    ----------
+    Attributes:
         container: container is the name of the container in the pods of the scaling target
         name: name is the name of the resource in question.
         target: target specifies the target value for the given metric
@@ -38,8 +37,7 @@ class ContainerResourceMetricStatus(K8sSpec):
     target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling
     options on top of those available to normal per-pod metrics using the 'pods' source.
 
-    Attributes
-    ----------
+    Attributes:
         container: container is the name of the container in the pods of the scaling target
         current: current contains the current value for the given metric
         name: name is the name of the resource in question.
@@ -55,8 +53,7 @@ class ContainerResourceMetricStatus(K8sSpec):
 class CrossVersionObjectReference(K8sSpec):
     """CrossVersionObjectReference contains enough information to let you identify the referred resource.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: apiVersion is the API version of the referent
         kind: kind is the kind of the referent;
         name: name is the name of the referent;
@@ -74,8 +71,7 @@ class ExternalMetricSource(K8sSpec):
     example length of queue in cloud messaging service, or QPS from loadbalancer running outside of
     cluster).
 
-    Attributes
-    ----------
+    Attributes:
         metric: metric identifies the target metric by name and selector
         target: target specifies the target value for the given metric
 
@@ -90,8 +86,7 @@ class ExternalMetricStatus(K8sSpec):
     """ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes
     object.
 
-    Attributes
-    ----------
+    Attributes:
         current: current contains the current value for the given metric
         metric: metric identifies the target metric by name and selector
 
@@ -105,8 +100,7 @@ class ExternalMetricStatus(K8sSpec):
 class HPAScalingPolicy(K8sSpec):
     """HPAScalingPolicy is a single policy which must hold true for a specified past interval.
 
-    Attributes
-    ----------
+    Attributes:
         periodSeconds: periodSeconds specifies the window of time for which the policy should hold true.
             PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
         type: type is used to specify the scaling policy.
@@ -128,8 +122,7 @@ class HPAScalingRules(K8sSpec):
     the number of replicas is not set instantly, instead, the safest value from the stabilization window
     is chosen.
 
-    Attributes
-    ----------
+    Attributes:
         policies: policies is a list of potential scaling polices which can be used during scaling. At least
             one policy must be specified, otherwise the HPAScalingRules will be discarded as invalid
         selectPolicy: selectPolicy is used to specify which policy should be used. If not set, the default
@@ -153,8 +146,7 @@ class HorizontalPodAutoscaler(K8sResource):
     manages the replica count of any resource implementing the scale subresource based on the metrics
     specified.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -178,8 +170,7 @@ class HorizontalPodAutoscalerBehavior(K8sSpec):
     """HorizontalPodAutoscalerBehavior configures the scaling behavior of the target in both Up and Down
     directions (scaleUp and scaleDown fields respectively).
 
-    Attributes
-    ----------
+    Attributes:
         scaleDown: scaleDown is scaling policy for scaling Down. If not set, the default value is to allow to
             scale down to minReplicas pods, with a 300 second stabilization window (i.e., the highest
             recommendation for the last 300sec is used).
@@ -197,8 +188,7 @@ class HorizontalPodAutoscalerBehavior(K8sSpec):
 class HorizontalPodAutoscalerCondition(K8sSpec):
     """HorizontalPodAutoscalerCondition describes the state of a HorizontalPodAutoscaler at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: lastTransitionTime is the last time the condition transitioned from one status to
             another
         message: message is a human-readable explanation containing details about the transition
@@ -219,8 +209,7 @@ class HorizontalPodAutoscalerCondition(K8sSpec):
 class HorizontalPodAutoscalerList(K8sSpec):
     """HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -241,8 +230,7 @@ class HorizontalPodAutoscalerList(K8sSpec):
 class HorizontalPodAutoscalerSpec(K8sSpec):
     """HorizontalPodAutoscalerSpec describes the desired functionality of the HorizontalPodAutoscaler.
 
-    Attributes
-    ----------
+    Attributes:
         behavior: behavior configures the scaling behavior of the target in both Up and Down directions
             (scaleUp and scaleDown fields respectively). If not set, the default HPAScalingRules for scale up
             and scale down are used.
@@ -274,8 +262,7 @@ class HorizontalPodAutoscalerSpec(K8sSpec):
 class HorizontalPodAutoscalerStatus(K8sSpec):
     """HorizontalPodAutoscalerStatus describes the current status of a horizontal pod autoscaler.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: conditions is the set of conditions required for this autoscaler to scale its target, and
             indicates whether or not those conditions are met.
         currentMetrics: currentMetrics is the last read state of the metrics used by this autoscaler.
@@ -317,8 +304,7 @@ class MetricSpec(K8sSpec):
     """MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field
     should be set at once).
 
-    Attributes
-    ----------
+    Attributes:
         containerResource: containerResource refers to a resource metric (such as those specified in requests
             and limits) known to Kubernetes describing a single container in each pod of the current scale
             target (e.g. CPU or memory). Such metrics are built in to Kubernetes, and have special scaling
@@ -355,8 +341,7 @@ class MetricSpec(K8sSpec):
 class MetricStatus(K8sSpec):
     """MetricStatus describes the last-read state of a single metric.
 
-    Attributes
-    ----------
+    Attributes:
         containerResource: container resource refers to a resource metric (such as those specified in requests
             and limits) known to Kubernetes describing a single container in each pod in the current scale
             target (e.g. CPU or memory). Such metrics are built in to Kubernetes, and have special scaling
@@ -431,8 +416,7 @@ class ObjectMetricSource(K8sSpec):
     """ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example,
     hits-per-second on an Ingress object).
 
-    Attributes
-    ----------
+    Attributes:
         describedObject: describedObject specifies the descriptions of a object,such as kind,name apiVersion
         metric: metric identifies the target metric by name and selector
         target: target specifies the target value for the given metric
@@ -449,8 +433,7 @@ class ObjectMetricStatus(K8sSpec):
     """ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for
     example, hits-per-second on an Ingress object).
 
-    Attributes
-    ----------
+    Attributes:
         current: current contains the current value for the given metric
         describedObject: DescribedObject specifies the descriptions of a object,such as kind,name apiVersion
         metric: metric identifies the target metric by name and selector
@@ -468,8 +451,7 @@ class PodsMetricSource(K8sSpec):
     (for example, transactions-processed-per-second). The values will be averaged together before being
     compared to the target value.
 
-    Attributes
-    ----------
+    Attributes:
         metric: metric identifies the target metric by name and selector
         target: target specifies the target value for the given metric
 
@@ -484,8 +466,7 @@ class PodsMetricStatus(K8sSpec):
     """PodsMetricStatus indicates the current value of a metric describing each pod in the current scale
     target (for example, transactions-processed-per-second).
 
-    Attributes
-    ----------
+    Attributes:
         current: current contains the current value for the given metric
         metric: metric identifies the target metric by name and selector
 
@@ -503,8 +484,7 @@ class ResourceMetricSource(K8sSpec):
     Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using
     the 'pods' source.  Only one 'target' type should be set.
 
-    Attributes
-    ----------
+    Attributes:
         name: name is the name of the resource in question.
         target: target specifies the target value for the given metric
 
@@ -521,8 +501,7 @@ class ResourceMetricStatus(K8sSpec):
     memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those
     available to normal per-pod metrics using the 'pods' source.
 
-    Attributes
-    ----------
+    Attributes:
         current: current contains the current value for the given metric
         name: name is the name of the resource in question.
 

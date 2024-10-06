@@ -11,8 +11,7 @@ from gybe.k8s.types import K8sSpec
 class Info(K8sSpec):
     """Info contains versioning information. how we'll want to distribute that information.
 
-    Attributes
-    ----------
+    Attributes:
         buildDate: ...
         compiler: ...
         gitCommit: ...

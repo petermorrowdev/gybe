@@ -19,8 +19,7 @@ class CertificateSigningRequest(K8sResource):
     request client certificates to authenticate to kube-apiserver (with the 'kubernetes.io/kube-apiserver-
     client' signerName), or to obtain certificates from custom non-Kubernetes signers.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -96,8 +95,7 @@ class CertificateSigningRequestList(K8sSpec):
 class CertificateSigningRequestSpec(K8sSpec):
     """CertificateSigningRequestSpec contains the certificate request.
 
-    Attributes
-    ----------
+    Attributes:
         expirationSeconds: expirationSeconds is the requested duration of validity of the issued certificate.
             The certificate signer may issue a certificate with a different validity duration so a client must
             check the delta between the notBefore and and notAfter fields in the issued certificate to
@@ -166,8 +164,7 @@ class CertificateSigningRequestStatus(K8sSpec):
     """CertificateSigningRequestStatus contains conditions used to indicate approved/denied/failed status of
     the request, and the issued certificate.
 
-    Attributes
-    ----------
+    Attributes:
         certificate: certificate is populated with an issued certificate by the signer after an Approved
             condition is present. This field is set via the /status subresource. Once populated, this field is
             immutable.  If the certificate signing request is denied, a condition of type 'Denied' is added

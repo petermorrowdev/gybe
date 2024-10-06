@@ -15,8 +15,7 @@ class LocalSubjectAccessReview(K8sResource):
     namespace. Having a namespace scoped resource makes it much easier to grant namespace scoped policy
     that includes permissions checking.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -99,8 +98,7 @@ class ResourceRule(K8sSpec):
     """ResourceRule is the list of actions the subject is allowed to perform on resources. The list ordering
     isn't significant, may contain duplicates, and possibly be incomplete.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroups: APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups
             are specified, any action requested against one of the enumerated resources in any API group will
             be allowed.  '*' means all.
@@ -168,8 +166,7 @@ class SelfSubjectRulesReview(K8sResource):
     lifetime/revocation, and correctness concerns. SubjectAccessReview, and LocalAccessReview are the
     correct way to defer authorization decisions to the API server.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -192,8 +189,7 @@ class SelfSubjectRulesReview(K8sResource):
 class SelfSubjectRulesReviewSpec(K8sSpec):
     """SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
 
-    Attributes
-    ----------
+    Attributes:
         namespace: Namespace to evaluate rules for. Required.
 
     """
@@ -205,8 +201,7 @@ class SelfSubjectRulesReviewSpec(K8sSpec):
 class SubjectAccessReview(K8sResource):
     """SubjectAccessReview checks whether or not a user or group can perform an action.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -279,8 +274,7 @@ class SubjectRulesReviewStatus(K8sSpec):
     Because authorization rules are additive, if a rule appears in a list it's safe to assume the subject
     has that permission, even if that list is incomplete.
 
-    Attributes
-    ----------
+    Attributes:
         evaluationError: EvaluationError can appear in combination with Rules. It indicates an error occurred
             during rule evaluation, such as an authorizer that doesn't support rule evaluation, and that
             ResourceRules and/or NonResourceRules may be incomplete.

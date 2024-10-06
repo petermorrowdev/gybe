@@ -18,8 +18,7 @@ class Event(K8sSpec):
     underlying trigger, or the continued existence of events with that Reason.  Events should be treated
     as informative, best-effort, supplemental data.
 
-    Attributes
-    ----------
+    Attributes:
         action: action is what action was taken/failed regarding to the regarding object. It is machine-
             readable. This field cannot be empty for new Events and it can have at most 128 characters.
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -79,8 +78,7 @@ class Event(K8sSpec):
 class EventList(K8sSpec):
     """EventList is a list of Event objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -104,8 +102,7 @@ class EventSeries(K8sSpec):
     reporter in 'k8s.io/client-go/tools/events/event_broadcaster.go' shows how this struct is updated on
     heartbeats and can guide customized reporter implementations.
 
-    Attributes
-    ----------
+    Attributes:
         count: count is the number of occurrences in this series up to the last heartbeat time.
         lastObservedTime: lastObservedTime is the time when last Event from the series was seen before last
             heartbeat.
