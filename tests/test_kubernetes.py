@@ -12,32 +12,6 @@ def test_import_default_kuberentes():
     assert k8s
 
 
-def test_import_k8s_1_26():
-    """Tests k8s 1.26 module imports"""
-    from gybe.k8s.v1_26.apps import v1
-
-    assert v1
-    from gybe.k8s.v1_26.batch import v1
-
-    assert v1
-    from gybe.k8s.v1_26.core import v1
-
-    assert v1
-
-
-def test_import_k8s_1_27():
-    """Tests k8s 1.27 module imports"""
-    from gybe.k8s.v1_27.apps import v1
-
-    assert v1
-    from gybe.k8s.v1_27.batch import v1
-
-    assert v1
-    from gybe.k8s.v1_27.core import v1
-
-    assert v1
-
-
 def test_import_k8s_1_28():
     """Tests k8s 1.28 module imports"""
     from gybe.k8s.v1_28.apps import v1
@@ -73,5 +47,18 @@ def test_import_k8s_1_30():
 
     assert v1
     from gybe.k8s.v1_30.core import v1
+
+    assert v1
+
+
+def test_import_k8s_1_31():
+    """Tests k8s 1.31 module imports"""
+    from gybe.k8s.v1_31.apps import v1
+
+    assert v1
+    from gybe.k8s.v1_31.batch import v1
+
+    assert v1
+    from gybe.k8s.v1_31.core import v1
 
     assert v1

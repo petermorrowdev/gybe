@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sSpec
 class MatchCondition(K8sSpec):
     """MatchCondition represents a condition which must by fulfilled for a request to be sent to a webhook.
 
-    Attributes
-    ----------
+    Attributes:
         expression: Expression represents the expression which will be evaluated by CEL. Must evaluate to
             bool. CEL expressions have access to the contents of the AdmissionRequest and Authorizer,
             organized into CEL variables:  'object' - The object from the incoming request. The value is null
@@ -42,8 +41,7 @@ class MatchCondition(K8sSpec):
 class MutatingWebhook(K8sSpec):
     """MutatingWebhook describes an admission webhook and the resources and operations it applies to.
 
-    Attributes
-    ----------
+    Attributes:
         admissionReviewVersions: AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
             versions the Webhook expects. API server will try to use first version in the list which it
             supports. If none of the versions specified in this list supported by API server, validation will
@@ -142,8 +140,7 @@ class MutatingWebhookConfiguration(K8sSpec):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -164,8 +161,7 @@ class MutatingWebhookConfiguration(K8sSpec):
 class MutatingWebhookConfigurationList(K8sSpec):
     """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -187,8 +183,7 @@ class RuleWithOperations(K8sSpec):
     """RuleWithOperations is a tuple of Operations and Resources. It is recommended to make sure that all the
     tuple expansions are valid.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroups: APIGroups is the API groups the resources belong to. '*' is all groups. If '*' is present,
             the length of the slice must be one. Required.
         apiVersions: APIVersions is the API versions the resources belong to. '*' is all versions. If '*' is
@@ -239,8 +234,7 @@ class ServiceReference(K8sSpec):
 class ValidatingWebhook(K8sSpec):
     """ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
 
-    Attributes
-    ----------
+    Attributes:
         admissionReviewVersions: AdmissionReviewVersions is an ordered list of preferred `AdmissionReview`
             versions the Webhook expects. API server will try to use first version in the list which it
             supports. If none of the versions specified in this list supported by API server, validation will
@@ -327,8 +321,7 @@ class ValidatingWebhookConfiguration(K8sSpec):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -349,8 +342,7 @@ class ValidatingWebhookConfiguration(K8sSpec):
 class ValidatingWebhookConfigurationList(K8sSpec):
     """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.

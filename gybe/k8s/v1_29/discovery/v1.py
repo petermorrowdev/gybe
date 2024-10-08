@@ -14,8 +14,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 class Endpoint(K8sSpec):
     """Endpoint represents a single logical 'backend' implementing a service.
 
-    Attributes
-    ----------
+    Attributes:
         addresses: addresses of this endpoint. The contents of this field are interpreted according to the
             corresponding EndpointSlice addressType field. Consumers must handle different types of addresses
             in the context of their own capabilities. This must contain at least one address but no more than
@@ -53,8 +52,7 @@ class Endpoint(K8sSpec):
 class EndpointConditions(K8sSpec):
     """EndpointConditions represents the current condition of an endpoint.
 
-    Attributes
-    ----------
+    Attributes:
         ready: ready indicates that this endpoint is prepared to receive traffic, according to whatever system
             is managing the endpoint. A nil value indicates an unknown state. In most cases consumers should
             interpret this unknown state as ready. For compatibility reasons, ready should never be 'true' for
@@ -77,8 +75,7 @@ class EndpointConditions(K8sSpec):
 class EndpointHints(K8sSpec):
     """EndpointHints provides hints describing how an endpoint should be consumed.
 
-    Attributes
-    ----------
+    Attributes:
         forZones: forZones indicates the zone(s) this endpoint should be consumed by to enable topology aware
             routing.
 
@@ -125,8 +122,7 @@ class EndpointSlice(K8sSpec):
     may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full
     set of endpoints.
 
-    Attributes
-    ----------
+    Attributes:
         addressType: addressType specifies the type of address carried by this EndpointSlice. All addresses in
             this slice must be the same type. This field is immutable after creation. The following address
             types are currently supported: * IPv4: Represents an IPv4 Address. * IPv6: Represents an IPv6
@@ -178,8 +174,7 @@ class EndpointSliceList(K8sSpec):
 class ForZone(K8sSpec):
     """ForZone provides information about which zones should consume this endpoint.
 
-    Attributes
-    ----------
+    Attributes:
         name: name represents the name of the zone.
 
     """

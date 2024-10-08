@@ -18,8 +18,7 @@ class CSIDriver(K8sSpec):
     Kubelet uses this object to determine whether pod information needs to be passed on mount. CSIDriver
     objects are non-namespaced.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -43,8 +42,7 @@ class CSIDriver(K8sSpec):
 class CSIDriverList(K8sSpec):
     """CSIDriverList is a collection of CSIDriver objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -65,8 +63,7 @@ class CSIDriverList(K8sSpec):
 class CSIDriverSpec(K8sSpec):
     """CSIDriverSpec is the specification of a CSIDriver.
 
-    Attributes
-    ----------
+    Attributes:
         attachRequired: attachRequired indicates this CSI volume driver requires an attach operation (because
             it implements the CSI ControllerPublishVolume() method), and that the Kubernetes attach detach
             controller should call the attach volume interface which checks the volumeattachment status and
@@ -159,8 +156,7 @@ class CSINode(K8sSpec):
     no CSI Drivers available on the node, or the Kubelet version is low enough that it doesn't create this
     object. CSINode has an OwnerReference that points to the corresponding node object.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -211,8 +207,7 @@ class CSINodeDriver(K8sSpec):
 class CSINodeList(K8sSpec):
     """CSINodeList is a collection of CSINode objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -257,8 +252,7 @@ class CSIStorageCapacity(K8sSpec):
     it falls back to a comparison against the less precise Capacity. If that is also unset, the scheduler
     assumes that capacity is insufficient and tries some other node.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -301,8 +295,7 @@ class CSIStorageCapacity(K8sSpec):
 class CSIStorageCapacityList(K8sSpec):
     """CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -325,8 +318,7 @@ class StorageClass(K8sSpec):
     dynamically provisioned.  StorageClasses are non-namespaced; the name of the storage class according
     to etcd is in ObjectMeta.Name.
 
-    Attributes
-    ----------
+    Attributes:
         allowVolumeExpansion: allowVolumeExpansion shows whether the storage class allow volume expand.
         allowedTopologies: allowedTopologies restrict the node topologies where volumes can be dynamically
             provisioned. Each volume plugin defines its own supported topology specifications. An empty
@@ -368,8 +360,7 @@ class StorageClass(K8sSpec):
 class StorageClassList(K8sSpec):
     """StorageClassList is a collection of storage classes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -390,8 +381,7 @@ class StorageClassList(K8sSpec):
 class TokenRequest(K8sSpec):
     """TokenRequest contains parameters of a service account token.
 
-    Attributes
-    ----------
+    Attributes:
         audience: audience is the intended audience of the token in 'TokenRequestSpec'. It will default to the
             audiences of kube apiserver.
         expirationSeconds: expirationSeconds is the duration of validity of the token in 'TokenRequestSpec'.
@@ -408,8 +398,7 @@ class VolumeAttachment(K8sResource):
     """VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified
     node.  VolumeAttachment objects are non-namespaced.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -434,8 +423,7 @@ class VolumeAttachment(K8sResource):
 class VolumeAttachmentList(K8sSpec):
     """VolumeAttachmentList is a collection of VolumeAttachment objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -458,8 +446,7 @@ class VolumeAttachmentSource(K8sSpec):
     can be attached via external attacher, in future we may allow also inline volumes in pods. Exactly one
     member can be set.
 
-    Attributes
-    ----------
+    Attributes:
         inlineVolumeSpec: inlineVolumeSpec contains all the information necessary to attach a persistent
             volume defined by a pod's inline VolumeSource. This field is populated only for the CSIMigration
             feature. It contains translated fields from a pod's inline VolumeSource to a PersistentVolumeSpec.
@@ -476,8 +463,7 @@ class VolumeAttachmentSource(K8sSpec):
 class VolumeAttachmentSpec(K8sSpec):
     """VolumeAttachmentSpec is the specification of a VolumeAttachment request.
 
-    Attributes
-    ----------
+    Attributes:
         attacher: attacher indicates the name of the volume driver that MUST handle this request. This is the
             name returned by GetPluginName().
         nodeName: nodeName represents the node that the volume should be attached to.
@@ -494,8 +480,7 @@ class VolumeAttachmentSpec(K8sSpec):
 class VolumeAttachmentStatus(K8sSpec):
     """VolumeAttachmentStatus is the status of a VolumeAttachment request.
 
-    Attributes
-    ----------
+    Attributes:
         attachError: attachError represents the last error encountered during attach operation, if any. This
             field must only be set by the entity completing the attach operation, i.e. the external-attacher.
         attached: attached indicates the volume is successfully attached. This field must only be set by the
@@ -519,8 +504,7 @@ class VolumeAttachmentStatus(K8sSpec):
 class VolumeError(K8sSpec):
     """VolumeError captures an error encountered during a volume operation.
 
-    Attributes
-    ----------
+    Attributes:
         message: message represents the error encountered during Attach or Detach operation. This string may
             be logged, so it should not contain sensitive information.
         time: time represents the time the error was encountered.
@@ -535,8 +519,7 @@ class VolumeError(K8sSpec):
 class VolumeNodeResources(K8sSpec):
     """VolumeNodeResources is a set of resource limits for scheduling of volumes.
 
-    Attributes
-    ----------
+    Attributes:
         count: count indicates the maximum number of unique volumes managed by the CSI driver that can be used
             on a node. A volume that is both attached and mounted on a node is considered to be used once, not
             twice. The same rule applies for a unique volume that is shared among multiple pods on the same

@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 class UserInfo(K8sSpec):
     """UserInfo holds the information about the user needed to implement the user.Info interface.
 
-    Attributes
-    ----------
+    Attributes:
         extra: Any additional information provided by the authenticator.
         groups: The names of groups this user is a part of.
         uid: A unique value that identifies this user across time. If this user is deleted and another user by
@@ -33,8 +32,7 @@ class UserInfo(K8sSpec):
 class BoundObjectReference(K8sSpec):
     """BoundObjectReference is a reference to an object that a token is bound to.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: API version of the referent.
         kind: Kind of the referent. Valid kinds are 'Pod' and 'Secret'.
         name: Name of the referent.
@@ -52,8 +50,7 @@ class BoundObjectReference(K8sSpec):
 class TokenRequest(K8sResource):
     """TokenRequest requests a token for a given service account.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -76,8 +73,7 @@ class TokenRequest(K8sResource):
 class TokenRequestSpec(K8sSpec):
     """TokenRequestSpec contains client provided parameters of a token request.
 
-    Attributes
-    ----------
+    Attributes:
         audiences: Audiences are the intendend audiences of the token. A recipient of a token must identify
             themself with an identifier in the list of audiences of the token, and otherwise should reject the
             token. A token issued for multiple audiences may be used to authenticate against any of the
@@ -101,8 +97,7 @@ class TokenRequestSpec(K8sSpec):
 class TokenRequestStatus(K8sSpec):
     """TokenRequestStatus is the result of a token request.
 
-    Attributes
-    ----------
+    Attributes:
         expirationTimestamp: ExpirationTimestamp is the time of expiration of the returned token.
         token: Token is the opaque bearer token.
 
@@ -119,8 +114,7 @@ class SelfSubjectReview(K8sSpec):
     If impersonation or request header authentication is used, any extra keys will have their case ignored
     and returned as lowercase.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -141,8 +135,7 @@ class SelfSubjectReview(K8sSpec):
 class SelfSubjectReviewStatus(K8sSpec):
     """SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 
-    Attributes
-    ----------
+    Attributes:
         userInfo: User attributes of the user making this request.
 
     """
@@ -155,8 +148,7 @@ class TokenReview(K8sResource):
     """TokenReview attempts to authenticate a token to a known user. Note: TokenReview requests may be cached
     by the webhook token authenticator plugin in the kube-apiserver.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -179,8 +171,7 @@ class TokenReview(K8sResource):
 class TokenReviewSpec(K8sSpec):
     """TokenReviewSpec is a description of the token authentication request.
 
-    Attributes
-    ----------
+    Attributes:
         audiences: Audiences is a list of the identifiers that the resource server presented with the token
             identifies as. Audience-aware token authenticators will verify that the token was intended for at
             least one of the audiences in this list. If no audiences are provided, the audience will default
@@ -197,8 +188,7 @@ class TokenReviewSpec(K8sSpec):
 class TokenReviewStatus(K8sSpec):
     """TokenReviewStatus is the result of the token authentication request.
 
-    Attributes
-    ----------
+    Attributes:
         audiences: Audiences are audience identifiers chosen by the authenticator that are compatible with
             both the TokenReview and token. An identifier is any identifier in the intersection of the
             TokenReviewSpec audiences and the token's audiences. A client of the TokenReview API that sets the

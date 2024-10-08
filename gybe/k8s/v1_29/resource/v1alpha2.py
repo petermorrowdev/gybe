@@ -14,8 +14,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class AllocationResult(K8sSpec):
     """AllocationResult contains attributes of an allocated resource.
 
-    Attributes
-    ----------
+    Attributes:
         availableOnNodes: This field will get set by the resource driver after it has allocated the resource
             to inform the scheduler where it can schedule Pods using the ResourceClaim.  Setting this field is
             optional. If null, the resource is available everywhere.
@@ -42,8 +41,7 @@ class PodSchedulingContext(K8sResource):
     that use 'WaitForFirstConsumer' allocation mode.  This is an alpha type and requires enabling the
     DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -66,8 +64,7 @@ class PodSchedulingContext(K8sResource):
 class PodSchedulingContextList(K8sSpec):
     """PodSchedulingContextList is a collection of Pod scheduling objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -88,8 +85,7 @@ class PodSchedulingContextList(K8sSpec):
 class PodSchedulingContextSpec(K8sSpec):
     """PodSchedulingContextSpec describes where resources for the Pod are needed.
 
-    Attributes
-    ----------
+    Attributes:
         potentialNodes: PotentialNodes lists nodes where the Pod might be able to run.  The size of this field
             is limited to 128. This is large enough for many clusters. Larger clusters may need more attempts
             to find a node that suits all pending resources. This may get increased in the future, but not
@@ -107,8 +103,7 @@ class PodSchedulingContextSpec(K8sSpec):
 class PodSchedulingContextStatus(K8sSpec):
     """PodSchedulingContextStatus describes where resources for the Pod can be allocated.
 
-    Attributes
-    ----------
+    Attributes:
         resourceClaims: ResourceClaims describes resource availability for each pod.spec.resourceClaim entry
             where the corresponding ResourceClaim uses 'WaitForFirstConsumer' allocation mode.
 
@@ -123,8 +118,7 @@ class ResourceClaim(K8sResource):
     the resource has been allocated and what the resulting attributes are.  This is an alpha type and
     requires enabling the DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -149,8 +143,7 @@ class ResourceClaimConsumerReference(K8sSpec):
     """ResourceClaimConsumerReference contains enough information to let you locate the consumer of a
     ResourceClaim. The user must be a resource in the same namespace as the ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         name: Name is the name of resource being referenced.
@@ -169,8 +162,7 @@ class ResourceClaimConsumerReference(K8sSpec):
 class ResourceClaimList(K8sSpec):
     """ResourceClaimList is a collection of claims.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -192,8 +184,7 @@ class ResourceClaimParametersReference(K8sSpec):
     """ResourceClaimParametersReference contains enough information to let you locate the parameters for a
     ResourceClaim. The object must be in the same namespace as the ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         kind: Kind is the type of resource being referenced. This is the same value as in the parameter
@@ -212,8 +203,7 @@ class ResourceClaimSchedulingStatus(K8sSpec):
     """ResourceClaimSchedulingStatus contains information about one particular ResourceClaim with
     'WaitForFirstConsumer' allocation mode.
 
-    Attributes
-    ----------
+    Attributes:
         name: Name matches the pod.spec.resourceClaims[*].Name field.
         unsuitableNodes: UnsuitableNodes lists nodes that the ResourceClaim cannot be allocated for.  The size
             of this field is limited to 128, the same as for PodSchedulingSpec.PotentialNodes. This may get
@@ -229,8 +219,7 @@ class ResourceClaimSchedulingStatus(K8sSpec):
 class ResourceClaimSpec(K8sSpec):
     """ResourceClaimSpec defines how a resource is to be allocated.
 
-    Attributes
-    ----------
+    Attributes:
         allocationMode: Allocation can start immediately or when a Pod wants to use the resource.
             'WaitForFirstConsumer' is the default.
         parametersRef: ParametersRef references a separate object with arbitrary parameters that will be used
@@ -251,8 +240,7 @@ class ResourceClaimStatus(K8sSpec):
     """ResourceClaimStatus tracks whether the resource has been allocated and what the resulting attributes
     are.
 
-    Attributes
-    ----------
+    Attributes:
         allocation: Allocation is set by the resource driver once a resource or set of resources has been
             allocated successfully. If this is not specified, the resources have not been allocated yet.
         deallocationRequested: DeallocationRequested indicates that a ResourceClaim is to be deallocated.  The
@@ -276,8 +264,7 @@ class ResourceClaimStatus(K8sSpec):
 class ResourceClaimTemplate(K8sSpec):
     """ResourceClaimTemplate is used to produce ResourceClaim objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -299,8 +286,7 @@ class ResourceClaimTemplate(K8sSpec):
 class ResourceClaimTemplateList(K8sSpec):
     """ResourceClaimTemplateList is a collection of claim templates.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -321,8 +307,7 @@ class ResourceClaimTemplateList(K8sSpec):
 class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         metadata: ObjectMeta may contain labels and annotations that will be copied into the PVC when creating
             it. No other fields are allowed and will be rejected during validation.
         spec: Spec for the ResourceClaim. The entire content is copied unchanged into the ResourceClaim that
@@ -339,8 +324,7 @@ class ResourceClass(K8sSpec):
     """ResourceClass is used by administrators to influence how resources are allocated.  This is an alpha
     type and requires enabling the DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -371,8 +355,7 @@ class ResourceClass(K8sSpec):
 class ResourceClassList(K8sSpec):
     """ResourceClassList is a collection of classes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -394,8 +377,7 @@ class ResourceClassParametersReference(K8sSpec):
     """ResourceClassParametersReference contains enough information to let you locate the parameters for a
     ResourceClass.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         kind: Kind is the type of resource being referenced. This is the same value as in the parameter
@@ -416,8 +398,7 @@ class ResourceClassParametersReference(K8sSpec):
 class ResourceHandle(K8sSpec):
     """ResourceHandle holds opaque resource data for processing by a specific kubelet plugin.
 
-    Attributes
-    ----------
+    Attributes:
         data: Data contains the opaque data associated with this ResourceHandle. It is set by the controller
             component of the resource driver whose name matches the DriverName set in the ResourceClaimStatus
             this ResourceHandle is embedded in. It is set at allocation time and is intended for processing by

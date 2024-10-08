@@ -15,8 +15,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class AllocationResult(K8sSpec):
     """AllocationResult contains attributes of an allocated resource.
 
-    Attributes
-    ----------
+    Attributes:
         availableOnNodes: This field will get set by the resource driver after it has allocated the resource
             to inform the scheduler where it can schedule Pods using the ResourceClaim.  Setting this field is
             optional. If null, the resource is available everywhere.
@@ -41,8 +40,7 @@ class AllocationResult(K8sSpec):
 class DriverAllocationResult(K8sSpec):
     """DriverAllocationResult contains vendor parameters and the allocation result for one request.
 
-    Attributes
-    ----------
+    Attributes:
         namedResources: NamedResources describes the allocation result when using the named resources model.
         vendorRequestParameters: VendorRequestParameters are the per-request configuration parameters from the
             time that the claim was allocated.
@@ -57,8 +55,7 @@ class DriverAllocationResult(K8sSpec):
 class DriverRequests(K8sSpec):
     """DriverRequests describes all resources that are needed from one particular driver.
 
-    Attributes
-    ----------
+    Attributes:
         driverName: DriverName is the name used by the DRA driver kubelet plugin.
         requests: Requests describes all resources that are needed from the driver.
         vendorParameters: VendorParameters are arbitrary setup parameters for all requests of the claim. They
@@ -75,8 +72,7 @@ class DriverRequests(K8sSpec):
 class NamedResourcesAllocationResult(K8sSpec):
     """NamedResourcesAllocationResult is used in AllocationResultModel.
 
-    Attributes
-    ----------
+    Attributes:
         name: Name is the name of the selected resource instance.
 
     """
@@ -88,8 +84,7 @@ class NamedResourcesAllocationResult(K8sSpec):
 class NamedResourcesAttribute(K8sSpec):
     """NamedResourcesAttribute is a combination of an attribute name and its value.
 
-    Attributes
-    ----------
+    Attributes:
         bool: BoolValue is a true/false value.
         int: IntValue is a 64-bit integer.
         intSlice: IntSliceValue is an array of 64-bit integers.
@@ -116,8 +111,7 @@ class NamedResourcesAttribute(K8sSpec):
 class NamedResourcesFilter(K8sSpec):
     """NamedResourcesFilter is used in ResourceFilterModel.
 
-    Attributes
-    ----------
+    Attributes:
         selector: Selector is a CEL expression which must evaluate to true if a resource instance is suitable.
             The language is as defined in https://kubernetes.io/docs/reference/using-api/cel/  In addition,
             for each type NamedResourcesin AttributeValue there is a map that resolves to the corresponding
@@ -134,8 +128,7 @@ class NamedResourcesInstance(K8sSpec):
     """NamedResourcesInstance represents one individual hardware instance that can be selected based on its
     attributes.
 
-    Attributes
-    ----------
+    Attributes:
         attributes: Attributes defines the attributes of this resource instance. The name of each attribute
             must be unique.
         name: Name is unique identifier among all resource instances managed by the driver on the node. It
@@ -151,8 +144,7 @@ class NamedResourcesInstance(K8sSpec):
 class NamedResourcesIntSlice(K8sSpec):
     """NamedResourcesIntSlice contains a slice of 64-bit integers.
 
-    Attributes
-    ----------
+    Attributes:
         ints: Ints is the slice of 64-bit integers.
 
     """
@@ -164,8 +156,7 @@ class NamedResourcesIntSlice(K8sSpec):
 class NamedResourcesRequest(K8sSpec):
     """NamedResourcesRequest is used in ResourceRequestModel.
 
-    Attributes
-    ----------
+    Attributes:
         selector: Selector is a CEL expression which must evaluate to true if a resource instance is suitable.
             The language is as defined in https://kubernetes.io/docs/reference/using-api/cel/  In addition,
             for each type NamedResourcesin AttributeValue there is a map that resolves to the corresponding
@@ -181,8 +172,7 @@ class NamedResourcesRequest(K8sSpec):
 class NamedResourcesResources(K8sSpec):
     """NamedResourcesResources is used in ResourceModel.
 
-    Attributes
-    ----------
+    Attributes:
         instances: The list of all individual resources instances currently available.
 
     """
@@ -194,8 +184,7 @@ class NamedResourcesResources(K8sSpec):
 class NamedResourcesStringSlice(K8sSpec):
     """NamedResourcesStringSlice contains a slice of strings.
 
-    Attributes
-    ----------
+    Attributes:
         strings: Strings is the slice of strings.
 
     """
@@ -209,8 +198,7 @@ class PodSchedulingContext(K8sResource):
     that use 'WaitForFirstConsumer' allocation mode.  This is an alpha type and requires enabling the
     DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -233,8 +221,7 @@ class PodSchedulingContext(K8sResource):
 class PodSchedulingContextList(K8sSpec):
     """PodSchedulingContextList is a collection of Pod scheduling objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -255,8 +242,7 @@ class PodSchedulingContextList(K8sSpec):
 class PodSchedulingContextSpec(K8sSpec):
     """PodSchedulingContextSpec describes where resources for the Pod are needed.
 
-    Attributes
-    ----------
+    Attributes:
         potentialNodes: PotentialNodes lists nodes where the Pod might be able to run.  The size of this field
             is limited to 128. This is large enough for many clusters. Larger clusters may need more attempts
             to find a node that suits all pending resources. This may get increased in the future, but not
@@ -274,8 +260,7 @@ class PodSchedulingContextSpec(K8sSpec):
 class PodSchedulingContextStatus(K8sSpec):
     """PodSchedulingContextStatus describes where resources for the Pod can be allocated.
 
-    Attributes
-    ----------
+    Attributes:
         resourceClaims: ResourceClaims describes resource availability for each pod.spec.resourceClaim entry
             where the corresponding ResourceClaim uses 'WaitForFirstConsumer' allocation mode.
 
@@ -290,8 +275,7 @@ class ResourceClaim(K8sResource):
     the resource has been allocated and what the resulting attributes are.  This is an alpha type and
     requires enabling the DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -316,8 +300,7 @@ class ResourceClaimConsumerReference(K8sSpec):
     """ResourceClaimConsumerReference contains enough information to let you locate the consumer of a
     ResourceClaim. The user must be a resource in the same namespace as the ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         name: Name is the name of resource being referenced.
@@ -336,8 +319,7 @@ class ResourceClaimConsumerReference(K8sSpec):
 class ResourceClaimList(K8sSpec):
     """ResourceClaimList is a collection of claims.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -359,8 +341,7 @@ class ResourceClaimParameters(K8sSpec):
     """ResourceClaimParameters defines resource requests for a ResourceClaim in an in-tree format understood
     by Kubernetes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -391,8 +372,7 @@ class ResourceClaimParameters(K8sSpec):
 class ResourceClaimParametersList(K8sSpec):
     """ResourceClaimParametersList is a collection of ResourceClaimParameters.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -414,8 +394,7 @@ class ResourceClaimParametersReference(K8sSpec):
     """ResourceClaimParametersReference contains enough information to let you locate the parameters for a
     ResourceClaim. The object must be in the same namespace as the ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         kind: Kind is the type of resource being referenced. This is the same value as in the parameter
@@ -434,8 +413,7 @@ class ResourceClaimSchedulingStatus(K8sSpec):
     """ResourceClaimSchedulingStatus contains information about one particular ResourceClaim with
     'WaitForFirstConsumer' allocation mode.
 
-    Attributes
-    ----------
+    Attributes:
         name: Name matches the pod.spec.resourceClaims[*].Name field.
         unsuitableNodes: UnsuitableNodes lists nodes that the ResourceClaim cannot be allocated for.  The size
             of this field is limited to 128, the same as for PodSchedulingSpec.PotentialNodes. This may get
@@ -451,8 +429,7 @@ class ResourceClaimSchedulingStatus(K8sSpec):
 class ResourceClaimSpec(K8sSpec):
     """ResourceClaimSpec defines how a resource is to be allocated.
 
-    Attributes
-    ----------
+    Attributes:
         allocationMode: Allocation can start immediately or when a Pod wants to use the resource.
             'WaitForFirstConsumer' is the default.
         parametersRef: ParametersRef references a separate object with arbitrary parameters that will be used
@@ -473,8 +450,7 @@ class ResourceClaimStatus(K8sSpec):
     """ResourceClaimStatus tracks whether the resource has been allocated and what the resulting attributes
     are.
 
-    Attributes
-    ----------
+    Attributes:
         allocation: Allocation is set by the resource driver once a resource or set of resources has been
             allocated successfully. If this is not specified, the resources have not been allocated yet.
         deallocationRequested: DeallocationRequested indicates that a ResourceClaim is to be deallocated.  The
@@ -498,8 +474,7 @@ class ResourceClaimStatus(K8sSpec):
 class ResourceClaimTemplate(K8sSpec):
     """ResourceClaimTemplate is used to produce ResourceClaim objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -521,8 +496,7 @@ class ResourceClaimTemplate(K8sSpec):
 class ResourceClaimTemplateList(K8sSpec):
     """ResourceClaimTemplateList is a collection of claim templates.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -543,8 +517,7 @@ class ResourceClaimTemplateList(K8sSpec):
 class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
-    Attributes
-    ----------
+    Attributes:
         metadata: ObjectMeta may contain labels and annotations that will be copied into the PVC when creating
             it. No other fields are allowed and will be rejected during validation.
         spec: Spec for the ResourceClaim. The entire content is copied unchanged into the ResourceClaim that
@@ -561,8 +534,7 @@ class ResourceClass(K8sSpec):
     """ResourceClass is used by administrators to influence how resources are allocated.  This is an alpha
     type and requires enabling the DynamicResourceAllocation feature gate.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -596,8 +568,7 @@ class ResourceClass(K8sSpec):
 class ResourceClassList(K8sSpec):
     """ResourceClassList is a collection of classes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -619,8 +590,7 @@ class ResourceClassParameters(K8sSpec):
     """ResourceClassParameters defines resource requests for a ResourceClass in an in-tree format understood
     by Kubernetes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -648,8 +618,7 @@ class ResourceClassParameters(K8sSpec):
 class ResourceClassParametersList(K8sSpec):
     """ResourceClassParametersList is a collection of ResourceClassParameters.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -671,8 +640,7 @@ class ResourceClassParametersReference(K8sSpec):
     """ResourceClassParametersReference contains enough information to let you locate the parameters for a
     ResourceClass.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: APIGroup is the group for the resource being referenced. It is empty for the core API. This
             matches the group in the APIVersion that is used when creating the resources.
         kind: Kind is the type of resource being referenced. This is the same value as in the parameter
@@ -693,8 +661,7 @@ class ResourceClassParametersReference(K8sSpec):
 class ResourceFilter(K8sSpec):
     """ResourceFilter is a filter for resources from one particular driver.
 
-    Attributes
-    ----------
+    Attributes:
         driverName: DriverName is the name used by the DRA driver kubelet plugin.
         namedResources: NamedResources describes a resource filter using the named resources model.
 
@@ -708,8 +675,7 @@ class ResourceFilter(K8sSpec):
 class ResourceHandle(K8sSpec):
     """ResourceHandle holds opaque resource data for processing by a specific kubelet plugin.
 
-    Attributes
-    ----------
+    Attributes:
         data: Data contains the opaque data associated with this ResourceHandle. It is set by the controller
             component of the resource driver whose name matches the DriverName set in the ResourceClaimStatus
             this ResourceHandle is embedded in. It is set at allocation time and is intended for processing by
@@ -731,8 +697,7 @@ class ResourceHandle(K8sSpec):
 class ResourceRequest(K8sSpec):
     """ResourceRequest is a request for resources from one particular driver.
 
-    Attributes
-    ----------
+    Attributes:
         namedResources: NamedResources describes a request for resources with the named resources model.
         vendorParameters: VendorParameters are arbitrary setup parameters for the requested resource. They are
             ignored while allocating a claim.
@@ -747,8 +712,7 @@ class ResourceRequest(K8sSpec):
 class ResourceSlice(K8sSpec):
     """ResourceSlice provides information about available resources on individual nodes.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -775,8 +739,7 @@ class ResourceSlice(K8sSpec):
 class ResourceSliceList(K8sSpec):
     """ResourceSliceList is a collection of ResourceSlices.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -797,8 +760,7 @@ class ResourceSliceList(K8sSpec):
 class StructuredResourceHandle(K8sSpec):
     """StructuredResourceHandle is the in-tree representation of the allocation result.
 
-    Attributes
-    ----------
+    Attributes:
         nodeName: NodeName is the name of the node providing the necessary resources if the resources are
             local to a node.
         results: Results lists all allocated driver resources.
@@ -819,8 +781,7 @@ class StructuredResourceHandle(K8sSpec):
 class VendorParameters(K8sSpec):
     """VendorParameters are opaque parameters for one particular driver.
 
-    Attributes
-    ----------
+    Attributes:
         driverName: DriverName is the name used by the DRA driver kubelet plugin.
         parameters: Parameters can be arbitrary setup parameters. They are ignored while allocating a claim.
 

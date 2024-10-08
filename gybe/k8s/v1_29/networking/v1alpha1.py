@@ -38,8 +38,7 @@ class IPAddress(K8sSpec):
 class IPAddressList(K8sSpec):
     """IPAddressList contains a list of IPAddress.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -60,8 +59,7 @@ class IPAddressList(K8sSpec):
 class IPAddressSpec(K8sSpec):
     """IPAddressSpec describe the attributes in an IP Address.
 
-    Attributes
-    ----------
+    Attributes:
         parentRef: ParentRef references the resource that an IPAddress is attached to. An IPAddress must
             reference a parent object.
 
@@ -74,8 +72,7 @@ class IPAddressSpec(K8sSpec):
 class ParentReference(K8sSpec):
     """ParentReference describes a reference to a parent object.
 
-    Attributes
-    ----------
+    Attributes:
         group: Group is the group of the object being referenced.
         name: Name is the name of the object being referenced.
         namespace: Namespace is the namespace of the object being referenced.
@@ -94,8 +91,7 @@ class ServiceCIDR(K8sResource):
     """ServiceCIDR defines a range of IP addresses using CIDR format (e.g. 192.168.0.0/24 or 2001:db2::/64).
     This range is used to allocate ClusterIPs to Service objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -118,8 +114,7 @@ class ServiceCIDR(K8sResource):
 class ServiceCIDRList(K8sSpec):
     """ServiceCIDRList contains a list of ServiceCIDR objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -140,8 +135,7 @@ class ServiceCIDRList(K8sSpec):
 class ServiceCIDRSpec(K8sSpec):
     """ServiceCIDRSpec define the CIDRs the user wants to use for allocating ClusterIPs for Services.
 
-    Attributes
-    ----------
+    Attributes:
         cidrs: CIDRs defines the IP blocks in CIDR notation (e.g. '192.168.0.0/24' or '2001:db8::/64') from
             which to assign service cluster IPs. Max of two CIDRs is allowed, one of each IP family. This
             field is immutable.
@@ -155,8 +149,7 @@ class ServiceCIDRSpec(K8sSpec):
 class ServiceCIDRStatus(K8sSpec):
     """ServiceCIDRStatus describes the current state of the ServiceCIDR.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: conditions holds an array of metav1.Condition that describe the state of the ServiceCIDR.
             Current service state
 

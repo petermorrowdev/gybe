@@ -15,8 +15,7 @@ class Eviction(K8sSpec):
     subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod
     name>/evictions.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -60,8 +59,7 @@ class PodDisruptionBudget(K8sResource):
 class PodDisruptionBudgetList(K8sSpec):
     """PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -82,8 +80,7 @@ class PodDisruptionBudgetList(K8sSpec):
 class PodDisruptionBudgetSpec(K8sSpec):
     """PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
 
-    Attributes
-    ----------
+    Attributes:
         maxUnavailable: An eviction is allowed if at most 'maxUnavailable' pods selected by 'selector' are
             unavailable after the eviction, i.e. even in absence of the evicted pod. For example, one can
             prevent all voluntary evictions by specifying 0. This is a mutually exclusive setting with
@@ -122,8 +119,7 @@ class PodDisruptionBudgetStatus(K8sSpec):
     """PodDisruptionBudgetStatus represents information about the status of a PodDisruptionBudget. Status may
     trail the actual state of a system.
 
-    Attributes
-    ----------
+    Attributes:
         conditions: Conditions contain conditions for PDB. The disruption controller sets the
             DisruptionAllowed condition. The following are known values for the reason field (additional
             reasons could be added in the future): - SyncFailed: The controller encountered an error and

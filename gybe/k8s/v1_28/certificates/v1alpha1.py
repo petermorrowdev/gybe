@@ -21,8 +21,7 @@ class ClusterTrustBundle(K8sSpec):
     independent set of trust anchors for that signer. Admission control is used to enforce that only users
     with permissions on the signer can create or modify the corresponding bundle.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -63,8 +62,7 @@ class ClusterTrustBundleList(K8sSpec):
 class ClusterTrustBundleSpec(K8sSpec):
     """ClusterTrustBundleSpec contains the signer and trust anchors.
 
-    Attributes
-    ----------
+    Attributes:
         signerName: signerName indicates the associated signer, if any.  In order to create or update a
             ClusterTrustBundle that sets signerName, you must have the following cluster-scoped permission:
             group=certificates.k8s.io resource=signers resourceName=<the signer name> verb=attest.  If

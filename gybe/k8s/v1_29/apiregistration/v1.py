@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class APIService(K8sResource):
     """APIService represents a server for a particular GroupVersion. Name must be 'version.group'.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -56,8 +55,7 @@ class APIServiceCondition(K8sSpec):
 class APIServiceList(K8sSpec):
     """APIServiceList is a list of APIService objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -79,8 +77,7 @@ class APIServiceSpec(K8sSpec):
     """APIServiceSpec contains information for locating and communicating with a server. Only https is
     supported, though you are able to disable certificate verification.
 
-    Attributes
-    ----------
+    Attributes:
         caBundle: CABundle is a PEM encoded CA bundle which will be used to validate an API server's serving
             certificate. If unspecified, system trust roots on the apiserver are used.
         group: Group is the API group name this server hosts

@@ -17,8 +17,7 @@ class SelfSubjectReview(K8sSpec):
     If impersonation or request header authentication is used, any extra keys will have their case ignored
     and returned as lowercase.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -39,8 +38,7 @@ class SelfSubjectReview(K8sSpec):
 class SelfSubjectReviewStatus(K8sSpec):
     """SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
 
-    Attributes
-    ----------
+    Attributes:
         userInfo: User attributes of the user making this request.
 
     """

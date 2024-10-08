@@ -13,8 +13,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 class CustomResourceColumnDefinition(K8sSpec):
     """CustomResourceColumnDefinition specifies a column for server side printing.
 
-    Attributes
-    ----------
+    Attributes:
         description: description is a human readable description of this column.
         format: format is an optional OpenAPI type definition for this column. The 'name' format is applied to
             the primary identifier column to assist in clients identifying column is the resource name. See
@@ -42,8 +41,7 @@ class CustomResourceColumnDefinition(K8sSpec):
 class CustomResourceConversion(K8sSpec):
     """CustomResourceConversion describes how to convert different versions of a CR.
 
-    Attributes
-    ----------
+    Attributes:
         strategy: strategy specifies how custom resources are converted between versions. Allowed values are:
             - `'None'`: The converter only change the apiVersion and would not touch any other field in the
             custom resource. - `'Webhook'`: API Server will call to an external webhook to do the conversion.
@@ -63,8 +61,7 @@ class CustomResourceDefinition(K8sResource):
     """CustomResourceDefinition represents a resource that should be exposed on the API server.  Its name
     MUST be in the format <.spec.name>.<.spec.group>.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -87,8 +84,7 @@ class CustomResourceDefinition(K8sResource):
 class CustomResourceDefinitionCondition(K8sSpec):
     """CustomResourceDefinitionCondition contains details for the current condition of this pod.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: lastTransitionTime last time the condition transitioned from one status to
             another.
         message: message is a human-readable message indicating details about last transition.
@@ -109,8 +105,7 @@ class CustomResourceDefinitionCondition(K8sSpec):
 class CustomResourceDefinitionList(K8sSpec):
     """CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -215,8 +210,7 @@ class CustomResourceDefinitionStatus(K8sSpec):
 class CustomResourceDefinitionVersion(K8sSpec):
     """CustomResourceDefinitionVersion describes a version for CRD.
 
-    Attributes
-    ----------
+    Attributes:
         additionalPrinterColumns: additionalPrinterColumns specifies additional columns returned in Table
             output. See https://kubernetes.io/docs/reference/using-api/api-concepts/#receiving-resources-as-
             tables for details. If no columns are specified, a single column displaying the age of the custom
@@ -256,8 +250,7 @@ class CustomResourceDefinitionVersion(K8sSpec):
 class CustomResourceSubresourceScale(K8sSpec):
     """CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources.
 
-    Attributes
-    ----------
+    Attributes:
         labelSelectorPath: labelSelectorPath defines the JSON path inside of a custom resource that
             corresponds to Scale `status.selector`. Only JSON paths without the array notation are allowed.
             Must be a JSON Path under `.status` or `.spec`. Must be set to work with HorizontalPodAutoscaler.
@@ -283,8 +276,7 @@ class CustomResourceSubresourceScale(K8sSpec):
 class CustomResourceSubresources(K8sSpec):
     """CustomResourceSubresources defines the status and scale subresources for CustomResources.
 
-    Attributes
-    ----------
+    Attributes:
         scale: scale indicates the custom resource should serve a `/scale` subresource that returns an
             `autoscaling/v1` Scale object.
         status: status indicates the custom resource should serve a `/status` subresource. When enabled: 1.
@@ -302,8 +294,7 @@ class CustomResourceSubresources(K8sSpec):
 class CustomResourceValidation(K8sSpec):
     """CustomResourceValidation is a list of validation methods for CustomResources.
 
-    Attributes
-    ----------
+    Attributes:
         openAPIV3Schema: openAPIV3Schema is the OpenAPI v3 schema to use for validation and pruning.
 
     """
@@ -315,8 +306,7 @@ class CustomResourceValidation(K8sSpec):
 class ExternalDocumentation(K8sSpec):
     """ExternalDocumentation allows referencing an external resource for extended documentation.
 
-    Attributes
-    ----------
+    Attributes:
         description: ...
         url: ...
 
@@ -330,8 +320,7 @@ class ExternalDocumentation(K8sSpec):
 class SelectableField(K8sSpec):
     """SelectableField specifies the JSON path of a field that may be used with field selectors.
 
-    Attributes
-    ----------
+    Attributes:
         jsonPath: jsonPath is a simple JSON path which is evaluated against each custom resource to produce a
             field selector value. Only JSON paths without the array notation are allowed. Must point to a
             field of type string, boolean or integer. Types with enum values and strings with formats are
@@ -365,8 +354,7 @@ class ServiceReference(K8sSpec):
 class ValidationRule(K8sSpec):
     """ValidationRule describes a validation rule written in the CEL expression language.
 
-    Attributes
-    ----------
+    Attributes:
         fieldPath: fieldPath represents the field path returned when the validation fails. It must be a
             relative JSON path (i.e. with array notation) scoped to the location of this x-kubernetes-
             validations extension in the schema and refer to an existing field. e.g. when validation checks if
@@ -465,8 +453,7 @@ class ValidationRule(K8sSpec):
 class WebhookClientConfig(K8sSpec):
     """WebhookClientConfig contains the information to make a TLS connection with the webhook.
 
-    Attributes
-    ----------
+    Attributes:
         caBundle: caBundle is a PEM encoded CA bundle which will be used to validate the webhook's server
             certificate. If unspecified, system trust roots on the apiserver are used.
         service: service is a reference to the service for this webhook. Either service or url must be

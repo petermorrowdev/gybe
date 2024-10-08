@@ -14,8 +14,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 class Overhead(K8sSpec):
     """Overhead structure represents the resource overhead associated with running a pod.
 
-    Attributes
-    ----------
+    Attributes:
         podFixed: podFixed represents the fixed resource overhead associated with running a pod.
 
     """
@@ -31,8 +30,7 @@ class RuntimeClass(K8sSpec):
     responsible for resolving the RuntimeClassName reference before running the pod.  For more details,
     see https://kubernetes.io/docs/concepts/containers/runtime-class/
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -66,8 +64,7 @@ class RuntimeClass(K8sSpec):
 class RuntimeClassList(K8sSpec):
     """RuntimeClassList is a list of RuntimeClass objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -88,8 +85,7 @@ class RuntimeClassList(K8sSpec):
 class Scheduling(K8sSpec):
     """Scheduling specifies the scheduling constraints for nodes supporting a RuntimeClass.
 
-    Attributes
-    ----------
+    Attributes:
         nodeSelector: nodeSelector lists labels that must be present on nodes that support this RuntimeClass.
             Pods using this RuntimeClass can only be scheduled to a node matched by this selector. The
             RuntimeClass nodeSelector is merged with a pod's existing nodeSelector. Any conflicts will cause

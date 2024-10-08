@@ -15,8 +15,7 @@ class HTTPIngressPath(K8sSpec):
     """HTTPIngressPath associates a path with a backend. Incoming urls matching the path are forwarded to the
     backend.
 
-    Attributes
-    ----------
+    Attributes:
         backend: backend defines the referenced service endpoint to which the traffic will be forwarded to.
         path: path is matched against the path of an incoming request. Currently it can contain characters
             disallowed from the conventional 'path' part of a URL as defined by RFC 3986. Paths must begin
@@ -45,8 +44,7 @@ class HTTPIngressRuleValue(K8sSpec):
     http://<host>/<path>?<searchpart> -> backend where where parts of the url correspond to RFC 3986, this
     resource will be used to match against everything after the last '/' and before the first '?' or '#'.
 
-    Attributes
-    ----------
+    Attributes:
         paths: paths is a collection of paths that map requests to backends.
 
     """
@@ -60,8 +58,7 @@ class Ingress(K8sResource):
     backend. An Ingress can be configured to give services externally-reachable urls, load balance
     traffic, terminate SSL, offer name based virtual hosting etc.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -84,8 +81,7 @@ class Ingress(K8sResource):
 class IngressBackend(K8sSpec):
     """IngressBackend describes all endpoints for a given service and port.
 
-    Attributes
-    ----------
+    Attributes:
         resource: resource is an ObjectRef to another Kubernetes resource in the namespace of the Ingress
             object. If resource is specified, a service.Name and service.Port must not be specified. This is a
             mutually exclusive setting with 'Service'.
@@ -105,8 +101,7 @@ class IngressClass(K8sSpec):
     should be considered default. When a single IngressClass resource has this annotation set to true, new
     Ingress resources without a class specified will be assigned this default class.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -127,8 +122,7 @@ class IngressClass(K8sSpec):
 class IngressClassList(K8sSpec):
     """IngressClassList is a collection of IngressClasses.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -150,8 +144,7 @@ class IngressClassParametersReference(K8sSpec):
     """IngressClassParametersReference identifies an API object. This can be used to specify a cluster or
     namespace-scoped resource.
 
-    Attributes
-    ----------
+    Attributes:
         apiGroup: apiGroup is the group for the resource being referenced. If APIGroup is not specified, the
             specified Kind must be in the core API group. For any other third-party types, APIGroup is
             required.
@@ -175,8 +168,7 @@ class IngressClassParametersReference(K8sSpec):
 class IngressClassSpec(K8sSpec):
     """IngressClassSpec provides information about the class of an Ingress.
 
-    Attributes
-    ----------
+    Attributes:
         controller: controller refers to the name of the controller that should handle this class. This allows
             for different 'flavors' that are controlled by the same controller. For example, you may have
             different parameters for the same implementing controller. This should be specified as a domain-
@@ -195,8 +187,7 @@ class IngressClassSpec(K8sSpec):
 class IngressList(K8sSpec):
     """IngressList is a collection of Ingress.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -217,8 +208,7 @@ class IngressList(K8sSpec):
 class IngressLoadBalancerIngress(K8sSpec):
     """IngressLoadBalancerIngress represents the status of a load-balancer ingress point.
 
-    Attributes
-    ----------
+    Attributes:
         hostname: hostname is set for load-balancer ingress points that are DNS based.
         ip: ip is set for load-balancer ingress points that are IP based.
         ports: ports provides information about the ports exposed by this LoadBalancer.
@@ -234,8 +224,7 @@ class IngressLoadBalancerIngress(K8sSpec):
 class IngressLoadBalancerStatus(K8sSpec):
     """IngressLoadBalancerStatus represents the status of a load-balancer.
 
-    Attributes
-    ----------
+    Attributes:
         ingress: ingress is a list containing ingress points for the load-balancer.
 
     """
@@ -267,8 +256,7 @@ class IngressRule(K8sSpec):
     services. Incoming requests are first evaluated for a host match, then routed to the backend
     associated with the matching IngressRuleValue.
 
-    Attributes
-    ----------
+    Attributes:
         host: host is the fully qualified domain name of a network host, as defined by RFC 3986. Note the
             following deviations from the 'host' part of the URI as defined in RFC 3986: 1. IPs are not
             allowed. Currently an IngressRuleValue can only apply to    the IP in the Spec of the parent
@@ -296,8 +284,7 @@ class IngressRule(K8sSpec):
 class IngressServiceBackend(K8sSpec):
     """IngressServiceBackend references a Kubernetes Service as a Backend.
 
-    Attributes
-    ----------
+    Attributes:
         name: name is the referenced service. The service must exist in the same namespace as the Ingress
             object.
         port: port of the referenced service. A port name or port number is required for a
@@ -313,8 +300,7 @@ class IngressServiceBackend(K8sSpec):
 class IngressSpec(K8sSpec):
     """IngressSpec describes the Ingress the user wishes to exist.
 
-    Attributes
-    ----------
+    Attributes:
         defaultBackend: defaultBackend is the backend that should handle requests that don't match any rule.
             If Rules are not specified, DefaultBackend must be specified. If DefaultBackend is not set, the
             handling of requests that do not match any of the rules will be up to the Ingress controller.
@@ -345,8 +331,7 @@ class IngressSpec(K8sSpec):
 class IngressStatus(K8sSpec):
     """IngressStatus describe the current state of the Ingress.
 
-    Attributes
-    ----------
+    Attributes:
         loadBalancer: loadBalancer contains the current status of the load-balancer.
 
     """
@@ -358,8 +343,7 @@ class IngressStatus(K8sSpec):
 class IngressTLS(K8sSpec):
     """IngressTLS describes the transport layer security associated with an ingress.
 
-    Attributes
-    ----------
+    Attributes:
         hosts: hosts is a list of hosts included in the TLS certificate. The values in this list must match
             the name/s used in the tlsSecret. Defaults to the wildcard host setting for the loadbalancer
             controller fulfilling this Ingress, if left unspecified.
@@ -420,8 +404,7 @@ class NetworkPolicyEgressRule(K8sSpec):
 class NetworkPolicyList(K8sSpec):
     """NetworkPolicyList is a list of NetworkPolicy objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -526,8 +509,7 @@ class NetworkPolicySpec(K8sSpec):
 class ServiceBackendPort(K8sSpec):
     """ServiceBackendPort is the service port being referenced.
 
-    Attributes
-    ----------
+    Attributes:
         name: name is the name of the port on the Service. This is a mutually exclusive setting with 'Number'.
         number: number is the numerical port number (e.g. 80) on the Service. This is a mutually exclusive
             setting with 'Name'.

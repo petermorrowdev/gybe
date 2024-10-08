@@ -20,8 +20,7 @@ class ClusterCIDR(K8sSpec):
     allocator will attempt to break ties using internal heuristics, but any ClusterCIDR whose node
     selector matches the Node may be used.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -42,8 +41,7 @@ class ClusterCIDR(K8sSpec):
 class ClusterCIDRList(K8sSpec):
     """ClusterCIDRList contains a list of ClusterCIDR.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -64,8 +62,7 @@ class ClusterCIDRList(K8sSpec):
 class ClusterCIDRSpec(K8sSpec):
     """ClusterCIDRSpec defines the desired state of ClusterCIDR.
 
-    Attributes
-    ----------
+    Attributes:
         ipv4: ipv4 defines an IPv4 IP block in CIDR notation(e.g. '10.0.0.0/8'). At least one of ipv4 and ipv6
             must be specified. This field is immutable.
         ipv6: ipv6 defines an IPv6 IP block in CIDR notation(e.g. '2001:db8::/64'). At least one of ipv4 and
@@ -115,8 +112,7 @@ class IPAddress(K8sSpec):
 class IPAddressList(K8sSpec):
     """IPAddressList contains a list of IPAddress.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -137,8 +133,7 @@ class IPAddressList(K8sSpec):
 class IPAddressSpec(K8sSpec):
     """IPAddressSpec describe the attributes in an IP Address.
 
-    Attributes
-    ----------
+    Attributes:
         parentRef: ParentRef references the resource that an IPAddress is attached to. An IPAddress must
             reference a parent object.
 
@@ -151,8 +146,7 @@ class IPAddressSpec(K8sSpec):
 class ParentReference(K8sSpec):
     """ParentReference describes a reference to a parent object.
 
-    Attributes
-    ----------
+    Attributes:
         group: Group is the group of the object being referenced.
         name: Name is the name of the object being referenced.
         namespace: Namespace is the namespace of the object being referenced.

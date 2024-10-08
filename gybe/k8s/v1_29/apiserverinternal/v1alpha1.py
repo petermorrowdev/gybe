@@ -14,8 +14,7 @@ class ServerStorageVersion(K8sSpec):
     """An API server instance reports the version it can decode and the version it encodes objects to when
     persisting objects in the backend.
 
-    Attributes
-    ----------
+    Attributes:
         apiServerID: The ID of the reporting API server.
         decodableVersions: The API server can decode objects encoded in these versions. The encodingVersion
             must be included in the decodableVersions.
@@ -36,8 +35,7 @@ class ServerStorageVersion(K8sSpec):
 class StorageVersion(K8sResource):
     """Storage version of a specific resource.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -61,8 +59,7 @@ class StorageVersion(K8sResource):
 class StorageVersionCondition(K8sSpec):
     """Describes the state of the storageVersion at a certain point.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: Last time the condition transitioned from one status to another.
         message: A human readable message indicating details about the transition.
         observedGeneration: If set, this represents the .metadata.generation that the condition was set based
@@ -85,8 +82,7 @@ class StorageVersionCondition(K8sSpec):
 class StorageVersionList(K8sSpec):
     """A list of StorageVersions.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -108,8 +104,7 @@ class StorageVersionStatus(K8sSpec):
     """API server instances report the versions they can decode and the version they encode objects to when
     persisting objects in the backend.
 
-    Attributes
-    ----------
+    Attributes:
         commonEncodingVersion: If all API server instances agree on the same encoding storage version, then
             this field is set to that version. Otherwise this field is left empty. API servers should finish
             updating its storageVersionStatus entry before serving write operations, so that this field will

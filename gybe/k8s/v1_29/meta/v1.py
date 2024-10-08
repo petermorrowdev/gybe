@@ -12,8 +12,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
 class APIGroup(K8sSpec):
     """APIGroup contains the name, the supported versions, and the preferred version of a group.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -46,8 +45,7 @@ class GroupVersionForDiscovery(K8sSpec):
     """GroupVersion contains the 'group/version' and 'version' string of a version. It is made a struct to
     keep extensibility.
 
-    Attributes
-    ----------
+    Attributes:
         groupVersion: groupVersion specifies the API group and version in the form 'group/version'
         version: version specifies the version in the form of 'version'. This is to save the clients the
             trouble of splitting the GroupVersion.
@@ -63,8 +61,7 @@ class ServerAddressByClientCIDR(K8sSpec):
     """ServerAddressByClientCIDR helps the client to determine the server address that they should use,
     depending on the clientCIDR that they match.
 
-    Attributes
-    ----------
+    Attributes:
         clientCIDR: The CIDR with which clients can match their IP to figure out the server address that they
             should use.
         serverAddress: Address of this server, suitable for a client that matches the above CIDR. This can be
@@ -80,8 +77,7 @@ class ServerAddressByClientCIDR(K8sSpec):
 class APIResource(K8sSpec):
     """APIResource specifies the name of a resource and whether it is namespaced.
 
-    Attributes
-    ----------
+    Attributes:
         categories: categories is a list of the grouped resources this resource belongs to (e.g. 'all')
         group: group is the preferred group of the resource.  Empty implies the group of the containing
             resource list. For subresources, this may have a different value, for example: Scale'.
@@ -122,8 +118,7 @@ class APIResourceList(K8sSpec):
     """APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in
     a specific group and version, and if the resource is namespaced.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -144,8 +139,7 @@ class APIResourceList(K8sSpec):
 class DeleteOptions(K8sSpec):
     """DeleteOptions may be provided when deleting an API object.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -187,8 +181,7 @@ class ManagedFieldsEntry(K8sSpec):
     """ManagedFieldsEntry is a workflow-id, a FieldSet and the group version of the resource that the
     fieldset applies to.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the version of this resource that this field set applies to. The format
             is 'group/version' just like the top-level APIVersion field. It is necessary to track the version
             of a field set because it cannot be automatically converted.
@@ -224,8 +217,7 @@ class ObjectMeta(K8sSpec):
     """ObjectMeta is metadata that all persisted resources must have, which includes all objects users must
     create.
 
-    Attributes
-    ----------
+    Attributes:
         annotations: Annotations is an unstructured key value map stored with a resource that may be set by
             external tools to store and retrieve arbitrary metadata. They are not queryable and should be
             preserved when modifying objects.
@@ -321,8 +313,7 @@ class OwnerReference(K8sSpec):
     """OwnerReference contains enough information to let you identify an owning object. An owning object must
     be in the same namespace as the dependent, or be cluster-scoped, so there is no namespace field.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: API version of the referent.
         blockOwnerDeletion: If true, AND if the owner has the 'foregroundDeletion' finalizer, then the owner
             cannot be deleted from the key-value store until this reference is removed. See
@@ -349,8 +340,7 @@ class OwnerReference(K8sSpec):
 class Preconditions(K8sSpec):
     """Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
 
-    Attributes
-    ----------
+    Attributes:
         resourceVersion: Specifies the target ResourceVersion
         uid: Specifies the target UID.
 
@@ -364,8 +354,7 @@ class Preconditions(K8sSpec):
 class Status(K8sSpec):
     """Status is a return value for calls that don't return other objects.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -399,8 +388,7 @@ class StatusCause(K8sSpec):
     """StatusCause provides more information about an api.Status failure, including cases when multiple
     errors are encountered.
 
-    Attributes
-    ----------
+    Attributes:
         field: The field of the resource that has caused this error, as named by its JSON serialization. May
             include dot and postfix notation for nested attributes. Arrays are zero-indexed.  Fields may
             appear more than once in an array of causes due to fields having multiple errors. Optional.
@@ -425,8 +413,7 @@ class StatusDetails(K8sSpec):
     Clients must ignore fields that do not match the defined type of each attribute, and should assume
     that any attribute may be empty, invalid, or under defined.
 
-    Attributes
-    ----------
+    Attributes:
         causes: The Causes array includes more details associated with the StatusReason failure. Not all
             StatusReasons may provide detailed causes.
         group: The group attribute of the resource associated with the status StatusReason.
@@ -453,8 +440,7 @@ class StatusDetails(K8sSpec):
 class WatchEvent(K8sSpec):
     """Event represents a single event to a watched resource.
 
-    Attributes
-    ----------
+    Attributes:
         object: Object is:  * If Type is Added or Modified: the new state of the object.  * If Type is
             Deleted: the state of the object immediately before deletion.  * If Type is Error: *Status is
             recommended; other types may make sense    depending on context.
@@ -472,8 +458,7 @@ class LabelSelector(K8sSpec):
     matchExpressions are ANDed. An empty label selector matches all objects. A null label selector matches
     no objects.
 
-    Attributes
-    ----------
+    Attributes:
         matchExpressions: matchExpressions is a list of label selector requirements. The requirements are
             ANDed.
         matchLabels: matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is
@@ -491,8 +476,7 @@ class LabelSelectorRequirement(K8sSpec):
     """A label selector requirement is a selector that contains values, a key, and an operator that relates
     the key and values.
 
-    Attributes
-    ----------
+    Attributes:
         key: key is the label key that the selector applies to.
         operator: operator represents a key's relationship to a set of values. Valid operators are In, NotIn,
             Exists and DoesNotExist.
@@ -511,8 +495,7 @@ class LabelSelectorRequirement(K8sSpec):
 class APIGroupList(K8sSpec):
     """APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
@@ -531,8 +514,7 @@ class APIGroupList(K8sSpec):
 class Condition(K8sSpec):
     """Condition contains details for one aspect of the current state of this API Resource.
 
-    Attributes
-    ----------
+    Attributes:
         lastTransitionTime: lastTransitionTime is the last time the condition transitioned from one status to
             another. This should be when the underlying condition changed.  If that is not known, then using
             the time when the API field changed is acceptable.
@@ -564,8 +546,7 @@ class APIVersions(K8sSpec):
     """APIVersions lists the versions that are available, to allow clients to discover the API at /api, which
     is the root path of the legacy v1 API.
 
-    Attributes
-    ----------
+    Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
             should convert recognized schemas to the latest internal value, and may reject unrecognized
             values.
