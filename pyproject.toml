@@ -83,7 +83,7 @@ exclude_lines = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "--ignore kubernetes -v --cov gybe tests --cov-report=term-missing --durations=3"
+addopts = "--ignore kubernetes -v --cov gybe tests --cov-report=term-missing --cov-fail-under=97"
 testpaths = "tests"
 
 [tool.ruff]
