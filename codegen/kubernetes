@@ -15,9 +15,9 @@ function gen_k8s() {
 }
 
 # https://kubernetes.io/releases/
-gen_k8s 'v1.29.12' 'v1_29'
-gen_k8s 'v1.30.8' 'v1_30'
-gen_k8s 'v1.31.4' 'v1_31'
-gen_k8s 'v1.32.0' 'v1_32'
+gen_k8s 'v1.29.13' 'v1_29'
+gen_k8s 'v1.30.9' 'v1_30'
+gen_k8s 'v1.31.5' 'v1_31'
+gen_k8s 'v1.32.1' 'v1_32'
 
 (cd kubernetes && git checkout master -q)
