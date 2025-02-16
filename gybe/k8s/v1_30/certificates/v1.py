@@ -72,7 +72,7 @@ class CertificateSigningRequestCondition(K8sSpec):
 
 
 @dataclass
-class CertificateSigningRequestList(K8sSpec):
+class CertificateSigningRequestList(K8sResource):
     """CertificateSigningRequestList is a collection of CertificateSigningRequest objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -86,8 +86,8 @@ class CertificateSigningRequestList(K8sSpec):
     """
 
     items: List[CertificateSigningRequest]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['certificates.k8s.io/v1'] = 'certificates.k8s.io/v1'
+    kind: Literal['CertificateSigningRequestList'] = 'CertificateSigningRequestList'
     metadata: Optional[JSONObj] = None
 
 

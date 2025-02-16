@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource
 
 
 @dataclass
-class PriorityClass(K8sSpec):
+class PriorityClass(K8sResource):
     """PriorityClass defines mapping from a priority class name to the priority integer value. The value can
     be any valid integer.
 
@@ -36,16 +36,16 @@ class PriorityClass(K8sSpec):
     """
 
     value: int
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PriorityClass'] = 'PriorityClass'
     description: Optional[str] = None
     globalDefault: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     preemptionPolicy: Optional[str] = None
 
 
 @dataclass
-class PriorityClassList(K8sSpec):
+class PriorityClassList(K8sResource):
     """PriorityClassList is a collection of priority classes.
 
     Attributes:
@@ -60,6 +60,6 @@ class PriorityClassList(K8sSpec):
     """
 
     items: List[PriorityClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PriorityClassList'] = 'PriorityClassList'
     metadata: Optional[JSONObj] = None

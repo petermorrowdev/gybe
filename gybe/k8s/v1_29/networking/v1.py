@@ -95,7 +95,7 @@ class IngressBackend(K8sSpec):
 
 
 @dataclass
-class IngressClass(K8sSpec):
+class IngressClass(K8sResource):
     """IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The
     `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass
     should be considered default. When a single IngressClass resource has this annotation set to true, new
@@ -112,14 +112,14 @@ class IngressClass(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressClass'] = 'IngressClass'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[IngressClassSpec] = None
 
 
 @dataclass
-class IngressClassList(K8sSpec):
+class IngressClassList(K8sResource):
     """IngressClassList is a collection of IngressClasses.
 
     Attributes:
@@ -134,8 +134,8 @@ class IngressClassList(K8sSpec):
     """
 
     items: List[IngressClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressClassList'] = 'IngressClassList'
     metadata: Optional[JSONObj] = None
 
 
@@ -184,7 +184,7 @@ class IngressClassSpec(K8sSpec):
 
 
 @dataclass
-class IngressList(K8sSpec):
+class IngressList(K8sResource):
     """IngressList is a collection of Ingress.
 
     Attributes:
@@ -199,8 +199,8 @@ class IngressList(K8sSpec):
     """
 
     items: List[Ingress]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressList'] = 'IngressList'
     metadata: Optional[JSONObj] = None
 
 
@@ -359,7 +359,7 @@ class IngressTLS(K8sSpec):
 
 
 @dataclass
-class NetworkPolicy(K8sSpec):
+class NetworkPolicy(K8sResource):
     """NetworkPolicy describes what network traffic is allowed for a set of Pods
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -372,8 +372,8 @@ class NetworkPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['NetworkPolicy'] = 'NetworkPolicy'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[NetworkPolicySpec] = None
 
@@ -401,7 +401,7 @@ class NetworkPolicyEgressRule(K8sSpec):
 
 
 @dataclass
-class NetworkPolicyList(K8sSpec):
+class NetworkPolicyList(K8sResource):
     """NetworkPolicyList is a list of NetworkPolicy objects.
 
     Attributes:
@@ -416,8 +416,8 @@ class NetworkPolicyList(K8sSpec):
     """
 
     items: List[NetworkPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['NetworkPolicyList'] = 'NetworkPolicyList'
     metadata: Optional[JSONObj] = None
 
 

@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -136,7 +136,7 @@ class MutatingWebhook(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfiguration(K8sSpec):
+class MutatingWebhookConfiguration(K8sResource):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
@@ -151,14 +151,14 @@ class MutatingWebhookConfiguration(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['MutatingWebhookConfiguration'] = 'MutatingWebhookConfiguration'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     webhooks: Optional[List[MutatingWebhook]] = None
 
 
 @dataclass
-class MutatingWebhookConfigurationList(K8sSpec):
+class MutatingWebhookConfigurationList(K8sResource):
     """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
 
     Attributes:
@@ -173,8 +173,8 @@ class MutatingWebhookConfigurationList(K8sSpec):
     """
 
     items: List[MutatingWebhookConfiguration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['MutatingWebhookConfigurationList'] = 'MutatingWebhookConfigurationList'
     metadata: Optional[JSONObj] = None
 
 
@@ -317,7 +317,7 @@ class ValidatingWebhook(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfiguration(K8sSpec):
+class ValidatingWebhookConfiguration(K8sResource):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
@@ -332,14 +332,14 @@ class ValidatingWebhookConfiguration(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingWebhookConfiguration'] = 'ValidatingWebhookConfiguration'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     webhooks: Optional[List[ValidatingWebhook]] = None
 
 
 @dataclass
-class ValidatingWebhookConfigurationList(K8sSpec):
+class ValidatingWebhookConfigurationList(K8sResource):
     """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
 
     Attributes:
@@ -354,8 +354,8 @@ class ValidatingWebhookConfigurationList(K8sSpec):
     """
 
     items: List[ValidatingWebhookConfiguration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingWebhookConfigurationList'] = 'ValidatingWebhookConfigurationList'
     metadata: Optional[JSONObj] = None
 
 

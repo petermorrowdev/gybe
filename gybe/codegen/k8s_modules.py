@@ -59,7 +59,7 @@ resource_api_versions = {
     'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions': 'apiextensions.k8s.io',
     'io.k8s.kube-aggregator.pkg.apis.apiregistration': 'apiregistration.k8s.io',
 }
-resource_prop_names = {'apiVersion', 'kind', 'metadata', 'spec', 'status'}
+resource_prop_names = {'apiVersion', 'kind', 'metadata'}
 
 
 class JSONSchemaProperties(TypedDict):

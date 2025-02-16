@@ -79,7 +79,7 @@ class StorageVersionCondition(K8sSpec):
 
 
 @dataclass
-class StorageVersionList(K8sSpec):
+class StorageVersionList(K8sResource):
     """A list of StorageVersions.
 
     Attributes:
@@ -94,8 +94,8 @@ class StorageVersionList(K8sSpec):
     """
 
     items: List[StorageVersion]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['StorageVersionList'] = 'StorageVersionList'
     metadata: Optional[JSONObj] = None
 
 

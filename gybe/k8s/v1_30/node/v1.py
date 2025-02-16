@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -23,7 +23,7 @@ class Overhead(K8sSpec):
 
 
 @dataclass
-class RuntimeClass(K8sSpec):
+class RuntimeClass(K8sResource):
     """RuntimeClass defines a class of container runtime supported in the cluster. The RuntimeClass is used
     to determine which container runtime is used to run all containers in a pod. RuntimeClasses are
     manually defined by a user or cluster provisioner, and referenced in the PodSpec. The Kubelet is
@@ -53,15 +53,15 @@ class RuntimeClass(K8sSpec):
     """
 
     handler: str
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['RuntimeClass'] = 'RuntimeClass'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     overhead: Optional[Overhead] = None
     scheduling: Optional[Scheduling] = None
 
 
 @dataclass
-class RuntimeClassList(K8sSpec):
+class RuntimeClassList(K8sResource):
     """RuntimeClassList is a list of RuntimeClass objects.
 
     Attributes:
@@ -76,8 +76,8 @@ class RuntimeClassList(K8sSpec):
     """
 
     items: List[RuntimeClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['RuntimeClassList'] = 'RuntimeClassList'
     metadata: Optional[JSONObj] = None
 
 

@@ -96,7 +96,7 @@ class FlowSchemaCondition(K8sSpec):
 
 
 @dataclass
-class FlowSchemaList(K8sSpec):
+class FlowSchemaList(K8sResource):
     """FlowSchemaList is a list of FlowSchema objects.
 
     Attributes:
@@ -111,8 +111,8 @@ class FlowSchemaList(K8sSpec):
     """
 
     items: List[FlowSchema]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1'] = 'flowcontrol.apiserver.k8s.io/v1'
+    kind: Literal['FlowSchemaList'] = 'FlowSchemaList'
     metadata: Optional[JSONObj] = None
 
 
@@ -318,7 +318,7 @@ class PriorityLevelConfigurationCondition(K8sSpec):
 
 
 @dataclass
-class PriorityLevelConfigurationList(K8sSpec):
+class PriorityLevelConfigurationList(K8sResource):
     """PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
 
     Attributes:
@@ -333,8 +333,8 @@ class PriorityLevelConfigurationList(K8sSpec):
     """
 
     items: List[PriorityLevelConfiguration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1'] = 'flowcontrol.apiserver.k8s.io/v1'
+    kind: Literal['PriorityLevelConfigurationList'] = 'PriorityLevelConfigurationList'
     metadata: Optional[JSONObj] = None
 
 

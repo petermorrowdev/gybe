@@ -261,7 +261,7 @@ class ValidatingAdmissionPolicy(K8sResource):
 
 
 @dataclass
-class ValidatingAdmissionPolicyBinding(K8sSpec):
+class ValidatingAdmissionPolicyBinding(K8sResource):
     """ValidatingAdmissionPolicyBinding binds the ValidatingAdmissionPolicy with paramerized resources.
     ValidatingAdmissionPolicyBinding and parameter CRDs together define how cluster administrators
     configure policies for clusters.  For a given admission request, each binding will cause its policy to
@@ -282,14 +282,14 @@ class ValidatingAdmissionPolicyBinding(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1beta1'] = 'admissionregistration.k8s.io/v1beta1'
+    kind: Literal['ValidatingAdmissionPolicyBinding'] = 'ValidatingAdmissionPolicyBinding'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[ValidatingAdmissionPolicyBindingSpec] = None
 
 
 @dataclass
-class ValidatingAdmissionPolicyBindingList(K8sSpec):
+class ValidatingAdmissionPolicyBindingList(K8sResource):
     """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
 
     Attributes:
@@ -304,8 +304,8 @@ class ValidatingAdmissionPolicyBindingList(K8sSpec):
     """
 
     items: List[ValidatingAdmissionPolicyBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1beta1'] = 'admissionregistration.k8s.io/v1beta1'
+    kind: Literal['ValidatingAdmissionPolicyBindingList'] = 'ValidatingAdmissionPolicyBindingList'
     metadata: Optional[JSONObj] = None
 
 
@@ -363,7 +363,7 @@ class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
 
 
 @dataclass
-class ValidatingAdmissionPolicyList(K8sSpec):
+class ValidatingAdmissionPolicyList(K8sResource):
     """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
 
     Attributes:
@@ -378,8 +378,8 @@ class ValidatingAdmissionPolicyList(K8sSpec):
     """
 
     items: List[ValidatingAdmissionPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1beta1'] = 'admissionregistration.k8s.io/v1beta1'
+    kind: Literal['ValidatingAdmissionPolicyList'] = 'ValidatingAdmissionPolicyList'
     metadata: Optional[JSONObj] = None
 
 

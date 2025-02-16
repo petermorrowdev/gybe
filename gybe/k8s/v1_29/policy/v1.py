@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class Eviction(K8sSpec):
+class Eviction(K8sResource):
     """Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a
     subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod
     name>/evictions.
@@ -26,9 +26,9 @@ class Eviction(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['policy/v1'] = 'policy/v1'
+    kind: Literal['Eviction'] = 'Eviction'
     deleteOptions: Optional[gybe.k8s.v1_29.meta.v1.DeleteOptions] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 
 
@@ -56,7 +56,7 @@ class PodDisruptionBudget(K8sResource):
 
 
 @dataclass
-class PodDisruptionBudgetList(K8sSpec):
+class PodDisruptionBudgetList(K8sResource):
     """PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
 
     Attributes:
@@ -71,8 +71,8 @@ class PodDisruptionBudgetList(K8sSpec):
     """
 
     items: List[PodDisruptionBudget]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1'] = 'policy/v1'
+    kind: Literal['PodDisruptionBudgetList'] = 'PodDisruptionBudgetList'
     metadata: Optional[JSONObj] = None
 
 

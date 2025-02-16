@@ -3455,7 +3455,7 @@ class AttachedVolume(K8sSpec):
 
 
 @dataclass
-class Binding(K8sSpec):
+class Binding(K8sResource):
     """Binding ties one object to another; for example, a pod is bound to a node by a scheduler.
 
     Attributes:
@@ -3470,8 +3470,8 @@ class Binding(K8sSpec):
     """
 
     target: ObjectReference
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Binding'] = 'Binding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
@@ -3509,7 +3509,7 @@ class ComponentCondition(K8sSpec):
 
 
 @dataclass
-class ComponentStatus(K8sSpec):
+class ComponentStatus(K8sResource):
     """ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is
     deprecated in v1.19+
     Attributes:
@@ -3523,14 +3523,14 @@ class ComponentStatus(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ComponentStatus'] = 'ComponentStatus'
     conditions: Optional[List[ComponentCondition]] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ComponentStatusList(K8sSpec):
+class ComponentStatusList(K8sResource):
     """Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This
     API is deprecated in v1.19+
     Attributes:
@@ -3545,13 +3545,13 @@ class ComponentStatusList(K8sSpec):
     """
 
     items: List[ComponentStatus]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ComponentStatusList'] = 'ComponentStatusList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class ConfigMap(K8sSpec):
+class ConfigMap(K8sResource):
     """ConfigMap holds configuration data for pods to consume.
 
     Attributes:
@@ -3575,16 +3575,16 @@ class ConfigMap(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ConfigMap'] = 'ConfigMap'
     binaryData: Optional[JSONDict] = None
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ConfigMapList(K8sSpec):
+class ConfigMapList(K8sResource):
     """ConfigMapList is a resource containing a list of ConfigMap objects.
 
     Attributes:
@@ -3599,8 +3599,8 @@ class ConfigMapList(K8sSpec):
     """
 
     items: List[ConfigMap]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ConfigMapList'] = 'ConfigMapList'
     metadata: Optional[JSONObj] = None
 
 
@@ -3867,7 +3867,7 @@ class EndpointSubset(K8sSpec):
 
 
 @dataclass
-class Endpoints(K8sSpec):
+class Endpoints(K8sResource):
     """Endpoints is a collection of endpoints that implement the actual service. Example:           Name:
     'mysvc',          Subsets: [            {              Addresses: [{'ip': '10.10.1.1'}, {'ip':
     '10.10.2.2'}],              Ports: [{'name': 'a', 'port': 8675}, {'name': 'b', 'port': 309}]
@@ -3890,14 +3890,14 @@ class Endpoints(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Endpoints'] = 'Endpoints'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     subsets: Optional[List[EndpointSubset]] = None
 
 
 @dataclass
-class EndpointsList(K8sSpec):
+class EndpointsList(K8sResource):
     """EndpointsList is a list of endpoints.
 
     Attributes:
@@ -3912,13 +3912,13 @@ class EndpointsList(K8sSpec):
     """
 
     items: List[Endpoints]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['EndpointsList'] = 'EndpointsList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class Event(K8sSpec):
+class Event(K8sResource):
     """Event is a report of an event somewhere in the cluster.  Events have a limited retention time and
     triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event
     with a given Reason reflecting a consistent underlying trigger, or the continued existence of events
@@ -3952,12 +3952,12 @@ class Event(K8sSpec):
 
     metadata: gybe.k8s.v1_32.meta.v1.ObjectMeta
     involvedObject: ObjectReference
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Event'] = 'Event'
     action: Optional[str] = None
-    apiVersion: Optional[str] = None
     count: Optional[int] = None
     eventTime: Optional[str] = None
     firstTimestamp: Optional[str] = None
-    kind: Optional[str] = None
     lastTimestamp: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
@@ -3970,7 +3970,7 @@ class Event(K8sSpec):
 
 
 @dataclass
-class EventList(K8sSpec):
+class EventList(K8sResource):
     """EventList is a list of events.
 
     Attributes:
@@ -3985,8 +3985,8 @@ class EventList(K8sSpec):
     """
 
     items: List[Event]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['EventList'] = 'EventList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4018,7 +4018,7 @@ class HostIP(K8sSpec):
 
 
 @dataclass
-class LimitRange(K8sSpec):
+class LimitRange(K8sResource):
     """LimitRange sets resource usage limits for each kind of resource in a Namespace.
 
     Attributes:
@@ -4032,8 +4032,8 @@ class LimitRange(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['LimitRange'] = 'LimitRange'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[LimitRangeSpec] = None
 
@@ -4064,7 +4064,7 @@ class LimitRangeItem(K8sSpec):
 
 
 @dataclass
-class LimitRangeList(K8sSpec):
+class LimitRangeList(K8sResource):
     """LimitRangeList is a list of LimitRange items.
 
     Attributes:
@@ -4079,8 +4079,8 @@ class LimitRangeList(K8sSpec):
     """
 
     items: List[LimitRange]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['LimitRangeList'] = 'LimitRangeList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4195,7 +4195,7 @@ class NamespaceCondition(K8sSpec):
 
 
 @dataclass
-class NamespaceList(K8sSpec):
+class NamespaceList(K8sResource):
     """NamespaceList is a list of Namespaces.
 
     Attributes:
@@ -4210,8 +4210,8 @@ class NamespaceList(K8sSpec):
     """
 
     items: List[Namespace]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['NamespaceList'] = 'NamespaceList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4387,7 +4387,7 @@ class NodeFeatures(K8sSpec):
 
 
 @dataclass
-class NodeList(K8sSpec):
+class NodeList(K8sResource):
     """NodeList is the whole list of all Nodes which have been registered with master.
 
     Attributes:
@@ -4402,8 +4402,8 @@ class NodeList(K8sSpec):
     """
 
     items: List[Node]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['NodeList'] = 'NodeList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4565,7 +4565,7 @@ class PersistentVolume(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimList(K8sSpec):
+class PersistentVolumeClaimList(K8sResource):
     """PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
 
     Attributes:
@@ -4580,13 +4580,13 @@ class PersistentVolumeClaimList(K8sSpec):
     """
 
     items: List[PersistentVolumeClaim]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PersistentVolumeClaimList'] = 'PersistentVolumeClaimList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class PersistentVolumeList(K8sSpec):
+class PersistentVolumeList(K8sResource):
     """PersistentVolumeList is a list of PersistentVolume items.
 
     Attributes:
@@ -4601,8 +4601,8 @@ class PersistentVolumeList(K8sSpec):
     """
 
     items: List[PersistentVolume]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PersistentVolumeList'] = 'PersistentVolumeList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4686,7 +4686,7 @@ class PodIP(K8sSpec):
 
 
 @dataclass
-class PodList(K8sSpec):
+class PodList(K8sResource):
     """PodList is a list of Pods.
 
     Attributes:
@@ -4701,8 +4701,8 @@ class PodList(K8sSpec):
     """
 
     items: List[Pod]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PodList'] = 'PodList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4809,7 +4809,7 @@ class PodStatus(K8sSpec):
 
 
 @dataclass
-class PodTemplate(K8sSpec):
+class PodTemplate(K8sResource):
     """PodTemplate describes a template for creating copies of a predefined pod.
 
     Attributes:
@@ -4825,14 +4825,14 @@ class PodTemplate(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PodTemplate'] = 'PodTemplate'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     template: Optional[PodTemplateSpec] = None
 
 
 @dataclass
-class PodTemplateList(K8sSpec):
+class PodTemplateList(K8sResource):
     """PodTemplateList is a list of PodTemplates.
 
     Attributes:
@@ -4847,8 +4847,8 @@ class PodTemplateList(K8sSpec):
     """
 
     items: List[PodTemplate]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PodTemplateList'] = 'PodTemplateList'
     metadata: Optional[JSONObj] = None
 
 
@@ -4917,7 +4917,7 @@ class ReplicationControllerCondition(K8sSpec):
 
 
 @dataclass
-class ReplicationControllerList(K8sSpec):
+class ReplicationControllerList(K8sResource):
     """ReplicationControllerList is a collection of replication controllers.
 
     Attributes:
@@ -4932,8 +4932,8 @@ class ReplicationControllerList(K8sSpec):
     """
 
     items: List[ReplicationController]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ReplicationControllerList'] = 'ReplicationControllerList'
     metadata: Optional[JSONObj] = None
 
 
@@ -5034,7 +5034,7 @@ class ResourceQuota(K8sResource):
 
 
 @dataclass
-class ResourceQuotaList(K8sSpec):
+class ResourceQuotaList(K8sResource):
     """ResourceQuotaList is a list of ResourceQuota items.
 
     Attributes:
@@ -5049,8 +5049,8 @@ class ResourceQuotaList(K8sSpec):
     """
 
     items: List[ResourceQuota]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ResourceQuotaList'] = 'ResourceQuotaList'
     metadata: Optional[JSONObj] = None
 
 
@@ -5142,7 +5142,7 @@ class ScopedResourceSelectorRequirement(K8sSpec):
 
 
 @dataclass
-class Secret(K8sSpec):
+class Secret(K8sResource):
     """Secret holds secret data of a certain type. The total bytes of the values in the Data field must be
     less than MaxSecretSize bytes.
 
@@ -5167,17 +5167,17 @@ class Secret(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Secret'] = 'Secret'
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     stringData: Optional[JSONDict] = None
     type: Optional[str] = None
 
 
 @dataclass
-class SecretList(K8sSpec):
+class SecretList(K8sResource):
     """SecretList is a list of Secret.
 
     Attributes:
@@ -5192,8 +5192,8 @@ class SecretList(K8sSpec):
     """
 
     items: List[Secret]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['SecretList'] = 'SecretList'
     metadata: Optional[JSONObj] = None
 
 
@@ -5224,7 +5224,7 @@ class Service(K8sResource):
 
 
 @dataclass
-class ServiceAccount(K8sSpec):
+class ServiceAccount(K8sResource):
     """ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for
     an identity * a principal that can be authenticated and authorized * a set of secrets
     Attributes:
@@ -5251,16 +5251,16 @@ class ServiceAccount(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ServiceAccount'] = 'ServiceAccount'
     automountServiceAccountToken: Optional[bool] = None
     imagePullSecrets: Optional[List[LocalObjectReference]] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     secrets: Optional[List[ObjectReference]] = None
 
 
 @dataclass
-class ServiceAccountList(K8sSpec):
+class ServiceAccountList(K8sResource):
     """ServiceAccountList is a list of ServiceAccount objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -5274,13 +5274,13 @@ class ServiceAccountList(K8sSpec):
     """
 
     items: List[ServiceAccount]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ServiceAccountList'] = 'ServiceAccountList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class ServiceList(K8sSpec):
+class ServiceList(K8sResource):
     """ServiceList holds a list of services.
 
     Attributes:
@@ -5295,8 +5295,8 @@ class ServiceList(K8sSpec):
     """
 
     items: List[Service]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ServiceList'] = 'ServiceList'
     metadata: Optional[JSONObj] = None
 
 

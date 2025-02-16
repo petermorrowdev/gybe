@@ -226,7 +226,7 @@ class DeviceClaimConfiguration(K8sSpec):
 
 
 @dataclass
-class DeviceClass(K8sSpec):
+class DeviceClass(K8sResource):
     """DeviceClass is a vendor- or admin-provided resource that contains device configuration and selectors.
     It can be referenced in the device requests of a claim to apply these presets. Cluster scoped.  This
     is an alpha type and requires enabling the DynamicResourceAllocation feature gate.
@@ -246,8 +246,8 @@ class DeviceClass(K8sSpec):
     """
 
     spec: DeviceClassSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['DeviceClass'] = 'DeviceClass'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
@@ -264,7 +264,7 @@ class DeviceClassConfiguration(K8sSpec):
 
 
 @dataclass
-class DeviceClassList(K8sSpec):
+class DeviceClassList(K8sResource):
     """DeviceClassList is a collection of classes.
 
     Attributes:
@@ -279,8 +279,8 @@ class DeviceClassList(K8sSpec):
     """
 
     items: List[DeviceClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['DeviceClassList'] = 'DeviceClassList'
     metadata: Optional[JSONObj] = None
 
 
@@ -500,7 +500,7 @@ class ResourceClaimConsumerReference(K8sSpec):
 
 
 @dataclass
-class ResourceClaimList(K8sSpec):
+class ResourceClaimList(K8sResource):
     """ResourceClaimList is a collection of claims.
 
     Attributes:
@@ -515,8 +515,8 @@ class ResourceClaimList(K8sSpec):
     """
 
     items: List[ResourceClaim]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['ResourceClaimList'] = 'ResourceClaimList'
     metadata: Optional[JSONObj] = None
 
 
@@ -560,7 +560,7 @@ class ResourceClaimStatus(K8sSpec):
 
 
 @dataclass
-class ResourceClaimTemplate(K8sSpec):
+class ResourceClaimTemplate(K8sResource):
     """ResourceClaimTemplate is used to produce ResourceClaim objects.  This is an alpha type and requires
     enabling the DynamicResourceAllocation feature gate.
 
@@ -577,13 +577,13 @@ class ResourceClaimTemplate(K8sSpec):
     """
 
     spec: ResourceClaimTemplateSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sSpec):
+class ResourceClaimTemplateList(K8sResource):
     """ResourceClaimTemplateList is a collection of claim templates.
 
     Attributes:
@@ -598,8 +598,8 @@ class ResourceClaimTemplateList(K8sSpec):
     """
 
     items: List[ResourceClaimTemplate]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['ResourceClaimTemplateList'] = 'ResourceClaimTemplateList'
     metadata: Optional[JSONObj] = None
 
 
@@ -646,7 +646,7 @@ class ResourcePool(K8sSpec):
 
 
 @dataclass
-class ResourceSlice(K8sSpec):
+class ResourceSlice(K8sResource):
     """ResourceSlice represents one or more resources in a pool of similar resources, managed by a common
     driver. A pool may span more than one ResourceSlice, and exactly how many ResourceSlices comprise a
     pool is determined by the driver.  At the moment, the only supported resources are devices with
@@ -676,13 +676,13 @@ class ResourceSlice(K8sSpec):
     """
 
     spec: ResourceSliceSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['ResourceSlice'] = 'ResourceSlice'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ResourceSliceList(K8sSpec):
+class ResourceSliceList(K8sResource):
     """ResourceSliceList is a collection of ResourceSlices.
 
     Attributes:
@@ -697,8 +697,8 @@ class ResourceSliceList(K8sSpec):
     """
 
     items: List[ResourceSlice]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    kind: Literal['ResourceSliceList'] = 'ResourceSliceList'
     metadata: Optional[JSONObj] = None
 
 

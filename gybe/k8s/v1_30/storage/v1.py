@@ -12,7 +12,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class CSIDriver(K8sSpec):
+class CSIDriver(K8sResource):
     """CSIDriver captures information about a Container Storage Interface (CSI) volume driver deployed on the
     cluster. Kubernetes attach detach controller uses this object to determine whether attach is required.
     Kubelet uses this object to determine whether pod information needs to be passed on mount. CSIDriver
@@ -33,13 +33,13 @@ class CSIDriver(K8sSpec):
     """
 
     spec: CSIDriverSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIDriver'] = 'CSIDriver'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class CSIDriverList(K8sSpec):
+class CSIDriverList(K8sResource):
     """CSIDriverList is a collection of CSIDriver objects.
 
     Attributes:
@@ -54,8 +54,8 @@ class CSIDriverList(K8sSpec):
     """
 
     items: List[CSIDriver]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIDriverList'] = 'CSIDriverList'
     metadata: Optional[JSONObj] = None
 
 
@@ -148,7 +148,7 @@ class CSIDriverSpec(K8sSpec):
 
 
 @dataclass
-class CSINode(K8sSpec):
+class CSINode(K8sResource):
     """CSINode holds information about all CSI drivers installed on a node. CSI drivers do not need to create
     the CSINode object directly. As long as they use the node-driver-registrar sidecar container, the
     kubelet will automatically populate the CSINode object for the CSI driver as part of kubelet plugin
@@ -168,8 +168,8 @@ class CSINode(K8sSpec):
     """
 
     spec: CSINodeSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSINode'] = 'CSINode'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
@@ -204,7 +204,7 @@ class CSINodeDriver(K8sSpec):
 
 
 @dataclass
-class CSINodeList(K8sSpec):
+class CSINodeList(K8sResource):
     """CSINodeList is a collection of CSINode objects.
 
     Attributes:
@@ -219,8 +219,8 @@ class CSINodeList(K8sSpec):
     """
 
     items: List[CSINode]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSINodeList'] = 'CSINodeList'
     metadata: Optional[JSONObj] = None
 
 
@@ -237,7 +237,7 @@ class CSINodeSpec(K8sSpec):
 
 
 @dataclass
-class CSIStorageCapacity(K8sSpec):
+class CSIStorageCapacity(K8sResource):
     """CSIStorageCapacity stores the result of one CSI GetCapacity call. For a given StorageClass, this
     describes the available capacity in a particular topology segment.  This can be used when considering
     where to instantiate new PersistentVolumes.  For example this can express things like: - StorageClass
@@ -283,16 +283,16 @@ class CSIStorageCapacity(K8sSpec):
     """
 
     storageClassName: str
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIStorageCapacity'] = 'CSIStorageCapacity'
     capacity: Optional[gybe.k8s.v1_30.api.resource.Quantity] = None
-    kind: Optional[str] = None
     maximumVolumeSize: Optional[gybe.k8s.v1_30.api.resource.Quantity] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     nodeTopology: Optional[gybe.k8s.v1_30.meta.v1.LabelSelector] = None
 
 
 @dataclass
-class CSIStorageCapacityList(K8sSpec):
+class CSIStorageCapacityList(K8sResource):
     """CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
 
     Attributes:
@@ -307,13 +307,13 @@ class CSIStorageCapacityList(K8sSpec):
     """
 
     items: List[CSIStorageCapacity]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIStorageCapacityList'] = 'CSIStorageCapacityList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class StorageClass(K8sSpec):
+class StorageClass(K8sResource):
     """StorageClass describes the parameters for a class of storage for which PersistentVolumes can be
     dynamically provisioned.  StorageClasses are non-namespaced; the name of the storage class according
     to etcd is in ObjectMeta.Name.
@@ -345,10 +345,10 @@ class StorageClass(K8sSpec):
     """
 
     provisioner: str
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['StorageClass'] = 'StorageClass'
     allowVolumeExpansion: Optional[bool] = None
     allowedTopologies: Optional[List[gybe.k8s.v1_30.core.v1.TopologySelectorTerm]] = None
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     mountOptions: Optional[List[str]] = None
     parameters: Optional[JSONDict] = None
@@ -357,7 +357,7 @@ class StorageClass(K8sSpec):
 
 
 @dataclass
-class StorageClassList(K8sSpec):
+class StorageClassList(K8sResource):
     """StorageClassList is a collection of storage classes.
 
     Attributes:
@@ -372,8 +372,8 @@ class StorageClassList(K8sSpec):
     """
 
     items: List[StorageClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['StorageClassList'] = 'StorageClassList'
     metadata: Optional[JSONObj] = None
 
 
@@ -420,7 +420,7 @@ class VolumeAttachment(K8sResource):
 
 
 @dataclass
-class VolumeAttachmentList(K8sSpec):
+class VolumeAttachmentList(K8sResource):
     """VolumeAttachmentList is a collection of VolumeAttachment objects.
 
     Attributes:
@@ -435,8 +435,8 @@ class VolumeAttachmentList(K8sSpec):
     """
 
     items: List[VolumeAttachment]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['VolumeAttachmentList'] = 'VolumeAttachmentList'
     metadata: Optional[JSONObj] = None
 
 

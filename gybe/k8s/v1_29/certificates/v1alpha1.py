@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class ClusterTrustBundle(K8sSpec):
+class ClusterTrustBundle(K8sResource):
     """ClusterTrustBundle is a cluster-scoped container for X.509 trust anchors (root certificates).
     ClusterTrustBundle objects are considered to be readable by any authenticated user in the cluster,
     because they can be mounted by pods using the `clusterTrustBundle` projection.  All service accounts
@@ -33,13 +33,13 @@ class ClusterTrustBundle(K8sSpec):
     """
 
     spec: ClusterTrustBundleSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['certificates.k8s.io/v1alpha1'] = 'certificates.k8s.io/v1alpha1'
+    kind: Literal['ClusterTrustBundle'] = 'ClusterTrustBundle'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ClusterTrustBundleList(K8sSpec):
+class ClusterTrustBundleList(K8sResource):
     """ClusterTrustBundleList is a collection of ClusterTrustBundle objects
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -53,8 +53,8 @@ class ClusterTrustBundleList(K8sSpec):
     """
 
     items: List[ClusterTrustBundle]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['certificates.k8s.io/v1alpha1'] = 'certificates.k8s.io/v1alpha1'
+    kind: Literal['ClusterTrustBundleList'] = 'ClusterTrustBundleList'
     metadata: Optional[JSONObj] = None
 
 

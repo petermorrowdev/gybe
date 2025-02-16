@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -175,7 +175,7 @@ class MatchResources(K8sSpec):
 
 
 @dataclass
-class MutatingAdmissionPolicy(K8sSpec):
+class MutatingAdmissionPolicy(K8sResource):
     """MutatingAdmissionPolicy describes the definition of an admission mutation policy that mutates the
     object coming into admission chain.
 
@@ -190,14 +190,14 @@ class MutatingAdmissionPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicy'] = 'MutatingAdmissionPolicy'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicySpec] = None
 
 
 @dataclass
-class MutatingAdmissionPolicyBinding(K8sSpec):
+class MutatingAdmissionPolicyBinding(K8sResource):
     """MutatingAdmissionPolicyBinding binds the MutatingAdmissionPolicy with parametrized resources.
     MutatingAdmissionPolicyBinding and the optional parameter resource together define how cluster
     administrators configure policies for clusters.  For a given admission request, each binding will
@@ -218,14 +218,14 @@ class MutatingAdmissionPolicyBinding(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicyBinding'] = 'MutatingAdmissionPolicyBinding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicyBindingSpec] = None
 
 
 @dataclass
-class MutatingAdmissionPolicyBindingList(K8sSpec):
+class MutatingAdmissionPolicyBindingList(K8sResource):
     """MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
 
     Attributes:
@@ -240,8 +240,8 @@ class MutatingAdmissionPolicyBindingList(K8sSpec):
     """
 
     items: List[MutatingAdmissionPolicyBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicyBindingList'] = 'MutatingAdmissionPolicyBindingList'
     metadata: Optional[JSONObj] = None
 
 
@@ -277,7 +277,7 @@ class MutatingAdmissionPolicyBindingSpec(K8sSpec):
 
 
 @dataclass
-class MutatingAdmissionPolicyList(K8sSpec):
+class MutatingAdmissionPolicyList(K8sResource):
     """MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
 
     Attributes:
@@ -292,8 +292,8 @@ class MutatingAdmissionPolicyList(K8sSpec):
     """
 
     items: List[MutatingAdmissionPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicyList'] = 'MutatingAdmissionPolicyList'
     metadata: Optional[JSONObj] = None
 
 

@@ -10,7 +10,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class IPAddress(K8sSpec):
+class IPAddress(K8sResource):
     """IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that
     operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An
     IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of
@@ -28,14 +28,14 @@ class IPAddress(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1alpha1'] = 'networking.k8s.io/v1alpha1'
+    kind: Literal['IPAddress'] = 'IPAddress'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[IPAddressSpec] = None
 
 
 @dataclass
-class IPAddressList(K8sSpec):
+class IPAddressList(K8sResource):
     """IPAddressList contains a list of IPAddress.
 
     Attributes:
@@ -50,8 +50,8 @@ class IPAddressList(K8sSpec):
     """
 
     items: List[IPAddress]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1alpha1'] = 'networking.k8s.io/v1alpha1'
+    kind: Literal['IPAddressList'] = 'IPAddressList'
     metadata: Optional[JSONObj] = None
 
 
@@ -111,7 +111,7 @@ class ServiceCIDR(K8sResource):
 
 
 @dataclass
-class ServiceCIDRList(K8sSpec):
+class ServiceCIDRList(K8sResource):
     """ServiceCIDRList contains a list of ServiceCIDR objects.
 
     Attributes:
@@ -126,8 +126,8 @@ class ServiceCIDRList(K8sSpec):
     """
 
     items: List[ServiceCIDR]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1alpha1'] = 'networking.k8s.io/v1alpha1'
+    kind: Literal['ServiceCIDRList'] = 'ServiceCIDRList'
     metadata: Optional[JSONObj] = None
 
 

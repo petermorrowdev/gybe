@@ -34,7 +34,7 @@ class CronJob(K8sResource):
 
 
 @dataclass
-class CronJobList(K8sSpec):
+class CronJobList(K8sResource):
     """CronJobList is a collection of cron jobs.
 
     Attributes:
@@ -49,8 +49,8 @@ class CronJobList(K8sSpec):
     """
 
     items: List[CronJob]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['CronJobList'] = 'CronJobList'
     metadata: Optional[JSONObj] = None
 
 
@@ -158,7 +158,7 @@ class JobCondition(K8sSpec):
 
 
 @dataclass
-class JobList(K8sSpec):
+class JobList(K8sResource):
     """JobList is a collection of jobs.
 
     Attributes:
@@ -173,8 +173,8 @@ class JobList(K8sSpec):
     """
 
     items: List[Job]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['batch/v1'] = 'batch/v1'
+    kind: Literal['JobList'] = 'JobList'
     metadata: Optional[JSONObj] = None
 
 

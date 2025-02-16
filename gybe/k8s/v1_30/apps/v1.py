@@ -11,7 +11,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class ControllerRevision(K8sSpec):
+class ControllerRevision(K8sResource):
     """ControllerRevision implements an immutable snapshot of state data. Clients are responsible for
     serializing and deserializing the objects that contain their internal state. Once a ControllerRevision
     has been successfully created, it can not be updated. The API Server will fail validation of all
@@ -33,14 +33,14 @@ class ControllerRevision(K8sSpec):
     """
 
     revision: int
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ControllerRevision'] = 'ControllerRevision'
     data: Optional[JSONObj] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ControllerRevisionList(K8sSpec):
+class ControllerRevisionList(K8sResource):
     """ControllerRevisionList is a resource containing a list of ControllerRevision objects.
 
     Attributes:
@@ -55,8 +55,8 @@ class ControllerRevisionList(K8sSpec):
     """
 
     items: List[ControllerRevision]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ControllerRevisionList'] = 'ControllerRevisionList'
     metadata: Optional[JSONObj] = None
 
 
@@ -105,7 +105,7 @@ class DaemonSetCondition(K8sSpec):
 
 
 @dataclass
-class DaemonSetList(K8sSpec):
+class DaemonSetList(K8sResource):
     """DaemonSetList is a collection of daemon sets.
 
     Attributes:
@@ -120,8 +120,8 @@ class DaemonSetList(K8sSpec):
     """
 
     items: List[DaemonSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['DaemonSetList'] = 'DaemonSetList'
     metadata: Optional[JSONObj] = None
 
 
@@ -249,7 +249,7 @@ class DeploymentCondition(K8sSpec):
 
 
 @dataclass
-class DeploymentList(K8sSpec):
+class DeploymentList(K8sResource):
     """DeploymentList is a list of Deployments.
 
     Attributes:
@@ -264,8 +264,8 @@ class DeploymentList(K8sSpec):
     """
 
     items: List[Deployment]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['DeploymentList'] = 'DeploymentList'
     metadata: Optional[JSONObj] = None
 
 
@@ -397,7 +397,7 @@ class ReplicaSetCondition(K8sSpec):
 
 
 @dataclass
-class ReplicaSetList(K8sSpec):
+class ReplicaSetList(K8sResource):
     """ReplicaSetList is a collection of ReplicaSets.
 
     Attributes:
@@ -412,8 +412,8 @@ class ReplicaSetList(K8sSpec):
     """
 
     items: List[ReplicaSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ReplicaSetList'] = 'ReplicaSetList'
     metadata: Optional[JSONObj] = None
 
 
@@ -596,7 +596,7 @@ class StatefulSetCondition(K8sSpec):
 
 
 @dataclass
-class StatefulSetList(K8sSpec):
+class StatefulSetList(K8sResource):
     """StatefulSetList is a collection of StatefulSets.
 
     Attributes:
@@ -611,8 +611,8 @@ class StatefulSetList(K8sSpec):
     """
 
     items: List[StatefulSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['StatefulSetList'] = 'StatefulSetList'
     metadata: Optional[JSONObj] = None
 
 

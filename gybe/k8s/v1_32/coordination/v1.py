@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class Lease(K8sSpec):
+class Lease(K8sResource):
     """Lease defines a lease concept.
 
     Attributes:
@@ -24,14 +24,14 @@ class Lease(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Lease'] = 'Lease'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[LeaseSpec] = None
 
 
 @dataclass
-class LeaseList(K8sSpec):
+class LeaseList(K8sResource):
     """LeaseList is a list of Lease objects.
 
     Attributes:
@@ -46,8 +46,8 @@ class LeaseList(K8sSpec):
     """
 
     items: List[Lease]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['LeaseList'] = 'LeaseList'
     metadata: Optional[JSONObj] = None
 
 

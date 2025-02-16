@@ -218,7 +218,7 @@ class PodSchedulingContext(K8sResource):
 
 
 @dataclass
-class PodSchedulingContextList(K8sSpec):
+class PodSchedulingContextList(K8sResource):
     """PodSchedulingContextList is a collection of Pod scheduling objects.
 
     Attributes:
@@ -233,8 +233,8 @@ class PodSchedulingContextList(K8sSpec):
     """
 
     items: List[PodSchedulingContext]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['PodSchedulingContextList'] = 'PodSchedulingContextList'
     metadata: Optional[JSONObj] = None
 
 
@@ -316,7 +316,7 @@ class ResourceClaimConsumerReference(K8sSpec):
 
 
 @dataclass
-class ResourceClaimList(K8sSpec):
+class ResourceClaimList(K8sResource):
     """ResourceClaimList is a collection of claims.
 
     Attributes:
@@ -331,13 +331,13 @@ class ResourceClaimList(K8sSpec):
     """
 
     items: List[ResourceClaim]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaimList'] = 'ResourceClaimList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class ResourceClaimParameters(K8sSpec):
+class ResourceClaimParameters(K8sResource):
     """ResourceClaimParameters defines resource requests for a ResourceClaim in an in-tree format understood
     by Kubernetes.
 
@@ -360,16 +360,16 @@ class ResourceClaimParameters(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaimParameters'] = 'ResourceClaimParameters'
     driverRequests: Optional[List[DriverRequests]] = None
     generatedFrom: Optional[ResourceClaimParametersReference] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     shareable: Optional[bool] = None
 
 
 @dataclass
-class ResourceClaimParametersList(K8sSpec):
+class ResourceClaimParametersList(K8sResource):
     """ResourceClaimParametersList is a collection of ResourceClaimParameters.
 
     Attributes:
@@ -384,8 +384,8 @@ class ResourceClaimParametersList(K8sSpec):
     """
 
     items: List[ResourceClaimParameters]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaimParametersList'] = 'ResourceClaimParametersList'
     metadata: Optional[JSONObj] = None
 
 
@@ -471,7 +471,7 @@ class ResourceClaimStatus(K8sSpec):
 
 
 @dataclass
-class ResourceClaimTemplate(K8sSpec):
+class ResourceClaimTemplate(K8sResource):
     """ResourceClaimTemplate is used to produce ResourceClaim objects.
 
     Attributes:
@@ -487,13 +487,13 @@ class ResourceClaimTemplate(K8sSpec):
     """
 
     spec: ResourceClaimTemplateSpec
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sSpec):
+class ResourceClaimTemplateList(K8sResource):
     """ResourceClaimTemplateList is a collection of claim templates.
 
     Attributes:
@@ -508,8 +508,8 @@ class ResourceClaimTemplateList(K8sSpec):
     """
 
     items: List[ResourceClaimTemplate]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClaimTemplateList'] = 'ResourceClaimTemplateList'
     metadata: Optional[JSONObj] = None
 
 
@@ -530,7 +530,7 @@ class ResourceClaimTemplateSpec(K8sSpec):
 
 
 @dataclass
-class ResourceClass(K8sSpec):
+class ResourceClass(K8sResource):
     """ResourceClass is used by administrators to influence how resources are allocated.  This is an alpha
     type and requires enabling the DynamicResourceAllocation feature gate.
 
@@ -556,8 +556,8 @@ class ResourceClass(K8sSpec):
     """
 
     driverName: str
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClass'] = 'ResourceClass'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     parametersRef: Optional[ResourceClassParametersReference] = None
     structuredParameters: Optional[bool] = None
@@ -565,7 +565,7 @@ class ResourceClass(K8sSpec):
 
 
 @dataclass
-class ResourceClassList(K8sSpec):
+class ResourceClassList(K8sResource):
     """ResourceClassList is a collection of classes.
 
     Attributes:
@@ -580,13 +580,13 @@ class ResourceClassList(K8sSpec):
     """
 
     items: List[ResourceClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClassList'] = 'ResourceClassList'
     metadata: Optional[JSONObj] = None
 
 
 @dataclass
-class ResourceClassParameters(K8sSpec):
+class ResourceClassParameters(K8sResource):
     """ResourceClassParameters defines resource requests for a ResourceClass in an in-tree format understood
     by Kubernetes.
 
@@ -606,16 +606,16 @@ class ResourceClassParameters(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClassParameters'] = 'ResourceClassParameters'
     filters: Optional[List[ResourceFilter]] = None
     generatedFrom: Optional[ResourceClassParametersReference] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     vendorParameters: Optional[List[VendorParameters]] = None
 
 
 @dataclass
-class ResourceClassParametersList(K8sSpec):
+class ResourceClassParametersList(K8sResource):
     """ResourceClassParametersList is a collection of ResourceClassParameters.
 
     Attributes:
@@ -630,8 +630,8 @@ class ResourceClassParametersList(K8sSpec):
     """
 
     items: List[ResourceClassParameters]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceClassParametersList'] = 'ResourceClassParametersList'
     metadata: Optional[JSONObj] = None
 
 
@@ -709,7 +709,7 @@ class ResourceRequest(K8sSpec):
 
 
 @dataclass
-class ResourceSlice(K8sSpec):
+class ResourceSlice(K8sResource):
     """ResourceSlice provides information about available resources on individual nodes.
 
     Attributes:
@@ -728,15 +728,15 @@ class ResourceSlice(K8sSpec):
     """
 
     driverName: str
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceSlice'] = 'ResourceSlice'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     namedResources: Optional[NamedResourcesResources] = None
     nodeName: Optional[str] = None
 
 
 @dataclass
-class ResourceSliceList(K8sSpec):
+class ResourceSliceList(K8sResource):
     """ResourceSliceList is a collection of ResourceSlices.
 
     Attributes:
@@ -751,8 +751,8 @@ class ResourceSliceList(K8sSpec):
     """
 
     items: List[ResourceSlice]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    kind: Literal['ResourceSliceList'] = 'ResourceSliceList'
     metadata: Optional[JSONObj] = None
 
 

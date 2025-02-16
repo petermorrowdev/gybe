@@ -52,7 +52,7 @@ class APIServiceCondition(K8sSpec):
 
 
 @dataclass
-class APIServiceList(K8sSpec):
+class APIServiceList(K8sResource):
     """APIServiceList is a list of APIService objects.
 
     Attributes:
@@ -67,8 +67,8 @@ class APIServiceList(K8sSpec):
     """
 
     items: List[APIService]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apiregistration.k8s.io/v1'] = 'apiregistration.k8s.io/v1'
+    kind: Literal['APIServiceList'] = 'APIServiceList'
     metadata: Optional[JSONObj] = None
 
 

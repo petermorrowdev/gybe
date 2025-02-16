@@ -69,7 +69,7 @@ class StorageVersionMigration(K8sResource):
 
 
 @dataclass
-class StorageVersionMigrationList(K8sSpec):
+class StorageVersionMigrationList(K8sResource):
     """StorageVersionMigrationList is a collection of storage version migrations.
 
     Attributes:
@@ -84,8 +84,8 @@ class StorageVersionMigrationList(K8sSpec):
     """
 
     items: List[StorageVersionMigration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1alpha1'] = 'storage.k8s.io/v1alpha1'
+    kind: Literal['StorageVersionMigrationList'] = 'StorageVersionMigrationList'
     metadata: Optional[JSONObj] = None
 
 

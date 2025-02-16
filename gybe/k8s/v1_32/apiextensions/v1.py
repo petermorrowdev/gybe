@@ -102,7 +102,7 @@ class CustomResourceDefinitionCondition(K8sSpec):
 
 
 @dataclass
-class CustomResourceDefinitionList(K8sSpec):
+class CustomResourceDefinitionList(K8sResource):
     """CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
 
     Attributes:
@@ -117,8 +117,8 @@ class CustomResourceDefinitionList(K8sSpec):
     """
 
     items: List[CustomResourceDefinition]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['apiextensions.k8s.io/v1'] = 'apiextensions.k8s.io/v1'
+    kind: Literal['CustomResourceDefinitionList'] = 'CustomResourceDefinitionList'
     metadata: Optional[JSONObj] = None
 
 

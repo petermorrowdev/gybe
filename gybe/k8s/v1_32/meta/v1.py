@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -361,7 +361,7 @@ class Preconditions(K8sSpec):
 
 
 @dataclass
-class Status(K8sSpec):
+class Status(K8sResource):
     """Status is a return value for calls that don't return other objects.
 
     Attributes:
@@ -383,10 +383,10 @@ class Status(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Status'] = 'Status'
     code: Optional[int] = None
     details: Optional[StatusDetails] = None
-    kind: Optional[str] = None
     message: Optional[str] = None
     metadata: Optional[JSONObj] = None
     reason: Optional[str] = None

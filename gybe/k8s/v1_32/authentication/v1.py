@@ -108,7 +108,7 @@ class TokenRequestStatus(K8sSpec):
 
 
 @dataclass
-class SelfSubjectReview(K8sSpec):
+class SelfSubjectReview(K8sResource):
     """SelfSubjectReview contains the user information that the kube-apiserver has about the user making this
     request. When using impersonation, users will receive the user info of the user being impersonated.
     If impersonation or request header authentication is used, any extra keys will have their case ignored
@@ -125,8 +125,8 @@ class SelfSubjectReview(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
+    kind: Literal['SelfSubjectReview'] = 'SelfSubjectReview'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     status: Optional[SelfSubjectReviewStatus] = None
 

@@ -206,7 +206,7 @@ class HorizontalPodAutoscalerCondition(K8sSpec):
 
 
 @dataclass
-class HorizontalPodAutoscalerList(K8sSpec):
+class HorizontalPodAutoscalerList(K8sResource):
     """HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
 
     Attributes:
@@ -221,8 +221,8 @@ class HorizontalPodAutoscalerList(K8sSpec):
     """
 
     items: List[HorizontalPodAutoscaler]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['autoscaling/v2'] = 'autoscaling/v2'
+    kind: Literal['HorizontalPodAutoscalerList'] = 'HorizontalPodAutoscalerList'
     metadata: Optional[JSONObj] = None
 
 
