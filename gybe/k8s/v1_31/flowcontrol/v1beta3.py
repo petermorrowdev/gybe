@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -93,27 +93,6 @@ class FlowSchemaCondition(K8sSpec):
     reason: Optional[str] = None
     status: Optional[str] = None
     type: Optional[str] = None
-
-
-@dataclass
-class FlowSchemaList(K8sResource):
-    """FlowSchemaList is a list of FlowSchema objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: `items` is a list of FlowSchemas.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: `metadata` is the standard list metadata.
-
-    """
-
-    items: List[FlowSchema]
-    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1beta3'] = 'flowcontrol.apiserver.k8s.io/v1beta3'
-    kind: Literal['FlowSchemaList'] = 'FlowSchemaList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -313,27 +292,6 @@ class PriorityLevelConfigurationCondition(K8sSpec):
     reason: Optional[str] = None
     status: Optional[str] = None
     type: Optional[str] = None
-
-
-@dataclass
-class PriorityLevelConfigurationList(K8sResource):
-    """PriorityLevelConfigurationList is a list of PriorityLevelConfiguration objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: `items` is a list of request-priorities.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: `metadata` is the standard object's metadata.
-
-    """
-
-    items: List[PriorityLevelConfiguration]
-    apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1beta3'] = 'flowcontrol.apiserver.k8s.io/v1beta3'
-    kind: Literal['PriorityLevelConfigurationList'] = 'PriorityLevelConfigurationList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

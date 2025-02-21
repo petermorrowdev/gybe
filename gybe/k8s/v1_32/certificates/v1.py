@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
@@ -69,26 +69,6 @@ class CertificateSigningRequestCondition(K8sSpec):
     lastUpdateTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class CertificateSigningRequestList(K8sResource):
-    """CertificateSigningRequestList is a collection of CertificateSigningRequest objects
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a collection of CertificateSigningRequest objects
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: ...
-
-    """
-
-    items: List[CertificateSigningRequest]
-    apiVersion: Literal['certificates.k8s.io/v1'] = 'certificates.k8s.io/v1'
-    kind: Literal['CertificateSigningRequestList'] = 'CertificateSigningRequestList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

@@ -218,27 +218,6 @@ class PodSchedulingContext(K8sResource):
 
 
 @dataclass
-class PodSchedulingContextList(K8sResource):
-    """PodSchedulingContextList is a collection of Pod scheduling objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of PodSchedulingContext objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[PodSchedulingContext]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['PodSchedulingContextList'] = 'PodSchedulingContextList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class PodSchedulingContextSpec(K8sSpec):
     """PodSchedulingContextSpec describes where resources for the Pod are needed.
 
@@ -316,27 +295,6 @@ class ResourceClaimConsumerReference(K8sSpec):
 
 
 @dataclass
-class ResourceClaimList(K8sResource):
-    """ResourceClaimList is a collection of claims.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claims.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaim]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceClaimList'] = 'ResourceClaimList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceClaimParameters(K8sResource):
     """ResourceClaimParameters defines resource requests for a ResourceClaim in an in-tree format understood
     by Kubernetes.
@@ -366,27 +324,6 @@ class ResourceClaimParameters(K8sResource):
     generatedFrom: Optional[ResourceClaimParametersReference] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     shareable: Optional[bool] = None
-
-
-@dataclass
-class ResourceClaimParametersList(K8sResource):
-    """ResourceClaimParametersList is a collection of ResourceClaimParameters.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of node resource capacity objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaimParameters]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceClaimParametersList'] = 'ResourceClaimParametersList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -493,27 +430,6 @@ class ResourceClaimTemplate(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sResource):
-    """ResourceClaimTemplateList is a collection of claim templates.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claim templates.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaimTemplate]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceClaimTemplateList'] = 'ResourceClaimTemplateList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
@@ -565,27 +481,6 @@ class ResourceClass(K8sResource):
 
 
 @dataclass
-class ResourceClassList(K8sResource):
-    """ResourceClassList is a collection of classes.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource classes.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClass]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceClassList'] = 'ResourceClassList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceClassParameters(K8sResource):
     """ResourceClassParameters defines resource requests for a ResourceClass in an in-tree format understood
     by Kubernetes.
@@ -612,27 +507,6 @@ class ResourceClassParameters(K8sResource):
     generatedFrom: Optional[ResourceClassParametersReference] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     vendorParameters: Optional[List[VendorParameters]] = None
-
-
-@dataclass
-class ResourceClassParametersList(K8sResource):
-    """ResourceClassParametersList is a collection of ResourceClassParameters.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of node resource capacity objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClassParameters]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceClassParametersList'] = 'ResourceClassParametersList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -733,27 +607,6 @@ class ResourceSlice(K8sResource):
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     namedResources: Optional[NamedResourcesResources] = None
     nodeName: Optional[str] = None
-
-
-@dataclass
-class ResourceSliceList(K8sResource):
-    """ResourceSliceList is a collection of ResourceSlices.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of node resource capacity objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceSlice]
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
-    kind: Literal['ResourceSliceList'] = 'ResourceSliceList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

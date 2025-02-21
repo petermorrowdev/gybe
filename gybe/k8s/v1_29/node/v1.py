@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
@@ -58,27 +58,6 @@ class RuntimeClass(K8sResource):
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     overhead: Optional[Overhead] = None
     scheduling: Optional[Scheduling] = None
-
-
-@dataclass
-class RuntimeClassList(K8sResource):
-    """RuntimeClassList is a list of RuntimeClass objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[RuntimeClass]
-    apiVersion: Literal['v1'] = 'v1'
-    kind: Literal['RuntimeClassList'] = 'RuntimeClassList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

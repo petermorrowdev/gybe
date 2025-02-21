@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -72,27 +72,6 @@ class Event(K8sResource):
     reportingInstance: Optional[str] = None
     series: Optional[EventSeries] = None
     type: Optional[str] = None
-
-
-@dataclass
-class EventList(K8sResource):
-    """EventList is a list of Event objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Event]
-    apiVersion: Literal['v1'] = 'v1'
-    kind: Literal['EventList'] = 'EventList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
