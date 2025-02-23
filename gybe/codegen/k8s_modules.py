@@ -14,7 +14,6 @@ k8s_discovery_dir = Path('kubernetes/api/discovery')
 # a json-serializable dict
 JSONObj: TypeAlias = Union[dict[str, 'JSONObj'], list['JSONObj'], str, int, float, bool, None]
 JSONDict: TypeAlias = dict[str, Union['JSONObj', 'JSONDict']]
-KindDict: TypeAlias = dict[str, set[str]]
 schema_type_map = dict(
     string='str',
     boolean='bool',
