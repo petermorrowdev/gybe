@@ -25,7 +25,7 @@ class LeaseCandidate(K8sResource):
 
     """
 
-    apiVersion: Literal['v1alpha2'] = 'v1alpha2'
+    apiVersion: Literal['coordination.k8s.io/v1alpha2'] = 'coordination.k8s.io/v1alpha2'
     kind: Literal['LeaseCandidate'] = 'LeaseCandidate'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[LeaseCandidateSpec] = None

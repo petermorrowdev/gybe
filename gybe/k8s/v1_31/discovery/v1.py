@@ -144,7 +144,7 @@ class EndpointSlice(K8sResource):
 
     addressType: str
     endpoints: List[Endpoint]
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['discovery.k8s.io/v1'] = 'discovery.k8s.io/v1'
     kind: Literal['EndpointSlice'] = 'EndpointSlice'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     ports: Optional[List[EndpointPort]] = None

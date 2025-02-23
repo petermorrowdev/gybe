@@ -54,7 +54,7 @@ class PodSchedulingContext(K8sResource):
     """
 
     spec: PodSchedulingContextSpec
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
     kind: Literal['PodSchedulingContext'] = 'PodSchedulingContext'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[PodSchedulingContextStatus] = None
@@ -111,7 +111,7 @@ class ResourceClaim(K8sResource):
     """
 
     spec: ResourceClaimSpec
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
     kind: Literal['ResourceClaim'] = 'ResourceClaim'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
@@ -235,7 +235,7 @@ class ResourceClaimTemplate(K8sResource):
     """
 
     spec: ResourceClaimTemplateSpec
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
     kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 
@@ -281,7 +281,7 @@ class ResourceClass(K8sResource):
     """
 
     driverName: str
-    apiVersion: Literal['policy/v1alpha2'] = 'policy/v1alpha2'
+    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
     kind: Literal['ResourceClass'] = 'ResourceClass'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     parametersRef: Optional[ResourceClassParametersReference] = None

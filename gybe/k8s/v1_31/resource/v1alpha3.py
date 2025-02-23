@@ -206,7 +206,7 @@ class DeviceClass(K8sResource):
     """
 
     spec: DeviceClassSpec
-    apiVersion: Literal['policy/v1alpha3'] = 'policy/v1alpha3'
+    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['DeviceClass'] = 'DeviceClass'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
 
@@ -388,7 +388,7 @@ class PodSchedulingContext(K8sResource):
     """
 
     spec: PodSchedulingContextSpec
-    apiVersion: Literal['policy/v1alpha3'] = 'policy/v1alpha3'
+    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['PodSchedulingContext'] = 'PodSchedulingContext'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     status: Optional[PodSchedulingContextStatus] = None
@@ -446,7 +446,7 @@ class ResourceClaim(K8sResource):
     """
 
     spec: ResourceClaimSpec
-    apiVersion: Literal['policy/v1alpha3'] = 'policy/v1alpha3'
+    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['ResourceClaim'] = 'ResourceClaim'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
@@ -553,7 +553,7 @@ class ResourceClaimTemplate(K8sResource):
     """
 
     spec: ResourceClaimTemplateSpec
-    apiVersion: Literal['policy/v1alpha3'] = 'policy/v1alpha3'
+    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
 
@@ -631,7 +631,7 @@ class ResourceSlice(K8sResource):
     """
 
     spec: ResourceSliceSpec
-    apiVersion: Literal['policy/v1alpha3'] = 'policy/v1alpha3'
+    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['ResourceSlice'] = 'ResourceSlice'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
 

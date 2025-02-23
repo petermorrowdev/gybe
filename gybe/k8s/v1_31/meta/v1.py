@@ -9,7 +9,7 @@ from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class APIGroup(K8sSpec):
+class APIGroup(K8sResource):
     """APIGroup contains the name, the supported versions, and the preferred version of a group.
 
     Attributes:
@@ -34,8 +34,8 @@ class APIGroup(K8sSpec):
 
     name: str
     versions: List[GroupVersionForDiscovery]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIGroup'] = 'APIGroup'
     preferredVersion: Optional[GroupVersionForDiscovery] = None
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDR]] = None
 
@@ -114,7 +114,7 @@ class APIResource(K8sSpec):
 
 
 @dataclass
-class DeleteOptions(K8sSpec):
+class DeleteOptions(K8sResource):
     """DeleteOptions may be provided when deleting an API object.
 
     Attributes:
@@ -145,10 +145,10 @@ class DeleteOptions(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['DeleteOptions'] = 'DeleteOptions'
     dryRun: Optional[List[str]] = None
     gracePeriodSeconds: Optional[int] = None
-    kind: Optional[str] = None
     orphanDependents: Optional[bool] = None
     preconditions: Optional[Preconditions] = None
     propagationPolicy: Optional[str] = None
@@ -415,7 +415,7 @@ class StatusDetails(K8sSpec):
 
 
 @dataclass
-class WatchEvent(K8sSpec):
+class WatchEvent(K8sResource):
     """Event represents a single event to a watched resource.
 
     Attributes:
@@ -520,7 +520,7 @@ class FieldSelectorRequirement(K8sSpec):
 
 
 @dataclass
-class APIVersions(K8sSpec):
+class APIVersions(K8sResource):
     """APIVersions lists the versions that are available, to allow clients to discover the API at /api, which
     is the root path of the legacy v1 API.
 
@@ -543,5 +543,5 @@ class APIVersions(K8sSpec):
 
     versions: List[str]
     serverAddressByClientCIDRs: List[ServerAddressByClientCIDR]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIVersions'] = 'APIVersions'

@@ -56,7 +56,7 @@ class Event(K8sResource):
     """
 
     eventTime: str
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['events.k8s.io/v1'] = 'events.k8s.io/v1'
     kind: Literal['Event'] = 'Event'
     action: Optional[str] = None
     deprecatedCount: Optional[int] = None

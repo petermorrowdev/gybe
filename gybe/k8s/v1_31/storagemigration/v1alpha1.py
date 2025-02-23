@@ -61,7 +61,7 @@ class StorageVersionMigration(K8sResource):
 
     """
 
-    apiVersion: Literal['storage.k8s.io/v1alpha1'] = 'storage.k8s.io/v1alpha1'
+    apiVersion: Literal['storagemigration.k8s.io/v1alpha1'] = 'storagemigration.k8s.io/v1alpha1'
     kind: Literal['StorageVersionMigration'] = 'StorageVersionMigration'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[StorageVersionMigrationSpec] = None

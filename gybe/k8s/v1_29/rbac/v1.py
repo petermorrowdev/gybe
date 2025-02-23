@@ -41,7 +41,7 @@ class ClusterRole(K8sResource):
 
     """
 
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['ClusterRole'] = 'ClusterRole'
     aggregationRule: Optional[AggregationRule] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
@@ -67,7 +67,7 @@ class ClusterRoleBinding(K8sResource):
     """
 
     roleRef: RoleRef
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['ClusterRoleBinding'] = 'ClusterRoleBinding'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
@@ -118,7 +118,7 @@ class Role(K8sResource):
 
     """
 
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['Role'] = 'Role'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     rules: Optional[List[PolicyRule]] = None
@@ -146,7 +146,7 @@ class RoleBinding(K8sResource):
     """
 
     roleRef: RoleRef
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['RoleBinding'] = 'RoleBinding'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None

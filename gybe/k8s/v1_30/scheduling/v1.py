@@ -36,7 +36,7 @@ class PriorityClass(K8sResource):
     """
 
     value: int
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['scheduling.k8s.io/v1'] = 'scheduling.k8s.io/v1'
     kind: Literal['PriorityClass'] = 'PriorityClass'
     description: Optional[str] = None
     globalDefault: Optional[bool] = None

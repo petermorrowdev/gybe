@@ -5,13 +5,16 @@ from __future__ import annotations
 import ast
 import json
 import textwrap
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional, TypeAlias, TypedDict, Union
 
 k8s_openapi_dir = Path('kubernetes/api/openapi-spec/v3')
+k8s_discovery_dir = Path('kubernetes/api/discovery')
 # a json-serializable dict
 JSONObj: TypeAlias = Union[dict[str, 'JSONObj'], list['JSONObj'], str, int, float, bool, None]
 JSONDict: TypeAlias = dict[str, Union['JSONObj', 'JSONDict']]
+KindDict: TypeAlias = dict[str, set[str]]
 schema_type_map = dict(
     string='str',
     boolean='bool',
@@ -36,30 +39,6 @@ ignore_models = {
     'StorageVersionSpec',
     'FieldsV1',
 }
-# NOTE: The expected `apiVersion` values for k8s resources are documented here:
-# https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/
-# in the tables with `Group`, `Version` and `Kind`. This data does not exist in
-# the kubernetes JSON schema, so it's manually mapped below.
-resource_api_versions = {
-    'io.k8s.api.admissionregistration': 'admissionregistration.k8s.io',
-    'io.k8s.api.apiserverinternal': 'admissionregistration.k8s.io',
-    'io.k8s.api.apps': 'apps',
-    'io.k8s.api.authentication': 'authentication.k8s.io',
-    'io.k8s.api.authorization': 'rbac.authorization.k8s.io',
-    'io.k8s.api.autoscaling': 'autoscaling',
-    'io.k8s.api.batch': 'batch',
-    'io.k8s.api.certificates': 'certificates.k8s.io',
-    'io.k8s.api.core': '',  # `apiVersion: v1`, `apiVersion: v2`, ect.
-    'io.k8s.api.flowcontrol': 'flowcontrol.apiserver.k8s.io',
-    'io.k8s.api.networking': 'networking.k8s.io',
-    'io.k8s.api.policy': 'policy',
-    'io.k8s.api.resource': 'policy',
-    'io.k8s.api.storage': 'storage.k8s.io',
-    'io.k8s.api.storagemigration': 'storage.k8s.io',
-    'io.k8s.apiextensions-apiserver.pkg.apis.apiextensions': 'apiextensions.k8s.io',
-    'io.k8s.kube-aggregator.pkg.apis.apiregistration': 'apiregistration.k8s.io',
-}
-resource_prop_names = {'apiVersion', 'kind', 'metadata'}
 
 
 class JSONSchemaProperties(TypedDict):
@@ -68,6 +47,23 @@ class JSONSchemaProperties(TypedDict):
     type: str
     items: JSONSchemaProperties
     allOf: Optional[list[JSONSchemaProperties]]
+
+
+@dataclass
+class K8sResourceRef:
+    """Reference to kubernetes resource extracted from x-kubernetes-group-version-kind."""
+
+    group: str
+    version: str
+    kind: str
+
+    @property
+    def api_version(self):
+        """Namespaced version for usage with `apiVersion` in resources."""
+        if self.group:
+            return self.group + '/' + self.version
+        else:
+            return self.version
 
 
 class K8sModule:
@@ -101,20 +97,16 @@ class K8sModule:
         properties: dict[str, JSONSchemaProperties],
         description: str,
         required: list[str],
+        resource_ref: K8sResourceRef | None,
     ) -> None:
         """Add a kubernetes JSON schema specification to the module as a dataclass ast."""
         name_parts = name.split('.')
-        prop_names = set(properties.keys())
         literal_properties = dict()
-        if len(resource_prop_names - prop_names) == 0:
-            k = '.'.join(name_parts[:-2])
-            api_group = resource_api_versions.get(k)
-            if api_group:
-                api_version = api_group + '/' + name_parts[-2]
-            else:
-                api_version = name_parts[-2]
-            literal_properties['apiVersion'] = api_version
-            literal_properties['kind'] = name_parts[-1]
+
+        if resource_ref is not None:
+            literal_properties['apiVersion'] = resource_ref.api_version
+            literal_properties['kind'] = resource_ref.kind
+
         model_def = self._model_def(
             name=name_parts[-1],
             properties=properties,
@@ -244,15 +236,24 @@ def _write_k8s_models(k8s_version_module: str) -> None:
     for name in model_schemas.keys():
         if name not in k8s_modules:
             module_name = _ref_to_module_name(name, k8s_version_module)
-            k8s_modules[module_name] = K8sModule(k8s_version_module, module_name)
+            k8s_modules[module_name] = K8sModule(
+                module_name=module_name,
+                version_module=k8s_version_module,
+            )
 
     for name, schema in model_schemas.items():
         properties = schema.get('properties')
         description = schema.get('description')
         required = schema.get('required')
+        resource_refs = schema.get('x-kubernetes-group-version-kind')
+        # ignore extra group version kinds
+        if len(resource_refs or []):
+            resource_ref = K8sResourceRef(**resource_refs[0])
+        else:
+            resource_ref = None
         if properties:
             k8s_module = k8s_modules[_ref_to_module_name(name, k8s_version_module)]
-            k8s_module.add_model(name, properties, description, required)
+            k8s_module.add_model(name, properties, description, required, resource_ref)
 
     for k8s_module in k8s_modules.values():
         k8s_module.write_module()
@@ -273,7 +274,7 @@ def _ref_to_module_name(ref: str, version_module: str) -> str:
     return '.'.join(_ref_to_model_path(ref, version_module).split('.')[:-1])
 
 
-def write_module(k8s_version_module):
+def write_module(k8s_version_module: str) -> None:
     """Write generated k8s module based on kubernetes JSON schema."""
     _write_module_init(k8s_version_module)
     _write_k8s_models(k8s_version_module)

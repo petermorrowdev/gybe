@@ -53,7 +53,7 @@ class RuntimeClass(K8sResource):
     """
 
     handler: str
-    apiVersion: Literal['v1'] = 'v1'
+    apiVersion: Literal['node.k8s.io/v1'] = 'node.k8s.io/v1'
     kind: Literal['RuntimeClass'] = 'RuntimeClass'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     overhead: Optional[Overhead] = None

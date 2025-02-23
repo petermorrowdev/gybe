@@ -50,7 +50,7 @@ class StorageVersion(K8sResource):
 
     spec: JSONObj
     status: StorageVersionStatus
-    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    apiVersion: Literal['internal.apiserver.k8s.io/v1alpha1'] = 'internal.apiserver.k8s.io/v1alpha1'
     kind: Literal['StorageVersion'] = 'StorageVersion'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 

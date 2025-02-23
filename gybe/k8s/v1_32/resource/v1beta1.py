@@ -246,7 +246,7 @@ class DeviceClass(K8sResource):
     """
 
     spec: DeviceClassSpec
-    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['DeviceClass'] = 'DeviceClass'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
@@ -452,7 +452,7 @@ class ResourceClaim(K8sResource):
     """
 
     spec: ResourceClaimSpec
-    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceClaim'] = 'ResourceClaim'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
@@ -535,7 +535,7 @@ class ResourceClaimTemplate(K8sResource):
     """
 
     spec: ResourceClaimTemplateSpec
-    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
@@ -613,7 +613,7 @@ class ResourceSlice(K8sResource):
     """
 
     spec: ResourceSliceSpec
-    apiVersion: Literal['policy/v1beta1'] = 'policy/v1beta1'
+    apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceSlice'] = 'ResourceSlice'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 

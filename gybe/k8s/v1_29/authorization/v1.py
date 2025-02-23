@@ -29,7 +29,7 @@ class LocalSubjectAccessReview(K8sResource):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['LocalSubjectAccessReview'] = 'LocalSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
@@ -135,7 +135,7 @@ class SelfSubjectAccessReview(K8sResource):
     """
 
     spec: SelfSubjectAccessReviewSpec
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SelfSubjectAccessReview'] = 'SelfSubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
@@ -179,7 +179,7 @@ class SelfSubjectRulesReview(K8sResource):
     """
 
     spec: SelfSubjectRulesReviewSpec
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SelfSubjectRulesReview'] = 'SelfSubjectRulesReview'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[SubjectRulesReviewStatus] = None
@@ -214,7 +214,7 @@ class SubjectAccessReview(K8sResource):
     """
 
     spec: SubjectAccessReviewSpec
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SubjectAccessReview'] = 'SubjectAccessReview'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
