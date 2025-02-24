@@ -8,7 +8,7 @@ from typing import List, Literal, Optional
 import gybe.k8s.v1_30.api.resource
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -36,6 +36,27 @@ class CSIDriver(K8sResource):
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['CSIDriver'] = 'CSIDriver'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
+
+
+@dataclass
+class CSIDriverList(K8sResource):
+    """CSIDriverList is a collection of CSIDriver objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of CSIDriver
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[CSIDriver]
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIDriverList'] = 'CSIDriverList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -183,6 +204,27 @@ class CSINodeDriver(K8sSpec):
 
 
 @dataclass
+class CSINodeList(K8sResource):
+    """CSINodeList is a collection of CSINode objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of CSINode
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[CSINode]
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSINodeList'] = 'CSINodeList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class CSINodeSpec(K8sSpec):
     """CSINodeSpec holds information about the specification of all CSI drivers installed on a node
     Attributes:
@@ -250,6 +292,27 @@ class CSIStorageCapacity(K8sResource):
 
 
 @dataclass
+class CSIStorageCapacityList(K8sResource):
+    """CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of CSIStorageCapacity objects.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[CSIStorageCapacity]
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['CSIStorageCapacityList'] = 'CSIStorageCapacityList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class StorageClass(K8sResource):
     """StorageClass describes the parameters for a class of storage for which PersistentVolumes can be
     dynamically provisioned.  StorageClasses are non-namespaced; the name of the storage class according
@@ -294,6 +357,27 @@ class StorageClass(K8sResource):
 
 
 @dataclass
+class StorageClassList(K8sResource):
+    """StorageClassList is a collection of storage classes.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of StorageClasses
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[StorageClass]
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['StorageClassList'] = 'StorageClassList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class TokenRequest(K8sSpec):
     """TokenRequest contains parameters of a service account token.
 
@@ -333,6 +417,27 @@ class VolumeAttachment(K8sResource):
     kind: Literal['VolumeAttachment'] = 'VolumeAttachment'
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     status: Optional[VolumeAttachmentStatus] = None
+
+
+@dataclass
+class VolumeAttachmentList(K8sResource):
+    """VolumeAttachmentList is a collection of VolumeAttachment objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of VolumeAttachments
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[VolumeAttachment]
+    apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
+    kind: Literal['VolumeAttachmentList'] = 'VolumeAttachmentList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

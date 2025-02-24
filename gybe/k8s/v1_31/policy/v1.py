@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -53,6 +53,27 @@ class PodDisruptionBudget(K8sResource):
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[PodDisruptionBudgetSpec] = None
     status: Optional[PodDisruptionBudgetStatus] = None
+
+
+@dataclass
+class PodDisruptionBudgetList(K8sResource):
+    """PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items is a list of PodDisruptionBudgets
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard object's metadata.
+
+    """
+
+    items: List[PodDisruptionBudget]
+    apiVersion: Literal['policy/v1'] = 'policy/v1'
+    kind: Literal['PodDisruptionBudgetList'] = 'PodDisruptionBudgetList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

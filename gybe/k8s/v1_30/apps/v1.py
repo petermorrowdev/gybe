@@ -40,6 +40,27 @@ class ControllerRevision(K8sResource):
 
 
 @dataclass
+class ControllerRevisionList(K8sResource):
+    """ControllerRevisionList is a resource containing a list of ControllerRevision objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items is the list of ControllerRevisions
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata:
+
+    """
+
+    items: List[ControllerRevision]
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ControllerRevisionList'] = 'ControllerRevisionList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class DaemonSet(K8sResource):
     """DaemonSet represents the configuration of a daemon set.
 
@@ -81,6 +102,27 @@ class DaemonSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
+
+
+@dataclass
+class DaemonSetList(K8sResource):
+    """DaemonSetList is a collection of daemon sets.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: A list of daemon sets.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[DaemonSet]
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['DaemonSetList'] = 'DaemonSetList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -204,6 +246,27 @@ class DeploymentCondition(K8sSpec):
     lastUpdateTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
+
+
+@dataclass
+class DeploymentList(K8sResource):
+    """DeploymentList is a list of Deployments.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items is the list of Deployments.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[Deployment]
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['DeploymentList'] = 'DeploymentList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -331,6 +394,27 @@ class ReplicaSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
+
+
+@dataclass
+class ReplicaSetList(K8sResource):
+    """ReplicaSetList is a collection of ReplicaSets.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: List of ReplicaSets.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[ReplicaSet]
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ReplicaSetList'] = 'ReplicaSetList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -509,6 +593,27 @@ class StatefulSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
+
+
+@dataclass
+class StatefulSetList(K8sResource):
+    """StatefulSetList is a collection of StatefulSets.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items is the list of stateful sets.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list's metadata.
+
+    """
+
+    items: List[StatefulSet]
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['StatefulSetList'] = 'StatefulSetList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

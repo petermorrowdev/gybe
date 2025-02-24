@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -98,6 +98,27 @@ class HorizontalPodAutoscaler(K8sResource):
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[HorizontalPodAutoscalerSpec] = None
     status: Optional[HorizontalPodAutoscalerStatus] = None
+
+
+@dataclass
+class HorizontalPodAutoscalerList(K8sResource):
+    """list of horizontal pod autoscaler objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of horizontal pod autoscaler objects.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[HorizontalPodAutoscaler]
+    apiVersion: Literal['autoscaling/v1'] = 'autoscaling/v1'
+    kind: Literal['HorizontalPodAutoscalerList'] = 'HorizontalPodAutoscalerList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

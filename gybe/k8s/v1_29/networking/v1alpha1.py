@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -32,6 +32,27 @@ class IPAddress(K8sResource):
     kind: Literal['IPAddress'] = 'IPAddress'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[IPAddressSpec] = None
+
+
+@dataclass
+class IPAddressList(K8sResource):
+    """IPAddressList contains a list of IPAddress.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of IPAddresses.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard object's metadata.
+
+    """
+
+    items: List[IPAddress]
+    apiVersion: Literal['networking.k8s.io/v1alpha1'] = 'networking.k8s.io/v1alpha1'
+    kind: Literal['IPAddressList'] = 'IPAddressList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -87,6 +108,27 @@ class ServiceCIDR(K8sResource):
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[ServiceCIDRSpec] = None
     status: Optional[ServiceCIDRStatus] = None
+
+
+@dataclass
+class ServiceCIDRList(K8sResource):
+    """ServiceCIDRList contains a list of ServiceCIDR objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of ServiceCIDRs.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard object's metadata.
+
+    """
+
+    items: List[ServiceCIDR]
+    apiVersion: Literal['networking.k8s.io/v1alpha1'] = 'networking.k8s.io/v1alpha1'
+    kind: Literal['ServiceCIDRList'] = 'ServiceCIDRList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

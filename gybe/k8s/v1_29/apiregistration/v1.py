@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -49,6 +49,27 @@ class APIServiceCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
+
+
+@dataclass
+class APIServiceList(K8sResource):
+    """APIServiceList is a list of APIService objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items is the list of APIService
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[APIService]
+    apiVersion: Literal['apiregistration.k8s.io/v1'] = 'apiregistration.k8s.io/v1'
+    kind: Literal['APIServiceList'] = 'APIServiceList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

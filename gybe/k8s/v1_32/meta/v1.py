@@ -114,6 +114,28 @@ class APIResource(K8sSpec):
 
 
 @dataclass
+class APIResourceList(K8sResource):
+    """APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in
+    a specific group and version, and if the resource is namespaced.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        groupVersion: groupVersion is the group and version this APIResourceList is for.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        resources: resources contains the name of the resources and if they are namespaced.
+
+    """
+
+    groupVersion: str
+    resources: List[APIResource]
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIResourceList'] = 'APIResourceList'
+
+
+@dataclass
 class DeleteOptions(K8sResource):
     """DeleteOptions may be provided when deleting an API object.
 
@@ -508,6 +530,25 @@ class LabelSelectorRequirement(K8sSpec):
     key: str
     operator: str
     values: Optional[List[str]] = None
+
+
+@dataclass
+class APIGroupList(K8sResource):
+    """APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        groups: groups is a list of APIGroup.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+
+    """
+
+    groups: List[APIGroup]
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIGroupList'] = 'APIGroupList'
 
 
 @dataclass

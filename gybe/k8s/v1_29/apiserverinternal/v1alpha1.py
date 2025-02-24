@@ -79,6 +79,27 @@ class StorageVersionCondition(K8sSpec):
 
 
 @dataclass
+class StorageVersionList(K8sResource):
+    """A list of StorageVersions.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: Items holds a list of StorageVersion
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[StorageVersion]
+    apiVersion: Literal['internal.apiserver.k8s.io/v1alpha1'] = 'internal.apiserver.k8s.io/v1alpha1'
+    kind: Literal['StorageVersionList'] = 'StorageVersionList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class StorageVersionStatus(K8sSpec):
     """API server instances report the versions they can decode and the version they encode objects to when
     persisting objects in the backend.

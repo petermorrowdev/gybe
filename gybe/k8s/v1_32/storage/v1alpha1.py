@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Literal, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONDict, K8sResource
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource
 
 
 @dataclass
@@ -40,3 +40,24 @@ class VolumeAttributesClass(K8sResource):
     kind: Literal['VolumeAttributesClass'] = 'VolumeAttributesClass'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     parameters: Optional[JSONDict] = None
+
+
+@dataclass
+class VolumeAttributesClassList(K8sResource):
+    """VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of VolumeAttributesClass objects.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata
+
+    """
+
+    items: List[VolumeAttributesClass]
+    apiVersion: Literal['storage.k8s.io/v1alpha1'] = 'storage.k8s.io/v1alpha1'
+    kind: Literal['VolumeAttributesClassList'] = 'VolumeAttributesClassList'
+    metadata: Optional[JSONObj] = None

@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -256,6 +256,27 @@ class MutatingWebhookConfiguration(K8sResource):
 
 
 @dataclass
+class MutatingWebhookConfigurationList(K8sResource):
+    """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: List of MutatingWebhookConfiguration.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[MutatingWebhookConfiguration]
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['MutatingWebhookConfigurationList'] = 'MutatingWebhookConfigurationList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class NamedRuleWithOperations(K8sSpec):
     """NamedRuleWithOperations is a tuple of Operations and Resources with ResourceNames.
 
@@ -460,6 +481,27 @@ class ValidatingAdmissionPolicyBinding(K8sResource):
 
 
 @dataclass
+class ValidatingAdmissionPolicyBindingList(K8sResource):
+    """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: List of PolicyBinding.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[ValidatingAdmissionPolicyBinding]
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingAdmissionPolicyBindingList'] = 'ValidatingAdmissionPolicyBindingList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
     """ValidatingAdmissionPolicyBindingSpec is the specification of the ValidatingAdmissionPolicyBinding.
 
@@ -511,6 +553,27 @@ class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
     paramRef: Optional[ParamRef] = None
     policyName: Optional[str] = None
     validationActions: Optional[List[str]] = None
+
+
+@dataclass
+class ValidatingAdmissionPolicyList(K8sResource):
+    """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: List of ValidatingAdmissionPolicy.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[ValidatingAdmissionPolicy]
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingAdmissionPolicyList'] = 'ValidatingAdmissionPolicyList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -690,6 +753,27 @@ class ValidatingWebhookConfiguration(K8sResource):
     kind: Literal['ValidatingWebhookConfiguration'] = 'ValidatingWebhookConfiguration'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     webhooks: Optional[List[ValidatingWebhook]] = None
+
+
+@dataclass
+class ValidatingWebhookConfigurationList(K8sResource):
+    """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: List of ValidatingWebhookConfiguration.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[ValidatingWebhookConfiguration]
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingWebhookConfigurationList'] = 'ValidatingWebhookConfigurationList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

@@ -119,6 +119,27 @@ class IngressClass(K8sResource):
 
 
 @dataclass
+class IngressClassList(K8sResource):
+    """IngressClassList is a collection of IngressClasses.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of IngressClasses.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[IngressClass]
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressClassList'] = 'IngressClassList'
+    metadata: Optional[JSONObj] = None
+
+
+@dataclass
 class IngressClassParametersReference(K8sSpec):
     """IngressClassParametersReference identifies an API object. This can be used to specify a cluster or
     namespace-scoped resource.
@@ -160,6 +181,27 @@ class IngressClassSpec(K8sSpec):
 
     controller: Optional[str] = None
     parameters: Optional[IngressClassParametersReference] = None
+
+
+@dataclass
+class IngressList(K8sResource):
+    """IngressList is a collection of Ingress.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is the list of Ingress.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard object's metadata.
+
+    """
+
+    items: List[Ingress]
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressList'] = 'IngressList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -356,6 +398,27 @@ class NetworkPolicyEgressRule(K8sSpec):
 
     ports: Optional[List[NetworkPolicyPort]] = None
     to: Optional[List[NetworkPolicyPeer]] = None
+
+
+@dataclass
+class NetworkPolicyList(K8sResource):
+    """NetworkPolicyList is a list of NetworkPolicy objects.
+
+    Attributes:
+        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
+            should convert recognized schemas to the latest internal value, and may reject unrecognized
+            values.
+        items: items is a list of schema objects.
+        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
+            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
+        metadata: Standard list metadata.
+
+    """
+
+    items: List[NetworkPolicy]
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['NetworkPolicyList'] = 'NetworkPolicyList'
+    metadata: Optional[JSONObj] = None
 
 
 @dataclass

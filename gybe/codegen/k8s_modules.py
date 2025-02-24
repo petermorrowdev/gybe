@@ -228,7 +228,7 @@ def _write_k8s_models(k8s_version_module: str) -> None:
         schemas = spec.get('components', dict()).get('schemas') or dict()
         for name, schema in schemas.items():
             if name.startswith('io.k8s'):
-                if not any(m in name for m in ignore_models) and not name.endswith('List'):
+                if not any(m in name for m in ignore_models):
                     model_schemas[name] = schema
 
     k8s_modules: dict[str, K8sModule] = dict()
