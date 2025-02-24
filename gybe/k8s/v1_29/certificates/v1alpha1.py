@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -36,26 +36,6 @@ class ClusterTrustBundle(K8sResource):
     apiVersion: Literal['certificates.k8s.io/v1alpha1'] = 'certificates.k8s.io/v1alpha1'
     kind: Literal['ClusterTrustBundle'] = 'ClusterTrustBundle'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
-
-
-@dataclass
-class ClusterTrustBundleList(K8sResource):
-    """ClusterTrustBundleList is a collection of ClusterTrustBundle objects
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a collection of ClusterTrustBundle objects
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: metadata contains the list metadata.
-
-    """
-
-    items: List[ClusterTrustBundle]
-    apiVersion: Literal['certificates.k8s.io/v1alpha1'] = 'certificates.k8s.io/v1alpha1'
-    kind: Literal['ClusterTrustBundleList'] = 'ClusterTrustBundleList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

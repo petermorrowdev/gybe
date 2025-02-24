@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource
+from gybe.k8s.types import K8sResource
 
 
 @dataclass
@@ -42,24 +42,3 @@ class PriorityClass(K8sResource):
     globalDefault: Optional[bool] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     preemptionPolicy: Optional[str] = None
-
-
-@dataclass
-class PriorityClassList(K8sResource):
-    """PriorityClassList is a collection of priority classes.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of PriorityClasses
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[PriorityClass]
-    apiVersion: Literal['scheduling.k8s.io/v1'] = 'scheduling.k8s.io/v1'
-    kind: Literal['PriorityClassList'] = 'PriorityClassList'
-    metadata: Optional[JSONObj] = None

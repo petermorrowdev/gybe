@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -71,46 +71,6 @@ class ClusterRoleBinding(K8sResource):
     kind: Literal['ClusterRoleBinding'] = 'ClusterRoleBinding'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
-
-
-@dataclass
-class ClusterRoleBindingList(K8sResource):
-    """ClusterRoleBindingList is a collection of ClusterRoleBindings
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of ClusterRoleBindings
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[ClusterRoleBinding]
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
-    kind: Literal['ClusterRoleBindingList'] = 'ClusterRoleBindingList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class ClusterRoleList(K8sResource):
-    """ClusterRoleList is a collection of ClusterRoles
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of ClusterRoles
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[ClusterRole]
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
-    kind: Literal['ClusterRoleList'] = 'ClusterRoleList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -190,46 +150,6 @@ class RoleBinding(K8sResource):
     kind: Literal['RoleBinding'] = 'RoleBinding'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
-
-
-@dataclass
-class RoleBindingList(K8sResource):
-    """RoleBindingList is a collection of RoleBindings
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of RoleBindings
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[RoleBinding]
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
-    kind: Literal['RoleBindingList'] = 'RoleBindingList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class RoleList(K8sResource):
-    """RoleList is a collection of Roles
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of Roles
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[Role]
-    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
-    kind: Literal['RoleList'] = 'RoleList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.core.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -58,27 +58,6 @@ class PodSchedulingContext(K8sResource):
     kind: Literal['PodSchedulingContext'] = 'PodSchedulingContext'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[PodSchedulingContextStatus] = None
-
-
-@dataclass
-class PodSchedulingContextList(K8sResource):
-    """PodSchedulingContextList is a collection of Pod scheduling objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of PodSchedulingContext objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[PodSchedulingContext]
-    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
-    kind: Literal['PodSchedulingContextList'] = 'PodSchedulingContextList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -156,27 +135,6 @@ class ResourceClaimConsumerReference(K8sSpec):
     name: str
     uid: str
     apiGroup: Optional[str] = None
-
-
-@dataclass
-class ResourceClaimList(K8sResource):
-    """ResourceClaimList is a collection of claims.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claims.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaim]
-    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
-    kind: Literal['ResourceClaimList'] = 'ResourceClaimList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -283,27 +241,6 @@ class ResourceClaimTemplate(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sResource):
-    """ResourceClaimTemplateList is a collection of claim templates.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claim templates.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaimTemplate]
-    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
-    kind: Literal['ResourceClaimTemplateList'] = 'ResourceClaimTemplateList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
@@ -349,27 +286,6 @@ class ResourceClass(K8sResource):
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     parametersRef: Optional[ResourceClassParametersReference] = None
     suitableNodes: Optional[gybe.k8s.v1_29.core.v1.NodeSelector] = None
-
-
-@dataclass
-class ResourceClassList(K8sResource):
-    """ResourceClassList is a collection of classes.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource classes.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClass]
-    apiVersion: Literal['resource.k8s.io/v1alpha2'] = 'resource.k8s.io/v1alpha2'
-    kind: Literal['ResourceClassList'] = 'ResourceClassList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

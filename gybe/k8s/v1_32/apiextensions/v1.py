@@ -102,27 +102,6 @@ class CustomResourceDefinitionCondition(K8sSpec):
 
 
 @dataclass
-class CustomResourceDefinitionList(K8sResource):
-    """CustomResourceDefinitionList is a list of CustomResourceDefinition objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items list individual CustomResourceDefinition objects
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata
-
-    """
-
-    items: List[CustomResourceDefinition]
-    apiVersion: Literal['apiextensions.k8s.io/v1'] = 'apiextensions.k8s.io/v1'
-    kind: Literal['CustomResourceDefinitionList'] = 'CustomResourceDefinitionList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class CustomResourceDefinitionNames(K8sSpec):
     """CustomResourceDefinitionNames indicates the names to serve this CustomResourceDefinition
     Attributes:

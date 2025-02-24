@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -225,27 +225,6 @@ class MutatingAdmissionPolicyBinding(K8sResource):
 
 
 @dataclass
-class MutatingAdmissionPolicyBindingList(K8sResource):
-    """MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of PolicyBinding.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[MutatingAdmissionPolicyBinding]
-    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
-    kind: Literal['MutatingAdmissionPolicyBindingList'] = 'MutatingAdmissionPolicyBindingList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class MutatingAdmissionPolicyBindingSpec(K8sSpec):
     """MutatingAdmissionPolicyBindingSpec is the specification of the MutatingAdmissionPolicyBinding.
 
@@ -274,27 +253,6 @@ class MutatingAdmissionPolicyBindingSpec(K8sSpec):
     matchResources: Optional[MatchResources] = None
     paramRef: Optional[ParamRef] = None
     policyName: Optional[str] = None
-
-
-@dataclass
-class MutatingAdmissionPolicyList(K8sResource):
-    """MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ValidatingAdmissionPolicy.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[MutatingAdmissionPolicy]
-    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
-    kind: Literal['MutatingAdmissionPolicyList'] = 'MutatingAdmissionPolicyList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

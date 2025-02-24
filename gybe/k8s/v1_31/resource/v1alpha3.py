@@ -224,27 +224,6 @@ class DeviceClassConfiguration(K8sSpec):
 
 
 @dataclass
-class DeviceClassList(K8sResource):
-    """DeviceClassList is a collection of classes.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource classes.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[DeviceClass]
-    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
-    kind: Literal['DeviceClassList'] = 'DeviceClassList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class DeviceClassSpec(K8sSpec):
     """DeviceClassSpec is used in a [DeviceClass] to define what can be allocated and how to configure it.
 
@@ -416,27 +395,6 @@ class PodSchedulingContext(K8sResource):
 
 
 @dataclass
-class PodSchedulingContextList(K8sResource):
-    """PodSchedulingContextList is a collection of Pod scheduling objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of PodSchedulingContext objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[PodSchedulingContext]
-    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
-    kind: Literal['PodSchedulingContextList'] = 'PodSchedulingContextList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class PodSchedulingContextSpec(K8sSpec):
     """PodSchedulingContextSpec describes where resources for the Pod are needed.
 
@@ -512,27 +470,6 @@ class ResourceClaimConsumerReference(K8sSpec):
     name: str
     uid: str
     apiGroup: Optional[str] = None
-
-
-@dataclass
-class ResourceClaimList(K8sResource):
-    """ResourceClaimList is a collection of claims.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claims.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaim]
-    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
-    kind: Literal['ResourceClaimList'] = 'ResourceClaimList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -622,27 +559,6 @@ class ResourceClaimTemplate(K8sResource):
 
 
 @dataclass
-class ResourceClaimTemplateList(K8sResource):
-    """ResourceClaimTemplateList is a collection of claim templates.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource claim templates.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceClaimTemplate]
-    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
-    kind: Literal['ResourceClaimTemplateList'] = 'ResourceClaimTemplateList'
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceClaimTemplateSpec(K8sSpec):
     """ResourceClaimTemplateSpec contains the metadata and fields for a ResourceClaim.
 
@@ -718,27 +634,6 @@ class ResourceSlice(K8sResource):
     apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
     kind: Literal['ResourceSlice'] = 'ResourceSlice'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
-
-
-@dataclass
-class ResourceSliceList(K8sResource):
-    """ResourceSliceList is a collection of ResourceSlices.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of resource ResourceSlices.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[ResourceSlice]
-    apiVersion: Literal['resource.k8s.io/v1alpha3'] = 'resource.k8s.io/v1alpha3'
-    kind: Literal['ResourceSliceList'] = 'ResourceSliceList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

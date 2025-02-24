@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Literal, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -28,27 +28,6 @@ class Lease(K8sResource):
     kind: Literal['Lease'] = 'Lease'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[LeaseSpec] = None
-
-
-@dataclass
-class LeaseList(K8sResource):
-    """LeaseList is a list of Lease objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Lease]
-    apiVersion: Literal['coordination.k8s.io/v1'] = 'coordination.k8s.io/v1'
-    kind: Literal['LeaseList'] = 'LeaseList'
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
