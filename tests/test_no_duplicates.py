@@ -1,14 +1,13 @@
 import ast
 import re
 from pathlib import Path
-from typing import Iterator, Union
 
 PROJECT_ROOT = Path(__file__).parent
 PATTERN = r'Model\d*'
 
 
 def iter_k8s_py():
-    return PROJECT_ROOT.parent.glob('gybe/kubernetes/**/*.py')
+    return PROJECT_ROOT.parent.glob('gybe/k8s/**/*.py')
 
 
 def test_no_duplicate_models():
@@ -27,18 +26,3 @@ def test_no_duplicate_models():
     count = sum([v for v in duplicates.values()])
     top_five = '\n\t'.join([f'{k}: {v}' for k, v in sorted(duplicates.items(), key=lambda i: -i[1])][:5])
     assert not count, f'Found {count} duplicates: \n\t{top_five}\n\t...{count - 5} more'
-
-
-def get_classes_from_ast(node):
-    classes = [n.name for n in ast.walk(node) if isinstance(n, ast.ClassDef)]
-    return classes
-
-
-def walk_module(m: Union[ast.Module, ast.ClassDef]) -> Iterator[ast.stmt]:
-    for tree in m.body:
-        if isinstance(tree, (ast.Module, ast.ClassDef)):
-            yield tree
-            for tree in walk_module(tree):
-                yield tree
-        else:
-            yield tree
