@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -61,32 +61,11 @@ class StorageVersionMigration(K8sResource):
 
     """
 
-    apiVersion: Literal['storage.k8s.io/v1alpha1'] = 'storage.k8s.io/v1alpha1'
+    apiVersion: Literal['storagemigration.k8s.io/v1alpha1'] = 'storagemigration.k8s.io/v1alpha1'
     kind: Literal['StorageVersionMigration'] = 'StorageVersionMigration'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[StorageVersionMigrationSpec] = None
     status: Optional[StorageVersionMigrationStatus] = None
-
-
-@dataclass
-class StorageVersionMigrationList(K8sSpec):
-    """StorageVersionMigrationList is a collection of storage version migrations.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of StorageVersionMigration
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[StorageVersionMigration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

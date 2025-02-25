@@ -1,7 +1,7 @@
 import gybe
 
 
-def create_standard_container(image: str, command: list[str]):
+def create_standard_container(image: str, command: list[str] | None = None):
     return gybe.k8s.Container(image=image, command=command, name='standard-server')
 
 
@@ -97,3 +97,36 @@ def test_two_pods_chart_fails_with_invalid_yaml(run_cli):
     result = run_cli(two_pods, INVALID_TWO_POD_YAML)
     assert result.exit_code == -1
     assert result.stdout.strip() == EXPECTED_INVALID_TWO_POD_YAML.strip()
+
+
+@gybe.transpiler
+def pod_w_default_image(image: str = 'busybox:1') -> gybe.Manifest:
+    pod_spec = gybe.k8s.PodSpec(
+        containers=[create_standard_container(image=image)],
+    )
+    return [
+        gybe.k8s.Pod(
+            kind='Pod',
+            apiVersion='v1',
+            metadata=gybe.k8s.ObjectMeta(name='pod-1'),
+            spec=pod_spec,
+        ),
+    ]
+
+
+EXPECTED_PAD_W_DEFAULT_MANIFEST = """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-1
+spec:
+  containers:
+  - image: busybox:1
+    name: standard-server
+"""
+
+
+def test_pod_w_default_image_success(run_cli):
+    result = run_cli(pod_w_default_image, '')  # empty yaml valid in this case
+    assert result.exit_code == 0
+    assert result.stdout.strip() == EXPECTED_PAD_W_DEFAULT_MANIFEST.strip()

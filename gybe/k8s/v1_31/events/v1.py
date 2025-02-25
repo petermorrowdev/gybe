@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_31.core.v1
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
-class Event(K8sSpec):
+class Event(K8sResource):
     """Event is a report of an event somewhere in the cluster. It generally denotes some state change in the
     system. Events have a limited retention time and triggers and messages may evolve with time.  Event
     consumers should not rely on the timing of an event with a given Reason reflecting a consistent
@@ -56,13 +56,13 @@ class Event(K8sSpec):
     """
 
     eventTime: str
+    apiVersion: Literal['events.k8s.io/v1'] = 'events.k8s.io/v1'
+    kind: Literal['Event'] = 'Event'
     action: Optional[str] = None
-    apiVersion: Optional[str] = None
     deprecatedCount: Optional[int] = None
     deprecatedFirstTimestamp: Optional[str] = None
     deprecatedLastTimestamp: Optional[str] = None
     deprecatedSource: Optional[gybe.k8s.v1_31.core.v1.EventSource] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     note: Optional[str] = None
     reason: Optional[str] = None
@@ -72,27 +72,6 @@ class Event(K8sSpec):
     reportingInstance: Optional[str] = None
     series: Optional[EventSeries] = None
     type: Optional[str] = None
-
-
-@dataclass
-class EventList(K8sSpec):
-    """EventList is a list of Event objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Event]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

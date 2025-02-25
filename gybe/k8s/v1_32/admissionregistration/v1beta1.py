@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -261,7 +261,7 @@ class ValidatingAdmissionPolicy(K8sResource):
 
 
 @dataclass
-class ValidatingAdmissionPolicyBinding(K8sSpec):
+class ValidatingAdmissionPolicyBinding(K8sResource):
     """ValidatingAdmissionPolicyBinding binds the ValidatingAdmissionPolicy with paramerized resources.
     ValidatingAdmissionPolicyBinding and parameter CRDs together define how cluster administrators
     configure policies for clusters.  For a given admission request, each binding will cause its policy to
@@ -282,31 +282,10 @@ class ValidatingAdmissionPolicyBinding(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1beta1'] = 'admissionregistration.k8s.io/v1beta1'
+    kind: Literal['ValidatingAdmissionPolicyBinding'] = 'ValidatingAdmissionPolicyBinding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[ValidatingAdmissionPolicyBindingSpec] = None
-
-
-@dataclass
-class ValidatingAdmissionPolicyBindingList(K8sSpec):
-    """ValidatingAdmissionPolicyBindingList is a list of ValidatingAdmissionPolicyBinding.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of PolicyBinding.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ValidatingAdmissionPolicyBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -361,27 +340,6 @@ class ValidatingAdmissionPolicyBindingSpec(K8sSpec):
     paramRef: Optional[ParamRef] = None
     policyName: Optional[str] = None
     validationActions: Optional[List[str]] = None
-
-
-@dataclass
-class ValidatingAdmissionPolicyList(K8sSpec):
-    """ValidatingAdmissionPolicyList is a list of ValidatingAdmissionPolicy.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ValidatingAdmissionPolicy.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ValidatingAdmissionPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

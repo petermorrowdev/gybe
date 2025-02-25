@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
-class IPAddress(K8sSpec):
+class IPAddress(K8sResource):
     """IPAddress represents a single IP of a single IP Family. The object is designed to be used by APIs that
     operate on IP addresses. The object is used by the Service core API for allocation of IP addresses. An
     IP address can be represented in different formats, to guarantee the uniqueness of the IP, the name of
@@ -28,31 +28,10 @@ class IPAddress(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1beta1'] = 'networking.k8s.io/v1beta1'
+    kind: Literal['IPAddress'] = 'IPAddress'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[IPAddressSpec] = None
-
-
-@dataclass
-class IPAddressList(K8sSpec):
-    """IPAddressList contains a list of IPAddress.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of IPAddresses.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[IPAddress]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -108,27 +87,6 @@ class ServiceCIDR(K8sResource):
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     spec: Optional[ServiceCIDRSpec] = None
     status: Optional[ServiceCIDRStatus] = None
-
-
-@dataclass
-class ServiceCIDRList(K8sSpec):
-    """ServiceCIDRList contains a list of ServiceCIDR objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of ServiceCIDRs.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[ServiceCIDR]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

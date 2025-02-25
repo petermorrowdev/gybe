@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_31.core.v1
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
@@ -117,7 +117,7 @@ class EndpointPort(K8sSpec):
 
 
 @dataclass
-class EndpointSlice(K8sSpec):
+class EndpointSlice(K8sResource):
     """EndpointSlice represents a subset of the endpoints that implement a service. For a given service there
     may be multiple EndpointSlice objects, selected by labels, which must be joined to produce the full
     set of endpoints.
@@ -144,30 +144,10 @@ class EndpointSlice(K8sSpec):
 
     addressType: str
     endpoints: List[Endpoint]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['discovery.k8s.io/v1'] = 'discovery.k8s.io/v1'
+    kind: Literal['EndpointSlice'] = 'EndpointSlice'
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     ports: Optional[List[EndpointPort]] = None
-
-
-@dataclass
-class EndpointSliceList(K8sSpec):
-    """EndpointSliceList represents a list of endpoint slices
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of endpoint slices
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[EndpointSlice]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

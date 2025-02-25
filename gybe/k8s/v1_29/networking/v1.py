@@ -95,7 +95,7 @@ class IngressBackend(K8sSpec):
 
 
 @dataclass
-class IngressClass(K8sSpec):
+class IngressClass(K8sResource):
     """IngressClass represents the class of the Ingress, referenced by the Ingress Spec. The
     `ingressclass.kubernetes.io/is-default-class` annotation can be used to indicate that an IngressClass
     should be considered default. When a single IngressClass resource has this annotation set to true, new
@@ -112,31 +112,10 @@ class IngressClass(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['IngressClass'] = 'IngressClass'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[IngressClassSpec] = None
-
-
-@dataclass
-class IngressClassList(K8sSpec):
-    """IngressClassList is a collection of IngressClasses.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of IngressClasses.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[IngressClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -181,27 +160,6 @@ class IngressClassSpec(K8sSpec):
 
     controller: Optional[str] = None
     parameters: Optional[IngressClassParametersReference] = None
-
-
-@dataclass
-class IngressList(K8sSpec):
-    """IngressList is a collection of Ingress.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of Ingress.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[Ingress]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -359,7 +317,7 @@ class IngressTLS(K8sSpec):
 
 
 @dataclass
-class NetworkPolicy(K8sSpec):
+class NetworkPolicy(K8sResource):
     """NetworkPolicy describes what network traffic is allowed for a set of Pods
     Attributes:
         apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
@@ -372,8 +330,8 @@ class NetworkPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
+    kind: Literal['NetworkPolicy'] = 'NetworkPolicy'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[NetworkPolicySpec] = None
 
@@ -398,27 +356,6 @@ class NetworkPolicyEgressRule(K8sSpec):
 
     ports: Optional[List[NetworkPolicyPort]] = None
     to: Optional[List[NetworkPolicyPeer]] = None
-
-
-@dataclass
-class NetworkPolicyList(K8sSpec):
-    """NetworkPolicyList is a list of NetworkPolicy objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[NetworkPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class APIGroup(K8sSpec):
+class APIGroup(K8sResource):
     """APIGroup contains the name, the supported versions, and the preferred version of a group.
 
     Attributes:
@@ -34,8 +34,8 @@ class APIGroup(K8sSpec):
 
     name: str
     versions: List[GroupVersionForDiscovery]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIGroup'] = 'APIGroup'
     preferredVersion: Optional[GroupVersionForDiscovery] = None
     serverAddressByClientCIDRs: Optional[List[ServerAddressByClientCIDR]] = None
 
@@ -114,29 +114,7 @@ class APIResource(K8sSpec):
 
 
 @dataclass
-class APIResourceList(K8sSpec):
-    """APIResourceList is a list of APIResource, it is used to expose the name of the resources supported in
-    a specific group and version, and if the resource is namespaced.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        groupVersion: groupVersion is the group and version this APIResourceList is for.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        resources: resources contains the name of the resources and if they are namespaced.
-
-    """
-
-    groupVersion: str
-    resources: List[APIResource]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-
-
-@dataclass
-class DeleteOptions(K8sSpec):
+class DeleteOptions(K8sResource):
     """DeleteOptions may be provided when deleting an API object.
 
     Attributes:
@@ -167,10 +145,10 @@ class DeleteOptions(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['DeleteOptions'] = 'DeleteOptions'
     dryRun: Optional[List[str]] = None
     gracePeriodSeconds: Optional[int] = None
-    kind: Optional[str] = None
     orphanDependents: Optional[bool] = None
     preconditions: Optional[Preconditions] = None
     propagationPolicy: Optional[str] = None
@@ -351,7 +329,7 @@ class Preconditions(K8sSpec):
 
 
 @dataclass
-class Status(K8sSpec):
+class Status(K8sResource):
     """Status is a return value for calls that don't return other objects.
 
     Attributes:
@@ -373,10 +351,10 @@ class Status(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Status'] = 'Status'
     code: Optional[int] = None
     details: Optional[StatusDetails] = None
-    kind: Optional[str] = None
     message: Optional[str] = None
     metadata: Optional[JSONObj] = None
     reason: Optional[str] = None
@@ -437,7 +415,7 @@ class StatusDetails(K8sSpec):
 
 
 @dataclass
-class WatchEvent(K8sSpec):
+class WatchEvent(K8sResource):
     """Event represents a single event to a watched resource.
 
     Attributes:
@@ -492,25 +470,6 @@ class LabelSelectorRequirement(K8sSpec):
 
 
 @dataclass
-class APIGroupList(K8sSpec):
-    """APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        groups: groups is a list of APIGroup.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-
-    """
-
-    groups: List[APIGroup]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-
-
-@dataclass
 class Condition(K8sSpec):
     """Condition contains details for one aspect of the current state of this API Resource.
 
@@ -561,7 +520,7 @@ class FieldSelectorRequirement(K8sSpec):
 
 
 @dataclass
-class APIVersions(K8sSpec):
+class APIVersions(K8sResource):
     """APIVersions lists the versions that are available, to allow clients to discover the API at /api, which
     is the root path of the legacy v1 API.
 
@@ -584,5 +543,5 @@ class APIVersions(K8sSpec):
 
     versions: List[str]
     serverAddressByClientCIDRs: List[ServerAddressByClientCIDR]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['APIVersions'] = 'APIVersions'

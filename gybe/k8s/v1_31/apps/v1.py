@@ -11,7 +11,7 @@ from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
-class ControllerRevision(K8sSpec):
+class ControllerRevision(K8sResource):
     """ControllerRevision implements an immutable snapshot of state data. Clients are responsible for
     serializing and deserializing the objects that contain their internal state. Once a ControllerRevision
     has been successfully created, it can not be updated. The API Server will fail validation of all
@@ -33,31 +33,10 @@ class ControllerRevision(K8sSpec):
     """
 
     revision: int
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['apps/v1'] = 'apps/v1'
+    kind: Literal['ControllerRevision'] = 'ControllerRevision'
     data: Optional[JSONObj] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
-
-
-@dataclass
-class ControllerRevisionList(K8sSpec):
-    """ControllerRevisionList is a resource containing a list of ControllerRevision objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of ControllerRevisions
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata:
-
-    """
-
-    items: List[ControllerRevision]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -102,27 +81,6 @@ class DaemonSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class DaemonSetList(K8sSpec):
-    """DaemonSetList is a collection of daemon sets.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: A list of daemon sets.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[DaemonSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -246,27 +204,6 @@ class DeploymentCondition(K8sSpec):
     lastUpdateTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class DeploymentList(K8sSpec):
-    """DeploymentList is a list of Deployments.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of Deployments.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Deployment]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -394,27 +331,6 @@ class ReplicaSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class ReplicaSetList(K8sSpec):
-    """ReplicaSetList is a collection of ReplicaSets.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ReplicaSets.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ReplicaSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -593,27 +509,6 @@ class StatefulSetCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class StatefulSetList(K8sSpec):
-    """StatefulSetList is a collection of StatefulSets.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of stateful sets.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list's metadata.
-
-    """
-
-    items: List[StatefulSet]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

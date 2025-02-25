@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -136,7 +136,7 @@ class MutatingWebhook(K8sSpec):
 
 
 @dataclass
-class MutatingWebhookConfiguration(K8sSpec):
+class MutatingWebhookConfiguration(K8sResource):
     """MutatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and may change the object.
 
@@ -151,31 +151,10 @@ class MutatingWebhookConfiguration(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['MutatingWebhookConfiguration'] = 'MutatingWebhookConfiguration'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     webhooks: Optional[List[MutatingWebhook]] = None
-
-
-@dataclass
-class MutatingWebhookConfigurationList(K8sSpec):
-    """MutatingWebhookConfigurationList is a list of MutatingWebhookConfiguration.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of MutatingWebhookConfiguration.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[MutatingWebhookConfiguration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -317,7 +296,7 @@ class ValidatingWebhook(K8sSpec):
 
 
 @dataclass
-class ValidatingWebhookConfiguration(K8sSpec):
+class ValidatingWebhookConfiguration(K8sResource):
     """ValidatingWebhookConfiguration describes the configuration of and admission webhook that accept or
     reject and object without changing it.
 
@@ -332,31 +311,10 @@ class ValidatingWebhookConfiguration(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
+    kind: Literal['ValidatingWebhookConfiguration'] = 'ValidatingWebhookConfiguration'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     webhooks: Optional[List[ValidatingWebhook]] = None
-
-
-@dataclass
-class ValidatingWebhookConfigurationList(K8sSpec):
-    """ValidatingWebhookConfigurationList is a list of ValidatingWebhookConfiguration.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ValidatingWebhookConfiguration.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ValidatingWebhookConfiguration]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

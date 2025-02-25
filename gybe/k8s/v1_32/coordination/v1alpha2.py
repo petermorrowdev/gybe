@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
-class LeaseCandidate(K8sSpec):
+class LeaseCandidate(K8sResource):
     """LeaseCandidate defines a candidate for a Lease object. Candidates are created such that coordinated
     leader election will pick the best leader from the list of candidates.
 
@@ -25,31 +25,10 @@ class LeaseCandidate(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['coordination.k8s.io/v1alpha2'] = 'coordination.k8s.io/v1alpha2'
+    kind: Literal['LeaseCandidate'] = 'LeaseCandidate'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[LeaseCandidateSpec] = None
-
-
-@dataclass
-class LeaseCandidateList(K8sSpec):
-    """LeaseCandidateList is a list of Lease objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of schema objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[LeaseCandidate]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

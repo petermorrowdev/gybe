@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -175,7 +175,7 @@ class MatchResources(K8sSpec):
 
 
 @dataclass
-class MutatingAdmissionPolicy(K8sSpec):
+class MutatingAdmissionPolicy(K8sResource):
     """MutatingAdmissionPolicy describes the definition of an admission mutation policy that mutates the
     object coming into admission chain.
 
@@ -190,14 +190,14 @@ class MutatingAdmissionPolicy(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicy'] = 'MutatingAdmissionPolicy'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicySpec] = None
 
 
 @dataclass
-class MutatingAdmissionPolicyBinding(K8sSpec):
+class MutatingAdmissionPolicyBinding(K8sResource):
     """MutatingAdmissionPolicyBinding binds the MutatingAdmissionPolicy with parametrized resources.
     MutatingAdmissionPolicyBinding and the optional parameter resource together define how cluster
     administrators configure policies for clusters.  For a given admission request, each binding will
@@ -218,31 +218,10 @@ class MutatingAdmissionPolicyBinding(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    kind: Literal['MutatingAdmissionPolicyBinding'] = 'MutatingAdmissionPolicyBinding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicyBindingSpec] = None
-
-
-@dataclass
-class MutatingAdmissionPolicyBindingList(K8sSpec):
-    """MutatingAdmissionPolicyBindingList is a list of MutatingAdmissionPolicyBinding.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of PolicyBinding.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[MutatingAdmissionPolicyBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -274,27 +253,6 @@ class MutatingAdmissionPolicyBindingSpec(K8sSpec):
     matchResources: Optional[MatchResources] = None
     paramRef: Optional[ParamRef] = None
     policyName: Optional[str] = None
-
-
-@dataclass
-class MutatingAdmissionPolicyList(K8sSpec):
-    """MutatingAdmissionPolicyList is a list of MutatingAdmissionPolicy.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ValidatingAdmissionPolicy.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[MutatingAdmissionPolicy]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

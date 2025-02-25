@@ -6,11 +6,11 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
-class Eviction(K8sSpec):
+class Eviction(K8sResource):
     """Eviction evicts a pod from its node subject to certain policies and safety constraints. This is a
     subresource of Pod.  A request to cause such an eviction is created by POSTing to .../pods/<pod
     name>/evictions.
@@ -26,9 +26,9 @@ class Eviction(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['policy/v1'] = 'policy/v1'
+    kind: Literal['Eviction'] = 'Eviction'
     deleteOptions: Optional[gybe.k8s.v1_30.meta.v1.DeleteOptions] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
 
 
@@ -53,27 +53,6 @@ class PodDisruptionBudget(K8sResource):
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[PodDisruptionBudgetSpec] = None
     status: Optional[PodDisruptionBudgetStatus] = None
-
-
-@dataclass
-class PodDisruptionBudgetList(K8sSpec):
-    """PodDisruptionBudgetList is a collection of PodDisruptionBudgets.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of PodDisruptionBudgets
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[PodDisruptionBudget]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

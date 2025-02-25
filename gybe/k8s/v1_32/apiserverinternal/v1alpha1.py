@@ -50,7 +50,7 @@ class StorageVersion(K8sResource):
 
     spec: JSONObj
     status: StorageVersionStatus
-    apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
+    apiVersion: Literal['internal.apiserver.k8s.io/v1alpha1'] = 'internal.apiserver.k8s.io/v1alpha1'
     kind: Literal['StorageVersion'] = 'StorageVersion'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
 
@@ -76,27 +76,6 @@ class StorageVersionCondition(K8sSpec):
     message: str
     lastTransitionTime: Optional[str] = None
     observedGeneration: Optional[int] = None
-
-
-@dataclass
-class StorageVersionList(K8sSpec):
-    """A list of StorageVersions.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items holds a list of StorageVersion
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[StorageVersion]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

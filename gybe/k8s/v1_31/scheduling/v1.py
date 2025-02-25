@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_31.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource
 
 
 @dataclass
-class PriorityClass(K8sSpec):
+class PriorityClass(K8sResource):
     """PriorityClass defines mapping from a priority class name to the priority integer value. The value can
     be any valid integer.
 
@@ -36,30 +36,9 @@ class PriorityClass(K8sSpec):
     """
 
     value: int
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['scheduling.k8s.io/v1'] = 'scheduling.k8s.io/v1'
+    kind: Literal['PriorityClass'] = 'PriorityClass'
     description: Optional[str] = None
     globalDefault: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_31.meta.v1.ObjectMeta] = None
     preemptionPolicy: Optional[str] = None
-
-
-@dataclass
-class PriorityClassList(K8sSpec):
-    """PriorityClassList is a collection of priority classes.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of PriorityClasses
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[PriorityClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None

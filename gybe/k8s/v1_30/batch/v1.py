@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_30.core.v1
 import gybe.k8s.v1_30.meta.v1
-from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -31,27 +31,6 @@ class CronJob(K8sResource):
     metadata: Optional[gybe.k8s.v1_30.meta.v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
-
-
-@dataclass
-class CronJobList(K8sSpec):
-    """CronJobList is a collection of cron jobs.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of CronJobs.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[CronJob]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -155,27 +134,6 @@ class JobCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class JobList(K8sSpec):
-    """JobList is a collection of jobs.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of Jobs.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Job]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

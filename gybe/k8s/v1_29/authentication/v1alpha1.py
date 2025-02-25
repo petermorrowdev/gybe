@@ -3,15 +3,15 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_29.authentication.v1
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
-class SelfSubjectReview(K8sSpec):
+class SelfSubjectReview(K8sResource):
     """SelfSubjectReview contains the user information that the kube-apiserver has about the user making this
     request. When using impersonation, users will receive the user info of the user being impersonated.
     If impersonation or request header authentication is used, any extra keys will have their case ignored
@@ -28,8 +28,8 @@ class SelfSubjectReview(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['authentication.k8s.io/v1alpha1'] = 'authentication.k8s.io/v1alpha1'
+    kind: Literal['SelfSubjectReview'] = 'SelfSubjectReview'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     status: Optional[SelfSubjectReviewStatus] = None
 

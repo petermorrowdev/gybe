@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Literal, Optional
 
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource
 
 
 @dataclass
-class VolumeAttributesClass(K8sSpec):
+class VolumeAttributesClass(K8sResource):
     """VolumeAttributesClass represents a specification of mutable volume attributes defined by the CSI
     driver. The class can be specified during dynamic provisioning of PersistentVolumeClaims, and changed
     in the PersistentVolumeClaim spec after provisioning.
@@ -36,28 +36,7 @@ class VolumeAttributesClass(K8sSpec):
     """
 
     driverName: str
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['storage.k8s.io/v1alpha1'] = 'storage.k8s.io/v1alpha1'
+    kind: Literal['VolumeAttributesClass'] = 'VolumeAttributesClass'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     parameters: Optional[JSONDict] = None
-
-
-@dataclass
-class VolumeAttributesClassList(K8sSpec):
-    """VolumeAttributesClassList is a collection of VolumeAttributesClass objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is the list of VolumeAttributesClass objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata
-
-    """
-
-    items: List[VolumeAttributesClass]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None

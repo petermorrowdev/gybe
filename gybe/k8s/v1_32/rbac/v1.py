@@ -3,10 +3,10 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 import gybe.k8s.v1_32.meta.v1
-from gybe.k8s.types import JSONObj, K8sSpec
+from gybe.k8s.types import K8sResource, K8sSpec
 
 
 @dataclass
@@ -23,7 +23,7 @@ class AggregationRule(K8sSpec):
 
 
 @dataclass
-class ClusterRole(K8sSpec):
+class ClusterRole(K8sResource):
     """ClusterRole is a cluster level, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding or ClusterRoleBinding.
 
@@ -41,15 +41,15 @@ class ClusterRole(K8sSpec):
 
     """
 
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['ClusterRole'] = 'ClusterRole'
     aggregationRule: Optional[AggregationRule] = None
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     rules: Optional[List[PolicyRule]] = None
 
 
 @dataclass
-class ClusterRoleBinding(K8sSpec):
+class ClusterRoleBinding(K8sResource):
     """ClusterRoleBinding references a ClusterRole, but not contain it.  It can reference a ClusterRole in
     the global namespace, and adds who information via Subject.
 
@@ -67,50 +67,10 @@ class ClusterRoleBinding(K8sSpec):
     """
 
     roleRef: RoleRef
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['ClusterRoleBinding'] = 'ClusterRoleBinding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
-
-
-@dataclass
-class ClusterRoleBindingList(K8sSpec):
-    """ClusterRoleBindingList is a collection of ClusterRoleBindings
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of ClusterRoleBindings
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[ClusterRoleBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class ClusterRoleList(K8sSpec):
-    """ClusterRoleList is a collection of ClusterRoles
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of ClusterRoles
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[ClusterRole]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -143,7 +103,7 @@ class PolicyRule(K8sSpec):
 
 
 @dataclass
-class Role(K8sSpec):
+class Role(K8sResource):
     """Role is a namespaced, logical grouping of PolicyRules that can be referenced as a unit by a
     RoleBinding.
 
@@ -158,14 +118,14 @@ class Role(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['Role'] = 'Role'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     rules: Optional[List[PolicyRule]] = None
 
 
 @dataclass
-class RoleBinding(K8sSpec):
+class RoleBinding(K8sResource):
     """RoleBinding references a role, but does not contain it.  It can reference a Role in the same namespace
     or a ClusterRole in the global namespace. It adds who information via Subjects and namespace
     information by which namespace it exists in.  RoleBindings in a given namespace only have effect in
@@ -186,50 +146,10 @@ class RoleBinding(K8sSpec):
     """
 
     roleRef: RoleRef
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
+    kind: Literal['RoleBinding'] = 'RoleBinding'
     metadata: Optional[gybe.k8s.v1_32.meta.v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
-
-
-@dataclass
-class RoleBindingList(K8sSpec):
-    """RoleBindingList is a collection of RoleBindings
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of RoleBindings
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[RoleBinding]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class RoleList(K8sSpec):
-    """RoleList is a collection of Roles
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of Roles
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard object's metadata.
-
-    """
-
-    items: List[Role]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass

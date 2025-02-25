@@ -7,7 +7,7 @@ from typing import List, Literal, Optional
 
 import gybe.k8s.v1_29.api.resource
 import gybe.k8s.v1_29.meta.v1
-from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
+from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
 @dataclass
@@ -3300,7 +3300,7 @@ class AttachedVolume(K8sSpec):
 
 
 @dataclass
-class Binding(K8sSpec):
+class Binding(K8sResource):
     """Binding ties one object to another; for example, a pod is bound to a node by a scheduler. Deprecated
     in 1.7, please use the bindings subresource of pods instead.
 
@@ -3316,8 +3316,8 @@ class Binding(K8sSpec):
     """
 
     target: ObjectReference
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Binding'] = 'Binding'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 
 
@@ -3355,7 +3355,7 @@ class ComponentCondition(K8sSpec):
 
 
 @dataclass
-class ComponentStatus(K8sSpec):
+class ComponentStatus(K8sResource):
     """ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is
     deprecated in v1.19+
     Attributes:
@@ -3369,35 +3369,14 @@ class ComponentStatus(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ComponentStatus'] = 'ComponentStatus'
     conditions: Optional[List[ComponentCondition]] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
 
 
 @dataclass
-class ComponentStatusList(K8sSpec):
-    """Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This
-    API is deprecated in v1.19+
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ComponentStatus objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ComponentStatus]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class ConfigMap(K8sSpec):
+class ConfigMap(K8sResource):
     """ConfigMap holds configuration data for pods to consume.
 
     Attributes:
@@ -3421,33 +3400,12 @@ class ConfigMap(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ConfigMap'] = 'ConfigMap'
     binaryData: Optional[JSONDict] = None
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
-
-
-@dataclass
-class ConfigMapList(K8sSpec):
-    """ConfigMapList is a resource containing a list of ConfigMap objects.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of ConfigMaps.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata:
-
-    """
-
-    items: List[ConfigMap]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -3692,7 +3650,7 @@ class EndpointSubset(K8sSpec):
 
 
 @dataclass
-class Endpoints(K8sSpec):
+class Endpoints(K8sResource):
     """Endpoints is a collection of endpoints that implement the actual service. Example:           Name:
     'mysvc',          Subsets: [            {              Addresses: [{'ip': '10.10.1.1'}, {'ip':
     '10.10.2.2'}],              Ports: [{'name': 'a', 'port': 8675}, {'name': 'b', 'port': 309}]
@@ -3715,35 +3673,14 @@ class Endpoints(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Endpoints'] = 'Endpoints'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     subsets: Optional[List[EndpointSubset]] = None
 
 
 @dataclass
-class EndpointsList(K8sSpec):
-    """EndpointsList is a list of endpoints.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of endpoints.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Endpoints]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class Event(K8sSpec):
+class Event(K8sResource):
     """Event is a report of an event somewhere in the cluster.  Events have a limited retention time and
     triggers and messages may evolve with time.  Event consumers should not rely on the timing of an event
     with a given Reason reflecting a consistent underlying trigger, or the continued existence of events
@@ -3777,12 +3714,12 @@ class Event(K8sSpec):
 
     metadata: gybe.k8s.v1_29.meta.v1.ObjectMeta
     involvedObject: ObjectReference
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Event'] = 'Event'
     action: Optional[str] = None
-    apiVersion: Optional[str] = None
     count: Optional[int] = None
     eventTime: Optional[str] = None
     firstTimestamp: Optional[str] = None
-    kind: Optional[str] = None
     lastTimestamp: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
@@ -3792,27 +3729,6 @@ class Event(K8sSpec):
     series: Optional[EventSeries] = None
     source: Optional[EventSource] = None
     type: Optional[str] = None
-
-
-@dataclass
-class EventList(K8sSpec):
-    """EventList is a list of events.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of events
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Event]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -3843,7 +3759,7 @@ class HostIP(K8sSpec):
 
 
 @dataclass
-class LimitRange(K8sSpec):
+class LimitRange(K8sResource):
     """LimitRange sets resource usage limits for each kind of resource in a Namespace.
 
     Attributes:
@@ -3857,8 +3773,8 @@ class LimitRange(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['LimitRange'] = 'LimitRange'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     spec: Optional[LimitRangeSpec] = None
 
@@ -3886,27 +3802,6 @@ class LimitRangeItem(K8sSpec):
     max: Optional[JSONDict] = None
     maxLimitRequestRatio: Optional[JSONDict] = None
     min: Optional[JSONDict] = None
-
-
-@dataclass
-class LimitRangeList(K8sSpec):
-    """LimitRangeList is a list of LimitRange items.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of LimitRange objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[LimitRange]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4001,27 +3896,6 @@ class NamespaceCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class NamespaceList(K8sSpec):
-    """NamespaceList is a list of Namespaces.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is the list of Namespace objects in the list.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Namespace]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4181,27 +4055,6 @@ class NodeDaemonEndpoints(K8sSpec):
 
 
 @dataclass
-class NodeList(K8sSpec):
-    """NodeList is the whole list of all Nodes which have been registered with master.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of nodes
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Node]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class NodeSpec(K8sSpec):
     """NodeSpec describes the attributes that a node is created with.
 
@@ -4325,48 +4178,6 @@ class PersistentVolume(K8sResource):
 
 
 @dataclass
-class PersistentVolumeClaimList(K8sSpec):
-    """PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of persistent volume claims.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[PersistentVolumeClaim]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class PersistentVolumeList(K8sSpec):
-    """PersistentVolumeList is a list of PersistentVolume items.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: items is a list of persistent volumes.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[PersistentVolume]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class PersistentVolumeStatus(K8sSpec):
     """PersistentVolumeStatus is the current status of a persistent volume.
 
@@ -4445,27 +4256,6 @@ class PodIP(K8sSpec):
     """
 
     ip: Optional[str] = None
-
-
-@dataclass
-class PodList(K8sSpec):
-    """PodList is a list of Pods.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of pods.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Pod]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4560,7 +4350,7 @@ class PodStatus(K8sSpec):
 
 
 @dataclass
-class PodTemplate(K8sSpec):
+class PodTemplate(K8sResource):
     """PodTemplate describes a template for creating copies of a predefined pod.
 
     Attributes:
@@ -4576,31 +4366,10 @@ class PodTemplate(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['PodTemplate'] = 'PodTemplate'
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     template: Optional[PodTemplateSpec] = None
-
-
-@dataclass
-class PodTemplateList(K8sSpec):
-    """PodTemplateList is a list of PodTemplates.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of pod templates
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[PodTemplate]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4666,27 +4435,6 @@ class ReplicationControllerCondition(K8sSpec):
     lastTransitionTime: Optional[str] = None
     message: Optional[str] = None
     reason: Optional[str] = None
-
-
-@dataclass
-class ReplicationControllerList(K8sSpec):
-    """ReplicationControllerList is a collection of replication controllers.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of replication controllers.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ReplicationController]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4766,27 +4514,6 @@ class ResourceQuota(K8sResource):
 
 
 @dataclass
-class ResourceQuotaList(K8sSpec):
-    """ResourceQuotaList is a list of ResourceQuota items.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of ResourceQuota objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ResourceQuota]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
 class ResourceQuotaSpec(K8sSpec):
     """ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
 
@@ -4853,7 +4580,7 @@ class ScopedResourceSelectorRequirement(K8sSpec):
 
 
 @dataclass
-class Secret(K8sSpec):
+class Secret(K8sResource):
     """Secret holds secret data of a certain type. The total bytes of the values in the Data field must be
     less than MaxSecretSize bytes.
 
@@ -4878,34 +4605,13 @@ class Secret(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['Secret'] = 'Secret'
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     stringData: Optional[JSONDict] = None
     type: Optional[str] = None
-
-
-@dataclass
-class SecretList(K8sSpec):
-    """SecretList is a list of Secret.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: Items is a list of secret objects.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Secret]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
@@ -4935,7 +4641,7 @@ class Service(K8sResource):
 
 
 @dataclass
-class ServiceAccount(K8sSpec):
+class ServiceAccount(K8sResource):
     """ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for
     an identity * a principal that can be authenticated and authorized * a set of secrets
     Attributes:
@@ -4961,53 +4667,12 @@ class ServiceAccount(K8sSpec):
 
     """
 
-    apiVersion: Optional[str] = None
+    apiVersion: Literal['v1'] = 'v1'
+    kind: Literal['ServiceAccount'] = 'ServiceAccount'
     automountServiceAccountToken: Optional[bool] = None
     imagePullSecrets: Optional[List[LocalObjectReference]] = None
-    kind: Optional[str] = None
     metadata: Optional[gybe.k8s.v1_29.meta.v1.ObjectMeta] = None
     secrets: Optional[List[ObjectReference]] = None
-
-
-@dataclass
-class ServiceAccountList(K8sSpec):
-    """ServiceAccountList is a list of ServiceAccount objects
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of ServiceAccounts.
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[ServiceAccount]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
-
-
-@dataclass
-class ServiceList(K8sSpec):
-    """ServiceList holds a list of services.
-
-    Attributes:
-        apiVersion: APIVersion defines the versioned schema of this representation of an object. Servers
-            should convert recognized schemas to the latest internal value, and may reject unrecognized
-            values.
-        items: List of services
-        kind: Kind is a string value representing the REST resource this object represents. Servers may infer
-            this from the endpoint the client submits requests to. Cannot be updated. In CamelCase.
-        metadata: Standard list metadata.
-
-    """
-
-    items: List[Service]
-    apiVersion: Optional[str] = None
-    kind: Optional[str] = None
-    metadata: Optional[JSONObj] = None
 
 
 @dataclass
