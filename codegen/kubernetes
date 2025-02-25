@@ -7,7 +7,6 @@ function gen_k8s() {
   local version="$1"
   local version_module="$2"
   (cd kubernetes && git checkout $version -q)
-  mkdir -p tests/data/k8s-api-specs/$version
   python -m gybe.codegen $version_module
   ruff check --quiet --fix gybe/k8s/v*
   ruff format --quiet gybe/k8s/v*
