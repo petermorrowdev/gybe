@@ -1,9 +1,9 @@
 import pytest
-from click import BaseCommand
+from click import Command
 from click.testing import CliRunner
 
 
-def _run_cli(cli_fn: BaseCommand, yaml: str):
+def _run_cli(cli_fn: Command, yaml: str):
     runner = CliRunner()
     with runner.isolated_filesystem():
         values_file_name = 'values.yaml'
