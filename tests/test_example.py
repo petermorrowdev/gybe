@@ -69,6 +69,13 @@ def test_two_pods_chart_transpiles_with_valid_yaml(run_cli):
     assert result.stdout.strip() == EXPECTED_TWO_POD_MANIFEST.strip()
 
 
+def test_two_pods_chart_transpiles_with_valid_yaml_and_set_arg(run_cli):
+    result = run_cli(two_pods, VALID_TWO_POD_YAML, '--set', 'image=python:3.14')
+    assert result.exit_code == 0
+    expected = EXPECTED_TWO_POD_MANIFEST.replace('python:3', 'python:3.14').strip()
+    assert result.stdout.strip() == expected
+
+
 EXPECTED_EMPTY_YAML_VALIDATION_ERROR = """
 validation errors:
 - required field missing @ $.image
