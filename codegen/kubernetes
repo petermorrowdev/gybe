@@ -17,6 +17,6 @@ function gen_k8s() {
 gen_k8s 'v1.30.13' 'v1_30'
 gen_k8s 'v1.31.9' 'v1_31'
 gen_k8s 'v1.32.5' 'v1_32'
-gen_k8s 'v1.33.0' 'v1_33'
+gen_k8s 'v1.33.1' 'v1_33'
 
 (cd kubernetes && git checkout master -q)
