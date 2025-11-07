@@ -399,7 +399,7 @@ class NetworkPolicyPort(K8sSpec):
     """
 
     endPort: Optional[int] = None
-    port: Optional[str] = None
+    port: Optional[int | str] = None
     protocol: Optional[str] = None
 
 

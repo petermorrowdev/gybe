@@ -36,6 +36,9 @@ ignore_models = {
     'StorageVersionSpec',
     'FieldsV1',
 }
+override_fields = {
+    'port': 'int | str',
+}
 
 
 class JSONSchemaProperties(TypedDict):
@@ -207,7 +210,9 @@ class K8sModule:
         for m in ignore_models:
             if m in ref:
                 return 'JSONObj'
-        if ref.endswith('IntOrString') or 'Time' in ref:
+        if ref.endswith('IntOrString'):
+            return 'int | str'
+        elif 'Time' in ref:
             return 'str'
         if import_ != self._module_name:
             self._module_imports.add('import ' + import_)

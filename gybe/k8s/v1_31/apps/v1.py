@@ -412,8 +412,8 @@ class RollingUpdateDaemonSet(K8sSpec):
 
     """
 
-    maxSurge: Optional[str] = None
-    maxUnavailable: Optional[str] = None
+    maxSurge: Optional[int | str] = None
+    maxUnavailable: Optional[int | str] = None
 
 
 @dataclass
@@ -438,8 +438,8 @@ class RollingUpdateDeployment(K8sSpec):
 
     """
 
-    maxSurge: Optional[str] = None
-    maxUnavailable: Optional[str] = None
+    maxSurge: Optional[int | str] = None
+    maxUnavailable: Optional[int | str] = None
 
 
 @dataclass
@@ -461,7 +461,7 @@ class RollingUpdateStatefulSetStrategy(K8sSpec):
 
     """
 
-    maxUnavailable: Optional[str] = None
+    maxUnavailable: Optional[int | str] = None
     partition: Optional[int] = None
 
 
