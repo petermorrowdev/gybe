@@ -1612,7 +1612,7 @@ class HTTPGetAction(K8sSpec):
 
     """
 
-    port: str
+    port: int | str
     host: Optional[str] = None
     httpHeaders: Optional[List[HTTPHeader]] = None
     path: Optional[str] = None
@@ -2997,7 +2997,7 @@ class TCPSocketAction(K8sSpec):
 
     """
 
-    port: str
+    port: int | str
     host: Optional[str] = None
 
 
@@ -4926,7 +4926,7 @@ class ServicePort(K8sSpec):
     name: Optional[str] = None
     nodePort: Optional[int] = None
     protocol: Optional[str] = None
-    targetPort: Optional[str] = None
+    targetPort: Optional[int | str] = None
 
 
 @dataclass

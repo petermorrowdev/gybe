@@ -87,8 +87,8 @@ class PodDisruptionBudgetSpec(K8sSpec):
 
     """
 
-    maxUnavailable: Optional[str] = None
-    minAvailable: Optional[str] = None
+    maxUnavailable: Optional[int | str] = None
+    minAvailable: Optional[int | str] = None
     selector: Optional[gybe.k8s.v1_32.meta.v1.LabelSelector] = None
     unhealthyPodEvictionPolicy: Optional[str] = None
 
