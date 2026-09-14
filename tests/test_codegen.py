@@ -50,6 +50,7 @@ def test_codegen_write_module(version, version_module):
             'mypy',
             '--follow-imports=skip',
             '--ignore-missing-imports',
+            '--show-traceback',
             generated_version_dir,
         )
 
