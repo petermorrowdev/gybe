@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -28,8 +28,8 @@ class Eviction(K8sResource):
 
     apiVersion: Literal['policy/v1'] = 'policy/v1'
     kind: Literal['Eviction'] = 'Eviction'
-    deleteOptions: Optional[gybe.k8s.v1_34.meta.v1.DeleteOptions] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    deleteOptions: Optional[_meta_v1.DeleteOptions] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -50,7 +50,7 @@ class PodDisruptionBudget(K8sResource):
 
     apiVersion: Literal['policy/v1'] = 'policy/v1'
     kind: Literal['PodDisruptionBudget'] = 'PodDisruptionBudget'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PodDisruptionBudgetSpec] = None
     status: Optional[PodDisruptionBudgetStatus] = None
 
@@ -88,7 +88,7 @@ class PodDisruptionBudgetSpec(K8sSpec):
 
     maxUnavailable: Optional[int | str] = None
     minAvailable: Optional[int | str] = None
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
     unhealthyPodEvictionPolicy: Optional[str] = None
 
 
@@ -131,6 +131,6 @@ class PodDisruptionBudgetStatus(K8sSpec):
     currentHealthy: int
     desiredHealthy: int
     expectedPods: int
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None
     disruptedPods: Optional[JSONDict] = None
     observedGeneration: Optional[int] = None

@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -55,7 +55,7 @@ class RuntimeClass(K8sResource):
     handler: str
     apiVersion: Literal['node.k8s.io/v1'] = 'node.k8s.io/v1'
     kind: Literal['RuntimeClass'] = 'RuntimeClass'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     overhead: Optional[Overhead] = None
     scheduling: Optional[Scheduling] = None
 
@@ -75,4 +75,4 @@ class Scheduling(K8sSpec):
     """
 
     nodeSelector: Optional[JSONDict] = None
-    tolerations: Optional[List[gybe.k8s.v1_34.core.v1.Toleration]] = None
+    tolerations: Optional[List[_core_v1.Toleration]] = None

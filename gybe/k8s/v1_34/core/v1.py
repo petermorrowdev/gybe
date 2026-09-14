@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.api.resource
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.api.resource as _api_resource
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -1009,7 +1009,7 @@ class ClusterTrustBundleProjection(K8sSpec):
     """
 
     path: str
-    labelSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    labelSelector: Optional[_meta_v1.LabelSelector] = None
     name: Optional[str] = None
     optional: Optional[bool] = None
     signerName: Optional[str] = None
@@ -1370,7 +1370,7 @@ class EmptyDirVolumeSource(K8sSpec):
     """
 
     medium: Optional[str] = None
-    sizeLimit: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    sizeLimit: Optional[_api_resource.Quantity] = None
 
 
 @dataclass
@@ -1956,7 +1956,7 @@ class PersistentVolumeClaim(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['PersistentVolumeClaim'] = 'PersistentVolumeClaim'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeClaimSpec] = None
     status: Optional[PersistentVolumeClaimStatus] = None
 
@@ -2040,7 +2040,7 @@ class PersistentVolumeClaimSpec(K8sSpec):
     dataSource: Optional[TypedLocalObjectReference] = None
     dataSourceRef: Optional[TypedObjectReference] = None
     resources: Optional[VolumeResourceRequirements] = None
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
     storageClassName: Optional[str] = None
     volumeAttributesClassName: Optional[str] = None
     volumeMode: Optional[str] = None
@@ -2129,7 +2129,7 @@ class PersistentVolumeClaimTemplate(K8sSpec):
     """
 
     spec: PersistentVolumeClaimSpec
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -2214,10 +2214,10 @@ class PodAffinityTerm(K8sSpec):
     """
 
     topologyKey: str
-    labelSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    labelSelector: Optional[_meta_v1.LabelSelector] = None
     matchLabelKeys: Optional[List[str]] = None
     mismatchLabelKeys: Optional[List[str]] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
     namespaces: Optional[List[str]] = None
 
 
@@ -2694,7 +2694,7 @@ class PodTemplateSpec(K8sSpec):
 
     """
 
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PodSpec] = None
 
 
@@ -2831,7 +2831,7 @@ class ResourceFieldSelector(K8sSpec):
 
     resource: str
     containerName: Optional[str] = None
-    divisor: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    divisor: Optional[_api_resource.Quantity] = None
 
 
 @dataclass
@@ -3239,7 +3239,7 @@ class TopologySpreadConstraint(K8sSpec):
     maxSkew: int
     topologyKey: str
     whenUnsatisfiable: str
-    labelSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    labelSelector: Optional[_meta_v1.LabelSelector] = None
     matchLabelKeys: Optional[List[str]] = None
     minDomains: Optional[int] = None
     nodeAffinityPolicy: Optional[str] = None
@@ -3610,7 +3610,7 @@ class Binding(K8sResource):
     target: ObjectReference
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Binding'] = 'Binding'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -3664,7 +3664,7 @@ class ComponentStatus(K8sResource):
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['ComponentStatus'] = 'ComponentStatus'
     conditions: Optional[List[ComponentCondition]] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -3697,7 +3697,7 @@ class ConfigMap(K8sResource):
     binaryData: Optional[JSONDict] = None
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -4013,7 +4013,7 @@ class Endpoints(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Endpoints'] = 'Endpoints'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     subsets: Optional[List[EndpointSubset]] = None
 
 
@@ -4050,7 +4050,7 @@ class Event(K8sResource):
 
     """
 
-    metadata: gybe.k8s.v1_34.meta.v1.ObjectMeta
+    metadata: _meta_v1.ObjectMeta
     involvedObject: ObjectReference
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Event'] = 'Event'
@@ -4113,7 +4113,7 @@ class LimitRange(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['LimitRange'] = 'LimitRange'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[LimitRangeSpec] = None
 
 
@@ -4227,7 +4227,7 @@ class Namespace(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Namespace'] = 'Namespace'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[NamespaceSpec] = None
     status: Optional[NamespaceStatus] = None
 
@@ -4299,7 +4299,7 @@ class Node(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Node'] = 'Node'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[NodeSpec] = None
     status: Optional[NodeStatus] = None
 
@@ -4589,7 +4589,7 @@ class PersistentVolume(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['PersistentVolume'] = 'PersistentVolume'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PersistentVolumeSpec] = None
     status: Optional[PersistentVolumeStatus] = None
 
@@ -4634,7 +4634,7 @@ class Pod(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Pod'] = 'Pod'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PodSpec] = None
     status: Optional[PodStatus] = None
 
@@ -4825,7 +4825,7 @@ class PodTemplate(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['PodTemplate'] = 'PodTemplate'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     template: Optional[PodTemplateSpec] = None
 
 
@@ -4868,7 +4868,7 @@ class ReplicationController(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['ReplicationController'] = 'ReplicationController'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ReplicationControllerSpec] = None
     status: Optional[ReplicationControllerStatus] = None
 
@@ -4984,7 +4984,7 @@ class ResourceQuota(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['ResourceQuota'] = 'ResourceQuota'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ResourceQuotaSpec] = None
     status: Optional[ResourceQuotaStatus] = None
 
@@ -5106,7 +5106,7 @@ class Secret(K8sResource):
     kind: Literal['Secret'] = 'Secret'
     data: Optional[JSONDict] = None
     immutable: Optional[bool] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     stringData: Optional[JSONDict] = None
     type: Optional[str] = None
 
@@ -5132,7 +5132,7 @@ class Service(K8sResource):
 
     apiVersion: Literal['v1'] = 'v1'
     kind: Literal['Service'] = 'Service'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ServiceSpec] = None
     status: Optional[ServiceStatus] = None
 
@@ -5169,7 +5169,7 @@ class ServiceAccount(K8sResource):
     kind: Literal['ServiceAccount'] = 'ServiceAccount'
     automountServiceAccountToken: Optional[bool] = None
     imagePullSecrets: Optional[List[LocalObjectReference]] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     secrets: Optional[List[ObjectReference]] = None
 
 
@@ -5383,7 +5383,7 @@ class ServiceStatus(K8sSpec):
 
     """
 
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None
     loadBalancer: Optional[LoadBalancerStatus] = None
 
 

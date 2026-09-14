@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
@@ -76,7 +76,7 @@ class CustomResourceDefinition(K8sResource):
     spec: CustomResourceDefinitionSpec
     apiVersion: Literal['apiextensions.k8s.io/v1'] = 'apiextensions.k8s.io/v1'
     kind: Literal['CustomResourceDefinition'] = 'CustomResourceDefinition'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[CustomResourceDefinitionStatus] = None
 
 

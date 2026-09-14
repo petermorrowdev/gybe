@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -37,7 +37,7 @@ class CertificateSigningRequest(K8sResource):
     spec: CertificateSigningRequestSpec
     apiVersion: Literal['certificates.k8s.io/v1'] = 'certificates.k8s.io/v1'
     kind: Literal['CertificateSigningRequest'] = 'CertificateSigningRequest'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[CertificateSigningRequestStatus] = None
 
 

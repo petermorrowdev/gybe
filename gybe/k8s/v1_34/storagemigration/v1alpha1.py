@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -63,7 +63,7 @@ class StorageVersionMigration(K8sResource):
 
     apiVersion: Literal['storagemigration.k8s.io/v1alpha1'] = 'storagemigration.k8s.io/v1alpha1'
     kind: Literal['StorageVersionMigration'] = 'StorageVersionMigration'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[StorageVersionMigrationSpec] = None
     status: Optional[StorageVersionMigrationStatus] = None
 

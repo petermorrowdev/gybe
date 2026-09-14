@@ -325,6 +325,11 @@ class OwnerReference(K8sSpec):
 
 
 @dataclass
+class Patch(K8sSpec):
+    """Patch is provided to give a concrete name and type to the Kubernetes PATCH request body."""
+
+
+@dataclass
 class Preconditions(K8sSpec):
     """Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
 

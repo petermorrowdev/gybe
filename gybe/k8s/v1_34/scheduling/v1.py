@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource
 
 
@@ -40,5 +40,5 @@ class PriorityClass(K8sResource):
     kind: Literal['PriorityClass'] = 'PriorityClass'
     description: Optional[str] = None
     globalDefault: Optional[bool] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     preemptionPolicy: Optional[str] = None

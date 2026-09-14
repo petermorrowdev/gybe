@@ -5,9 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.api.resource
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.api.resource as _api_resource
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -35,7 +35,7 @@ class CSIDriver(K8sResource):
     spec: CSIDriverSpec
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['CSIDriver'] = 'CSIDriver'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -156,7 +156,7 @@ class CSINode(K8sResource):
     spec: CSINodeSpec
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['CSINode'] = 'CSINode'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -250,10 +250,10 @@ class CSIStorageCapacity(K8sResource):
     storageClassName: str
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['CSIStorageCapacity'] = 'CSIStorageCapacity'
-    capacity: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
-    maximumVolumeSize: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
-    nodeTopology: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    capacity: Optional[_api_resource.Quantity] = None
+    maximumVolumeSize: Optional[_api_resource.Quantity] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
+    nodeTopology: Optional[_meta_v1.LabelSelector] = None
 
 
 @dataclass
@@ -292,8 +292,8 @@ class StorageClass(K8sResource):
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['StorageClass'] = 'StorageClass'
     allowVolumeExpansion: Optional[bool] = None
-    allowedTopologies: Optional[List[gybe.k8s.v1_34.core.v1.TopologySelectorTerm]] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    allowedTopologies: Optional[List[_core_v1.TopologySelectorTerm]] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     mountOptions: Optional[List[str]] = None
     parameters: Optional[JSONDict] = None
     reclaimPolicy: Optional[str] = None
@@ -338,7 +338,7 @@ class VolumeAttachment(K8sResource):
     spec: VolumeAttachmentSpec
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['VolumeAttachment'] = 'VolumeAttachment'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[VolumeAttachmentStatus] = None
 
 
@@ -357,7 +357,7 @@ class VolumeAttachmentSource(K8sSpec):
 
     """
 
-    inlineVolumeSpec: Optional[gybe.k8s.v1_34.core.v1.PersistentVolumeSpec] = None
+    inlineVolumeSpec: Optional[_core_v1.PersistentVolumeSpec] = None
     persistentVolumeName: Optional[str] = None
 
 
@@ -431,7 +431,7 @@ class VolumeAttributesClass(K8sResource):
     driverName: str
     apiVersion: Literal['storage.k8s.io/v1'] = 'storage.k8s.io/v1'
     kind: Literal['VolumeAttributesClass'] = 'VolumeAttributesClass'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     parameters: Optional[JSONDict] = None
 
 

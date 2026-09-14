@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -62,12 +62,12 @@ class Event(K8sResource):
     deprecatedCount: Optional[int] = None
     deprecatedFirstTimestamp: Optional[str] = None
     deprecatedLastTimestamp: Optional[str] = None
-    deprecatedSource: Optional[gybe.k8s.v1_34.core.v1.EventSource] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    deprecatedSource: Optional[_core_v1.EventSource] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     note: Optional[str] = None
     reason: Optional[str] = None
-    regarding: Optional[gybe.k8s.v1_34.core.v1.ObjectReference] = None
-    related: Optional[gybe.k8s.v1_34.core.v1.ObjectReference] = None
+    regarding: Optional[_core_v1.ObjectReference] = None
+    related: Optional[_core_v1.ObjectReference] = None
     reportingController: Optional[str] = None
     reportingInstance: Optional[str] = None
     series: Optional[EventSeries] = None

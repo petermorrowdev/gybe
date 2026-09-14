@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -27,7 +27,7 @@ class LeaseCandidate(K8sResource):
 
     apiVersion: Literal['coordination.k8s.io/v1alpha2'] = 'coordination.k8s.io/v1alpha2'
     kind: Literal['LeaseCandidate'] = 'LeaseCandidate'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[LeaseCandidateSpec] = None
 
 

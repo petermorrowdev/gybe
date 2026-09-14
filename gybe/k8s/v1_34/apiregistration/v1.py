@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -27,7 +27,7 @@ class APIService(K8sResource):
 
     apiVersion: Literal['apiregistration.k8s.io/v1'] = 'apiregistration.k8s.io/v1'
     kind: Literal['APIService'] = 'APIService'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[APIServiceSpec] = None
     status: Optional[APIServiceStatus] = None
 

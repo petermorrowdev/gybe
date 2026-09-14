@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -28,7 +28,7 @@ class CronJob(K8sResource):
 
     apiVersion: Literal['batch/v1'] = 'batch/v1'
     kind: Literal['CronJob'] = 'CronJob'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[CronJobSpec] = None
     status: Optional[CronJobStatus] = None
 
@@ -86,7 +86,7 @@ class CronJobStatus(K8sSpec):
 
     """
 
-    active: Optional[List[gybe.k8s.v1_34.core.v1.ObjectReference]] = None
+    active: Optional[List[_core_v1.ObjectReference]] = None
     lastScheduleTime: Optional[str] = None
     lastSuccessfulTime: Optional[str] = None
 
@@ -109,7 +109,7 @@ class Job(K8sResource):
 
     apiVersion: Literal['batch/v1'] = 'batch/v1'
     kind: Literal['Job'] = 'Job'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
     status: Optional[JobStatus] = None
 
@@ -225,7 +225,7 @@ class JobSpec(K8sSpec):
 
     """
 
-    template: gybe.k8s.v1_34.core.v1.PodTemplateSpec
+    template: _core_v1.PodTemplateSpec
     activeDeadlineSeconds: Optional[int] = None
     backoffLimit: Optional[int] = None
     backoffLimitPerIndex: Optional[int] = None
@@ -237,7 +237,7 @@ class JobSpec(K8sSpec):
     parallelism: Optional[int] = None
     podFailurePolicy: Optional[PodFailurePolicy] = None
     podReplacementPolicy: Optional[str] = None
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
     successPolicy: Optional[SuccessPolicy] = None
     suspend: Optional[bool] = None
     ttlSecondsAfterFinished: Optional[int] = None
@@ -319,7 +319,7 @@ class JobTemplateSpec(K8sSpec):
 
     """
 
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[JobSpec] = None
 
 

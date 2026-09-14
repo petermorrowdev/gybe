@@ -5,9 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.api.resource
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.api.resource as _api_resource
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, JSONObj, K8sResource, K8sSpec
 
 
@@ -39,7 +39,7 @@ class AllocatedDeviceStatus(K8sSpec):
     driver: str
     pool: str
     device: str
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None
     data: Optional[JSONObj] = None
     networkData: Optional[NetworkDeviceData] = None
     shareID: Optional[str] = None
@@ -61,7 +61,7 @@ class AllocationResult(K8sSpec):
 
     allocationTimestamp: Optional[str] = None
     devices: Optional[DeviceAllocationResult] = None
-    nodeSelector: Optional[gybe.k8s.v1_34.core.v1.NodeSelector] = None
+    nodeSelector: Optional[_core_v1.NodeSelector] = None
 
 
 @dataclass
@@ -120,7 +120,7 @@ class BasicDevice(K8sSpec):
     capacity: Optional[JSONDict] = None
     consumesCounters: Optional[List[DeviceCounterConsumption]] = None
     nodeName: Optional[str] = None
-    nodeSelector: Optional[gybe.k8s.v1_34.core.v1.NodeSelector] = None
+    nodeSelector: Optional[_core_v1.NodeSelector] = None
     taints: Optional[List[DeviceTaint]] = None
 
 
@@ -184,9 +184,9 @@ class CapacityRequestPolicy(K8sSpec):
 
     """
 
-    default: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    default: Optional[_api_resource.Quantity] = None
     validRange: Optional[CapacityRequestPolicyRange] = None
-    validValues: Optional[List[gybe.k8s.v1_34.api.resource.Quantity]] = None
+    validValues: Optional[List[_api_resource.Quantity]] = None
 
 
 @dataclass
@@ -210,9 +210,9 @@ class CapacityRequestPolicyRange(K8sSpec):
 
     """
 
-    min: gybe.k8s.v1_34.api.resource.Quantity
-    max: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
-    step: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    min: _api_resource.Quantity
+    max: Optional[_api_resource.Quantity] = None
+    step: Optional[_api_resource.Quantity] = None
 
 
 @dataclass
@@ -249,7 +249,7 @@ class Counter(K8sSpec):
 
     """
 
-    value: gybe.k8s.v1_34.api.resource.Quantity
+    value: _api_resource.Quantity
 
 
 @dataclass
@@ -359,7 +359,7 @@ class DeviceCapacity(K8sSpec):
 
     """
 
-    value: gybe.k8s.v1_34.api.resource.Quantity
+    value: _api_resource.Quantity
     requestPolicy: Optional[CapacityRequestPolicy] = None
 
 
@@ -422,7 +422,7 @@ class DeviceClass(K8sResource):
     spec: DeviceClassSpec
     apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['DeviceClass'] = 'DeviceClass'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -831,7 +831,7 @@ class ResourceClaim(K8sResource):
     spec: ResourceClaimSpec
     apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceClaim'] = 'ResourceClaim'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[ResourceClaimStatus] = None
 
 
@@ -914,7 +914,7 @@ class ResourceClaimTemplate(K8sResource):
     spec: ResourceClaimTemplateSpec
     apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceClaimTemplate'] = 'ResourceClaimTemplate'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -930,7 +930,7 @@ class ResourceClaimTemplateSpec(K8sSpec):
     """
 
     spec: ResourceClaimSpec
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -992,7 +992,7 @@ class ResourceSlice(K8sResource):
     spec: ResourceSliceSpec
     apiVersion: Literal['resource.k8s.io/v1beta1'] = 'resource.k8s.io/v1beta1'
     kind: Literal['ResourceSlice'] = 'ResourceSlice'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -1031,6 +1031,6 @@ class ResourceSliceSpec(K8sSpec):
     allNodes: Optional[bool] = None
     devices: Optional[List[Device]] = None
     nodeName: Optional[str] = None
-    nodeSelector: Optional[gybe.k8s.v1_34.core.v1.NodeSelector] = None
+    nodeSelector: Optional[_core_v1.NodeSelector] = None
     perDeviceNodeSelection: Optional[bool] = None
     sharedCounters: Optional[List[CounterSet]] = None
