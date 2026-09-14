@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -46,7 +46,7 @@ class TokenRequest(K8sResource):
     spec: TokenRequestSpec
     apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
     kind: Literal['TokenRequest'] = 'TokenRequest'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[TokenRequestStatus] = None
 
 
@@ -108,7 +108,7 @@ class SelfSubjectReview(K8sResource):
 
     apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
     kind: Literal['SelfSubjectReview'] = 'SelfSubjectReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[SelfSubjectReviewStatus] = None
 
 
@@ -144,7 +144,7 @@ class TokenReview(K8sResource):
     spec: TokenReviewSpec
     apiVersion: Literal['authentication.k8s.io/v1'] = 'authentication.k8s.io/v1'
     kind: Literal['TokenReview'] = 'TokenReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[TokenReviewStatus] = None
 
 

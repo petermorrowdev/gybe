@@ -21,6 +21,8 @@ schema_type_map = dict(
 )
 # ignored models fallback to `JSONObj`
 ignore_models = {
+    # uses python builtins: `bool`, `int`
+    'DeviceAttribute',
     # includes hyphenated fields
     'JSONSchemaProps',
     # 'except` reserved: `IPBlock.except`
@@ -31,10 +33,11 @@ ignore_models = {
     'ListMeta',
     # `RawExtension` is strange
     'RawExtension',
-    # Undefined models
+    # Undefined/empty models
     'CustomResourceSubresourceStatus',
     'StorageVersionSpec',
     'FieldsV1',
+    'BasicSchedulingPolicy',
 }
 override_fields = {
     'port': 'int | str',

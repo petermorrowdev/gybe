@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
@@ -36,7 +36,7 @@ class ControllerRevision(K8sResource):
     apiVersion: Literal['apps/v1'] = 'apps/v1'
     kind: Literal['ControllerRevision'] = 'ControllerRevision'
     data: Optional[JSONObj] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
 
 
 @dataclass
@@ -58,7 +58,7 @@ class DaemonSet(K8sResource):
 
     apiVersion: Literal['apps/v1'] = 'apps/v1'
     kind: Literal['DaemonSet'] = 'DaemonSet'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[DaemonSetSpec] = None
     status: Optional[DaemonSetStatus] = None
 
@@ -102,8 +102,8 @@ class DaemonSetSpec(K8sSpec):
 
     """
 
-    selector: gybe.k8s.v1_34.meta.v1.LabelSelector
-    template: gybe.k8s.v1_34.core.v1.PodTemplateSpec
+    selector: _meta_v1.LabelSelector
+    template: _core_v1.PodTemplateSpec
     minReadySeconds: Optional[int] = None
     revisionHistoryLimit: Optional[int] = None
     updateStrategy: Optional[DaemonSetUpdateStrategy] = None
@@ -179,7 +179,7 @@ class Deployment(K8sResource):
 
     apiVersion: Literal['apps/v1'] = 'apps/v1'
     kind: Literal['Deployment'] = 'Deployment'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[DeploymentSpec] = None
     status: Optional[DeploymentStatus] = None
 
@@ -231,8 +231,8 @@ class DeploymentSpec(K8sSpec):
 
     """
 
-    selector: gybe.k8s.v1_34.meta.v1.LabelSelector
-    template: gybe.k8s.v1_34.core.v1.PodTemplateSpec
+    selector: _meta_v1.LabelSelector
+    template: _core_v1.PodTemplateSpec
     minReadySeconds: Optional[int] = None
     paused: Optional[bool] = None
     progressDeadlineSeconds: Optional[int] = None
@@ -314,7 +314,7 @@ class ReplicaSet(K8sResource):
 
     apiVersion: Literal['apps/v1'] = 'apps/v1'
     kind: Literal['ReplicaSet'] = 'ReplicaSet'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ReplicaSetSpec] = None
     status: Optional[ReplicaSetStatus] = None
 
@@ -357,10 +357,10 @@ class ReplicaSetSpec(K8sSpec):
 
     """
 
-    selector: gybe.k8s.v1_34.meta.v1.LabelSelector
+    selector: _meta_v1.LabelSelector
     minReadySeconds: Optional[int] = None
     replicas: Optional[int] = None
-    template: Optional[gybe.k8s.v1_34.core.v1.PodTemplateSpec] = None
+    template: Optional[_core_v1.PodTemplateSpec] = None
 
 
 @dataclass
@@ -497,7 +497,7 @@ class StatefulSet(K8sResource):
 
     apiVersion: Literal['apps/v1'] = 'apps/v1'
     kind: Literal['StatefulSet'] = 'StatefulSet'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[StatefulSetSpec] = None
     status: Optional[StatefulSetStatus] = None
 
@@ -607,8 +607,8 @@ class StatefulSetSpec(K8sSpec):
 
     """
 
-    selector: gybe.k8s.v1_34.meta.v1.LabelSelector
-    template: gybe.k8s.v1_34.core.v1.PodTemplateSpec
+    selector: _meta_v1.LabelSelector
+    template: _core_v1.PodTemplateSpec
     minReadySeconds: Optional[int] = None
     ordinals: Optional[StatefulSetOrdinals] = None
     persistentVolumeClaimRetentionPolicy: Optional[StatefulSetPersistentVolumeClaimRetentionPolicy] = None
@@ -617,7 +617,7 @@ class StatefulSetSpec(K8sSpec):
     revisionHistoryLimit: Optional[int] = None
     serviceName: Optional[str] = None
     updateStrategy: Optional[StatefulSetUpdateStrategy] = None
-    volumeClaimTemplates: Optional[List[gybe.k8s.v1_34.core.v1.PersistentVolumeClaim]] = None
+    volumeClaimTemplates: Optional[List[_core_v1.PersistentVolumeClaim]] = None
 
 
 @dataclass

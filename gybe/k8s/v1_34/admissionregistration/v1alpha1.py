@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -170,8 +170,8 @@ class MatchResources(K8sSpec):
 
     excludeResourceRules: Optional[List[NamedRuleWithOperations]] = None
     matchPolicy: Optional[str] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
-    objectSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
+    objectSelector: Optional[_meta_v1.LabelSelector] = None
     resourceRules: Optional[List[NamedRuleWithOperations]] = None
 
 
@@ -193,7 +193,7 @@ class MutatingAdmissionPolicy(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
     kind: Literal['MutatingAdmissionPolicy'] = 'MutatingAdmissionPolicy'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicySpec] = None
 
 
@@ -221,7 +221,7 @@ class MutatingAdmissionPolicyBinding(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1alpha1'] = 'admissionregistration.k8s.io/v1alpha1'
     kind: Literal['MutatingAdmissionPolicyBinding'] = 'MutatingAdmissionPolicyBinding'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[MutatingAdmissionPolicyBindingSpec] = None
 
 
@@ -420,7 +420,7 @@ class ParamRef(K8sSpec):
     name: Optional[str] = None
     namespace: Optional[str] = None
     parameterNotFoundAction: Optional[str] = None
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
 
 
 @dataclass

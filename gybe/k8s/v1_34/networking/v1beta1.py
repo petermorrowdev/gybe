@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -30,7 +30,7 @@ class IPAddress(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1beta1'] = 'networking.k8s.io/v1beta1'
     kind: Literal['IPAddress'] = 'IPAddress'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[IPAddressSpec] = None
 
 
@@ -84,7 +84,7 @@ class ServiceCIDR(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1beta1'] = 'networking.k8s.io/v1beta1'
     kind: Literal['ServiceCIDR'] = 'ServiceCIDR'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ServiceCIDRSpec] = None
     status: Optional[ServiceCIDRStatus] = None
 
@@ -113,4 +113,4 @@ class ServiceCIDRStatus(K8sSpec):
 
     """
 
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None

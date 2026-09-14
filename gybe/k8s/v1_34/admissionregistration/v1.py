@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -131,8 +131,8 @@ class MatchResources(K8sSpec):
 
     excludeResourceRules: Optional[List[NamedRuleWithOperations]] = None
     matchPolicy: Optional[str] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
-    objectSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
+    objectSelector: Optional[_meta_v1.LabelSelector] = None
     resourceRules: Optional[List[NamedRuleWithOperations]] = None
 
 
@@ -226,8 +226,8 @@ class MutatingWebhook(K8sSpec):
     failurePolicy: Optional[str] = None
     matchConditions: Optional[List[MatchCondition]] = None
     matchPolicy: Optional[str] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
-    objectSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
+    objectSelector: Optional[_meta_v1.LabelSelector] = None
     reinvocationPolicy: Optional[str] = None
     rules: Optional[List[RuleWithOperations]] = None
     timeoutSeconds: Optional[int] = None
@@ -251,7 +251,7 @@ class MutatingWebhookConfiguration(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
     kind: Literal['MutatingWebhookConfiguration'] = 'MutatingWebhookConfiguration'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     webhooks: Optional[List[MutatingWebhook]] = None
 
 
@@ -340,7 +340,7 @@ class ParamRef(K8sSpec):
     name: Optional[str] = None
     namespace: Optional[str] = None
     parameterNotFoundAction: Optional[str] = None
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
 
 
 @dataclass
@@ -426,7 +426,7 @@ class ValidatingAdmissionPolicy(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
     kind: Literal['ValidatingAdmissionPolicy'] = 'ValidatingAdmissionPolicy'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ValidatingAdmissionPolicySpec] = None
     status: Optional[ValidatingAdmissionPolicyStatus] = None
 
@@ -455,7 +455,7 @@ class ValidatingAdmissionPolicyBinding(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
     kind: Literal['ValidatingAdmissionPolicyBinding'] = 'ValidatingAdmissionPolicyBinding'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ValidatingAdmissionPolicyBindingSpec] = None
 
 
@@ -580,7 +580,7 @@ class ValidatingAdmissionPolicyStatus(K8sSpec):
 
     """
 
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None
     observedGeneration: Optional[int] = None
     typeChecking: Optional[TypeChecking] = None
 
@@ -664,8 +664,8 @@ class ValidatingWebhook(K8sSpec):
     failurePolicy: Optional[str] = None
     matchConditions: Optional[List[MatchCondition]] = None
     matchPolicy: Optional[str] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
-    objectSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
+    objectSelector: Optional[_meta_v1.LabelSelector] = None
     rules: Optional[List[RuleWithOperations]] = None
     timeoutSeconds: Optional[int] = None
 
@@ -688,7 +688,7 @@ class ValidatingWebhookConfiguration(K8sResource):
 
     apiVersion: Literal['admissionregistration.k8s.io/v1'] = 'admissionregistration.k8s.io/v1'
     kind: Literal['ValidatingWebhookConfiguration'] = 'ValidatingWebhookConfiguration'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     webhooks: Optional[List[ValidatingWebhook]] = None
 
 

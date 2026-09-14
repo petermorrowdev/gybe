@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
@@ -73,7 +73,7 @@ class IPAddress(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
     kind: Literal['IPAddress'] = 'IPAddress'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[IPAddressSpec] = None
 
 
@@ -110,7 +110,7 @@ class Ingress(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
     kind: Literal['Ingress'] = 'Ingress'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[IngressSpec] = None
     status: Optional[IngressStatus] = None
 
@@ -128,7 +128,7 @@ class IngressBackend(K8sSpec):
 
     """
 
-    resource: Optional[gybe.k8s.v1_34.core.v1.TypedLocalObjectReference] = None
+    resource: Optional[_core_v1.TypedLocalObjectReference] = None
     service: Optional[IngressServiceBackend] = None
 
 
@@ -152,7 +152,7 @@ class IngressClass(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
     kind: Literal['IngressClass'] = 'IngressClass'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[IngressClassSpec] = None
 
 
@@ -370,7 +370,7 @@ class NetworkPolicy(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
     kind: Literal['NetworkPolicy'] = 'NetworkPolicy'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[NetworkPolicySpec] = None
 
 
@@ -417,8 +417,8 @@ class NetworkPolicyPeer(K8sSpec):
     """
 
     ipBlock: Optional[JSONObj] = None
-    namespaceSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
-    podSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    namespaceSelector: Optional[_meta_v1.LabelSelector] = None
+    podSelector: Optional[_meta_v1.LabelSelector] = None
 
 
 @dataclass
@@ -476,7 +476,7 @@ class NetworkPolicySpec(K8sSpec):
 
     egress: Optional[List[NetworkPolicyEgressRule]] = None
     ingress: Optional[List[JSONObj]] = None
-    podSelector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    podSelector: Optional[_meta_v1.LabelSelector] = None
     policyTypes: Optional[List[str]] = None
 
 
@@ -532,7 +532,7 @@ class ServiceCIDR(K8sResource):
 
     apiVersion: Literal['networking.k8s.io/v1'] = 'networking.k8s.io/v1'
     kind: Literal['ServiceCIDR'] = 'ServiceCIDR'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[ServiceCIDRSpec] = None
     status: Optional[ServiceCIDRStatus] = None
 
@@ -561,4 +561,4 @@ class ServiceCIDRStatus(K8sSpec):
 
     """
 
-    conditions: Optional[List[gybe.k8s.v1_34.meta.v1.Condition]] = None
+    conditions: Optional[List[_meta_v1.Condition]] = None

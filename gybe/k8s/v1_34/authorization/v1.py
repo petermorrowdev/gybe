@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -34,7 +34,7 @@ class FieldSelectorAttributes(K8sSpec):
     """
 
     rawSelector: Optional[str] = None
-    requirements: Optional[List[gybe.k8s.v1_34.meta.v1.FieldSelectorRequirement]] = None
+    requirements: Optional[List[_meta_v1.FieldSelectorRequirement]] = None
 
 
 @dataclass
@@ -62,7 +62,7 @@ class LabelSelectorAttributes(K8sSpec):
     """
 
     rawSelector: Optional[str] = None
-    requirements: Optional[List[gybe.k8s.v1_34.meta.v1.LabelSelectorRequirement]] = None
+    requirements: Optional[List[_meta_v1.LabelSelectorRequirement]] = None
 
 
 @dataclass
@@ -87,7 +87,7 @@ class LocalSubjectAccessReview(K8sResource):
     spec: SubjectAccessReviewSpec
     apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['LocalSubjectAccessReview'] = 'LocalSubjectAccessReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
 
@@ -199,7 +199,7 @@ class SelfSubjectAccessReview(K8sResource):
     spec: SelfSubjectAccessReviewSpec
     apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SelfSubjectAccessReview'] = 'SelfSubjectAccessReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
 
@@ -243,7 +243,7 @@ class SelfSubjectRulesReview(K8sResource):
     spec: SelfSubjectRulesReviewSpec
     apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SelfSubjectRulesReview'] = 'SelfSubjectRulesReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[SubjectRulesReviewStatus] = None
 
 
@@ -278,7 +278,7 @@ class SubjectAccessReview(K8sResource):
     spec: SubjectAccessReviewSpec
     apiVersion: Literal['authorization.k8s.io/v1'] = 'authorization.k8s.io/v1'
     kind: Literal['SubjectAccessReview'] = 'SubjectAccessReview'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     status: Optional[SubjectAccessReviewStatus] = None
 
 

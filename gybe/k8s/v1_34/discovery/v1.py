@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.core.v1
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.core.v1 as _core_v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import JSONDict, K8sResource, K8sSpec
 
 
@@ -44,7 +44,7 @@ class Endpoint(K8sSpec):
     hints: Optional[EndpointHints] = None
     hostname: Optional[str] = None
     nodeName: Optional[str] = None
-    targetRef: Optional[gybe.k8s.v1_34.core.v1.ObjectReference] = None
+    targetRef: Optional[_core_v1.ObjectReference] = None
     zone: Optional[str] = None
 
 
@@ -155,7 +155,7 @@ class EndpointSlice(K8sResource):
     endpoints: List[Endpoint]
     apiVersion: Literal['discovery.k8s.io/v1'] = 'discovery.k8s.io/v1'
     kind: Literal['EndpointSlice'] = 'EndpointSlice'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     ports: Optional[List[EndpointPort]] = None
 
 

@@ -5,8 +5,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.api.resource
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.api.resource as _api_resource
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -148,7 +148,7 @@ class HPAScalingRules(K8sSpec):
     policies: Optional[List[HPAScalingPolicy]] = None
     selectPolicy: Optional[str] = None
     stabilizationWindowSeconds: Optional[int] = None
-    tolerance: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    tolerance: Optional[_api_resource.Quantity] = None
 
 
 @dataclass
@@ -171,7 +171,7 @@ class HorizontalPodAutoscaler(K8sResource):
 
     apiVersion: Literal['autoscaling/v2'] = 'autoscaling/v2'
     kind: Literal['HorizontalPodAutoscaler'] = 'HorizontalPodAutoscaler'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[HorizontalPodAutoscalerSpec] = None
     status: Optional[HorizontalPodAutoscalerStatus] = None
 
@@ -286,7 +286,7 @@ class MetricIdentifier(K8sSpec):
     """
 
     name: str
-    selector: Optional[gybe.k8s.v1_34.meta.v1.LabelSelector] = None
+    selector: Optional[_meta_v1.LabelSelector] = None
 
 
 @dataclass
@@ -376,8 +376,8 @@ class MetricTarget(K8sSpec):
 
     type: str
     averageUtilization: Optional[int] = None
-    averageValue: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
-    value: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    averageValue: Optional[_api_resource.Quantity] = None
+    value: Optional[_api_resource.Quantity] = None
 
 
 @dataclass
@@ -394,8 +394,8 @@ class MetricValueStatus(K8sSpec):
     """
 
     averageUtilization: Optional[int] = None
-    averageValue: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
-    value: Optional[gybe.k8s.v1_34.api.resource.Quantity] = None
+    averageValue: Optional[_api_resource.Quantity] = None
+    value: Optional[_api_resource.Quantity] = None
 
 
 @dataclass

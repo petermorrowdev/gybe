@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -19,7 +19,7 @@ class AggregationRule(K8sSpec):
 
     """
 
-    clusterRoleSelectors: Optional[List[gybe.k8s.v1_34.meta.v1.LabelSelector]] = None
+    clusterRoleSelectors: Optional[List[_meta_v1.LabelSelector]] = None
 
 
 @dataclass
@@ -44,7 +44,7 @@ class ClusterRole(K8sResource):
     apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['ClusterRole'] = 'ClusterRole'
     aggregationRule: Optional[AggregationRule] = None
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     rules: Optional[List[PolicyRule]] = None
 
 
@@ -69,7 +69,7 @@ class ClusterRoleBinding(K8sResource):
     roleRef: RoleRef
     apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['ClusterRoleBinding'] = 'ClusterRoleBinding'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
 
 
@@ -120,7 +120,7 @@ class Role(K8sResource):
 
     apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['Role'] = 'Role'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     rules: Optional[List[PolicyRule]] = None
 
 
@@ -148,7 +148,7 @@ class RoleBinding(K8sResource):
     roleRef: RoleRef
     apiVersion: Literal['rbac.authorization.k8s.io/v1'] = 'rbac.authorization.k8s.io/v1'
     kind: Literal['RoleBinding'] = 'RoleBinding'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     subjects: Optional[List[Subject]] = None
 
 

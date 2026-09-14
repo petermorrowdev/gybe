@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import List, Literal, Optional
 
-import gybe.k8s.v1_34.meta.v1
+import gybe.k8s.v1_34.meta.v1 as _meta_v1
 from gybe.k8s.types import K8sResource, K8sSpec
 
 
@@ -69,7 +69,7 @@ class FlowSchema(K8sResource):
 
     apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1'] = 'flowcontrol.apiserver.k8s.io/v1'
     kind: Literal['FlowSchema'] = 'FlowSchema'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[FlowSchemaSpec] = None
     status: Optional[FlowSchemaStatus] = None
 
@@ -270,7 +270,7 @@ class PriorityLevelConfiguration(K8sResource):
 
     apiVersion: Literal['flowcontrol.apiserver.k8s.io/v1'] = 'flowcontrol.apiserver.k8s.io/v1'
     kind: Literal['PriorityLevelConfiguration'] = 'PriorityLevelConfiguration'
-    metadata: Optional[gybe.k8s.v1_34.meta.v1.ObjectMeta] = None
+    metadata: Optional[_meta_v1.ObjectMeta] = None
     spec: Optional[PriorityLevelConfigurationSpec] = None
     status: Optional[PriorityLevelConfigurationStatus] = None
 
