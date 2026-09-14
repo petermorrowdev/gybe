@@ -37,7 +37,7 @@ ignore_models = {
     'CustomResourceSubresourceStatus',
     'StorageVersionSpec',
     'FieldsV1',
-    'BasicSchedulingPolic',
+    'BasicSchedulingPolicy',
 }
 override_fields = {
     'port': 'int | str',
@@ -150,15 +150,15 @@ class K8sModule:
         if not isinstance(cdef, ast.ClassDef):
             raise ValueError(f'{cdef} is not expected ast.ClassDef')
 
-        sections = ['\n'.join(textwrap.wrap(description, width=self._line_length - 8))]
-        if properties:
-            sections.extend(['Attributes:', self._prop_desc(properties), ''])
+        sections = [
+            '\n'.join(textwrap.wrap(description, width=self._line_length - 8)),
+            'Attributes:',
+            self._prop_desc(properties),
+            '',
+        ]
         docstring = '\n'.join(sections).replace('"', "'").replace('\\', '')
-        if properties:
-            docstring = textwrap.indent(docstring, '    ')
-            cdef.body = [ast.parse(f'"""\n{docstring}\n"""').body[0]]
-        else:
-            cdef.body = [ast.Expr(value=ast.Constant(value=docstring))]
+        docstring = textwrap.indent(docstring, '    ')
+        cdef.body = [ast.parse(f'"""\n{docstring}\n"""').body[0]]
 
         literal_props = resource_properties or dict()
         fields: list[tuple[str, int]] = []
@@ -218,9 +218,8 @@ class K8sModule:
         elif 'Time' in ref:
             return 'str'
         if import_ != self._module_name:
-            import_alias = '_' + '_'.join(import_.split('.')[-2:])
-            self._module_imports.add(f'import {import_} as {import_alias}')
-            return f'{import_alias}.{ref.split(".")[-1]}'
+            self._module_imports.add('import ' + import_)
+            return _ref_to_model_path(ref, version_module=self._version_module)
         else:
             return ref.split('.')[-1]
 
@@ -247,7 +246,7 @@ def _write_k8s_models(k8s_openapi_dir: Path, k8s_module_dir: Path, k8s_version_m
             )
 
     for name, schema in model_schemas.items():
-        properties = schema.get('properties') or {}
+        properties = schema.get('properties')
         description = schema.get('description')
         required = schema.get('required')
         resource_refs = schema.get('x-kubernetes-group-version-kind')
@@ -256,7 +255,7 @@ def _write_k8s_models(k8s_openapi_dir: Path, k8s_module_dir: Path, k8s_version_m
             resource_ref = K8sResourceRef(**resource_refs[0])
         else:
             resource_ref = None
-        if properties or schema.get('type') == 'object':
+        if properties:
             k8s_module = k8s_modules[_ref_to_module_name(name, k8s_version_module)]
             k8s_module.add_model(name, properties, description, required, resource_ref)
 
