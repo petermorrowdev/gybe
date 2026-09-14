@@ -312,25 +312,6 @@ class DeviceAllocationResult(K8sSpec):
 
 
 @dataclass
-class DeviceAttribute(K8sSpec):
-    """DeviceAttribute must have exactly one field set.
-
-    Attributes:
-        bool: BoolValue is a true/false value.
-        int: IntValue is a number.
-        string: StringValue is a string. Must not be longer than 64 characters.
-        version: VersionValue is a semantic version according to semver.org spec 2.0.0. Must not be longer
-            than 64 characters.
-
-    """
-
-    bool: Optional[bool] = None
-    int: Optional[int] = None
-    string: Optional[str] = None
-    version: Optional[str] = None
-
-
-@dataclass
 class DeviceCapacity(K8sSpec):
     """DeviceCapacity describes a quantity associated with a device.
 

@@ -6,12 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_36.meta.v1 as _meta_v1
-from gybe.k8s.types import K8sResource, K8sSpec
-
-
-@dataclass
-class BasicSchedulingPolicy(K8sSpec):
-    """BasicSchedulingPolicy indicates that standard Kubernetes scheduling behavior should be used."""
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -124,7 +119,7 @@ class PodGroupSchedulingPolicy(K8sSpec):
 
     """
 
-    basic: Optional[BasicSchedulingPolicy] = None
+    basic: Optional[JSONObj] = None
     gang: Optional[GangSchedulingPolicy] = None
 
 

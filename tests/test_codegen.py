@@ -13,7 +13,9 @@ k8s_module_dir = base_codegen_out_dir / 'gybe/k8s'
 
 
 def _exec(*args: str) -> None:
-    subprocess.run([sys.executable, '-m', *args], check=True)  # noqa: S603
+    proc = subprocess.run([sys.executable, '-m', *args], capture_output=True, text=True)  # noqa: S603
+    if proc.returncode != 0:
+        raise RuntimeError(proc.stdout or proc.stderr)
 
 
 @pytest.mark.parametrize(
@@ -48,7 +50,6 @@ def test_codegen_write_module(version, version_module):
             'mypy',
             '--follow-imports=skip',
             '--ignore-missing-imports',
-            '--disable-error-code=valid-type',
             generated_version_dir,
         )
 

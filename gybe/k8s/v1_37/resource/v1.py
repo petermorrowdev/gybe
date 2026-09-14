@@ -336,37 +336,6 @@ class DeviceAllocationResult(K8sSpec):
 
 
 @dataclass
-class DeviceAttribute(K8sSpec):
-    """DeviceAttribute must have exactly one field set.
-
-    Attributes:
-        bool: BoolValue is a true/false value.
-        bools: BoolValues is a non-empty list of true/false values.
-        int: IntValue is a number.
-        ints: IntValues is a non-empty list of numbers.  This is an alpha field and requires enabling the
-            DRAListTypeAttributes feature gate.
-        string: StringValue is a string. Must not be longer than 64 characters.
-        strings: StringValues is a non-empty list of strings. Each string must not be longer than 64
-            characters.  This is an alpha field and requires enabling the DRAListTypeAttributes feature gate.
-        version: VersionValue is a semantic version according to semver.org spec 2.0.0. Must not be longer
-            than 64 characters.
-        versions: VersionValues is a non-empty list of semantic versions according to semver.org spec 2.0.0.
-            Each version string must not be longer than 64 characters.  This is an alpha field and requires
-            enabling the DRAListTypeAttributes feature gate.
-
-    """
-
-    bool: Optional[bool] = None
-    bools: Optional[List[bool]] = None
-    int: Optional[int] = None
-    ints: Optional[List[int]] = None
-    string: Optional[str] = None
-    strings: Optional[List[str]] = None
-    version: Optional[str] = None
-    versions: Optional[List[str]] = None
-
-
-@dataclass
 class DeviceCapacity(K8sSpec):
     """DeviceCapacity describes a quantity associated with a device.
 

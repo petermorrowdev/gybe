@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List, Literal, Optional
 
 import gybe.k8s.v1_37.meta.v1 as _meta_v1
-from gybe.k8s.types import K8sResource, K8sSpec
+from gybe.k8s.types import JSONObj, K8sResource, K8sSpec
 
 
 @dataclass
@@ -19,18 +19,6 @@ class AllCompositeDisruptionMode(K8sSpec):
 @dataclass
 class AllDisruptionMode(K8sSpec):
     """AllDisruptionMode specifies that children can only be disrupted together."""
-
-
-@dataclass
-class BasicSchedulingPolicy(K8sSpec):
-    """BasicSchedulingPolicy indicates that standard Kubernetes scheduling behavior should be used."""
-
-
-@dataclass
-class CompositeBasicSchedulingPolicy(K8sSpec):
-    """CompositeBasicSchedulingPolicy indicates that the groups belonging to the composite group should be
-    scheduled independently.
-    """
 
 
 @dataclass
@@ -115,7 +103,7 @@ class CompositePodGroupSchedulingPolicy(K8sSpec):
 
     """
 
-    basic: Optional[CompositeBasicSchedulingPolicy] = None
+    basic: Optional[JSONObj] = None
     gang: Optional[CompositeGangSchedulingPolicy] = None
 
 
@@ -373,7 +361,7 @@ class PodGroupSchedulingPolicy(K8sSpec):
 
     """
 
-    basic: Optional[BasicSchedulingPolicy] = None
+    basic: Optional[JSONObj] = None
     gang: Optional[GangSchedulingPolicy] = None
 
 
@@ -610,11 +598,6 @@ class WorkloadPodGroupAllDisruptionMode(K8sSpec):
 
 
 @dataclass
-class WorkloadPodGroupBasicSchedulingPolicy(K8sSpec):
-    """WorkloadPodGroupBasicSchedulingPolicy indicates standard Kubernetes scheduling behavior."""
-
-
-@dataclass
 class WorkloadPodGroupDisruptionMode(K8sSpec):
     """WorkloadPodGroupDisruptionMode defines how individual pods within a group can be disrupted. Exactly
     one mode must be set.
@@ -690,7 +673,7 @@ class WorkloadPodGroupSchedulingPolicy(K8sSpec):
 
     """
 
-    basic: Optional[WorkloadPodGroupBasicSchedulingPolicy] = None
+    basic: Optional[JSONObj] = None
     gang: Optional[WorkloadPodGroupGangSchedulingPolicy] = None
 
 
